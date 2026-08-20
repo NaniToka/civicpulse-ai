@@ -16,9 +16,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
         if (isOpen) onClose();
-        else {
-          // Trigger open via parent state
-        }
       }
       if (e.key === 'Escape' && isOpen) {
         onClose();
@@ -38,7 +35,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
     { id: 'recommendations', label: 'Priority Recommendations', icon: <FileCheck className="w-4 h-4 text-emerald-400" />, description: 'Ranked evidence-backed capital investment priorities', category: 'Views' },
     { id: 'evidence', label: 'Evidence Explorer', icon: <Network className="w-4 h-4 text-indigo-400" />, description: 'Granular evidence nodes and 6-step evidence trails', category: 'Views' },
     { id: 'scenarios', label: 'Scenario Lab', icon: <TestTube2 className="w-4 h-4 text-violet-400" />, description: 'Counterfactual policy simulations & score deltas', category: 'Tools' },
-    { id: 'data', label: 'Data Explorer', icon: <Database className="w-4 h-4 text-slate-400" />, description: 'Synthetic demonstration datasets & live request test', category: 'Data' },
+    { id: 'data', label: 'Data Explorer', icon: <Database className="w-4 h-4 text-slate-300" />, description: 'Synthetic demonstration datasets & live request test', category: 'Data' },
   ];
 
   const filtered = items.filter(
@@ -48,33 +45,33 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 bg-slate-950/80 backdrop-blur-sm p-4">
-      <div className="w-full max-w-2xl bg-slate-900 border border-slate-800 rounded-xl shadow-2xl overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-150">
-        <div className="flex items-center px-4 border-b border-slate-800 bg-slate-950/50">
-          <Search className="w-5 h-5 text-slate-400 mr-3" />
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 bg-slate-950/85 backdrop-blur-md p-4">
+      <div className="w-full max-w-2xl bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-150">
+        <div className="flex items-center px-5 border-b border-slate-800 bg-slate-950">
+          <Search className="w-5 h-5 text-sky-400 mr-3 shrink-0" />
           <input
             type="text"
             placeholder="Type a command, search views or region..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full py-4 bg-transparent text-slate-100 placeholder-slate-500 text-sm focus:outline-none"
+            className="w-full py-4.5 bg-transparent text-slate-100 placeholder-slate-400 text-sm font-semibold focus:outline-none font-sans"
             autoFocus
           />
           <button
             onClick={onClose}
-            className="p-1 rounded text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition"
+            className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition"
           >
-            <X className="w-4 h-4" />
+            <X className="w-5 h-5" />
           </button>
         </div>
 
-        <div className="max-h-96 overflow-y-auto p-2">
+        <div className="max-h-96 overflow-y-auto p-3">
           {filtered.length === 0 ? (
-            <div className="p-8 text-center text-xs text-slate-500">
+            <div className="p-8 text-center text-xs font-bold text-slate-400">
               No matching views or commands found for "{query}".
             </div>
           ) : (
-            <div className="space-y-1">
+            <div className="space-y-2">
               {filtered.map((item) => (
                 <button
                   key={item.id}
@@ -82,22 +79,22 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
                     onSelectTab(item.id);
                     onClose();
                   }}
-                  className="w-full flex items-center justify-between p-3 rounded-lg text-left hover:bg-slate-800/80 transition group"
+                  className="w-full flex items-center justify-between p-3.5 rounded-xl text-left hover:bg-slate-800 transition group"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-md bg-slate-950 border border-slate-800">
+                  <div className="flex items-center gap-3.5">
+                    <div className="p-2.5 rounded-lg bg-slate-950 border border-slate-800 shadow-sm">
                       {item.icon}
                     </div>
                     <div>
-                      <div className="text-sm font-medium text-slate-200 group-hover:text-sky-300 transition">
+                      <div className="text-sm font-bold text-slate-100 group-hover:text-sky-300 transition">
                         {item.label}
                       </div>
-                      <div className="text-xs text-slate-500">{item.description}</div>
+                      <div className="text-xs text-slate-300 font-medium">{item.description}</div>
                     </div>
                   </div>
-                  <div className="flex items-center text-xs text-slate-500 group-hover:text-slate-300">
+                  <div className="flex items-center text-xs font-bold text-slate-300 group-hover:text-white font-mono">
                     <span className="mr-1">Jump</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </button>
               ))}
@@ -105,11 +102,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
           )}
         </div>
 
-        <div className="px-4 py-2 bg-slate-950/80 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500 font-mono">
+        <div className="px-5 py-3 bg-slate-950 border-t border-slate-800 flex items-center justify-between text-xs text-slate-300 font-mono font-bold">
           <div className="flex items-center gap-2">
-            <span className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700">↑↓</span>
+            <span className="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-100">↑↓</span>
             <span>Navigate</span>
-            <span className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700">ESC</span>
+            <span className="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-100">ESC</span>
             <span>Close</span>
           </div>
           <div>CivicPulse AI Command System</div>

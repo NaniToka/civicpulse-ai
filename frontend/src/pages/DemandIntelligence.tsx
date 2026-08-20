@@ -62,11 +62,11 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
   return (
     <div className="space-y-8 animate-in fade-in duration-300">
       {/* Header */}
-      <div className="border-b border-slate-800/80 pb-5">
+      <div className="border-b border-slate-800 pb-5 space-y-2">
         <h1 className="text-2xl font-bold text-slate-100 tracking-tight font-mono">
           Citizen Demand Intelligence
         </h1>
-        <p className="text-xs text-slate-400 mt-1">
+        <p className="text-sm text-slate-300 leading-relaxed font-sans">
           Understand community needs, track demand concentration across languages, and detect emerging demand velocity trends.
         </p>
       </div>
@@ -75,28 +75,28 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
       <CitizenVoiceComposer regions={regions} onSignalAdded={onSignalAdded} />
 
       {/* Filter Bar */}
-      <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-3">
-        <div className="flex items-center gap-2 text-xs font-semibold text-slate-300 uppercase tracking-wide">
+      <div className="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-4 shadow-md">
+        <div className="flex items-center gap-2 text-sm font-bold text-slate-100 uppercase tracking-wide">
           <Filter className="w-4 h-4 text-sky-400" />
           <span>Multilingual Signal Filters</span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           <div className="relative col-span-1 sm:col-span-2 lg:col-span-1">
-            <Search className="w-4 h-4 absolute left-3 top-2.5 text-slate-500" />
+            <Search className="w-4 h-4 absolute left-3 top-3 text-slate-400" />
             <input
               type="text"
               placeholder="Search citizen feedback..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-sky-500"
+              className="w-full pl-9 pr-3 py-2 bg-slate-950 border border-slate-700 rounded-lg text-xs font-semibold text-slate-100 placeholder-slate-400 focus:outline-none focus:border-sky-400"
             />
           </div>
 
           <select
             value={selectedRegion}
             onChange={(e) => setSelectedRegion(e.target.value)}
-            className="bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-sky-500 font-mono"
+            className="bg-slate-950 border border-slate-700 text-slate-100 font-bold text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-sky-400 font-mono"
           >
             <option value="ALL">All Regions ({regions.length})</option>
             {regions.map((r) => (
@@ -109,7 +109,7 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-sky-500 font-mono"
+            className="bg-slate-950 border border-slate-700 text-slate-100 font-bold text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-sky-400 font-mono"
           >
             <option value="ALL">All Categories</option>
             <option value="healthcare">Healthcare</option>
@@ -123,7 +123,7 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
           <select
             value={selectedLanguage}
             onChange={(e) => setSelectedLanguage(e.target.value)}
-            className="bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-sky-500 font-mono"
+            className="bg-slate-950 border border-slate-700 text-slate-100 font-bold text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-sky-400 font-mono"
           >
             <option value="ALL">All Languages</option>
             <option value="te">Telugu (te)</option>
@@ -138,7 +138,7 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
           <select
             value={selectedUrgency}
             onChange={(e) => setSelectedUrgency(e.target.value)}
-            className="bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-sky-500 font-mono"
+            className="bg-slate-950 border border-slate-700 text-slate-100 font-bold text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-sky-400 font-mono"
           >
             <option value="ALL">All Urgency Levels</option>
             <option value="CRITICAL">CRITICAL</option>
@@ -151,24 +151,24 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
 
       {/* Visual Analytics Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-4">
+        <div className="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-5">
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-bold text-slate-100 font-mono">Category Demand Distribution</h3>
-            <span className="text-xs font-mono text-slate-400">{requests.length} Total Verified Signals</span>
+            <span className="text-xs font-mono font-bold text-sky-400">{requests.length} Total Verified Signals</span>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-4">
             {Object.entries(categoryCounts).map(([cat, count]) => {
               const pct = Math.round((count / (requests.length || 1)) * 100);
               return (
-                <div key={cat} className="space-y-1">
+                <div key={cat} className="space-y-1.5">
                   <div className="flex justify-between text-xs font-mono">
-                    <span className="text-slate-300 capitalize">{cat}</span>
-                    <span className="text-sky-400 font-semibold">{count} ({pct}%)</span>
+                    <span className="text-slate-100 font-bold capitalize">{cat}</span>
+                    <span className="text-sky-300 font-bold">{count} ({pct}%)</span>
                   </div>
-                  <div className="h-2 rounded-full bg-slate-950 overflow-hidden border border-slate-800">
+                  <div className="h-2.5 rounded-full bg-slate-950 overflow-hidden border border-slate-800">
                     <div
-                      className="h-full bg-gradient-to-r from-sky-500 to-indigo-500 rounded-full"
+                      className="h-full bg-gradient-to-r from-sky-400 to-indigo-500 rounded-full"
                       style={{ width: `${pct}%` }}
                     />
                   </div>
@@ -178,28 +178,28 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
           </div>
         </div>
 
-        <div className="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-4">
+        <div className="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Globe2 className="w-4 h-4 text-indigo-400" />
               <h3 className="text-sm font-bold text-slate-100 font-mono">Multilingual Citizen Voice Representation</h3>
             </div>
-            <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800">
+            <span className="text-xs font-mono text-emerald-300 font-bold bg-emerald-950 px-2.5 py-1 rounded border border-emerald-700">
               NLP Engine Active
             </span>
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-4">
             {Object.entries(languageCounts).map(([code, count]) => {
               const pct = Math.round((count / (requests.length || 1)) * 100);
               return (
-                <div key={code} className="p-3 rounded-lg bg-slate-950 border border-slate-800/80">
-                  <div className="text-xs font-semibold text-slate-200">
+                <div key={code} className="p-4 rounded-xl bg-slate-950 border border-slate-800">
+                  <div className="text-xs font-bold text-slate-100">
                     {languageLabels[code] || code}
                   </div>
                   <div className="flex items-baseline justify-between mt-2 font-mono">
-                    <span className="text-lg font-bold text-sky-400">{count}</span>
-                    <span className="text-xs text-slate-400">{pct}% share</span>
+                    <span className="text-xl font-extrabold text-sky-400">{count}</span>
+                    <span className="text-xs font-bold text-slate-300">{pct}% share</span>
                   </div>
                 </div>
               );
@@ -209,87 +209,93 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
       </div>
 
       {/* Demand Velocity Momentum Signals */}
-      <div className="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-4">
+      <div className="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-5">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <TrendingUp className="w-5 h-5 text-sky-400" />
             <h3 className="text-base font-bold text-slate-100 font-mono">Demand Momentum Velocity Signals</h3>
           </div>
-          <span className="text-xs text-slate-400 font-mono">30-Day Window Comparison</span>
+          <span className="text-xs text-slate-300 font-mono font-bold">30-Day Window Comparison</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="p-5 rounded-xl bg-slate-950 border border-slate-800 space-y-3">
             <div className="flex justify-between items-center">
-              <span className="text-xs font-bold text-slate-200 font-mono">Healthcare Demand</span>
+              <span className="text-xs font-bold text-slate-100 font-mono">Healthcare Demand</span>
               <TrendBadge trend="INCREASING" pctChange={34.5} />
             </div>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-300 leading-relaxed font-medium">
               Accelerating demand velocity in Kanpur South and Ekurhuleni North clinics.
             </p>
-            <div className="text-[11px] font-mono text-emerald-400">+34.5% vs previous 30 days</div>
+            <div className="text-xs font-mono font-bold text-emerald-400">+34.5% vs previous 30 days</div>
           </div>
 
-          <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+          <div className="p-5 rounded-xl bg-slate-950 border border-slate-800 space-y-3">
             <div className="flex justify-between items-center">
-              <span className="text-xs font-bold text-slate-200 font-mono">Clean Water Supply</span>
+              <span className="text-xs font-bold text-slate-100 font-mono">Clean Water Supply</span>
               <TrendBadge trend="EMERGING" />
             </div>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-300 leading-relaxed font-medium">
               Sudden surge in pipeline fracture complaints in Pune Peri-Urban Ward 12.
             </p>
-            <div className="text-[11px] font-mono text-amber-400">Emerging urgent signal</div>
+            <div className="text-xs font-mono font-bold text-amber-400">Emerging urgent signal</div>
           </div>
 
-          <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+          <div className="p-5 rounded-xl bg-slate-950 border border-slate-800 space-y-3">
             <div className="flex justify-between items-center">
-              <span className="text-xs font-bold text-slate-200 font-mono">Digital Broadband</span>
+              <span className="text-xs font-bold text-slate-100 font-mono">Digital Broadband</span>
               <TrendBadge trend="STABLE" pctChange={2.1} />
             </div>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-300 leading-relaxed font-medium">
               Consistent steady request rate across student populations.
             </p>
-            <div className="text-[11px] font-mono text-slate-400">Stable volume (+2.1%)</div>
+            <div className="text-xs font-mono font-bold text-slate-300">Stable volume (+2.1%)</div>
           </div>
         </div>
       </div>
 
       {/* Citizen Feedback Feed Table */}
-      <div className="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-4">
-        <div className="flex items-center justify-between">
-          <h3 className="text-base font-bold text-slate-100 font-mono">Filtered Citizen Requests ({filteredRequests.length})</h3>
-          <span className="text-xs font-mono text-slate-400">Showing verified records</span>
+      <div className="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-5 shadow-lg">
+        <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+          <h3 className="text-lg font-bold text-slate-100 font-mono">Filtered Citizen Requests ({filteredRequests.length})</h3>
+          <span className="text-xs font-mono text-slate-300 font-bold">Showing verified records</span>
         </div>
 
         {filteredRequests.length === 0 ? (
-          <div className="py-12 text-center text-xs text-slate-500">
+          <div className="py-12 text-center text-xs text-slate-400 font-bold">
             No citizen requests match the selected filters.
           </div>
         ) : (
-          <div className="space-y-3">
+          <div className="space-y-4">
             {filteredRequests.map((req) => (
-              <div key={req.id} className="p-4 rounded-lg bg-slate-950 border border-slate-800/80 space-y-2">
-                <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
-                  <div className="flex items-center gap-2 font-mono">
-                    <span className="font-bold text-slate-200">{req.id}</span>
-                    <span className="text-slate-400">• {req.request_category || req.category}</span>
-                    <span className="text-slate-500">• {req.source}</span>
+              <div key={req.id} className="p-5 rounded-xl bg-slate-950 border border-slate-800 space-y-3 shadow-md">
+                <div className="flex flex-wrap items-center justify-between gap-3 text-xs">
+                  <div className="flex items-center gap-2.5 font-mono">
+                    <span className="font-bold text-slate-100 text-sm">{req.id}</span>
+                    <span className="text-sky-300 font-bold">• {req.request_category || req.category}</span>
+                    <span className="text-slate-400 font-semibold">• {req.source}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono bg-slate-900 border border-slate-800 px-2 py-0.5 rounded text-slate-400 uppercase">
-                      Lang: {req.language}
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs font-mono font-bold bg-slate-900 border border-slate-700 px-2.5 py-1 rounded-md text-slate-200 uppercase">
+                      LANG: {req.language}
                     </span>
-                    <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-semibold ${
-                      (req.urgency || req.extracted_entities.severity) === 'CRITICAL' ? 'bg-rose-950 text-rose-300 border border-rose-800' : 'bg-amber-950 text-amber-300 border border-amber-800'
+                    <span className={`px-2.5 py-1 rounded-md text-xs font-mono font-bold ${
+                      (req.urgency || req.extracted_entities.severity) === 'CRITICAL' ? 'bg-rose-950 text-rose-200 border border-rose-600' : 'bg-amber-950 text-amber-200 border border-amber-600'
                     }`}>
                       {req.urgency || req.extracted_entities.severity}
                     </span>
                   </div>
                 </div>
 
-                <p className="text-xs text-slate-300 italic">"{req.original_text}"</p>
-                <div className="text-xs text-sky-400 font-mono">
-                  English Translation: "{req.translated_text}"
+                <div className="p-3.5 rounded-lg bg-slate-900/90 border border-slate-800">
+                  <p className="text-sm font-semibold text-slate-100 leading-relaxed">
+                    "{req.original_text}"
+                  </p>
+                </div>
+
+                <div className="p-3.5 rounded-lg bg-sky-950/60 border border-sky-800/60 text-xs font-mono font-bold text-sky-200 flex items-start gap-2">
+                  <span className="text-sky-400 shrink-0">English Translation:</span>
+                  <span className="text-slate-100 font-sans italic font-medium">"{req.translated_text}"</span>
                 </div>
               </div>
             ))}

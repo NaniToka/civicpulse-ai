@@ -4,21 +4,26 @@
 
 @layer base {
   body {
-    @apply bg-civic-950 text-civic-100 selection:bg-accent-blue selection:text-civic-950;
+    @apply bg-slate-950 text-slate-100 antialiased selection:bg-sky-500 selection:text-slate-950 font-sans tracking-normal;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold text-slate-100 tracking-tight;
   }
 }
 
 /* Custom scrollbars */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
   background: #090D16;
 }
 ::-webkit-scrollbar-thumb {
   background: #334155;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #475569;

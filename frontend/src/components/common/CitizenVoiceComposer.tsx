@@ -108,28 +108,29 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
   };
 
   return (
-    <div className="p-6 rounded-xl bg-gradient-to-br from-slate-900 via-slate-900 to-slate-950 border border-slate-800 shadow-xl space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-lg bg-sky-950 text-sky-400 border border-sky-800">
-            <Globe2 className="w-5 h-5" />
+    <div className="p-6 md:p-8 rounded-xl bg-gradient-to-br from-slate-900 via-slate-900 to-slate-950 border border-slate-700 shadow-2xl space-y-6">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+        <div className="flex items-center gap-3.5">
+          <div className="p-3 rounded-xl bg-sky-950 text-sky-400 border border-sky-700 shadow-md">
+            <Globe2 className="w-6 h-6" />
           </div>
           <div>
-            <h2 className="text-base font-bold text-slate-100 font-mono">
+            <h2 className="text-lg font-bold text-slate-100 font-mono tracking-tight">
               Multilingual Citizen Voice Composer
             </h2>
-            <p className="text-xs text-slate-400">
-              Submit citizen complaints in Telugu, Hindi, Marathi, Portuguese, Zulu, Bengali, or English to generate structured demand signals.
+            <p className="text-xs text-slate-300 font-sans mt-0.5 font-medium">
+              Submit citizen feedback in Telugu, Hindi, Marathi, Portuguese, Zulu, Bengali, or English to generate structured demand signals.
             </p>
           </div>
         </div>
 
         <div className="flex items-center gap-2 text-xs font-mono">
-          <span className="text-slate-400">Target Region:</span>
+          <span className="text-slate-300 font-bold">Target Region:</span>
           <select
             value={selectedRegionId}
             onChange={(e) => setSelectedRegionId(e.target.value)}
-            className="bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-sky-500 font-mono"
+            className="bg-slate-950 border border-slate-700 text-slate-100 font-bold text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-sky-400 font-mono"
           >
             {regions.map((r) => (
               <option key={r.id} value={r.id}>
@@ -140,11 +141,12 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
         </div>
       </div>
 
-      <div className="space-y-2">
-        <div className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">
+      {/* Quick Example Prompts */}
+      <div className="space-y-3">
+        <div className="text-xs font-mono text-slate-300 font-bold uppercase tracking-wider">
           Try a Multilingual Example:
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2.5">
           {samplePrompts.map((sample) => (
             <button
               key={sample.code}
@@ -153,7 +155,7 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
                 setLanguageHint(sample.code);
                 handleAnalyze(sample.text, sample.code);
               }}
-              className="px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 hover:border-sky-500/60 text-xs font-mono text-slate-300 hover:text-sky-300 transition"
+              className="px-3.5 py-2 rounded-lg bg-slate-950 border border-slate-700 hover:border-sky-400 text-xs font-mono font-bold text-slate-100 hover:text-sky-300 transition shadow-sm"
             >
               {sample.label}
             </button>
@@ -161,6 +163,7 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
         </div>
       </div>
 
+      {/* Main Input Controls */}
       <div className="space-y-4">
         <div className="relative">
           <textarea
@@ -168,18 +171,18 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
             value={rawText}
             onChange={(e) => setRawText(e.target.value)}
             placeholder="Type or paste citizen feedback in any language (e.g. 'మా ప్రాంతంలో సరైన ఆసుపత్రి సౌకర్యాలు లేవు.')..."
-            className="w-full p-4 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-sky-500 font-sans leading-relaxed"
+            className="w-full p-4 bg-slate-950 border border-slate-700 rounded-xl text-sm font-semibold text-slate-100 placeholder-slate-400 focus:outline-none focus:border-sky-400 font-sans leading-relaxed"
           />
         </div>
 
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-3 text-xs font-mono">
+          <div className="flex flex-wrap items-center gap-4 text-xs font-mono">
             <div>
-              <span className="text-slate-400 mr-2">Language:</span>
+              <span className="text-slate-300 font-bold mr-2">Language:</span>
               <select
                 value={languageHint}
                 onChange={(e) => setLanguageHint(e.target.value)}
-                className="bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-sky-500"
+                className="bg-slate-950 border border-slate-700 text-slate-100 font-bold text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-sky-400"
               >
                 <option value="auto">Auto Detect</option>
                 <option value="te">Telugu (తెలుగు)</option>
@@ -193,11 +196,11 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
             </div>
 
             <div>
-              <span className="text-slate-400 mr-2">Channel:</span>
+              <span className="text-slate-300 font-bold mr-2">Channel:</span>
               <select
                 value={channelSource}
                 onChange={(e) => setChannelSource(e.target.value)}
-                className="bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-sky-500"
+                className="bg-slate-950 border border-slate-700 text-slate-100 font-bold text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-sky-400"
               >
                 <option value="voice">Voice Call</option>
                 <option value="text">SMS Text</option>
@@ -210,7 +213,7 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
           <button
             onClick={() => handleAnalyze()}
             disabled={analyzing || !rawText.trim()}
-            className="px-5 py-2.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-semibold text-xs transition flex items-center justify-center gap-2 shadow-md shadow-sky-950/60 disabled:opacity-50"
+            className="px-6 py-3 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs transition flex items-center justify-center gap-2 shadow-lg shadow-sky-950/60 disabled:opacity-50"
           >
             {analyzing ? (
               <span>Analyzing Signal...</span>
@@ -224,79 +227,82 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
         </div>
       </div>
 
+      {/* Step-by-Step Pipeline Animation */}
       {pipelineStep && (
-        <div className="p-4 rounded-xl bg-slate-950 border border-sky-900/50 flex items-center gap-3 text-xs font-mono text-sky-300 animate-pulse">
+        <div className="p-4 rounded-xl bg-slate-950 border border-sky-700 flex items-center gap-3 text-xs font-mono font-bold text-sky-300 animate-pulse">
           <RefreshCw className="w-4 h-4 animate-spin text-sky-400 shrink-0" />
           <span>{pipelineStep}</span>
         </div>
       )}
 
+      {/* Success Notification */}
       {successMessage && (
-        <div className="p-4 rounded-xl bg-emerald-950 border border-emerald-800 text-xs text-emerald-300 flex items-center justify-between">
+        <div className="p-4 rounded-xl bg-emerald-950 border border-emerald-700 text-xs font-bold text-emerald-200 flex items-center justify-between shadow-md">
           <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+            <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
             <span>{successMessage}</span>
           </div>
           <button
             onClick={() => setSuccessMessage(null)}
-            className="text-xs underline text-emerald-400"
+            className="text-xs underline text-emerald-300 font-mono ml-4"
           >
             Dismiss
           </button>
         </div>
       )}
 
+      {/* Structured AI Analysis Result Preview Card */}
       {analysisResult && (
-        <div className="p-5 rounded-xl bg-slate-950 border border-slate-800 space-y-4 animate-in fade-in duration-200">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-slate-100 font-mono">Extracted Civic Intelligence Signal</span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-800">
+        <div className="p-6 rounded-xl bg-slate-950 border border-slate-700 space-y-5 animate-in fade-in duration-200 shadow-xl">
+          <div className="flex items-center justify-between border-b border-slate-800 pb-3.5">
+            <div className="flex items-center gap-2.5">
+              <span className="text-sm font-bold text-slate-100 font-mono">Extracted Civic Intelligence Signal</span>
+              <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-700">
                 {(analysisResult.confidence * 100).toFixed(0)}% Confidence
               </span>
             </div>
-            <span className="text-[10px] font-mono text-slate-500 uppercase">
+            <span className="text-xs font-mono font-bold text-slate-300 uppercase">
               Provider: {aiProvider}
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono">
-            <div className="p-3 rounded-lg bg-slate-900 border border-slate-800">
-              <span className="text-slate-500 text-[10px] uppercase">Detected Language</span>
-              <div className="text-slate-200 font-bold mt-1 uppercase">{analysisResult.language}</div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-mono">
+            <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
+              <span className="text-slate-400 font-bold text-[10px] uppercase tracking-wider">Detected Language</span>
+              <div className="text-slate-100 font-extrabold text-base mt-1 uppercase">{analysisResult.language}</div>
             </div>
 
-            <div className="p-3 rounded-lg bg-slate-900 border border-slate-800">
-              <span className="text-slate-500 text-[10px] uppercase">Civic Category</span>
-              <div className="text-sky-400 font-bold mt-1 uppercase">{analysisResult.category}</div>
+            <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
+              <span className="text-slate-400 font-bold text-[10px] uppercase tracking-wider">Civic Category</span>
+              <div className="text-sky-400 font-extrabold text-base mt-1 uppercase">{analysisResult.category}</div>
             </div>
 
-            <div className="p-3 rounded-lg bg-slate-900 border border-slate-800">
-              <span className="text-slate-500 text-[10px] uppercase">Urgency Signal</span>
-              <div className="mt-1">
+            <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
+              <span className="text-slate-400 font-bold text-[10px] uppercase tracking-wider">Urgency Signal</span>
+              <div className="mt-1.5">
                 <PriorityBadge level={analysisResult.urgency} size="sm" />
               </div>
             </div>
           </div>
 
-          <div className="space-y-1 text-xs">
-            <span className="font-mono text-slate-400 text-[11px]">Normalized English Meaning:</span>
-            <p className="p-3 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 italic">
+          <div className="space-y-1.5 text-xs">
+            <span className="font-mono font-bold text-slate-300 text-xs">Normalized English Meaning:</span>
+            <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 text-slate-100 font-semibold text-sm leading-relaxed">
               "{analysisResult.summary}"
-            </p>
+            </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
-            <div className="text-xs font-mono text-slate-400 flex items-center gap-1.5">
-              <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-              <span>Contributes to <span className="text-sky-300 font-bold">{analysisResult.category.toUpperCase()}</span> demand index in selected district.</span>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
+            <div className="text-xs font-mono text-slate-300 font-medium flex items-center gap-2">
+              <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0" />
+              <span>Contributes to <span className="text-sky-300 font-bold uppercase">{analysisResult.category}</span> demand index in selected district.</span>
             </div>
 
             <button
               onClick={handleIngestSignal}
-              className="px-5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition flex items-center justify-center gap-2 shadow-md shadow-emerald-950/60"
+              className="px-6 py-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-950/60"
             >
-              <Send className="w-3.5 h-3.5" />
+              <Send className="w-4 h-4" />
               <span>Add Signal to Civic Intelligence</span>
             </button>
           </div>

@@ -53,104 +53,104 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
 
   return (
     <div className="space-y-8 animate-in fade-in duration-300">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800/80 pb-5">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5">
         <div>
           <div className="flex items-center gap-2">
-            <Database className="w-6 h-6 text-slate-400" />
+            <Database className="w-6 h-6 text-slate-300" />
             <h1 className="text-2xl font-bold text-slate-100 tracking-tight font-mono">
               Synthetic Demonstration Datasets
             </h1>
           </div>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-sm text-slate-300 mt-1 font-sans font-medium">
             Inspect the underlying datasets, census demographics, and test live multilingual citizen signal ingestion.
           </p>
         </div>
 
-        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-amber-950/60 border border-amber-800/40 text-[11px] font-mono text-amber-300">
-          <ShieldAlert className="w-3.5 h-3.5 text-amber-400" />
+        <div className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-amber-950 border border-amber-600 text-xs font-mono font-bold text-amber-200 shadow-sm">
+          <ShieldAlert className="w-4 h-4 text-amber-400" />
           <span>SYNTHETIC DEMO DATA</span>
         </div>
       </div>
 
-      <div className="flex border-b border-slate-800 text-xs font-mono">
+      <div className="flex border-b border-slate-800 text-xs font-mono font-bold">
         <button
           onClick={() => setActiveTab('requests')}
-          className={`px-4 py-2.5 font-semibold transition border-b-2 ${
+          className={`px-5 py-3 font-extrabold transition border-b-2 ${
             activeTab === 'requests'
-              ? 'border-sky-500 text-sky-400 bg-slate-900/50'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
+              ? 'border-sky-400 text-sky-300 bg-slate-900'
+              : 'border-transparent text-slate-300 hover:text-white'
           }`}
         >
           Citizen Requests ({requests.length})
         </button>
         <button
           onClick={() => setActiveTab('regions')}
-          className={`px-4 py-2.5 font-semibold transition border-b-2 ${
+          className={`px-5 py-3 font-extrabold transition border-b-2 ${
             activeTab === 'regions'
-              ? 'border-sky-500 text-sky-400 bg-slate-900/50'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
+              ? 'border-sky-400 text-sky-300 bg-slate-900'
+              : 'border-transparent text-slate-300 hover:text-white'
           }`}
         >
           Regions & Census ({regions.length})
         </button>
         <button
           onClick={() => setActiveTab('indicators')}
-          className={`px-4 py-2.5 font-semibold transition border-b-2 ${
+          className={`px-5 py-3 font-extrabold transition border-b-2 ${
             activeTab === 'indicators'
-              ? 'border-sky-500 text-sky-400 bg-slate-900/50'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
+              ? 'border-sky-400 text-sky-300 bg-slate-900'
+              : 'border-transparent text-slate-300 hover:text-white'
           }`}
         >
           Infrastructure Indicators ({indicators.length})
         </button>
         <button
           onClick={() => setActiveTab('investments')}
-          className={`px-4 py-2.5 font-semibold transition border-b-2 ${
+          className={`px-5 py-3 font-extrabold transition border-b-2 ${
             activeTab === 'investments'
-              ? 'border-sky-500 text-sky-400 bg-slate-900/50'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
+              ? 'border-sky-400 text-sky-300 bg-slate-900'
+              : 'border-transparent text-slate-300 hover:text-white'
           }`}
         >
           Capital Investments ({investments.length})
         </button>
         <button
           onClick={() => setActiveTab('ingest')}
-          className={`px-4 py-2.5 font-semibold transition border-b-2 flex items-center gap-1.5 ${
+          className={`px-5 py-3 font-extrabold transition border-b-2 flex items-center gap-1.5 ${
             activeTab === 'ingest'
-              ? 'border-emerald-500 text-emerald-400 bg-emerald-950/30'
-              : 'border-transparent text-emerald-400/80 hover:text-emerald-300'
+              ? 'border-emerald-500 text-emerald-300 bg-emerald-950'
+              : 'border-transparent text-emerald-400 hover:text-emerald-300'
           }`}
         >
-          <Plus className="w-3.5 h-3.5" />
+          <Plus className="w-4 h-4" />
           <span>Ingest Test Signal</span>
         </button>
       </div>
 
-      <div className="p-6 rounded-xl bg-slate-900 border border-slate-800">
+      <div className="p-6 rounded-xl bg-slate-900 border border-slate-800 shadow-lg">
         {activeTab === 'requests' && (
           <div className="space-y-4">
-            <h3 className="text-sm font-bold text-slate-100 font-mono">Citizen Requests Data</h3>
+            <h3 className="text-base font-bold text-slate-100 font-mono">Citizen Requests Data</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs font-mono">
-                <thead className="bg-slate-950 text-slate-400 border-b border-slate-800">
+                <thead className="bg-slate-950 text-slate-200 border-b border-slate-800 font-bold">
                   <tr>
-                    <th className="p-3">ID</th>
-                    <th className="p-3">REGION</th>
-                    <th className="p-3">LANG</th>
-                    <th className="p-3">CATEGORY</th>
-                    <th className="p-3">URGENCY</th>
-                    <th className="p-3">ORIGINAL TEXT</th>
+                    <th className="p-3.5">ID</th>
+                    <th className="p-3.5">REGION</th>
+                    <th className="p-3.5">LANG</th>
+                    <th className="p-3.5">CATEGORY</th>
+                    <th className="p-3.5">URGENCY</th>
+                    <th className="p-3.5">ORIGINAL TEXT</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-800">
+                <tbody className="divide-y divide-slate-800 font-medium">
                   {requests.map((r) => (
-                    <tr key={r.id} className="hover:bg-slate-950/60 transition">
-                      <td className="p-3 font-bold text-sky-400">{r.id}</td>
-                      <td className="p-3 text-slate-300">{r.region_id}</td>
-                      <td className="p-3 text-slate-400 uppercase">{r.language}</td>
-                      <td className="p-3 text-slate-200">{r.request_category || r.category}</td>
-                      <td className="p-3 font-bold text-rose-400">{r.urgency || r.extracted_entities.severity}</td>
-                      <td className="p-3 text-slate-400 italic line-clamp-1">"{r.original_text}"</td>
+                    <tr key={r.id} className="hover:bg-slate-950/80 transition">
+                      <td className="p-3.5 font-extrabold text-sky-400">{r.id}</td>
+                      <td className="p-3.5 text-slate-200 font-bold">{r.region_id}</td>
+                      <td className="p-3.5 text-slate-300 uppercase font-bold">{r.language}</td>
+                      <td className="p-3.5 text-slate-100 font-bold">{r.request_category || r.category}</td>
+                      <td className="p-3.5 font-extrabold text-rose-400">{r.urgency || r.extracted_entities.severity}</td>
+                      <td className="p-3.5 text-slate-200 font-semibold italic">"{r.original_text}"</td>
                     </tr>
                   ))}
                 </tbody>
@@ -161,28 +161,28 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
 
         {activeTab === 'regions' && (
           <div className="space-y-4">
-            <h3 className="text-sm font-bold text-slate-100 font-mono">Regions & Demographic Census Data</h3>
+            <h3 className="text-base font-bold text-slate-100 font-mono">Regions & Demographic Census Data</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs font-mono">
-                <thead className="bg-slate-950 text-slate-400 border-b border-slate-800">
+                <thead className="bg-slate-950 text-slate-200 border-b border-slate-800 font-bold">
                   <tr>
-                    <th className="p-3">ID</th>
-                    <th className="p-3">CITY</th>
-                    <th className="p-3">COUNTRY</th>
-                    <th className="p-3">POPULATION</th>
-                    <th className="p-3">VULNERABILITY</th>
-                    <th className="p-3">PRIMARY LANG</th>
+                    <th className="p-3.5">ID</th>
+                    <th className="p-3.5">CITY</th>
+                    <th className="p-3.5">COUNTRY</th>
+                    <th className="p-3.5">POPULATION</th>
+                    <th className="p-3.5">VULNERABILITY</th>
+                    <th className="p-3.5">PRIMARY LANG</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-800">
+                <tbody className="divide-y divide-slate-800 font-medium">
                   {regions.map((r) => (
-                    <tr key={r.id} className="hover:bg-slate-950/60 transition">
-                      <td className="p-3 font-bold text-indigo-400">{r.id}</td>
-                      <td className="p-3 font-bold text-slate-200">{r.district_city}</td>
-                      <td className="p-3 text-slate-400">{r.country}</td>
-                      <td className="p-3 text-slate-200">{r.population.toLocaleString()}</td>
-                      <td className="p-3 font-bold text-amber-400">{r.vulnerability_index.toFixed(2)}</td>
-                      <td className="p-3 text-emerald-400 uppercase">{r.primary_language}</td>
+                    <tr key={r.id} className="hover:bg-slate-950/80 transition">
+                      <td className="p-3.5 font-extrabold text-indigo-400">{r.id}</td>
+                      <td className="p-3.5 font-bold text-slate-100 text-sm">{r.district_city}</td>
+                      <td className="p-3.5 text-slate-300 font-semibold">{r.country}</td>
+                      <td className="p-3.5 text-slate-100 font-bold">{r.population.toLocaleString()}</td>
+                      <td className="p-3.5 font-extrabold text-amber-400">{r.vulnerability_index.toFixed(2)}</td>
+                      <td className="p-3.5 text-emerald-400 uppercase font-extrabold">{r.primary_language}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -193,26 +193,26 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
 
         {activeTab === 'indicators' && (
           <div className="space-y-4">
-            <h3 className="text-sm font-bold text-slate-100 font-mono">Infrastructure Capacity Indicators</h3>
+            <h3 className="text-base font-bold text-slate-100 font-mono">Infrastructure Capacity Indicators</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs font-mono">
-                <thead className="bg-slate-950 text-slate-400 border-b border-slate-800">
+                <thead className="bg-slate-950 text-slate-200 border-b border-slate-800 font-bold">
                   <tr>
-                    <th className="p-3">ID</th>
-                    <th className="p-3">REGION</th>
-                    <th className="p-3">CATEGORY</th>
-                    <th className="p-3">COVERAGE %</th>
-                    <th className="p-3">GAP SCORE</th>
+                    <th className="p-3.5">ID</th>
+                    <th className="p-3.5">REGION</th>
+                    <th className="p-3.5">CATEGORY</th>
+                    <th className="p-3.5">COVERAGE %</th>
+                    <th className="p-3.5">GAP SCORE</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-800">
+                <tbody className="divide-y divide-slate-800 font-medium">
                   {indicators.map((ind) => (
-                    <tr key={ind.id} className="hover:bg-slate-950/60 transition">
-                      <td className="p-3 font-bold text-slate-300">{ind.id}</td>
-                      <td className="p-3 text-slate-400">{ind.region_id}</td>
-                      <td className="p-3 text-sky-400 uppercase">{ind.category}</td>
-                      <td className="p-3 text-slate-200">{ind.coverage_ratio_pct}%</td>
-                      <td className="p-3 font-bold text-rose-400">{ind.gap_score.toFixed(2)}</td>
+                    <tr key={ind.id} className="hover:bg-slate-950/80 transition">
+                      <td className="p-3.5 font-bold text-slate-200">{ind.id}</td>
+                      <td className="p-3.5 text-slate-300 font-bold">{ind.region_id}</td>
+                      <td className="p-3.5 text-sky-400 uppercase font-extrabold">{ind.category}</td>
+                      <td className="p-3.5 text-slate-100 font-bold">{ind.coverage_ratio_pct}%</td>
+                      <td className="p-3.5 font-extrabold text-rose-400">{ind.gap_score.toFixed(2)}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -223,28 +223,28 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
 
         {activeTab === 'investments' && (
           <div className="space-y-4">
-            <h3 className="text-sm font-bold text-slate-100 font-mono">Public Capital Investments</h3>
+            <h3 className="text-base font-bold text-slate-100 font-mono">Public Capital Investments</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs font-mono">
-                <thead className="bg-slate-950 text-slate-400 border-b border-slate-800">
+                <thead className="bg-slate-950 text-slate-200 border-b border-slate-800 font-bold">
                   <tr>
-                    <th className="p-3">ID</th>
-                    <th className="p-3">PROJECT NAME</th>
-                    <th className="p-3">REGION</th>
-                    <th className="p-3">CATEGORY</th>
-                    <th className="p-3">BUDGET (USD)</th>
-                    <th className="p-3">STATUS</th>
+                    <th className="p-3.5">ID</th>
+                    <th className="p-3.5">PROJECT NAME</th>
+                    <th className="p-3.5">REGION</th>
+                    <th className="p-3.5">CATEGORY</th>
+                    <th className="p-3.5">BUDGET (USD)</th>
+                    <th className="p-3.5">STATUS</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-800">
+                <tbody className="divide-y divide-slate-800 font-medium">
                   {investments.map((inv) => (
-                    <tr key={inv.id} className="hover:bg-slate-950/60 transition">
-                      <td className="p-3 font-bold text-slate-300">{inv.id}</td>
-                      <td className="p-3 font-bold text-slate-200">{inv.project_name}</td>
-                      <td className="p-3 text-slate-400">{inv.region_id}</td>
-                      <td className="p-3 text-sky-400 uppercase">{inv.category}</td>
-                      <td className="p-3 text-emerald-400 font-bold">${inv.budget_usd.toLocaleString()}</td>
-                      <td className="p-3 font-bold text-amber-400 uppercase">{inv.status}</td>
+                    <tr key={inv.id} className="hover:bg-slate-950/80 transition">
+                      <td className="p-3.5 font-bold text-slate-200">{inv.id}</td>
+                      <td className="p-3.5 font-bold text-slate-100">{inv.project_name}</td>
+                      <td className="p-3.5 text-slate-300 font-bold">{inv.region_id}</td>
+                      <td className="p-3.5 text-sky-400 uppercase font-extrabold">{inv.category}</td>
+                      <td className="p-3.5 text-emerald-400 font-extrabold">${inv.budget_usd.toLocaleString()}</td>
+                      <td className="p-3.5 font-extrabold text-amber-400 uppercase">{inv.status}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -254,35 +254,35 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
         )}
 
         {activeTab === 'ingest' && (
-          <form onSubmit={handleIngest} className="space-y-4 max-w-2xl">
-            <h3 className="text-sm font-bold text-slate-100 font-mono">Ingest Multilingual Citizen Feedback Signal</h3>
+          <form onSubmit={handleIngest} className="space-y-5 max-w-2xl">
+            <h3 className="text-base font-bold text-slate-100 font-mono">Ingest Multilingual Citizen Feedback Signal</h3>
 
             {successMsg && (
-              <div className="p-3 rounded-lg bg-emerald-950 border border-emerald-800 text-xs text-emerald-300 flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+              <div className="p-4 rounded-xl bg-emerald-950 border border-emerald-700 text-xs font-bold text-emerald-200 flex items-center gap-2 shadow-md">
+                <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
                 <span>{successMsg}</span>
               </div>
             )}
 
-            <div className="space-y-1.5">
-              <label className="text-xs font-mono text-slate-400">Citizen Raw Text Feedback:</label>
+            <div className="space-y-2">
+              <label className="text-xs font-mono font-bold text-slate-300">Citizen Raw Text Feedback:</label>
               <textarea
                 rows={4}
                 required
                 placeholder="Enter feedback in Hindi, Marathi, Portuguese, Zulu, Bengali, English..."
                 value={rawText}
                 onChange={(e) => setRawText(e.target.value)}
-                className="w-full p-3 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-sky-500 font-mono"
+                className="w-full p-4 bg-slate-950 border border-slate-700 rounded-xl text-sm font-semibold text-slate-100 placeholder-slate-400 focus:outline-none focus:border-sky-400 font-sans leading-relaxed"
               />
             </div>
 
-            <div className="grid grid-cols-3 gap-3 text-xs font-mono">
+            <div className="grid grid-cols-3 gap-4 text-xs font-mono font-bold">
               <div>
-                <label className="text-slate-400">Language:</label>
+                <label className="text-slate-300">Language:</label>
                 <select
                   value={language}
                   onChange={(e) => setLanguage(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-lg p-2 mt-1"
+                  className="w-full bg-slate-950 border border-slate-700 text-slate-100 font-bold text-xs rounded-lg p-3 mt-1.5 focus:outline-none focus:border-sky-400"
                 >
                   <option value="hi">Hindi (hi)</option>
                   <option value="mr">Marathi (mr)</option>
@@ -294,11 +294,11 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
               </div>
 
               <div>
-                <label className="text-slate-400">Channel Source:</label>
+                <label className="text-slate-300">Channel Source:</label>
                 <select
                   value={source}
                   onChange={(e) => setSource(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-lg p-2 mt-1"
+                  className="w-full bg-slate-950 border border-slate-700 text-slate-100 font-bold text-xs rounded-lg p-3 mt-1.5 focus:outline-none focus:border-sky-400"
                 >
                   <option value="voice">Voice Call</option>
                   <option value="text">SMS Text</option>
@@ -308,11 +308,11 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
               </div>
 
               <div>
-                <label className="text-slate-400">Target Region:</label>
+                <label className="text-slate-300">Target Region:</label>
                 <select
                   value={regionId}
                   onChange={(e) => setRegionId(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-lg p-2 mt-1"
+                  className="w-full bg-slate-950 border border-slate-700 text-slate-100 font-bold text-xs rounded-lg p-3 mt-1.5 focus:outline-none focus:border-sky-400"
                 >
                   {regions.map((r) => (
                     <option key={r.id} value={r.id}>
@@ -326,7 +326,7 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
             <button
               type="submit"
               disabled={loading}
-              className="px-6 py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition shadow-md shadow-emerald-950/60 disabled:opacity-50"
+              className="px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition shadow-lg shadow-emerald-950/60 disabled:opacity-50"
             >
               {loading ? 'Ingesting via AI Pipeline...' : 'Ingest Signal into System'}
             </button>

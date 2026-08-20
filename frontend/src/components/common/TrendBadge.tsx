@@ -12,8 +12,8 @@ export const TrendBadge: React.FC<TrendBadgeProps> = ({ trend, pctChange }) => {
 
   if (normTrend === 'INCREASING') {
     return (
-      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-medium bg-rose-950/60 text-rose-300 border border-rose-800/40">
-        <TrendingUp className="w-3 h-3 text-rose-400" />
+      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-bold bg-rose-950 text-rose-200 border border-rose-600 shadow-sm">
+        <TrendingUp className="w-3.5 h-3.5 text-rose-400" />
         <span>INCREASING</span>
         {pctChange !== undefined && <span>({pctChange > 0 ? `+${pctChange.toFixed(1)}` : pctChange.toFixed(1)}%)</span>}
       </span>
@@ -22,8 +22,8 @@ export const TrendBadge: React.FC<TrendBadgeProps> = ({ trend, pctChange }) => {
 
   if (normTrend === 'EMERGING') {
     return (
-      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-medium bg-amber-950/60 text-amber-300 border border-amber-800/40">
-        <Sparkles className="w-3 h-3 text-amber-400" />
+      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-bold bg-amber-950 text-amber-200 border border-amber-600 shadow-sm">
+        <Sparkles className="w-3.5 h-3.5 text-amber-400" />
         <span>EMERGING</span>
       </span>
     );
@@ -31,8 +31,8 @@ export const TrendBadge: React.FC<TrendBadgeProps> = ({ trend, pctChange }) => {
 
   if (normTrend === 'DECREASING') {
     return (
-      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-medium bg-emerald-950/60 text-emerald-300 border border-emerald-800/40">
-        <TrendingDown className="w-3 h-3 text-emerald-400" />
+      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-bold bg-emerald-950 text-emerald-200 border border-emerald-600 shadow-sm">
+        <TrendingDown className="w-3.5 h-3.5 text-emerald-400" />
         <span>DECREASING</span>
         {pctChange !== undefined && <span>({pctChange.toFixed(1)}%)</span>}
       </span>
@@ -40,8 +40,8 @@ export const TrendBadge: React.FC<TrendBadgeProps> = ({ trend, pctChange }) => {
   }
 
   return (
-    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-medium bg-slate-800 text-slate-300 border border-slate-700">
-      <Minus className="w-3 h-3 text-slate-400" />
+    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-bold bg-slate-900 text-slate-200 border border-slate-700">
+      <Minus className="w-3.5 h-3.5 text-slate-400" />
       <span>STABLE</span>
     </span>
   );
