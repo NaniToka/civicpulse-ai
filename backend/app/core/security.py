@@ -1,6 +1,8 @@
 import re
-from fastapi import Request, HTTPException, status
+
+from fastapi import HTTPException, Request, status
 from starlette.middleware.base import BaseHTTPMiddleware
+
 from app.core.config import settings
 
 

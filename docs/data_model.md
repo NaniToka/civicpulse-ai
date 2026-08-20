@@ -1,61 +1,71 @@
 # CivicPulse AI Data Model & Schema Specification
 
-The data model is normalized and geospatial-ready, allowing direct translation to a relational PostgreSQL database extended with PostGIS for spatial spatial indexing.
+> **Synthetic Data Disclaimer**: All seed data files (`data/seed/*.json`) and demonstration API responses contain synthetic data created solely for prototyping and verification purposes, explicitly flagged with `"is_synthetic": true` / `"is_demo": true`.
 
-## Core Entities
+---
+
+## Core Entities & Schemas
 
 ### 1. `CitizenRequest`
-Represents an individual or aggregated citizen feedback entry.
-* `id` (`str`, Primary Key): Unique request identifier.
-* `region_id` (`str`, Foreign Key -> `Region.id`): Associated sub-national region.
-* `source` (`str`): Channel (e.g. `WhatsApp Voice`, `IVR`, `USSD`, `Mobile App`).
-* `language` (`str`): BCP-47 language tag (e.g. `hi`, `mr`, `pt`, `zu`, `en`).
-* `original_text` (`str`): Raw citizen input in native language.
-* `translated_text` (`str`): Machine-translated English text.
-* `request_category` (`str`): Target infrastructure category (e.g., `Clean Water & Sanitation`).
-* `extracted_entities` (`dict`): Extracted metadata (`location`, `severity`, `impacted_count`, `infrastructure_type`).
-* `latitude` (`float`), `longitude` (`float`): WGS-84 coordinates.
-* `timestamp` (`datetime`): Submission timestamp.
-* `confidence` (`float`): NLP extraction confidence score (0.0 to 1.0).
+Represents an individual citizen demand signal.
+- `id` (`str`): Unique request ID (e.g. `REQ-IND-UP-001`).
+- `region_id` (`str`, FK -> `Region.id`).
+- `source` (`str`): Ingestion channel (`voice`, `text`, `messaging`, `web`, `survey`, `imported_dataset`).
+- `language` (`str`): BCP-47 tag (e.g. `hi`, `mr`, `pt`, `zu`, `bn`, `en`).
+- `original_text` (`str`): Raw input text.
+- `normalized_text` (`str`): English translation or normalized summary.
+- `category` (`str`): Normalized taxonomy key (e.g. `water`, `healthcare`, `electricity`).
+- `subcategory` (`str`, Optional): Detailed deficit type.
+- `urgency` (`str`): `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`.
+- `processing_status` (`str`): `PENDING`, `PROCESSED`, `FAILED`.
+- `extracted_entities` (`ExtractedEntities`): Location, severity, impacted count, infrastructure type.
+- `confidence` (`float`): Extraction confidence (0.0 to 1.0).
+- `is_synthetic` (`bool`): Transparency flag (`true`).
 
 ### 2. `Region`
-Demographic and geographic definition of sub-national regions across BRICS.
-* `id` (`str`, Primary Key): Regional code (e.g., `REG-IND-MH-PUNE-01`).
-* `country` (`str`), `country_code` (`str`): ISO country name & code.
-* `state_province` (`str`), `district_city` (`str`): Administrative boundaries.
-* `latitude` (`float`), `longitude` (`float`): Centroid coordinates.
-* `population` (`int`): Resident census count.
-* `vulnerability_index` (`float`): Socioeconomic deficit index (0.0 to 1.0).
-* `primary_language` (`str`): Dominant language code.
+Administrative region with demographic indicators.
+- `id` (`str`): Regional identifier (e.g. `REG-IND-UP-KANP-02`).
+- `country`, `country_code`, `state_province`, `district_city` (`str`).
+- `population` (`int`): Resident census count.
+- `population_density` (`float`): Residents per km².
+- `youth_percentage`, `elderly_percentage` (`float`): Age demographic metrics.
+- `household_count` (`int`).
+- `vulnerability_index` (`float`): Socioeconomic vulnerability score (0.0 to 1.0).
+- `primary_language` (`str`).
 
 ### 3. `InfrastructureIndicator`
-Baseline capacity and deficit metrics per sector per region.
-* `id` (`str`, Primary Key): Unique indicator ID.
-* `region_id` (`str`, Foreign Key -> `Region.id`).
-* `category` (`str`): Sector name.
-* `current_capacity_pct` (`float`): Existing operational capacity.
-* `demand_index` (`float`): Measured demand score (0-100).
-* `coverage_ratio_pct` (`float`): Population coverage percentage.
-* `gap_score` (`float`): Calculated infrastructure deficit score (0.0 to 1.0).
+Sector-specific capacity metrics.
+- `id` (`str`).
+- `region_id` (`str`).
+- `category` (`str`): Controlled taxonomy key.
+- `current_capacity_pct` (`float`).
+- `demand_index` (`float`).
+- `coverage_ratio_pct` (`float`).
+- `gap_score` (`float`): Infrastructure deficit score (0.0 to 1.0).
+- `category_specific_metrics` (`dict`): Detailed indicators (e.g. `hospital_capacity_beds_per_1k`, `clean_water_access_pct`).
 
 ### 4. `InvestmentProject`
-Active or planned public capital allocation projects.
-* `id` (`str`, Primary Key): Project code.
-* `project_name` (`str`): Title of public investment.
-* `region_id` (`str`, Foreign Key -> `Region.id`).
-* `category` (`str`): Infrastructure sector.
-* `budget_usd` (`float`): Budget commitment.
-* `status` (`str`): Status (`PLANNED`, `APPROVED`, `IN_PROGRESS`, `COMPLETED`).
-* `planned_start` (`str`): Estimated start date.
+Public investment project records.
+- `id` (`str`).
+- `project_name` (`str`).
+- `region_id` (`str`).
+- `category` (`str`).
+- `budget_usd` (`float`).
+- `status` (`str`): `proposed`, `planned`, `active`, `completed`, `delayed`, `cancelled`.
+- `planned_start`, `planned_completion` (`str`).
 
-### 5. `PriorityRecommendation`
-The core explainable output generated by the prioritization engine.
-* `id` (`str`, Primary Key): Recommendation code.
-* `region_id` (`str`): Targeted region.
-* `category` (`str`): Recommended sector investment.
-* `priority_score` (`float`): Final score (0.0 to 100.0).
-* `confidence` (`float`): Composite statistical confidence.
-* `evidence` (`list[str]`): Fact-based bullet points derived from demand and gap analyses.
-* `reasoning` (`str`): Plain-language justification.
-* `expected_impact` (`str`): Quantified expected outcome.
-* `recommended_action` (`str`): Concrete policy action recommendation.
+### 5. `DemandHotspot`
+Normalized demand concentration signal.
+- `region_id`, `region_name`, `country`, `category` (`str`).
+- `raw_request_count` (`int`).
+- `weighted_demand_signal` (`float`).
+- `per_capita_demand_per_100k` (`float`).
+- `hotspot_score` (`float`): 0.0 to 100.0.
+
+### 6. `ExplanationDetails` & `FactorContribution`
+Machine-readable explainability schema powering "Why this recommendation?".
+- `recommendation_id`, `region_id`, `region_name`, `category` (`str`).
+- `priority_score` (`float`), `priority_level` (`str`).
+- `factors` (`list[FactorContribution]`): Factor name, raw value, weight, contribution, explanation.
+- `risks` (`list[str]`): Risk warnings.
+- `estimated_population_impact` (`int`).

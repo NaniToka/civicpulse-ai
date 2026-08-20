@@ -1,10 +1,11 @@
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 import logging
 
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from app.api.routes import router as api_router
 from app.core.config import settings
 from app.core.security import SecurityHeadersMiddleware
-from app.api.routes import router as api_router
 
 # Configure Logger
 logging.basicConfig(

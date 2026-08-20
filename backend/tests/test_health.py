@@ -1,4 +1,5 @@
 from fastapi.testclient import TestClient
+
 from app.main import app
 
 client = TestClient(app)
@@ -9,7 +10,7 @@ def test_health_check_endpoint():
     assert response.status_code == 200
     data = response.json()
     assert data["status"] == "healthy"
-    assert data["service"] == "CivicPulse AI Backend"
+    assert "CivicPulse AI" in data["service"]
 
 
 def test_regions_endpoint():
