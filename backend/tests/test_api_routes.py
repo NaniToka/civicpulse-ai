@@ -10,6 +10,34 @@ def test_health_endpoint():
     assert response.status_code == 200
     data = response.json()
     assert data["status"] == "healthy"
+    assert "version" in data
+    assert "environment" in data
+
+
+def test_demo_reset_endpoint():
+    # Ingest a demo signal first
+    payload = {
+        "source": "web",
+        "language": "hi",
+        "raw_text": "हमारे इलाके में पानी की किल्लत है",
+        "region_id": "REG-IND-UP-KANP-02",
+    }
+    client.post("/api/v1/citizen-requests", json=payload)
+
+    # Call reset endpoint
+    reset_res = client.post("/api/v1/demo/reset")
+    assert reset_res.status_code == 200
+    data = reset_res.json()
+    assert data["success"] is True
+    assert "Cleared" in data["message"]
+
+
+def test_cors_security_headers():
+    response = client.get("/api/v1/health", headers={"Origin": "http://localhost:5173"})
+    assert response.status_code == 200
+    assert response.headers.get("X-Content-Type-Options") == "nosniff"
+    assert response.headers.get("X-Frame-Options") == "DENY"
+    assert response.headers.get("access-control-allow-origin") == "http://localhost:5173"
 
 
 def test_categories_endpoint():

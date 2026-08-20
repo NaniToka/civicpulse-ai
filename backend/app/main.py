@@ -1,28 +1,42 @@
 import logging
+from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
 from app.api.routes import router as api_router
 from app.core.config import settings
-from app.core.security import SecurityHeadersMiddleware
+from app.core.security import RateLimitMiddleware, SecurityHeadersMiddleware
 
 # Configure Logger
 logging.basicConfig(
     level=getattr(logging, settings.LOG_LEVEL.upper(), logging.INFO),
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 )
 logger = logging.getLogger("civicpulse.main")
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Modern FastAPI Lifespan Handler for Startup and Shutdown Events."""
+    logger.info(f"Starting CivicPulse AI Backend Service v{settings.VERSION} in [{settings.ENVIRONMENT}] mode.")
+    logger.info(f"CORS Whitelist: {settings.cors_origins_list}")
+    yield
+    logger.info("Shutting down CivicPulse AI Backend Service.")
+
 
 app = FastAPI(
     title="CivicPulse AI Backend API",
     description="Citizen Demand Intelligence & Infrastructure Prioritization Engine for BRICS Nations",
-    version="0.1.0",
+    version=settings.VERSION,
     docs_url="/docs",
-    redoc_url="/redoc"
+    redoc_url="/redoc",
+    lifespan=lifespan,
 )
 
-# Append Security Headers Middleware
+# Append Rate Limit and Security Headers Middlewares
+app.add_middleware(RateLimitMiddleware, max_requests=60, window_seconds=60)
 app.add_middleware(SecurityHeadersMiddleware)
 
 # Configure CORS Middleware
@@ -38,10 +52,20 @@ app.add_middleware(
 app.include_router(api_router)
 
 
-@app.on_event("startup")
-async def startup_event():
-    logger.info(f"Starting CivicPulse AI Backend in [{settings.ENVIRONMENT}] mode.")
-    logger.info(f"CORS Whitelist: {settings.cors_origins_list}")
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    """Global Exception Handler returning clean, production-safe JSON error payloads without stack traces."""
+    logger.exception(f"Unhandled exception on {request.method} {request.url.path}: {exc}")
+    return JSONResponse(
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        content={
+            "success": False,
+            "error": {
+                "code": "INTERNAL_SERVER_ERROR",
+                "message": "An internal server error occurred while processing your request.",
+            },
+        },
+    )
 
 
 if __name__ == "__main__":

@@ -52,5 +52,11 @@ class DataLoader:
         """Appends new citizen request to in-memory demo state statelessly."""
         self._in_memory_requests.insert(0, request)
 
+    def reset_demo_state(self) -> int:
+        """Resets in-memory demo signals back to initial seed dataset state."""
+        count = len(self._in_memory_requests)
+        self._in_memory_requests.clear()
+        return count
+
 
 data_loader = DataLoader()

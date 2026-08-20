@@ -48,9 +48,20 @@ async def health_check():
     return {
         "status": "healthy",
         "service": "CivicPulse AI Backend Intelligence Engine",
-        "version": "0.5.0",
+        "version": settings.VERSION,
+        "environment": settings.ENVIRONMENT,
         "ai_provider": "gemini" if ai_configured else "rule_based_fallback",
         "ai_status": "active" if ai_configured else "unconfigured_fallback",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    }
+
+
+@router.post("/demo/reset", summary="Reset In-Memory Demonstration Signals")
+async def reset_demo_environment():
+    cleared_count = data_loader.reset_demo_state()
+    return {
+        "success": True,
+        "message": f"Demo environment successfully reset. Cleared {cleared_count} in-memory signals.",
         "timestamp": datetime.now(timezone.utc).isoformat(),
     }
 

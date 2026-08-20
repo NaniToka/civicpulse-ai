@@ -2,13 +2,14 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    ENVIRONMENT: str = "development"
+    VERSION: str = "0.5.0"
+    ENVIRONMENT: str = "production"
     LOG_LEVEL: str = "INFO"
 
     # Server Settings
     BACKEND_HOST: str = "0.0.0.0"
     BACKEND_PORT: int = 8000
-    ALLOWED_CORS_ORIGINS: str = "http://localhost:5173,http://127.0.0.1:5173,http://localhost:3000"
+    ALLOWED_CORS_ORIGINS: str = "http://localhost:5173,http://127.0.0.1:5173,http://localhost:3000,http://localhost:80,http://localhost"
 
     # Security
     SECRET_KEY: str = "dev-secret-key-change-in-production-civicpulse-ai-2026"
