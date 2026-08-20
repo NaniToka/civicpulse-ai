@@ -1,0 +1,82 @@
+[
+  {
+    "id": "REQ-IND-001",
+    "region_id": "REG-IND-MH-PUNE-01",
+    "source": "WhatsApp Voice Note",
+    "language": "mr",
+    "original_text": "आमच्या भागात गेल्या तीन आठवड्यांपासून पिण्याच्या पाण्याची पाइपलाइन फुटली आहे. ५,००० हून अधिक कुटुंबांना पाण्याचा थेंबही मिळत नाहीये.",
+    "translated_text": "Drinking water pipeline broken in our locality for past 3 weeks. Over 5,000 households have zero clean water supply.",
+    "request_category": "Clean Water & Sanitation",
+    "extracted_entities": {
+      "location": "Pune Peri-Urban Ward 12",
+      "severity": "CRITICAL",
+      "impacted_count": 5000,
+      "infrastructure_type": "Water Pipeline"
+    },
+    "latitude": 18.5250,
+    "longitude": 73.8610,
+    "timestamp": "2026-08-18T10:14:00Z",
+    "confidence": 0.94,
+    "is_demo": true
+  },
+  {
+    "id": "REQ-IND-002",
+    "region_id": "REG-IND-UP-KANP-02",
+    "source": "IVR Voice Call",
+    "language": "hi",
+    "original_text": "रोज शाम को 6 घंटे बिजली कटती है। अस्पताल में जनरेटर नहीं चल पा रहा, बच्चों की पढ़ाई ठप है।",
+    "translated_text": "Daily 6-hour power outage every evening. Local clinic generators are failing and schools are disrupted.",
+    "request_category": "Clean Energy & Grid Resilience",
+    "extracted_entities": {
+      "location": "Kanpur South Sector 4",
+      "severity": "HIGH",
+      "impacted_count": 12000,
+      "infrastructure_type": "Electrical Substation"
+    },
+    "latitude": 26.4420,
+    "longitude": 80.3280,
+    "timestamp": "2026-08-19T14:30:00Z",
+    "confidence": 0.91,
+    "is_demo": true
+  },
+  {
+    "id": "REQ-BRA-001",
+    "region_id": "REG-BRA-SP-EAST-01",
+    "source": "Mobile App Text",
+    "language": "pt",
+    "original_text": "Sem esgoto encanado nem tratamento de água no bairro. As crianças estão ficando doentes toda semana.",
+    "translated_text": "No piped sewage or water treatment in the neighborhood. Children are falling sick every week.",
+    "request_category": "Clean Water & Sanitation",
+    "extracted_entities": {
+      "location": "Zona Leste District B",
+      "severity": "CRITICAL",
+      "impacted_count": 8500,
+      "infrastructure_type": "Sewage Treatment"
+    },
+    "latitude": -23.5480,
+    "longitude": -46.6290,
+    "timestamp": "2026-08-19T09:12:00Z",
+    "confidence": 0.96,
+    "is_demo": true
+  },
+  {
+    "id": "REQ-ZAF-001",
+    "region_id": "REG-ZAF-GP-EKUR-01",
+    "source": "USSD Gateway",
+    "language": "zu",
+    "original_text": "Isibhedlela sendawo asinayo imithi yokwelapha amanzi amashushu nogesi awuthembekile.",
+    "translated_text": "The local health center has broken water pipes and unreliable electricity supply during night clinic shifts.",
+    "request_category": "Clean Water & Sanitation",
+    "extracted_entities": {
+      "location": "Ekurhuleni Section 8",
+      "severity": "HIGH",
+      "impacted_count": 4200,
+      "infrastructure_type": "Water & Sanitation Facility"
+    },
+    "latitude": -26.1600,
+    "longitude": 28.3110,
+    "timestamp": "2026-08-20T07:45:00Z",
+    "confidence": 0.89,
+    "is_demo": true
+  }
+]

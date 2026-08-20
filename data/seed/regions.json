@@ -1,0 +1,54 @@
+[
+  {
+    "id": "REG-IND-MH-PUNE-01",
+    "country": "India",
+    "country_code": "IND",
+    "state_province": "Maharashtra",
+    "district_city": "Pune Peri-Urban District",
+    "latitude": 18.5204,
+    "longitude": 73.8567,
+    "population": 3450000,
+    "vulnerability_index": 0.68,
+    "primary_language": "mr",
+    "is_demo": true
+  },
+  {
+    "id": "REG-IND-UP-KANP-02",
+    "country": "India",
+    "country_code": "IND",
+    "state_province": "Uttar Pradesh",
+    "district_city": "Kanpur South Belt",
+    "latitude": 26.4499,
+    "longitude": 80.3319,
+    "population": 2920000,
+    "vulnerability_index": 0.81,
+    "primary_language": "hi",
+    "is_demo": true
+  },
+  {
+    "id": "REG-BRA-SP-EAST-01",
+    "country": "Brazil",
+    "country_code": "BRA",
+    "state_province": "São Paulo",
+    "district_city": "Zona Leste Metro",
+    "latitude": -23.5505,
+    "longitude": -46.6333,
+    "population": 4100000,
+    "vulnerability_index": 0.62,
+    "primary_language": "pt",
+    "is_demo": true
+  },
+  {
+    "id": "REG-ZAF-GP-EKUR-01",
+    "country": "South Africa",
+    "country_code": "ZAF",
+    "state_province": "Gauteng",
+    "district_city": "Ekurhuleni North Township",
+    "latitude": -26.1625,
+    "longitude": 28.3150,
+    "population": 1850000,
+    "vulnerability_index": 0.74,
+    "primary_language": "zu",
+    "is_demo": true
+  }
+]

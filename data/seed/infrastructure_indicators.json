@@ -1,0 +1,57 @@
+[
+  {
+    "id": "INF-IND-PUNE-WATER",
+    "region_id": "REG-IND-MH-PUNE-01",
+    "category": "Clean Water & Sanitation",
+    "current_capacity_pct": 42.5,
+    "demand_index": 88.0,
+    "coverage_ratio_pct": 48.0,
+    "gap_score": 0.82,
+    "last_assessed": "2026-06-15",
+    "is_demo": true
+  },
+  {
+    "id": "INF-IND-PUNE-HEALTH",
+    "region_id": "REG-IND-MH-PUNE-01",
+    "category": "Healthcare & Sanitation",
+    "current_capacity_pct": 61.0,
+    "demand_index": 72.0,
+    "coverage_ratio_pct": 59.0,
+    "gap_score": 0.54,
+    "last_assessed": "2026-05-20",
+    "is_demo": true
+  },
+  {
+    "id": "INF-IND-KANP-ENERGY",
+    "region_id": "REG-IND-UP-KANP-02",
+    "category": "Clean Energy & Grid Resilience",
+    "current_capacity_pct": 34.0,
+    "demand_index": 92.5,
+    "coverage_ratio_pct": 38.0,
+    "gap_score": 0.89,
+    "last_assessed": "2026-07-01",
+    "is_demo": true
+  },
+  {
+    "id": "INF-BRA-SP-TRANSIT",
+    "region_id": "REG-BRA-SP-EAST-01",
+    "category": "Public Transit & Roads",
+    "current_capacity_pct": 52.0,
+    "demand_index": 85.0,
+    "coverage_ratio_pct": 55.0,
+    "gap_score": 0.68,
+    "last_assessed": "2026-04-10",
+    "is_demo": true
+  },
+  {
+    "id": "INF-ZAF-EKUR-WATER",
+    "region_id": "REG-ZAF-GP-EKUR-01",
+    "category": "Clean Water & Sanitation",
+    "current_capacity_pct": 38.0,
+    "demand_index": 94.0,
+    "coverage_ratio_pct": 41.0,
+    "gap_score": 0.86,
+    "last_assessed": "2026-06-28",
+    "is_demo": true
+  }
+]
