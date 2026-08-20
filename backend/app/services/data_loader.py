@@ -11,7 +11,7 @@ from app.models.schemas import (
 
 
 class DataLoader:
-    """Utility class to read synthetic seed datasets from data/seed/."""
+    """Utility class to read synthetic seed datasets and maintain in-memory append-only state for demo signals."""
 
     def __init__(self, seed_dir: str | None = None):
         if seed_dir is None:
@@ -19,6 +19,7 @@ class DataLoader:
             self.seed_dir = os.path.join(base_dir, "..", "data", "seed")
         else:
             self.seed_dir = seed_dir
+        self._in_memory_requests: list[CitizenRequest] = []
 
     def _load_json(self, filename: str) -> list[dict[str, Any]]:
         file_path = os.path.abspath(os.path.join(self.seed_dir, filename))
@@ -43,8 +44,13 @@ class DataLoader:
         return [InvestmentProject(**item) for item in data]
 
     def get_citizen_requests(self) -> list[CitizenRequest]:
-        data = self._load_json("citizen_requests.json")
-        return [CitizenRequest(**item) for item in data]
+        seed_data = self._load_json("citizen_requests.json")
+        requests = [CitizenRequest(**item) for item in seed_data]
+        return self._in_memory_requests + requests
+
+    def add_citizen_request(self, request: CitizenRequest) -> None:
+        """Appends new citizen request to in-memory demo state statelessly."""
+        self._in_memory_requests.insert(0, request)
 
 
 data_loader = DataLoader()

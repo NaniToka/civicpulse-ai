@@ -1,4 +1,19 @@
+from enum import Enum
+
 from pydantic import BaseModel
+
+
+class CivicIntent(str, Enum):
+    REQUEST_NEW_INFRASTRUCTURE = "request_new_infrastructure"
+    REQUEST_IMPROVEMENT = "request_improvement"
+    REPORT_SERVICE_GAP = "report_service_gap"
+    REPORT_ACCESSIBILITY_ISSUE = "report_accessibility_issue"
+    REPORT_OUTAGE = "report_outage"
+    REQUEST_EXPANSION = "request_expansion"
+    REQUEST_MAINTENANCE = "request_maintenance"
+    REQUEST_EMERGENCY_SUPPORT = "request_emergency_support"
+    GENERAL_FEEDBACK = "general_feedback"
+    UNKNOWN = "unknown"
 
 
 class CivicCategory(BaseModel):
@@ -129,17 +144,17 @@ def normalize_category(input_str: str) -> str:
             if cleaned == alias.lower():
                 return key
 
-    # Substring keyword heuristics for multilingual inputs
-    water_kw = ["water", "pipe", "aqua", "पानी", "पाणी", "জল", "água", "amanzi", "clean water"]
-    sanitation_kw = ["sewer", "sewage", "esgoto", "sanitat", "drain", "latrine", "waste water"]
-    electricity_kw = ["power", "electr", "grid", "energy", "बिजली", "luz", "ogesi", "light"]
-    healthcare_kw = ["health", "hosp", "clinic", "medic", "अस्पताल", "médico", "imithi", "doctor", "হাসপাতাল"]
-    education_kw = ["school", "educat", "teach", "class", "மாணவர்", "বিদ্যালয়"]
-    roads_kw = ["road", "pave", "street", "bridge", "highway", "मार्ग", "सड़क", "pothole"]
-    transportation_kw = ["transit", "bus", "train", "transport", "commute", "metro"]
-    digital_kw = ["internet", "broadband", "wifi", "telecom", "digital", "सेलुलर", "ইন্টারনেট"]
-    waste_kw = ["waste", "trash", "garbage", "rubbish", "landfill", "recycling"]
-    safety_kw = ["police", "safety", "crime", "lighting", "security"]
+    # Substring keyword heuristics for multilingual inputs (Hindi, Marathi, Telugu, Portuguese, Zulu, Bengali, English)
+    water_kw = ["water", "pipe", "aqua", "पानी", "पाणी", "জল", "água", "amanzi", "clean water", "నీరు", "తాగునీరు", "పైప్‌లైన్"]
+    sanitation_kw = ["sewer", "sewage", "esgoto", "sanitat", "drain", "latrine", "waste water", "మురుగునీరు"]
+    electricity_kw = ["power", "electr", "grid", "energy", "बिजली", "luz", "ogesi", "light", "విద్యుత్", "కరెంట్"]
+    healthcare_kw = ["health", "hosp", "clinic", "medic", "अस्पताल", "médico", "imithi", "doctor", "হাসপাতাল", "ఆసుపత్రి", "వైద్యం"]
+    education_kw = ["school", "educat", "teach", "class", "மாணவர்", "বিদ্যালয়", "పాఠశాల", "బడి"]
+    roads_kw = ["road", "pave", "street", "bridge", "highway", "मार्ग", "सड़क", "pothole", "రోడ్డు", "రహదారి"]
+    transportation_kw = ["transit", "bus", "train", "transport", "commute", "metro", "బస్సు", "రవాణా"]
+    digital_kw = ["internet", "broadband", "wifi", "telecom", "digital", "सेलुलर", "ইন্টারনেট", "ఇంటర్నెట్", "నెట్‌వర్క్"]
+    waste_kw = ["waste", "trash", "garbage", "rubbish", "landfill", "recycling", "చెత్త"]
+    safety_kw = ["police", "safety", "crime", "lighting", "security", "రక్షణ"]
 
     if any(w in cleaned for w in water_kw):
         return "water"

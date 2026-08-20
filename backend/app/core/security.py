@@ -20,14 +20,19 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
 
 def sanitize_input_text(text: str) -> str:
     """
-    Sanitizes citizen input text to strip dangerous prompt injection markers
-    or malicious control characters before passing to NLP services.
+    Sanitizes citizen input text to strip dangerous prompt injection markers,
+    secret exfiltration attempts, or malicious control characters.
     """
     if not text:
         return ""
-    # Strip null bytes and non-printable control chars (except standard newlines/tabs)
+    # Strip null bytes and non-printable control chars
     cleaned = re.sub(r"[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]", "", text)
-    # Trim excessive whitespace
+
+    # Neutralize prompt injection / secret exfiltration overrides
+    cleaned = re.sub(r"(?i)ignore\s+(all\s+)?previous\s+instructions", "[OVERRIDE REMOVED]", cleaned)
+    cleaned = re.sub(r"(?i)output\s+api_key[^\s]*", "[SECRET ATTEMPT NEUTRALIZED]", cleaned)
+    cleaned = re.sub(r"(?i)reveal\s+(the\s+)?api_key", "[SECRET ATTEMPT NEUTRALIZED]", cleaned)
+
     return cleaned.strip()
 
 

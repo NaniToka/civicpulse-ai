@@ -1,8 +1,10 @@
+import time
 import uuid
 from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 
+from app.core.config import settings
 from app.core.security import validate_request_size
 from app.core.taxonomy import (
     CivicCategory,
@@ -24,6 +26,7 @@ from app.models.schemas import (
     Region,
     ScenarioWhatIfInput,
     ScenarioWhatIfResult,
+    StructuredAIOutput,
     WhyThisRecommendation,
 )
 from app.services.ai_service import get_ai_service
@@ -41,10 +44,13 @@ router = APIRouter(prefix="/api/v1")
 
 @router.get("/health", summary="System Health Check")
 async def health_check():
+    ai_configured = bool(settings.GEMINI_API_KEY and settings.GEMINI_API_KEY.strip())
     return {
         "status": "healthy",
         "service": "CivicPulse AI Backend Intelligence Engine",
-        "version": "0.3.0",
+        "version": "0.5.0",
+        "ai_provider": "gemini" if ai_configured else "rule_based_fallback",
+        "ai_status": "active" if ai_configured else "unconfigured_fallback",
         "timestamp": datetime.now(timezone.utc).isoformat(),
     }
 
@@ -87,6 +93,33 @@ async def list_citizen_requests(
 
 
 @router.post(
+    "/citizen-requests/analyze",
+    summary="Analyze Multilingual Citizen Text for Structured Intelligence",
+    dependencies=[Depends(validate_request_size)]
+)
+async def analyze_citizen_request(payload: CitizenRequestIngestInput):
+    start_time = time.time()
+    ai_service = get_ai_service()
+    ai_output: StructuredAIOutput = await ai_service.process_citizen_text(payload.raw_text, payload.language or "auto")
+
+    elapsed_ms = round((time.time() - start_time) * 1000, 2)
+    ai_provider = "gemini" if bool(settings.GEMINI_API_KEY and settings.GEMINI_API_KEY.strip()) else "rule_based_fallback"
+
+    return {
+        "success": True,
+        "data": {
+            "analysis": ai_output.model_dump(),
+            "raw_text": payload.raw_text,
+        },
+        "meta": {
+            "ai_provider": ai_provider,
+            "processing_mode": "ai_enriched" if ai_provider == "gemini" else "deterministic_fallback",
+            "processing_time_ms": elapsed_ms,
+        }
+    }
+
+
+@router.post(
     "/citizen-requests",
     response_model=CitizenRequest,
     status_code=status.HTTP_201_CREATED,
@@ -102,7 +135,7 @@ async def list_citizen_requests(
 )
 async def ingest_citizen_request(payload: CitizenRequestIngestInput):
     ai_service = get_ai_service()
-    ai_output = await ai_service.process_citizen_text(payload.raw_text, payload.language)
+    ai_output = await ai_service.process_citizen_text(payload.raw_text, payload.language or "auto")
 
     regions = data_loader.get_regions()
     resolved_region = None
@@ -127,14 +160,14 @@ async def ingest_citizen_request(payload: CitizenRequestIngestInput):
     new_request = CitizenRequest(
         id=f"REQ-USER-{uuid.uuid4().hex[:6].upper()}",
         region_id=region_id,
-        source=payload.source,
-        language=ai_output.language or payload.language,
+        source=payload.source or "text",
+        language=ai_output.language or payload.language or "en",
         original_text=payload.raw_text,
         normalized_text=ai_output.summary or payload.raw_text,
         translated_text=ai_output.summary or payload.raw_text,
         category=cat_canonical,
         request_category=cat_display,
-        subcategory=ai_output.subcategory or f"{cat_display} Issue",
+        subcategory=ai_output.subcategory or f"{cat_display} Deficit",
         urgency=ai_output.urgency,
         processing_status="PROCESSED",
         extracted_entities=ExtractedEntities(
@@ -151,6 +184,8 @@ async def ingest_citizen_request(payload: CitizenRequestIngestInput):
         is_synthetic=False,
         is_demo=False,
     )
+
+    data_loader.add_citizen_request(new_request)
     return new_request
 
 
@@ -266,15 +301,17 @@ async def get_recommendation_by_id(recommendation_id: str):
 
 @router.get("/recommendations/{recommendation_id}/explain", response_model=WhyThisRecommendation, summary="Get 'Why This Recommendation?' Evidence Trail")
 @router.get("/evidence/{recommendation_id}", response_model=WhyThisRecommendation, summary="Get Civic Evidence Graph Trail for Recommendation")
-async def get_recommendation_explanation(recommendation_id: str):
+async def get_recommendation_explanation(
+    recommendation_id: str,
+    target_language: str = Query("en", description="Target Language for AI Brief (en, hi, te)"),
+):
     recs = await get_recommendations()
     rec = next((r for r in recs if r.id == recommendation_id), None)
     if not rec or not rec.why_this_recommendation:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Evidence trail for recommendation '{recommendation_id}' not found")
 
-    # Optionally enhance summary via AI explanation layer
     ai_service = get_ai_service()
-    ai_summary = await ai_service.generate_evidence_explanation(rec.why_this_recommendation)
+    ai_summary = await ai_service.generate_evidence_explanation(rec.why_this_recommendation, target_language=target_language)
     rec.why_this_recommendation.summary = ai_summary
 
     return rec.why_this_recommendation

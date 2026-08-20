@@ -11,6 +11,31 @@ export interface ExtractedEntities {
   subcategory?: string;
 }
 
+export interface StructuredAIOutput {
+  language: string;
+  category: string;
+  subcategory: string;
+  intent: string;
+  location?: string | null;
+  urgency: UrgencyLevel;
+  entities: string[];
+  summary: string;
+  confidence: number;
+}
+
+export interface CivicAnalysisResponse {
+  success: boolean;
+  data: {
+    analysis: StructuredAIOutput;
+    raw_text: string;
+  };
+  meta: {
+    ai_provider: string;
+    processing_mode: string;
+    processing_time_ms: number;
+  };
+}
+
 export interface CitizenRequest {
   id: string;
   region_id: string;

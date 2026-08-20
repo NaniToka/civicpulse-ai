@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { X, CheckCircle2, AlertTriangle, ShieldCheck, Sparkles, Network, ArrowRight } from 'lucide-react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { X, CheckCircle2, AlertTriangle, ShieldCheck, Sparkles, Network, ArrowRight, Globe } from 'lucide-react';
 import { PriorityRecommendation, WhyThisRecommendation } from '../../types';
 import { PriorityBadge } from './PriorityBadge';
 import { api } from '../../services/api';
@@ -12,38 +12,30 @@ interface EvidenceTrailModalProps {
 export const EvidenceTrailModal: React.FC<EvidenceTrailModalProps> = ({ recommendation, onClose }) => {
   const [whyData, setWhyData] = useState<WhyThisRecommendation | null>(null);
   const [loading, setLoading] = useState(false);
+  const [briefLang, setBriefLang] = useState<'en' | 'hi' | 'te'>('en');
+
+  const fetchEvidence = useCallback((recId: string, lang: 'en' | 'hi' | 'te') => {
+    setLoading(true);
+    api
+      .getEvidenceTrail(recId, lang)
+      .then((res) => setWhyData(res))
+      .catch(() => {
+        setWhyData({
+          recommendation_id: recId,
+          summary: recommendation?.reasoning || 'Recommendation based on aggregated demand signals.',
+          overall_confidence: recommendation?.confidence || 0.92,
+          evidence_chain: recommendation?.evidence_chain || [],
+          factors: recommendation?.explanation_details?.factors || [],
+          risks: recommendation?.explanation_details?.risks || [],
+        });
+      })
+      .finally(() => setLoading(false));
+  }, [recommendation]);
 
   useEffect(() => {
     if (!recommendation) return;
-
-    if (recommendation.why_this_recommendation) {
-      setWhyData(recommendation.why_this_recommendation);
-    } else {
-      setLoading(true);
-      api
-        .getEvidenceTrail(recommendation.id)
-        .then((res) => setWhyData(res))
-        .catch(() => {
-          // Fallback if network offline
-          setWhyData({
-            recommendation_id: recommendation.id,
-            summary: recommendation.reasoning,
-            overall_confidence: recommendation.confidence,
-            evidence_chain: recommendation.evidence_chain || [
-              { step: 1, title: 'Citizen Demand Voices', finding: 'High request count logged in locality', value: 'High', contribution: '+20.0 pts' },
-              { step: 2, title: 'Demand Velocity Momentum', finding: 'Demand velocity accelerating over 30 days', value: '+25%', contribution: '+10.0 pts' },
-              { step: 3, title: 'Infrastructure Deficit Gap', finding: 'Severe capacity deficit score', value: '0.82', contribution: '+18.0 pts' },
-              { step: 4, title: 'Demographic Target Need', finding: 'High vulnerable population ratio', value: '78/100', contribution: '+15.0 pts' },
-              { step: 5, title: 'Public Capital Investment Overlap', finding: 'No active duplicate project detected', value: 'NONE', contribution: '+5.0 pts' },
-              { step: 6, title: 'Priority Recommendation', finding: `Final Score ${recommendation.priority_score.toFixed(1)}/100`, value: recommendation.priority_level, contribution: 'Final' },
-            ],
-            factors: recommendation.explanation_details?.factors || [],
-            risks: recommendation.explanation_details?.risks || [],
-          });
-        })
-        .finally(() => setLoading(false));
-    }
-  }, [recommendation]);
+    fetchEvidence(recommendation.id, briefLang);
+  }, [recommendation, briefLang, fetchEvidence]);
 
   if (!recommendation) return null;
 
@@ -96,7 +88,6 @@ export const EvidenceTrailModal: React.FC<EvidenceTrailModalProps> = ({ recommen
                 <div className="relative pl-6 space-y-6 before:absolute before:left-2.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-800">
                   {whyData?.evidence_chain.map((step) => (
                     <div key={step.step} className="relative group">
-                      {/* Step Indicator Pin */}
                       <div className={`absolute -left-6 top-1 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-mono font-bold border ${
                         step.step === 6
                           ? 'bg-rose-950 text-rose-300 border-rose-600'
@@ -153,19 +144,46 @@ export const EvidenceTrailModal: React.FC<EvidenceTrailModalProps> = ({ recommen
                 </div>
               )}
 
-              {/* AI Decision Brief Section */}
+              {/* Multilingual AI Decision Brief Section */}
               <div className="p-5 rounded-xl bg-gradient-to-br from-slate-900 via-indigo-950/30 to-slate-900 border border-indigo-900/40">
-                <div className="flex items-center justify-between mb-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
                   <div className="flex items-center gap-2">
                     <Sparkles className="w-4 h-4 text-indigo-400" />
                     <h3 className="text-xs font-semibold text-indigo-300 uppercase tracking-wider">
-                      AI Decision Brief
+                      Multilingual AI Decision Brief
                     </h3>
                   </div>
-                  <span className="text-[10px] font-mono text-indigo-400/80 bg-indigo-950/60 px-2 py-0.5 rounded border border-indigo-800/40">
-                    AI-generated explanation based on validated evidence
-                  </span>
+
+                  {/* Multilingual Language Switcher */}
+                  <div className="flex items-center gap-1 bg-slate-950 p-1 rounded-lg border border-slate-800 text-xs font-mono">
+                    <Globe className="w-3.5 h-3.5 text-slate-400 ml-1" />
+                    <button
+                      onClick={() => setBriefLang('en')}
+                      className={`px-2 py-0.5 rounded transition ${
+                        briefLang === 'en' ? 'bg-indigo-900 text-indigo-200 font-bold' : 'text-slate-400 hover:text-slate-200'
+                      }`}
+                    >
+                      EN
+                    </button>
+                    <button
+                      onClick={() => setBriefLang('hi')}
+                      className={`px-2 py-0.5 rounded transition ${
+                        briefLang === 'hi' ? 'bg-indigo-900 text-indigo-200 font-bold' : 'text-slate-400 hover:text-slate-200'
+                      }`}
+                    >
+                      HI (हिंदी)
+                    </button>
+                    <button
+                      onClick={() => setBriefLang('te')}
+                      className={`px-2 py-0.5 rounded transition ${
+                        briefLang === 'te' ? 'bg-indigo-900 text-indigo-200 font-bold' : 'text-slate-400 hover:text-slate-200'
+                      }`}
+                    >
+                      TE (తెలుగు)
+                    </button>
+                  </div>
                 </div>
+
                 <p className="text-sm text-slate-300 leading-relaxed mb-4">
                   {whyData?.summary || recommendation.reasoning}
                 </p>
@@ -178,7 +196,6 @@ export const EvidenceTrailModal: React.FC<EvidenceTrailModalProps> = ({ recommen
                   </div>
                 </div>
 
-                {/* Risks / Limitations */}
                 {whyData?.risks && whyData.risks.length > 0 && (
                   <div className="mt-4 pt-3 border-t border-indigo-900/30">
                     <div className="text-xs font-semibold text-amber-400 flex items-center gap-1.5 mb-1.5">
@@ -205,7 +222,7 @@ export const EvidenceTrailModal: React.FC<EvidenceTrailModalProps> = ({ recommen
           </div>
           <button
             onClick={onClose}
-            className="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition font-medium"
+            className="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-200 transition font-medium"
           >
             Close Detail View
           </button>

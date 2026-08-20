@@ -12,6 +12,7 @@ import {
   InvestmentOverlapDetail,
   WhyThisRecommendation,
   DemandHotspot,
+  CivicAnalysisResponse,
 } from '../types';
 
 const API_BASE = '/api/v1';
@@ -36,7 +37,7 @@ async function fetchJSON<T>(endpoint: string, options?: RequestInit): Promise<T>
 }
 
 export const api = {
-  getHealth: () => fetchJSON<{ status: string; service: string }>('/health'),
+  getHealth: () => fetchJSON<{ status: string; service: string; ai_provider: string }>('/health'),
   getCategories: () => fetchJSON<CivicCategory[]>('/categories'),
   getRegions: () => fetchJSON<Region[]>('/regions'),
   getCitizenRequests: (regionId?: string, category?: string) => {
@@ -51,11 +52,16 @@ export const api = {
   getInvestments: (regionId?: string) =>
     fetchJSON<InvestmentProject[]>(`/investments${regionId ? `?region_id=${regionId}` : ''}`),
   getRecommendations: () => fetchJSON<PriorityRecommendation[]>('/recommendations/ranked'),
-  getEvidenceTrail: (recommendationId: string) =>
-    fetchJSON<WhyThisRecommendation>(`/recommendations/${recommendationId}/explain`),
+  getEvidenceTrail: (recommendationId: string, targetLanguage: string = 'en') =>
+    fetchJSON<WhyThisRecommendation>(`/recommendations/${recommendationId}/explain?target_language=${targetLanguage}`),
   getDemandTrends: () => fetchJSON<DemandMomentumSignal[]>('/demand/trends'),
   getDemandHotspots: () => fetchJSON<DemandHotspot[]>('/demand/hotspots'),
   getInvestmentOverlaps: () => fetchJSON<InvestmentOverlapDetail[]>('/investments/overlaps'),
+  analyzeCitizenText: (payload: CitizenRequestIngestInput) =>
+    fetchJSON<CivicAnalysisResponse>('/citizen-requests/analyze', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }),
   ingestCitizenRequest: (payload: CitizenRequestIngestInput) =>
     fetchJSON<CitizenRequest>('/citizen-requests', {
       method: 'POST',

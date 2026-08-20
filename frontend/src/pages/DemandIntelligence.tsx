@@ -2,14 +2,20 @@ import React, { useState } from 'react';
 import { Search, Filter, Globe2, TrendingUp } from 'lucide-react';
 import { CitizenRequest, DemandMomentumSignal, Region } from '../types';
 import { TrendBadge } from '../components/common/TrendBadge';
+import { CitizenVoiceComposer } from '../components/common/CitizenVoiceComposer';
 
 interface DemandIntelligenceProps {
   requests: CitizenRequest[];
   regions: Region[];
   trends?: DemandMomentumSignal[];
+  onSignalAdded?: (req: CitizenRequest) => void;
 }
 
-export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({ requests, regions }) => {
+export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
+  requests,
+  regions,
+  onSignalAdded,
+}) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRegion, setSelectedRegion] = useState<string>('ALL');
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
@@ -49,11 +55,13 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({ requests
     PT: 'Portuguese (Português)',
     ZU: 'Zulu (isiZulu)',
     BN: 'Bengali (বাংলা)',
+    TE: 'Telugu (తెలుగు)',
     EN: 'English',
   };
 
   return (
     <div className="space-y-8 animate-in fade-in duration-300">
+      {/* Header */}
       <div className="border-b border-slate-800/80 pb-5">
         <h1 className="text-2xl font-bold text-slate-100 tracking-tight font-mono">
           Citizen Demand Intelligence
@@ -63,6 +71,10 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({ requests
         </p>
       </div>
 
+      {/* Interactive Multilingual Citizen Voice Composer */}
+      <CitizenVoiceComposer regions={regions} onSignalAdded={onSignalAdded} />
+
+      {/* Filter Bar */}
       <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-3">
         <div className="flex items-center gap-2 text-xs font-semibold text-slate-300 uppercase tracking-wide">
           <Filter className="w-4 h-4 text-sky-400" />
@@ -114,6 +126,7 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({ requests
             className="bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-sky-500 font-mono"
           >
             <option value="ALL">All Languages</option>
+            <option value="te">Telugu (te)</option>
             <option value="hi">Hindi (hi)</option>
             <option value="mr">Marathi (mr)</option>
             <option value="pt">Portuguese (pt)</option>
@@ -136,6 +149,7 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({ requests
         </div>
       </div>
 
+      {/* Visual Analytics Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-4">
           <div className="flex items-center justify-between">
@@ -194,6 +208,7 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({ requests
         </div>
       </div>
 
+      {/* Demand Velocity Momentum Signals */}
       <div className="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -239,6 +254,7 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({ requests
         </div>
       </div>
 
+      {/* Citizen Feedback Feed Table */}
       <div className="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-4">
         <div className="flex items-center justify-between">
           <h3 className="text-base font-bold text-slate-100 font-mono">Filtered Citizen Requests ({filteredRequests.length})</h3>
