@@ -11,6 +11,7 @@ import {
   Network,
   Building2,
   ChevronRight,
+  Globe2,
 } from 'lucide-react';
 import { CitizenRequest, PriorityRecommendation, Region } from '../types';
 import { PriorityBadge } from '../components/common/PriorityBadge';
@@ -43,36 +44,37 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
 
   return (
     <div className="space-y-8 animate-in fade-in duration-300">
-      {/* Page Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800/80 pb-5">
-        <div>
+      {/* 10-Second Executive Value Proposition Banner */}
+      <div className="p-6 rounded-xl bg-gradient-to-r from-slate-900 via-sky-950/40 to-slate-900 border border-sky-900/50 shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="space-y-2 max-w-3xl">
           <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold text-slate-100 tracking-tight font-mono">
-              CivicPulse Intelligence
-            </h1>
-            <span className="text-xs font-mono text-emerald-400 bg-emerald-950/60 border border-emerald-800/40 px-2 py-0.5 rounded">
-              LIVE EVIDENCE ENGINE
+            <span className="px-2.5 py-0.5 rounded bg-sky-950 text-sky-400 border border-sky-800 text-[10px] font-mono font-bold uppercase tracking-wider">
+              Digital Public Good • Track 1
             </span>
+            <span className="text-xs text-slate-400 font-mono">BRICS Civic Intelligence</span>
           </div>
-          <p className="text-xs text-slate-400 mt-1">
-            Transforming multilingual citizen voices into evidence-driven public capital priorities across BRICS municipalities.
+          <h1 className="text-xl md:text-2xl font-bold text-slate-100 font-mono tracking-tight">
+            CivicPulse Decision Intelligence
+          </h1>
+          <p className="text-xs md:text-sm text-slate-300 leading-relaxed font-sans">
+            Transforming fragmented citizen voices across 7 languages into per-capita demand hotspots, cross-referencing census vulnerability & capacity gap indices to produce traceable 6-step evidence trails for policymakers.
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3 shrink-0">
           <button
-            onClick={() => onNavigate('scenarios')}
-            className="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-indigo-950/80 text-indigo-300 border border-indigo-800/60 hover:bg-indigo-900 transition text-xs font-semibold"
+            onClick={() => onNavigate('demand')}
+            className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-semibold text-xs transition shadow-md shadow-sky-950/60"
           >
-            <Sparkles className="w-4 h-4 text-indigo-400" />
-            <span>Launch Scenario Lab</span>
+            <Globe2 className="w-4 h-4" />
+            <span>Try Multilingual Input</span>
           </button>
           <button
-            onClick={() => onNavigate('recommendations')}
-            className="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-medium text-xs transition shadow-md shadow-sky-950/50"
+            onClick={() => onNavigate('scenarios')}
+            className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-slate-950 hover:bg-slate-800 text-indigo-300 border border-indigo-800/60 transition text-xs font-semibold"
           >
-            <span>Explore All Priorities</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <Sparkles className="w-4 h-4 text-indigo-400" />
+            <span>Scenario Lab</span>
           </button>
         </div>
       </div>
