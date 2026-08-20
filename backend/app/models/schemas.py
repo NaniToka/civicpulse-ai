@@ -45,6 +45,25 @@ class ProjectStatusEnum(str, Enum):
     CANCELLED = "cancelled"
 
 
+class EvidenceType(str, Enum):
+    CITIZEN_DEMAND = "citizen_demand"
+    INFRASTRUCTURE_GAP = "infrastructure_gap"
+    DEMOGRAPHIC_NEED = "demographic_need"
+    INVESTMENT_CONTEXT = "investment_context"
+    URGENCY = "urgency"
+    POPULATION_IMPACT = "population_impact"
+    DEMAND_MOMENTUM = "demand_momentum"
+    COVERAGE = "coverage"
+    ACCESSIBILITY = "accessibility"
+
+
+class DemandMomentumTrend(str, Enum):
+    INCREASING = "INCREASING"
+    STABLE = "STABLE"
+    DECREASING = "DECREASING"
+    EMERGING = "EMERGING"
+
+
 class ExtractedEntities(BaseModel):
     location: str | None = None
     severity: str = "MEDIUM"  # LOW, MEDIUM, HIGH, CRITICAL
@@ -62,7 +81,7 @@ class CitizenRequest(BaseModel):
     normalized_text: str = ""
     translated_text: str = ""
     category: str = "other"
-    request_category: str = "Other Civic Need"  # Legacy compatibility field
+    request_category: str = "Other Civic Need"  # Legacy compatibility
     subcategory: str | None = None
     urgency: str = "MEDIUM"
     processing_status: str = "PROCESSED"
@@ -146,6 +165,59 @@ class InvestmentProject(BaseModel):
         return "other"
 
 
+class EvidenceItem(BaseModel):
+    id: str
+    type: str  # citizen_demand, infrastructure_gap, demographic_need, investment_context, urgency, population_impact, demand_momentum, coverage, accessibility
+    source: str
+    region_id: str
+    category: str
+    metric: str
+    value: float
+    normalized_value: float = Field(ge=0.0, le=100.0)
+    contribution: float = Field(ge=-100.0, le=100.0)
+    confidence: float = Field(ge=0.0, le=1.0, default=0.90)
+    explanation: str
+    is_synthetic: bool = True
+
+    @field_validator("category", mode="before")
+    @classmethod
+    def validate_category(cls, v: Any) -> str:
+        if isinstance(v, str):
+            return normalize_category(v)
+        return "other"
+
+
+class DemandMomentumSignal(BaseModel):
+    region_id: str
+    category: str
+    trend: str  # INCREASING, STABLE, DECREASING, EMERGING
+    percentage_change: float
+    recent_window_count: int
+    previous_window_count: int
+    momentum_score: float = Field(ge=0.0, le=100.0)
+
+
+class InvestmentOverlapDetail(BaseModel):
+    has_overlap: bool
+    overlap_type: str  # NONE, ACTIVE_PROJECT, PLANNED_PROJECT, DELAYED_PROJECT, COMPLETED_PROJECT
+    project_id: str | None = None
+    project_name: str | None = None
+    project_status: str | None = None
+    budget_usd: float | None = 0.0
+    geographic_overlap: bool = True
+    category_overlap: bool = True
+    explanation: str
+
+
+class EvidenceChainStep(BaseModel):
+    step: int
+    title: str
+    finding: str
+    value: str
+    contribution: str
+    evidence_item_id: str | None = None
+
+
 class EvidenceCard(BaseModel):
     demand_signal_summary: str
     infrastructure_deficit_summary: str
@@ -176,6 +248,15 @@ class ExplanationDetails(BaseModel):
     recommended_action: str
 
 
+class WhyThisRecommendation(BaseModel):
+    recommendation_id: str
+    summary: str
+    overall_confidence: float = Field(ge=0.0, le=1.0, default=0.92)
+    evidence_chain: list[EvidenceChainStep]
+    factors: list[FactorContribution]
+    risks: list[str]
+
+
 class PriorityRecommendation(BaseModel):
     id: str
     region_id: str
@@ -186,6 +267,11 @@ class PriorityRecommendation(BaseModel):
     confidence: float = Field(ge=0.0, le=1.0)
     evidence_card: EvidenceCard
     explanation_details: ExplanationDetails | None = None
+    evidence_items: list[EvidenceItem] = Field(default_factory=list)
+    demand_momentum: DemandMomentumSignal | None = None
+    investment_overlap: InvestmentOverlapDetail | None = None
+    evidence_chain: list[EvidenceChainStep] = Field(default_factory=list)
+    why_this_recommendation: WhyThisRecommendation | None = None
     reasoning: str
     expected_impact: str
     recommended_action: str

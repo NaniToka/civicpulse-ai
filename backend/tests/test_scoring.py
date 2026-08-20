@@ -52,9 +52,9 @@ def test_priority_scoring_formula_reproducibility_and_explainability():
         )
     ]
 
-    investments = []
+    investments: list[InvestmentProject] = []
 
-    score, evidence, reasoning, _action, explanation_details = scoring_engine.calculate_priority_score(
+    res = scoring_engine.calculate_priority_score(
         region=region,
         indicator=indicator,
         requests=requests,
@@ -62,14 +62,18 @@ def test_priority_scoring_formula_reproducibility_and_explainability():
         category="water",
     )
 
+    score = res[0]
+    evidence = res[1]
+    reasoning = res[2]
+    explanation_details = res[4]
+
     assert 0.0 <= score <= 100.0
     assert score > 50.0
     assert evidence.data_sources is not None
     assert "Clean Water" in reasoning or "water" in reasoning.lower()
 
-    # Explainability details assertion
     assert explanation_details.priority_score == score
-    assert len(explanation_details.factors) == 6
+    assert len(explanation_details.factors) == 8
     assert any(f.name == "Citizen Demand Signal" for f in explanation_details.factors)
 
 
@@ -100,16 +104,17 @@ def test_investment_risk_penalty():
         is_synthetic=True,
     )
 
-    requests = []
+    requests: list[CitizenRequest] = []
 
     # Scenario without active investment
-    score_no_inv, _, _, _, _ = scoring_engine.calculate_priority_score(
+    res_no_inv = scoring_engine.calculate_priority_score(
         region=region,
         indicator=indicator,
         requests=requests,
         investments=[],
         category="sanitation",
     )
+    score_no_inv = res_no_inv[0]
 
     # Scenario with active investment
     active_inv = InvestmentProject(
@@ -123,13 +128,15 @@ def test_investment_risk_penalty():
         is_synthetic=True,
     )
 
-    score_with_inv, _, _, _, explanation_with_inv = scoring_engine.calculate_priority_score(
+    res_with_inv = scoring_engine.calculate_priority_score(
         region=region,
         indicator=indicator,
         requests=requests,
         investments=[active_inv],
         category="sanitation",
     )
+    score_with_inv = res_with_inv[0]
+    explanation_with_inv = res_with_inv[4]
 
     assert score_with_inv < score_no_inv
     assert len(explanation_with_inv.risks) > 0

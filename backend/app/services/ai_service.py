@@ -7,7 +7,7 @@ from pydantic import ValidationError
 from app.core.config import settings
 from app.core.security import sanitize_input_text
 from app.core.taxonomy import get_category_display_name, normalize_category
-from app.models.schemas import StructuredAIOutput
+from app.models.schemas import StructuredAIOutput, WhyThisRecommendation
 
 logger = logging.getLogger("civicpulse.ai_service")
 
@@ -34,6 +34,12 @@ class BaseLanguageIntelligenceProvider(ABC):
     ) -> str:
         """Generates plain-language explainable reasoning for policymaker evidence cards."""
 
+    @abstractmethod
+    async def generate_evidence_explanation(
+        self, why_recommendation: WhyThisRecommendation
+    ) -> str:
+        """Generates executive policymaker summary strictly derived from validated evidence graph."""
+
 
 class RuleBasedLanguageIntelligenceProvider(BaseLanguageIntelligenceProvider):
     """
@@ -47,10 +53,8 @@ class RuleBasedLanguageIntelligenceProvider(BaseLanguageIntelligenceProvider):
         cleaned = sanitize_input_text(text)
         lower_text = cleaned.lower()
 
-        # Heuristic Taxonomy Classification
         cat_key = normalize_category(lower_text)
 
-        # Heuristic Urgency & Entity Detection
         urgency = "MEDIUM"
         entities = []
         if any(w in lower_text for w in ["critical", "emergency", "dying", "failing", "फूटली", "urgente"]):
@@ -86,6 +90,14 @@ class RuleBasedLanguageIntelligenceProvider(BaseLanguageIntelligenceProvider):
             f"Based on aggregated citizen demand signals and deficit indexing, {region_name} exhibits a critical "
             f"infrastructure deficit in '{cat_display}' (Priority Score: {priority_score:.1f}/100). "
             f"Key factors include: {evidence_summary}. Immediate capital investment is strongly recommended."
+        )
+
+    async def generate_evidence_explanation(
+        self, why_recommendation: WhyThisRecommendation
+    ) -> str:
+        return (
+            f"[Rule-Based Evidence Summary] {why_recommendation.summary} "
+            f"Traceable through {len(why_recommendation.evidence_chain)} evidence chain steps."
         )
 
 
@@ -218,6 +230,40 @@ Be clear, factual, objective, and executive-level. Do not use generic filler wor
         except Exception as err:  # noqa: BLE001
             logger.error(f"Gemini API error generating reasoning: {err}. Falling back.")
             return await self.fallback.generate_recommendation_reasoning(region_name, category, priority_score, evidence_summary)
+
+    async def generate_evidence_explanation(
+        self, why_recommendation: WhyThisRecommendation
+    ) -> str:
+        if not self._client:
+            return await self.fallback.generate_evidence_explanation(why_recommendation)
+
+        steps_summary = "\n".join(
+            f"Step {s.step} ({s.title}): {s.finding} [Value: {s.value}, Contribution: {s.contribution}]"
+            for s in why_recommendation.evidence_chain
+        )
+        prompt = f"""You are an executive explanation engine for CivicPulse AI.
+Draft a 3-sentence executive summary explaining the evidence trail for this recommendation:
+
+Recommendation ID: {why_recommendation.recommendation_id}
+Summary: {why_recommendation.summary}
+
+EVIDENCE TRAIL STEPS:
+{steps_summary}
+
+STRICT RULES:
+1. Use ONLY the provided evidence trail steps.
+2. DO NOT invent statistics, metrics, or scores.
+3. Clearly state why this project is prioritized based on citizen voices, infrastructure gap, and capital alignment.
+"""
+        try:
+            response = self._client.models.generate_content(
+                model=self.model_name,
+                contents=prompt
+            )
+            return response.text.strip()
+        except Exception as err:  # noqa: BLE001
+            logger.error(f"Gemini API error generating evidence explanation: {err}. Falling back.")
+            return await self.fallback.generate_evidence_explanation(why_recommendation)
 
 
 # Backward compatible aliases

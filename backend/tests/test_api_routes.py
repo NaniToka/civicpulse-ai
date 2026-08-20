@@ -38,6 +38,15 @@ def test_demand_summary_endpoint():
     assert "category_distribution" in data
 
 
+def test_demand_trends_endpoint():
+    response = client.get("/api/v1/demand/trends")
+    assert response.status_code == 200
+    trends = response.json()
+    assert len(trends) > 0
+    assert "trend" in trends[0]
+    assert "momentum_score" in trends[0]
+
+
 def test_demand_hotspots_endpoint():
     response = client.get("/api/v1/demand/hotspots")
     assert response.status_code == 200
@@ -47,19 +56,28 @@ def test_demand_hotspots_endpoint():
     assert "per_capita_demand_per_100k" in hotspots[0]
 
 
-def test_recommendations_endpoint():
-    response = client.get("/api/v1/recommendations")
+def test_investment_overlaps_endpoint():
+    response = client.get("/api/v1/investments/overlaps")
+    assert response.status_code == 200
+    overlaps = response.json()
+    assert len(overlaps) > 0
+    assert "has_overlap" in overlaps[0]
+
+
+def test_ranked_recommendations_endpoint():
+    response = client.get("/api/v1/recommendations/ranked")
     assert response.status_code == 200
     recs = response.json()
     assert len(recs) > 0
     assert recs[0]["priority_score"] >= recs[-1]["priority_score"]
+    assert "evidence_chain" in recs[0]
 
     rec_id = recs[0]["id"]
-    explanation_res = client.get(f"/api/v1/recommendations/{rec_id}/explanation")
+    explanation_res = client.get(f"/api/v1/evidence/{rec_id}")
     assert explanation_res.status_code == 200
-    exp = explanation_res.json()
-    assert exp["recommendation_id"] == rec_id
-    assert len(exp["factors"]) == 6
+    why = explanation_res.json()
+    assert why["recommendation_id"] == rec_id
+    assert len(why["evidence_chain"]) == 6
 
 
 def test_citizen_request_ingest_endpoint():
@@ -82,7 +100,7 @@ def test_scenario_what_if_endpoint():
         "category": "healthcare",
         "budget_allocation_usd": 15000000.0,
     }
-    response = client.post("/api/v1/scenario/what-if", json=payload)
+    response = client.post("/api/v1/scenarios", json=payload)
     assert response.status_code == 200
     result = response.json()
     assert "original_priority_score" in result

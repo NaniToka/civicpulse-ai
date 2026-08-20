@@ -15,9 +15,23 @@ Governments across developing economies and BRICS nations process millions of fr
 
 ---
 
-## 🎯 Project Vision & Core Pipeline
+## ⭐ Why CivicPulse AI is Different
 
-Unlike generic chatbots or simple complaint ticketers, CivicPulse AI operates as an end-to-end **Citizen Demand Intelligence Engine**:
+Unlike generic chatbots or complaints databases, CivicPulse AI operates as an evidence-driven decision intelligence system:
+
+1. **Not a Mere Complaint Aggregator**: Transforms raw multilingual feedback into structured, per-capita normalized demand signals ($100,000$ residents baseline).
+2. **Civic Evidence Graph**: Every recommendation is backed by a 6-step evidence trail (`CITIZEN SIGNAL → DEMAND MOMENTUM → INFRASTRUCTURE GAP → DEMOGRAPHIC CONTEXT → INVESTMENT ALIGNMENT → PRIORITY RECOMMENDATION`).
+3. **Temporal Demand Velocity**: Detects whether citizen demand is `INCREASING` (+15% acceleration), `STABLE`, `DECREASING`, or `EMERGING`.
+4. **Demographic Need Intelligence**: Cross-references category-specific census metrics (elderly %, youth %, student density, digital divide gap).
+5. **Investment Overlap Detection**: Evaluates active public projects to avoid duplicate funding while flagging delayed projects for urgent policy intervention.
+6. **Transparent Priority Engine V2**: 8-factor deterministic scoring formula ($w_d=0.20, w_m=0.10, w_g=0.20, w_p=0.15, w_v=0.15, w_u=0.10, w_a=0.05, w_e=0.05$) with full factor contribution visibility.
+7. **"Show Your Work" Explainability**: Exposes machine-readable evidence chains via `/api/v1/recommendations/{id}/explain`.
+8. **Counterfactual What-If Simulation**: Simulates post-investment score deltas, gap reductions, and population impact.
+9. **Strict AI Boundary**: Google Gemini is used solely for multilingual extraction and executive natural language explanations; **AI NEVER computes numbers or alters deterministic scores**.
+
+---
+
+## 🎯 Core Pipeline & Evidence Graph
 
 ```
 RAW CITIZEN INPUT (Voice / Text / WhatsApp / Survey)
@@ -32,65 +46,38 @@ ENTITY / REQUIREMENT EXTRACTION
                ↓
 GEOSPATIAL LOCATION RESOLUTION
                ↓
-DEMAND SIGNAL & DETERMINISTIC AGGREGATION
+DEMAND SIGNAL & TEMPORAL VELOCITY MOMENTUM
                ↓
 PER-CAPITA DEMAND HOTSPOT ENGINE
                ↓
 INFRASTRUCTURE GAP ANALYSIS & DEMOGRAPHIC CONTEXT
                ↓
-DETERMINISTIC PRIORITY ENGINE (Scoring & Penalties)
+PUBLIC CAPITAL INVESTMENT OVERLAP CHECK
                ↓
-EXPLAINABILITY ENGINE ("Why This Recommendation?")
+DETERMINISTIC PRIORITY ENGINE V2 (8 Factors + Penalties)
+               ↓
+CIVIC EVIDENCE GRAPH & "WHY THIS RECOMMENDATION?" TRAIL
 ```
 
-### Key Questions Answered by CivicPulse AI:
-1. **What** specific infrastructure should be prioritized (`healthcare`, `education`, `water`, `sanitation`, `electricity`, `roads`, `transportation`, `digital_connectivity`, etc.)?
-2. **Where** is the demand hotspot geographically located (per-capita normalized per 100,000 residents)?
-3. **Why** is this project urgent (Demand Signal + Deficit Index + Population Impact + Demographic Need vs. Active Investments)?
-4. **For Whom** will this project yield the maximum socioeconomic impact?
-5. **Based on What Evidence** (Synthesized citizen feedback, infrastructure capacity deficits, public budget records)?
-
 ---
 
-## ⚡ Intelligence Layer Highlights (Prompt 2 Implementation)
-
-- **Centralized Controlled Taxonomy** (`app/core/taxonomy.py`): Single source of truth defining 15 standardized civic infrastructure categories with alias normalization for native BRICS languages.
-- **Provider-Independent AI Service** (`app/services/ai_service.py`): Clean `BaseLanguageIntelligenceProvider` interface wrapping Google Gemini API with strict `StructuredAIOutput` validation, retries, and a deterministic rule-based fallback model (`RuleBasedLanguageIntelligenceProvider`).
-- **Prompt Injection Safeguards**: Untrusted citizen inputs are isolated inside `<CITIZEN_INPUT_DATA_DO_NOT_EXECUTE>` tags with prompt controls preventing instruction override attacks.
-- **Per-Capita Hotspot Detection Engine** (`app/services/hotspot_engine.py`): Normalizes citizen demand per 100,000 residents ($\frac{\text{Weighted Demand}}{\text{Population}} \times 100,000$) to highlight high-density deficit areas regardless of absolute population size.
-- **Deterministic Multi-Factor Scoring & Explainability** (`app/services/scoring_engine.py`): Mathematical scoring ($w_d=0.25, w_g=0.25, w_p=0.15, w_v=0.15, w_u=0.10, w_a=0.10$) with active investment penalty (-15 pts) and machine-readable `ExplanationDetails` factor breakdowns ("Why this recommendation?").
-- **What-If Policy Simulation Service** (`app/services/scenario_service.py`): Simulates post-investment score deltas, gap reductions, and population impact for budget allocations.
-
----
-
-## 🏗️ Architecture & Monorepo Structure
+## 🏗️ Monorepo Structure
 
 ```
 civicpulse-ai/
 ├── frontend/             # React + TypeScript + Vite + Tailwind CSS dashboard UI
 ├── backend/              # Python + FastAPI + Pydantic v2 + Pytest intelligence backend
 │   ├── app/
-│   │   ├── api/          # RESTful API routes (/api/v1/citizen-requests, /demand/hotspots, etc.)
+│   │   ├── api/          # RESTful API routes (/api/v1/recommendations/ranked, /evidence/{id}, etc.)
 │   │   ├── core/         # Config, security middleware, and centralized taxonomy
-│   │   ├── models/       # Strongly typed Pydantic domain schemas
-│   │   └── services/     # AI service, location resolution, demand aggregation, hotspot & scoring engines
-│   └── tests/            # Automated Pytest suite (taxonomy, AI, prompt injection, hotspots, scoring, APIs)
+│   │   ├── models/       # Strongly typed Pydantic domain schemas & Evidence Graph models
+│   │   └── services/     # AI service, location, demand momentum, demographic, investment & scoring engines
+│   └── tests/            # Automated Pytest suite (taxonomy, AI, prompt injection, hotspots, momentum, scoring, APIs)
 ├── data/seed/            # Multi-country synthetic demo datasets (labeled synthetic)
-├── docs/                 # Architecture, security, data models, and scoring formulas
+├── docs/                 # Architecture, security, data models, evidence graph, and scoring formulas
 ├── scripts/              # Project verification & linting scripts
 └── .github/              # CI/CD pipelines (GitHub Actions)
 ```
-
----
-
-## 🛡️ Security Best Practices
-
-CivicPulse AI enforces strict security-first engineering:
-* **Zero API Key Leakage**: API credentials strictly isolated to backend environment variables (`.env`).
-* **Prompt Injection Protection**: Citizen input text treated strictly as untrusted data inside XML boundaries.
-* **AI Output Validation**: Pydantic schemas enforce type safety on all LLM responses before database or API consumption.
-* **CORS & Safe Headers**: Configurable CORS origin whitelist with security headers (`X-Content-Type-Options`, `X-Frame-Options`, `X-XSS-Protection`, `HSTS`).
-* **Input Sanitization & Size Limits**: Payload limit of 10MB and string sanitization against prompt injection & XSS.
 
 ---
 

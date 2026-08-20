@@ -15,22 +15,26 @@ from app.models.schemas import (
     CitizenRequestIngestInput,
     DemandAggregationSummary,
     DemandHotspot,
-    ExplanationDetails,
+    DemandMomentumSignal,
     ExtractedEntities,
     InfrastructureIndicator,
+    InvestmentOverlapDetail,
     InvestmentProject,
     PriorityRecommendation,
     Region,
     ScenarioWhatIfInput,
     ScenarioWhatIfResult,
+    WhyThisRecommendation,
 )
 from app.services.ai_service import get_ai_service
 from app.services.data_loader import data_loader
 from app.services.demand_engine import demand_aggregation_service
+from app.services.demand_momentum import demand_momentum_engine
 from app.services.hotspot_engine import hotspot_engine
+from app.services.investment_service import investment_overlap_engine
 from app.services.location_service import location_service
+from app.services.recommendation_service import recommendation_service
 from app.services.scenario_service import scenario_simulation_service
-from app.services.scoring_engine import scoring_engine
 
 router = APIRouter(prefix="/api/v1")
 
@@ -40,7 +44,7 @@ async def health_check():
     return {
         "status": "healthy",
         "service": "CivicPulse AI Backend Intelligence Engine",
-        "version": "0.2.0",
+        "version": "0.3.0",
         "timestamp": datetime.now(timezone.utc).isoformat(),
     }
 
@@ -164,6 +168,27 @@ async def get_demand_hotspots(category: str | None = Query(None, description="Op
     return hotspot_engine.detect_hotspots(regions, requests, indicators, category_filter=category)
 
 
+@router.get("/demand/trends", response_model=list[DemandMomentumSignal], summary="Get Demand Momentum Velocity Signals")
+async def get_demand_trends(
+    region_id: str | None = Query(None, description="Optional Region Filter"),
+    category: str | None = Query(None, description="Optional Category Filter"),
+):
+    regions = data_loader.get_regions()
+    requests = data_loader.get_citizen_requests()
+    indicators = data_loader.get_infrastructure_indicators()
+
+    signals: list[DemandMomentumSignal] = []
+    target_regions = [r for r in regions if r.id == region_id] if region_id else regions
+    target_categories = [normalize_category(category)] if category else list({normalize_category(i.category) for i in indicators})
+
+    for r in target_regions:
+        for cat in target_categories:
+            signal = demand_momentum_engine.calculate_momentum(r.id, cat, requests)
+            signals.append(signal)
+
+    return signals
+
+
 @router.get("/infrastructure/gaps", response_model=list[InfrastructureIndicator], summary="List Infrastructure Gap Indicators")
 @router.get("/indicators", response_model=list[InfrastructureIndicator], summary="List Infrastructure Gap Indicators (Legacy)", include_in_schema=False)
 async def list_infrastructure_gaps(
@@ -193,6 +218,28 @@ async def list_investments(
     return investments
 
 
+@router.get("/investments/overlaps", response_model=list[InvestmentOverlapDetail], summary="Detect Investment Overlaps & Status Alignment")
+async def get_investment_overlaps(
+    region_id: str | None = Query(None, description="Optional Region Filter"),
+    category: str | None = Query(None, description="Optional Category Filter"),
+):
+    regions = data_loader.get_regions()
+    investments = data_loader.get_investment_projects()
+    indicators = data_loader.get_infrastructure_indicators()
+
+    overlaps: list[InvestmentOverlapDetail] = []
+    target_regions = [r for r in regions if r.id == region_id] if region_id else regions
+    target_categories = [normalize_category(category)] if category else list({normalize_category(i.category) for i in indicators})
+
+    for r in target_regions:
+        for cat in target_categories:
+            detail = investment_overlap_engine.evaluate_investment_overlap(r.id, cat, investments)
+            overlaps.append(detail)
+
+    return overlaps
+
+
+@router.get("/recommendations/ranked", response_model=list[PriorityRecommendation], summary="List Ranked Recommendations with Evidence Graphs")
 @router.get("/recommendations", response_model=list[PriorityRecommendation], summary="Generate Priority Recommendations")
 async def get_recommendations():
     regions = data_loader.get_regions()
@@ -200,49 +247,12 @@ async def get_recommendations():
     requests = data_loader.get_citizen_requests()
     investments = data_loader.get_investment_projects()
 
-    recommendations: list[PriorityRecommendation] = []
-    all_cat_keys = list({normalize_category(i.category) for i in indicators})
-    if not all_cat_keys:
-        all_cat_keys = ["healthcare", "water", "electricity", "transportation", "digital_connectivity"]
-
-    for region in regions:
-        region_indicators = [i for i in indicators if i.region_id == region.id]
-        region_requests = [r for r in requests if r.region_id == region.id]
-        region_investments = [inv for inv in investments if inv.region_id == region.id]
-
-        for cat_key in all_cat_keys:
-            ind = next((i for i in region_indicators if normalize_category(i.category) == cat_key), None)
-
-            score, evidence, reasoning, action, explanation_details = scoring_engine.calculate_priority_score(
-                region=region,
-                indicator=ind,
-                requests=region_requests,
-                investments=region_investments,
-                category=cat_key,
-            )
-
-            rec_id = f"REC-{region.country_code}-{cat_key.upper()[:4]}"
-            recommendations.append(
-                PriorityRecommendation(
-                    id=rec_id,
-                    region_id=region.id,
-                    region_name=f"{region.district_city}, {region.country}",
-                    category=cat_key,
-                    priority_score=score,
-                    priority_level=explanation_details.priority_level,
-                    confidence=0.92,
-                    evidence_card=evidence,
-                    explanation_details=explanation_details,
-                    reasoning=reasoning,
-                    expected_impact=f"Estimated impact across ~{int(region.population * 0.25):,} residents",
-                    recommended_action=action,
-                    is_synthetic=True,
-                    is_demo=True,
-                )
-            )
-
-    recommendations.sort(key=lambda x: x.priority_score, reverse=True)
-    return recommendations
+    return recommendation_service.generate_all_ranked_recommendations(
+        regions=regions,
+        indicators=indicators,
+        requests=requests,
+        investments=investments,
+    )
 
 
 @router.get("/recommendations/{recommendation_id}", response_model=PriorityRecommendation, summary="Get Priority Recommendation by ID")
@@ -254,16 +264,24 @@ async def get_recommendation_by_id(recommendation_id: str):
     return rec
 
 
-@router.get("/recommendations/{recommendation_id}/explanation", response_model=ExplanationDetails, summary="Get 'Why this recommendation?' Factor Explanation")
+@router.get("/recommendations/{recommendation_id}/explain", response_model=WhyThisRecommendation, summary="Get 'Why This Recommendation?' Evidence Trail")
+@router.get("/evidence/{recommendation_id}", response_model=WhyThisRecommendation, summary="Get Civic Evidence Graph Trail for Recommendation")
 async def get_recommendation_explanation(recommendation_id: str):
     recs = await get_recommendations()
     rec = next((r for r in recs if r.id == recommendation_id), None)
-    if not rec or not rec.explanation_details:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Explanation for recommendation '{recommendation_id}' not found")
-    return rec.explanation_details
+    if not rec or not rec.why_this_recommendation:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Evidence trail for recommendation '{recommendation_id}' not found")
+
+    # Optionally enhance summary via AI explanation layer
+    ai_service = get_ai_service()
+    ai_summary = await ai_service.generate_evidence_explanation(rec.why_this_recommendation)
+    rec.why_this_recommendation.summary = ai_summary
+
+    return rec.why_this_recommendation
 
 
-@router.post("/scenario/what-if", response_model=ScenarioWhatIfResult, summary="Execute What-If Policy Simulation")
+@router.post("/scenarios", response_model=ScenarioWhatIfResult, summary="Execute Counterfactual Policy Simulation")
+@router.post("/scenario/what-if", response_model=ScenarioWhatIfResult, summary="Execute What-If Policy Simulation (Legacy)", include_in_schema=False)
 async def scenario_what_if(payload: ScenarioWhatIfInput):
     regions = data_loader.get_regions()
     region = next((r for r in regions if r.id == payload.region_id), None)
