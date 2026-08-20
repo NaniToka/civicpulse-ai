@@ -1,6 +1,6 @@
 # CivicPulse AI
 
-> **Citizen Demand Intelligence & Infrastructure Prioritization Platform**  
+> **AI-Powered Civic Decision Intelligence Platform**  
 > *Track 1 — AI for Digital Public Infrastructure & Governance (BRICS Nations)*
 
 ---
@@ -11,53 +11,49 @@ Governments across developing economies and BRICS nations process millions of fr
 
 **CivicPulse AI** is an open-source, scalable, multilingual decision-support platform designed as a **Digital Public Good**. It bridges citizen feedback and national public investment planning by transforming unstructured citizen signals into geographic demand intelligence, cross-referencing demographic data, infrastructure deficit indices, and existing investment allocations to generate **transparent, explainable priority scores and actionable evidence cards for policymakers**.
 
-> ⚠️ **Synthetic Demonstration Data Disclaimer**: All seed data files (`data/seed/*.json`) and demonstration API responses contain synthetic data created solely for prototyping and verification purposes, explicitly flagged with `"is_synthetic": true` / `"is_demo": true`.
+> ⚠️ **Prototype Disclaimer**: All seed dataset files (`data/seed/*.json`) and demonstration API responses contain synthetic data created solely for prototyping and verification purposes, explicitly flagged with `"is_synthetic": true` / `"is_demo": true`.
 
 ---
 
-## ⭐ Why CivicPulse AI is Different
+## 🖥️ Product Experience & Main Views
 
-Unlike generic chatbots or complaints databases, CivicPulse AI operates as an evidence-driven decision intelligence system:
+The interface presents a cohesive decision intelligence pipeline across 8 primary workspace views:
 
-1. **Not a Mere Complaint Aggregator**: Transforms raw multilingual feedback into structured, per-capita normalized demand signals ($100,000$ residents baseline).
-2. **Civic Evidence Graph**: Every recommendation is backed by a 6-step evidence trail (`CITIZEN SIGNAL → DEMAND MOMENTUM → INFRASTRUCTURE GAP → DEMOGRAPHIC CONTEXT → INVESTMENT ALIGNMENT → PRIORITY RECOMMENDATION`).
-3. **Temporal Demand Velocity**: Detects whether citizen demand is `INCREASING` (+15% acceleration), `STABLE`, `DECREASING`, or `EMERGING`.
-4. **Demographic Need Intelligence**: Cross-references category-specific census metrics (elderly %, youth %, student density, digital divide gap).
-5. **Investment Overlap Detection**: Evaluates active public projects to avoid duplicate funding while flagging delayed projects for urgent policy intervention.
-6. **Transparent Priority Engine V2**: 8-factor deterministic scoring formula ($w_d=0.20, w_m=0.10, w_g=0.20, w_p=0.15, w_v=0.15, w_u=0.10, w_a=0.05, w_e=0.05$) with full factor contribution visibility.
-7. **"Show Your Work" Explainability**: Exposes machine-readable evidence chains via `/api/v1/recommendations/{id}/explain`.
-8. **Counterfactual What-If Simulation**: Simulates post-investment score deltas, gap reductions, and population impact.
-9. **Strict AI Boundary**: Google Gemini is used solely for multilingual extraction and executive natural language explanations; **AI NEVER computes numbers or alters deterministic scores**.
+1. **Executive Overview** (`/`): High-level executive KPIs, interactive "Civic Demand Landscape" regional heatmap, Live Signal Ticker, Top Priority Actions, and Featured Evidence Preview.
+2. **Demand Intelligence** (`/demand`): Multilingual signal filters (Region, Category, Language, Urgency), category demand distribution, 30-day temporal demand velocity signals (`INCREASING`, `STABLE`, `EMERGING`), and language representation metrics.
+3. **Demand Hotspots** (`/hotspots`): Per-capita normalized demand concentration ($100,000$ residents baseline), selected Region Intelligence Panel, and sortable Municipal Hotspot Ranking Table.
+4. **Infrastructure Gaps** (`/gaps`): Operational capacity deficit index overview and Region × Sector Deficit Heat Matrix (0.00 to 1.00 intensity).
+5. **Priority Recommendations** (`/recommendations`): Ranked evidence-backed capital priorities, filterable cards (`CRITICAL`, `HIGH`, `MEDIUM`, `LOW`), score badges, and evidence trail triggers.
+6. **Evidence Explorer** (`/evidence`): Searchable granular evidence nodes (`citizen_demand`, `infrastructure_gap`, `demographic_need`, `investment_context`), confidence metrics, and 6-step recommendation evidence chains.
+7. **Scenario Lab** (`/scenarios`): Interactive counterfactual policy simulator allowing budget allocation ($1M to $50M USD) and coverage target adjustments with Before/After score deltas and beneficiary projections.
+8. **Data Explorer** (`/data`): Synthetic demonstration dataset inspector (Requests, Regions, Indicators, Investments) and live multilingual citizen request ingestion testing.
 
 ---
 
-## 🎯 Core Pipeline & Evidence Graph
+## ⭐ Key Differentiator — Civic Evidence Trail ("Show Your Work")
+
+Unlike generic chatbots or complaint counters, CivicPulse AI guarantees that every priority recommendation is traceable through an ordered 6-step evidence trail:
 
 ```
-RAW CITIZEN INPUT (Voice / Text / WhatsApp / Survey)
-               ↓
-LANGUAGE DETECTION & NORMALIZATION
-               ↓
-PROMPT INJECTION DEFENSE & PARSING
-               ↓
-CIVIC INTENT CLASSIFICATION (Controlled Taxonomy)
-               ↓
-ENTITY / REQUIREMENT EXTRACTION
-               ↓
-GEOSPATIAL LOCATION RESOLUTION
-               ↓
-DEMAND SIGNAL & TEMPORAL VELOCITY MOMENTUM
-               ↓
-PER-CAPITA DEMAND HOTSPOT ENGINE
-               ↓
-INFRASTRUCTURE GAP ANALYSIS & DEMOGRAPHIC CONTEXT
-               ↓
-PUBLIC CAPITAL INVESTMENT OVERLAP CHECK
-               ↓
-DETERMINISTIC PRIORITY ENGINE V2 (8 Factors + Penalties)
-               ↓
-CIVIC EVIDENCE GRAPH & "WHY THIS RECOMMENDATION?" TRAIL
+01 CITIZEN DEMAND → 02 DEMAND MOMENTUM → 03 INFRASTRUCTURE GAP → 04 DEMOGRAPHIC NEED → 05 INVESTMENT OVERLAP → 06 PRIORITY RECOMMENDATION
 ```
+
+Clicking **"View Evidence Trail"** on any recommendation opens a dedicated detail modal exposing:
+- **Visual Vertical Timeline**: Ordered 6-step evidence chain with exact findings and contribution points.
+- **8-Factor Scoring Formula Breakdown**: Transparent horizontal bar visualization for Demand Signal (0.20), Demand Momentum (0.10), Infrastructure Deficit (0.20), Population Scale (0.15), Demographic Need (0.15), Urgency (0.10), Investment Alignment (0.05), and Evidence Quality (0.05).
+- **AI Decision Brief**: Gemini-generated executive summary strictly constrained to validated evidence, with explicit risk factors and recommended policy actions.
+
+---
+
+## 🎬 30-Second Ideal Judge Demo Flow
+
+1. **Executive Overview**: Inspect top KPIs (Citizen Signals, Regions, Deficits) and hover over the **Civic Demand Landscape**.
+2. **Select Hotspot**: Click a district (e.g. *Kanpur South Belt*) to open the Region Intelligence Panel.
+3. **Open Recommendation**: Navigate to **Priority Recommendations** and select the top `CRITICAL` recommendation (*Healthcare Expansion*).
+4. **Follow Evidence Trail**: Click **"View Evidence Trail"** to inspect the vertical 6-step evidence timeline (`01 Citizen Demand Voices → 02 Velocity Momentum → ... → 06 Priority Score: 91.4`).
+5. **Inspect Factor Breakdown**: Review the 8-Factor deterministic scoring model breakdown and AI Decision Brief.
+6. **Open Scenario Lab**: Navigate to **Scenario Lab**, adjust the budget slider to **$15,000,000 USD**, and click **"Execute Counterfactual Simulation"**.
+7. **Compare Impact**: Observe the simulated score delta (`-18.5 pts` deficit reduction) and projected citizen beneficiaries (`+730,000 residents`).
 
 ---
 
@@ -65,18 +61,22 @@ CIVIC EVIDENCE GRAPH & "WHY THIS RECOMMENDATION?" TRAIL
 
 ```
 civicpulse-ai/
-├── frontend/             # React + TypeScript + Vite + Tailwind CSS dashboard UI
-├── backend/              # Python + FastAPI + Pydantic v2 + Pytest intelligence backend
+├── frontend/             # React + TypeScript + Vite + Tailwind CSS decision cockpit
+│   ├── src/
+│   │   ├── components/   # Sidebar, Navbar, CommandPalette (⌘K), PriorityBadge, TrendBadge, EvidenceTrailModal
+│   │   ├── pages/        # Executive Overview, Demand Intelligence, Hotspots, Gaps, Recommendations, Evidence Explorer, Scenario Lab, Data Explorer
+│   │   ├── services/     # Typed API client connecting to backend /api/v1
+│   │   └── types/        # TypeScript domain models & Evidence Graph schemas
+├── backend/              # Python + FastAPI + Pydantic v2 + Pytest intelligence engine
 │   ├── app/
-│   │   ├── api/          # RESTful API routes (/api/v1/recommendations/ranked, /evidence/{id}, etc.)
-│   │   ├── core/         # Config, security middleware, and centralized taxonomy
-│   │   ├── models/       # Strongly typed Pydantic domain schemas & Evidence Graph models
+│   │   ├── api/          # RESTful API routes (/recommendations/ranked, /evidence/{id}, /scenarios, etc.)
+│   │   ├── core/         # Security middleware, prompt injection defense, centralized taxonomy
+│   │   ├── models/       # Pydantic schemas & Evidence Graph models
 │   │   └── services/     # AI service, location, demand momentum, demographic, investment & scoring engines
-│   └── tests/            # Automated Pytest suite (taxonomy, AI, prompt injection, hotspots, momentum, scoring, APIs)
-├── data/seed/            # Multi-country synthetic demo datasets (labeled synthetic)
-├── docs/                 # Architecture, security, data models, evidence graph, and scoring formulas
-├── scripts/              # Project verification & linting scripts
-└── .github/              # CI/CD pipelines (GitHub Actions)
+│   └── tests/            # Pytest test suite (29 passing tests)
+├── data/seed/            # Multi-country synthetic demo datasets
+├── docs/                 # Architecture & evidence graph documentation
+└── scripts/              # Project verification & linting scripts
 ```
 
 ---
@@ -130,7 +130,7 @@ Run the automated full-system verification script:
 Or run test suites manually:
 * Backend Unit & API Tests: `cd backend && .venv/bin/pytest`
 * Backend Linting: `cd backend && .venv/bin/ruff check .`
-* Frontend Checks: `cd frontend && npm run build && npm run lint`
+* Frontend Linting & Build: `cd frontend && npm run lint && npm run build`
 
 ---
 

@@ -1,8 +1,14 @@
+export type UrgencyLevel = 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
+export type MomentumTrend = 'INCREASING' | 'STABLE' | 'DECREASING' | 'EMERGING';
+export type InvestmentStatus = 'PLANNED' | 'APPROVED' | 'IN_PROGRESS' | 'COMPLETED' | 'DELAYED';
+export type OverlapType = 'NONE' | 'PLANNED_PROJECT' | 'ACTIVE_PROJECT' | 'DELAYED_PROJECT' | 'COMPLETED_PROJECT';
+
 export interface ExtractedEntities {
   location?: string;
-  severity: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
+  severity: UrgencyLevel;
   impacted_count?: number;
   infrastructure_type?: string;
+  subcategory?: string;
 }
 
 export interface CitizenRequest {
@@ -11,14 +17,20 @@ export interface CitizenRequest {
   source: string;
   language: string;
   original_text: string;
+  normalized_text?: string;
   translated_text: string;
+  category?: string;
   request_category: string;
+  subcategory?: string;
+  urgency?: UrgencyLevel;
+  processing_status?: string;
   extracted_entities: ExtractedEntities;
   latitude: number;
   longitude: number;
   timestamp: string;
   confidence: number;
-  is_demo: boolean;
+  is_synthetic?: boolean;
+  is_demo?: boolean;
 }
 
 export interface Region {
@@ -30,9 +42,16 @@ export interface Region {
   latitude: number;
   longitude: number;
   population: number;
+  population_density?: number;
+  youth_percentage?: number;
+  elderly_percentage?: number;
+  household_count?: number;
+  urbanization_rate?: number;
+  digital_access_rate?: number;
   vulnerability_index: number;
   primary_language: string;
-  is_demo: boolean;
+  is_synthetic?: boolean;
+  is_demo?: boolean;
 }
 
 export interface InfrastructureIndicator {
@@ -44,7 +63,8 @@ export interface InfrastructureIndicator {
   coverage_ratio_pct: number;
   gap_score: number;
   last_assessed: string;
-  is_demo: boolean;
+  is_synthetic?: boolean;
+  is_demo?: boolean;
 }
 
 export interface InvestmentProject {
@@ -53,10 +73,12 @@ export interface InvestmentProject {
   region_id: string;
   category: string;
   budget_usd: number;
-  status: 'PLANNED' | 'APPROVED' | 'IN_PROGRESS' | 'COMPLETED';
+  status: string;
   planned_start: string;
   expected_capacity_addition?: string;
-  is_demo: boolean;
+  coverage_area?: string;
+  is_synthetic?: boolean;
+  is_demo?: boolean;
 }
 
 export interface EvidenceCard {
@@ -67,19 +89,109 @@ export interface EvidenceCard {
   data_sources: string[];
 }
 
+export interface FactorContribution {
+  name: string;
+  raw_value: number;
+  weight: number;
+  contribution: number;
+  explanation: string;
+}
+
+export interface ExplanationDetails {
+  recommendation_id: string;
+  region_id: string;
+  region_name: string;
+  category: string;
+  priority_score: number;
+  priority_level: UrgencyLevel;
+  factors: FactorContribution[];
+  risks: string[];
+  existing_investment_context?: string;
+  estimated_population_impact: number;
+  recommended_action: string;
+}
+
+export interface EvidenceItem {
+  id: string;
+  type: 'citizen_demand' | 'demand_momentum' | 'infrastructure_gap' | 'demographic_need' | 'investment_context' | 'urgency' | 'population_impact' | 'coverage' | 'accessibility';
+  source: string;
+  region_id: string;
+  category: string;
+  metric: string;
+  value: number;
+  normalized_value: number;
+  contribution: number;
+  confidence: number;
+  explanation: string;
+  is_synthetic?: boolean;
+}
+
+export interface DemandMomentumSignal {
+  region_id: string;
+  category: string;
+  trend: MomentumTrend;
+  percentage_change: number;
+  recent_window_count: number;
+  previous_window_count: number;
+  momentum_score: number;
+}
+
+export interface InvestmentOverlapDetail {
+  has_overlap: boolean;
+  overlap_type: OverlapType;
+  project_id?: string;
+  project_name?: string;
+  project_status?: string;
+  budget_usd?: number;
+  explanation: string;
+}
+
+export interface EvidenceChainStep {
+  step: number;
+  title: string;
+  finding: string;
+  value: string;
+  contribution: string;
+  evidence_item_id?: string | null;
+}
+
+export interface WhyThisRecommendation {
+  recommendation_id: string;
+  summary: string;
+  overall_confidence: number;
+  evidence_chain: EvidenceChainStep[];
+  factors: FactorContribution[];
+  risks: string[];
+}
+
 export interface PriorityRecommendation {
   id: string;
   region_id: string;
   region_name: string;
   category: string;
   priority_score: number;
+  priority_level: UrgencyLevel;
   confidence: number;
   evidence_card: EvidenceCard;
+  explanation_details?: ExplanationDetails;
+  evidence_items?: EvidenceItem[];
+  demand_momentum?: DemandMomentumSignal;
+  investment_overlap?: InvestmentOverlapDetail;
+  evidence_chain?: EvidenceChainStep[];
+  why_this_recommendation?: WhyThisRecommendation;
   reasoning: string;
   expected_impact: string;
   recommended_action: string;
-  generated_at: string;
-  is_demo: boolean;
+  generated_at?: string;
+  is_synthetic?: boolean;
+  is_demo?: boolean;
+}
+
+export interface CivicCategory {
+  key: string;
+  display_name: string;
+  description: string;
+  aliases: string[];
 }
 
 export interface CitizenRequestIngestInput {
@@ -106,4 +218,17 @@ export interface ScenarioWhatIfResult {
   projected_gap_score: number;
   expected_population_beneficiaries: number;
   simulation_notes: string;
+}
+
+export interface DemandHotspot {
+  region_id: string;
+  country: string;
+  district_city: string;
+  category: string;
+  request_count: number;
+  population: number;
+  per_capita_demand_per_100k: number;
+  hotspot_score: number;
+  gap_score: number;
+  urgency_level: UrgencyLevel;
 }

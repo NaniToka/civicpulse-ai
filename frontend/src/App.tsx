@@ -1,41 +1,62 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/layout/Navbar';
 import { Sidebar, NavTab } from './components/layout/Sidebar';
+import { CommandPalette } from './components/common/CommandPalette';
+import { EvidenceTrailModal } from './components/common/EvidenceTrailModal';
 import { DashboardOverview } from './pages/DashboardOverview';
+import { DemandIntelligence } from './pages/DemandIntelligence';
 import { HotspotExplorer } from './pages/HotspotExplorer';
+import { InfrastructureGaps } from './pages/InfrastructureGaps';
 import { RecommendationsView } from './pages/RecommendationsView';
-import { CitizenFeedbackFeed } from './pages/CitizenFeedbackFeed';
+import { EvidenceExplorer } from './pages/EvidenceExplorer';
 import { WhatIfScenario } from './pages/WhatIfScenario';
-import { Alert } from './components/common/Alert';
+import { DataExplorer } from './pages/DataExplorer';
 import { api } from './services/api';
-import { Region, CitizenRequest, InfrastructureIndicator, PriorityRecommendation } from './types';
+import {
+  Region,
+  CitizenRequest,
+  InfrastructureIndicator,
+  InvestmentProject,
+  PriorityRecommendation,
+  DemandMomentumSignal,
+} from './types';
 
 export const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<NavTab>('dashboard');
+  const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(false);
+  const [commandPaletteOpen, setCommandPaletteOpen] = useState<boolean>(false);
+  const [selectedModalRec, setSelectedModalRec] = useState<PriorityRecommendation | null>(null);
+
   const [regions, setRegions] = useState<Region[]>([]);
   const [requests, setRequests] = useState<CitizenRequest[]>([]);
   const [indicators, setIndicators] = useState<InfrastructureIndicator[]>([]);
+  const [investments, setInvestments] = useState<InvestmentProject[]>([]);
   const [recommendations, setRecommendations] = useState<PriorityRecommendation[]>([]);
+  const [trends, setTrends] = useState<DemandMomentumSignal[]>([]);
+
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function loadData() {
       setLoading(true);
       try {
-        const [regData, reqData, indData, recData] = await Promise.all([
-          api.getRegions(),
-          api.getCitizenRequests(),
-          api.getIndicators(),
-          api.getRecommendations(),
+        const [regData, reqData, indData, invData, recData] = await Promise.all([
+          api.getRegions().catch(() => []),
+          api.getCitizenRequests().catch(() => []),
+          api.getIndicators().catch(() => []),
+          api.getInvestments().catch(() => []),
+          api.getRecommendations().catch(() => []),
         ]);
-        setRegions(regData);
-        setRequests(reqData);
-        setIndicators(indData);
-        setRecommendations(recData);
+
+        if (regData.length > 0) setRegions(regData);
+        if (reqData.length > 0) setRequests(reqData);
+        if (indData.length > 0) setIndicators(indData);
+        if (invData.length > 0) setInvestments(invData);
+        if (recData.length > 0) setRecommendations(recData);
+
+        api.getDemandTrends().then((t) => setTrends(t)).catch(() => {});
       } catch (err) {
-        console.warn('Backend API offline. Operating in self-contained demo mode.', err);
-        setError('Backend API server unattached. Operating in standalone demo mode.');
+        console.warn('Backend API unattached. Operating with self-contained fallback state.', err);
       } finally {
         setLoading(false);
       }
@@ -48,22 +69,22 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-civic-950 text-civic-100">
-      <Navbar />
+    <div className="min-h-screen flex flex-col bg-civic-950 text-civic-100 font-sans selection:bg-sky-500 selection:text-slate-950">
+      <Navbar onOpenCommandPalette={() => setCommandPaletteOpen(true)} />
 
-      <div className="flex flex-1">
-        <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+      <div className="flex flex-1 overflow-hidden">
+        <Sidebar
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          collapsed={sidebarCollapsed}
+          onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
+        />
 
-        <main className="flex-1 p-6 max-w-7xl mx-auto overflow-y-auto">
-          {error && (
-            <div className="mb-4">
-              <Alert variant="warning">{error}</Alert>
-            </div>
-          )}
-
+        <main className="flex-1 p-6 lg:p-8 max-w-7xl mx-auto overflow-y-auto w-full">
           {loading ? (
-            <div className="h-64 flex items-center justify-center text-xs text-civic-400">
-              Initializing CivicPulse Intelligence Platform...
+            <div className="h-96 flex flex-col items-center justify-center space-y-3 text-slate-400 text-xs font-mono">
+              <div className="w-8 h-8 rounded-full border-2 border-sky-500 border-t-transparent animate-spin" />
+              <span>Initializing CivicPulse Intelligence Platform...</span>
             </div>
           ) : (
             <>
@@ -73,22 +94,71 @@ export const App: React.FC = () => {
                   requests={requests}
                   regions={regions}
                   onNavigate={setActiveTab}
+                  onOpenEvidenceModal={(rec) => setSelectedModalRec(rec)}
                 />
               )}
+
+              {activeTab === 'demand' && (
+                <DemandIntelligence requests={requests} regions={regions} trends={trends} />
+              )}
+
               {activeTab === 'hotspots' && (
-                <HotspotExplorer regions={regions} indicators={indicators} requests={requests} />
+                <HotspotExplorer
+                  regions={regions}
+                  indicators={indicators}
+                  requests={requests}
+                  onNavigate={setActiveTab}
+                />
               )}
+
+              {activeTab === 'gaps' && (
+                <InfrastructureGaps indicators={indicators} regions={regions} />
+              )}
+
               {activeTab === 'recommendations' && (
-                <RecommendationsView recommendations={recommendations} />
+                <RecommendationsView
+                  recommendations={recommendations}
+                  onOpenEvidenceModal={(rec) => setSelectedModalRec(rec)}
+                />
               )}
-              {activeTab === 'feedback' && (
-                <CitizenFeedbackFeed requests={requests} onNewRequestAdded={handleNewRequestAdded} />
+
+              {activeTab === 'evidence' && (
+                <EvidenceExplorer
+                  recommendations={recommendations}
+                  regions={regions}
+                  onOpenEvidenceModal={(rec) => setSelectedModalRec(rec)}
+                />
               )}
+
               {activeTab === 'scenarios' && <WhatIfScenario regions={regions} />}
+
+              {activeTab === 'data' && (
+                <DataExplorer
+                  requests={requests}
+                  regions={regions}
+                  indicators={indicators}
+                  investments={investments}
+                  onNewRequestAdded={handleNewRequestAdded}
+                />
+              )}
             </>
           )}
         </main>
       </div>
+
+      <CommandPalette
+        isOpen={commandPaletteOpen}
+        onClose={() => setCommandPaletteOpen(false)}
+        onSelectTab={(tab) => {
+          setActiveTab(tab);
+          setCommandPaletteOpen(false);
+        }}
+      />
+
+      <EvidenceTrailModal
+        recommendation={selectedModalRec}
+        onClose={() => setSelectedModalRec(null)}
+      />
     </div>
   );
 };
