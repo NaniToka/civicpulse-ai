@@ -564,13 +564,23 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
                 <span>{comment.timestamp}</span>
               </span>
 
-              <button
-                onClick={() => handleLikeComment(comment.id)}
-                className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-300 hover:border-cyan-500 transition font-bold cursor-pointer"
-              >
-                <ThumbsUp className="w-3.5 h-3.5 text-cyan-400" />
-                <span>{comment.likes} Upvotes</span>
-              </button>
+              {(() => {
+                const isUpvoted = upvotedCommentIds.includes(comment.id);
+                return (
+                  <button
+                    onClick={() => handleLikeComment(comment.id)}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border transition-all duration-200 font-bold cursor-pointer ${
+                      isUpvoted
+                        ? 'bg-cyan-950/90 border-cyan-400 text-cyan-200 shadow-md shadow-cyan-950 glow-cyan scale-105'
+                        : 'bg-slate-900 border-slate-800 text-slate-300 hover:text-cyan-300 hover:border-cyan-500'
+                    }`}
+                    title={isUpvoted ? 'Remove your upvote' : 'Upvote this comment'}
+                  >
+                    <ThumbsUp className={`w-3.5 h-3.5 ${isUpvoted ? 'text-cyan-300 fill-cyan-400' : 'text-cyan-400'}`} />
+                    <span>{isUpvoted ? 'Upvoted 👍' : 'Upvote'} ({comment.likes})</span>
+                  </button>
+                );
+              })()}
             </div>
           </div>
         ))}
