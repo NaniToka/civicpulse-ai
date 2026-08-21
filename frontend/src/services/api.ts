@@ -15,7 +15,8 @@ import {
   CivicAnalysisResponse,
 } from '../types';
 
-const API_BASE = '/api/v1';
+const BASE_URL = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '');
+const API_BASE = `${BASE_URL}/api/v1`;
 
 async function fetchJSON<T>(endpoint: string, options?: RequestInit): Promise<T> {
   try {
@@ -27,11 +28,14 @@ async function fetchJSON<T>(endpoint: string, options?: RequestInit): Promise<T>
       ...options,
     });
     if (!res.ok) {
-      throw new Error(`HTTP Error ${res.status}: ${res.statusText}`);
+      if (res.status === 429) {
+        throw new Error('Request is temporarily rate-limited. Please try again shortly.');
+      }
+      throw new Error(`Unable to connect to CivicPulse Intelligence (${res.status}).`);
     }
     return await res.json();
   } catch (err) {
-    console.warn(`[CivicPulse API] Failed to fetch ${endpoint}.`, err);
+    console.warn(`[CivicPulse API] Service communication notice for endpoint ${endpoint}.`, err);
     throw err;
   }
 }

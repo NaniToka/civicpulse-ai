@@ -119,8 +119,26 @@ npm install
 npm run dev
 ```
 
-* **Dashboard Cockpit**: `http://localhost:5173`
-* **API OpenAPI Docs**: `http://localhost:8000/docs`
+- **Dashboard Cockpit**: `http://localhost:5173`
+- **API OpenAPI Docs**: `http://localhost:8000/docs`
+
+---
+
+## 🌐 Production Deployment (Render Blueprint)
+
+CivicPulse AI is configured for dual-service production deployment on **Render** via the repository-native `render.yaml` Blueprint:
+
+### Service Architecture
+* **Service 1 (Backend)**: `civicpulse-ai-backend` — Python FastAPI Web Service bound to `0.0.0.0:$PORT` with health checks on `/api/v1/health`.
+* **Service 2 (Frontend)**: `civicpulse-ai-frontend` — React Static Site built via `npm ci && npm run build` publishing `./frontend/dist`.
+
+### Deployment Steps
+1. Connect your GitHub repository to [Render](https://render.com).
+2. Click **New +** → **Blueprint** and select `render.yaml`.
+3. Configure Backend Environment Secret: `GEMINI_API_KEY` (stored securely in Render dashboard).
+4. Set Backend `ALLOWED_CORS_ORIGINS` to `https://<YOUR-FRONTEND-URL>.onrender.com`.
+5. Set Frontend `VITE_API_BASE_URL` to `https://<YOUR-BACKEND-URL>.onrender.com`.
+6. Verify backend health check endpoint at `/api/v1/health` and open the public frontend URL.
 
 ---
 

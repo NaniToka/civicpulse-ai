@@ -1,0 +1,36 @@
+# Render Deployment Blueprint for CivicPulse AI (v0.5.0)
+# Blueprint specification for dual-service Render deployment (Frontend Static + Backend Web Service)
+
+services:
+  # 1. Backend FastAPI Service
+  - type: web
+    name: civicpulse-ai-backend
+    runtime: python
+    buildCommand: "cd backend && pip install -r requirements.txt"
+    startCommand: "cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: LOG_LEVEL
+        value: INFO
+      - key: BACKEND_HOST
+        value: 0.0.0.0
+      - key: ALLOWED_CORS_ORIGINS
+        value: "https://civicpulse-ai-frontend.onrender.com,http://localhost:5173"
+      - key: MAX_BODY_SIZE_BYTES
+        value: "10485760"
+      - key: GEMINI_MODEL_NAME
+        value: gemini-2.5-flash
+      - key: GEMINI_API_KEY
+        sync: false  # Configure in Render Web Dashboard Secrets
+
+  # 2. Frontend React Production Build
+  - type: web
+    name: civicpulse-ai-frontend
+    runtime: node
+    buildCommand: "cd frontend && npm ci && npm run build"
+    staticPublishPath: ./frontend/dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: "https://civicpulse-ai-backend.onrender.com"

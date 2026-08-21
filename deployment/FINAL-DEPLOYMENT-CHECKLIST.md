@@ -1,0 +1,27 @@
+# 📋 CivicPulse AI — Final Deployment Checklist
+
+- [x] Render frontend service configured (`render.yaml` staticPublishPath `./frontend/dist`)
+- [x] Render backend service configured (`render.yaml` uvicorn `0.0.0.0:$PORT`)
+- [x] Backend health check passing (`GET /api/v1/health`)
+- [x] CORS configured for production origin (`ALLOWED_CORS_ORIGINS`)
+- [x] Centralized API service using `VITE_API_BASE_URL` (`api.ts`)
+- [x] `GEMINI_API_KEY` stored securely in deployment secrets (0 secrets in Git)
+- [x] Executive Dashboard working with 3D Donut Chart
+- [x] Demand Intelligence page working with 30-day velocity trends
+- [x] Multilingual signal ingestion & Telugu demo working
+- [x] Citizen Feedback Wall working with single-upvote toggle logic
+- [x] Infrastructure Deficit Heat Matrix working with capacity % labels & severity badges
+- [x] Priority Recommendations working with ranked priority scores
+- [x] Evidence Explorer working with 6-step evidence trail modal
+- [x] Scenario Lab Policy Simulator working with intervention presets & ROI metrics
+- [x] Data Explorer working with 3D Bar Matrix Cylinder Graph
+- [x] Responsive mobile navigation drawer overlay (`Navbar.tsx` & `Sidebar.tsx`)
+- [x] Responsive grid breakpoints verified (320px to 1920px)
+- [x] Touch-friendly sliders and control buttons
+- [x] Production Error Boundary configured (`ErrorBoundary.tsx`)
+- [x] SEO, viewport, and Open Graph metadata configured (`index.html`)
+- [x] Zero TypeScript / ESLint warnings (`npm run lint && npx tsc --noEmit`)
+- [x] Production bundle build passing (`npm run build`)
+- [x] All 37 backend Pytest unit tests passing (`.venv/bin/pytest`)
+- [x] Root `README.md` updated with Production Deployment guide
+- [x] Synthetic data disclaimers visible in UI and documentation
