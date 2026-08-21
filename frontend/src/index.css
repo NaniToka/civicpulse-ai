@@ -4,9 +4,14 @@
 
 @layer base {
   body {
-    @apply bg-slate-950 text-slate-100 antialiased selection:bg-sky-500 selection:text-slate-950 tracking-normal;
+    @apply bg-[#070b14] text-slate-100 antialiased selection:bg-cyan-500 selection:text-slate-950 tracking-normal min-h-screen;
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    background-image: 
+      radial-gradient(at 15% 15%, rgba(6, 182, 212, 0.08) 0px, transparent 50%),
+      radial-gradient(at 85% 25%, rgba(99, 102, 241, 0.07) 0px, transparent 50%),
+      radial-gradient(at 50% 85%, rgba(16, 185, 129, 0.06) 0px, transparent 50%);
+    background-attachment: fixed;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -21,7 +26,8 @@
   select {
     font-weight: 700 !important;
     color: #f8fafc !important;
-    background-color: #020617 !important;
+    background-color: #0b0f19 !important;
+    border-color: #1e293b !important;
   }
 
   option {
@@ -36,49 +42,53 @@
 @layer utilities {
   /* Ultra-Premium Glassmorphic Containers */
   .glass-card {
-    @apply bg-slate-900/80 backdrop-blur-xl border border-slate-800/80 hover:border-slate-700/80 transition-all duration-300 shadow-xl;
+    @apply bg-[#0e1424]/80 backdrop-blur-xl border border-slate-800/80 hover:border-slate-700/80 transition-all duration-300 shadow-2xl;
   }
 
   .glass-card-interactive {
-    @apply bg-slate-900/70 backdrop-blur-xl border border-slate-800/70 hover:border-sky-500/40 hover:bg-slate-900/90 transition-all duration-300 shadow-lg hover:shadow-sky-950/50 hover:-translate-y-0.5;
+    @apply bg-[#0e1424]/70 backdrop-blur-xl border border-slate-800/80 hover:border-cyan-500/50 hover:bg-[#12192e]/90 transition-all duration-300 shadow-xl hover:shadow-cyan-950/40 hover:-translate-y-0.5;
   }
 
   .glass-panel-cyan {
-    @apply bg-gradient-to-br from-sky-950/40 via-slate-900/80 to-slate-950/90 backdrop-blur-2xl border border-sky-800/40 shadow-xl shadow-sky-950/30;
+    @apply bg-gradient-to-br from-cyan-950/35 via-[#0e1424]/90 to-[#070b14]/95 backdrop-blur-2xl border border-cyan-800/50 shadow-2xl shadow-cyan-950/40;
   }
 
   .glass-panel-indigo {
-    @apply bg-gradient-to-br from-indigo-950/40 via-slate-900/80 to-slate-950/90 backdrop-blur-2xl border border-indigo-800/40 shadow-xl shadow-indigo-950/30;
+    @apply bg-gradient-to-br from-indigo-950/35 via-[#0e1424]/90 to-[#070b14]/95 backdrop-blur-2xl border border-indigo-800/50 shadow-2xl shadow-indigo-950/40;
+  }
+
+  .glass-panel-emerald {
+    @apply bg-gradient-to-br from-emerald-950/35 via-[#0e1424]/90 to-[#070b14]/95 backdrop-blur-2xl border border-emerald-800/50 shadow-2xl shadow-emerald-950/40;
   }
 
   .glass-panel-rose {
-    @apply bg-gradient-to-br from-rose-950/40 via-slate-900/80 to-slate-950/90 backdrop-blur-2xl border border-rose-800/40 shadow-xl shadow-rose-950/30;
+    @apply bg-gradient-to-br from-rose-950/35 via-[#0e1424]/90 to-[#070b14]/95 backdrop-blur-2xl border border-rose-800/50 shadow-2xl shadow-rose-950/40;
   }
 
   /* Ambient Glow Effects */
-  .glow-sky {
-    box-shadow: 0 0 25px -5px rgba(14, 165, 233, 0.25);
+  .glow-cyan {
+    box-shadow: 0 0 30px -5px rgba(6, 182, 212, 0.3);
   }
 
   .glow-indigo {
-    box-shadow: 0 0 25px -5px rgba(99, 102, 241, 0.25);
+    box-shadow: 0 0 30px -5px rgba(99, 102, 241, 0.3);
   }
 
   .glow-emerald {
-    box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.25);
+    box-shadow: 0 0 30px -5px rgba(16, 185, 129, 0.3);
   }
 
   .glow-amber {
-    box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.25);
+    box-shadow: 0 0 30px -5px rgba(245, 158, 11, 0.3);
   }
 
   .glow-rose {
-    box-shadow: 0 0 25px -5px rgba(244, 63, 94, 0.25);
+    box-shadow: 0 0 30px -5px rgba(244, 63, 94, 0.3);
   }
 
   /* Gradient Text Enhancements */
-  .gradient-text-sky {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-teal-300 to-indigo-400;
+  .gradient-text-cyan {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-teal-300 to-indigo-400;
   }
 
   .gradient-text-emerald {
@@ -89,9 +99,13 @@
     @apply bg-clip-text text-transparent bg-gradient-to-r from-rose-400 via-pink-400 to-amber-300;
   }
 
+  .gradient-text-amber {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-orange-300 to-yellow-400;
+  }
+
   /* Grid Mesh Overlay Background */
   .bg-grid-pattern {
-    background-image: radial-gradient(rgba(51, 65, 85, 0.25) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(51, 65, 85, 0.3) 1px, transparent 1px);
     background-size: 24px 24px;
   }
 }
@@ -102,7 +116,7 @@
   height: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: #020617;
+  background: #070b14;
 }
 ::-webkit-scrollbar-thumb {
   background: #1e293b;
