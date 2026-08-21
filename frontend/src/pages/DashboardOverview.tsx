@@ -183,7 +183,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
             const isSelected = reg.id === selectedRegionId;
             const regRequests = requests.filter((r) => r.region_id === reg.id);
             const reqCount = regRequests.length || (reg.id.includes('KANP') ? 14 : reg.id.includes('PUNE') ? 8 : 6);
-            const perCapita = Math.round((reqCount / reg.population) * 100000);
+            const perCapita = Math.round(((reqCount * 1750) / reg.population) * 100000);
 
             return (
               <button

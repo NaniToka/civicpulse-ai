@@ -28,13 +28,13 @@ export const HotspotExplorer: React.FC<HotspotExplorerProps> = ({
       : regRequests.filter((req) => req.category === categoryFilter || req.request_category.toLowerCase() === categoryFilter.toLowerCase());
 
     const count = catRequests.length || (r.id.includes('KANP') ? 14 : r.id.includes('PUNE') ? 8 : 6);
-    const perCapita = Math.round((count / (r.population || 1000000)) * 100000);
+    const perCapita = Math.round(((count * 1750) / (r.population || 1000000)) * 100000);
     const regInds = indicators.filter((i) => i.region_id === r.id);
     const avgGap = regInds.length
       ? regInds.reduce((acc, curr) => acc + curr.gap_score, 0) / regInds.length
       : 0.72;
 
-    const hotspotScore = Math.min(100, Math.round((perCapita * 0.4) + (r.vulnerability_index * 40) + (avgGap * 40)));
+    const hotspotScore = Math.min(100, Math.round(((perCapita / 10) * 0.4) + (r.vulnerability_index * 40) + (avgGap * 30)));
 
     return {
       rank: idx + 1,
