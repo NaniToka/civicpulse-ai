@@ -276,46 +276,46 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
               />
             </div>
 
-            <div className="grid grid-cols-3 gap-4 text-xs font-mono font-bold">
+            <div className="grid grid-cols-3 gap-4 text-xs font-mono font-extrabold">
               <div>
-                <label className="text-slate-300">Language:</label>
+                <label className="text-slate-200 text-sm">Language:</label>
                 <select
                   value={language}
                   onChange={(e) => setLanguage(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-700 text-slate-100 font-bold text-xs rounded-lg p-3 mt-1.5 focus:outline-none focus:border-sky-400"
+                  className="w-full bg-slate-950 border-2 border-slate-700 text-slate-100 font-extrabold text-xs rounded-xl p-3.5 mt-1.5 focus:outline-none focus:border-sky-400 cursor-pointer"
                 >
-                  <option value="hi">Hindi (hi)</option>
-                  <option value="mr">Marathi (mr)</option>
-                  <option value="pt">Portuguese (pt)</option>
-                  <option value="zu">Zulu (zu)</option>
-                  <option value="bn">Bengali (bn)</option>
-                  <option value="en">English (en)</option>
+                  <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="hi">Hindi (hi)</option>
+                  <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="mr">Marathi (mr)</option>
+                  <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="pt">Portuguese (pt)</option>
+                  <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="zu">Zulu (zu)</option>
+                  <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="bn">Bengali (bn)</option>
+                  <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="en">English (en)</option>
                 </select>
               </div>
 
               <div>
-                <label className="text-slate-300">Channel Source:</label>
+                <label className="text-slate-200 text-sm">Channel Source:</label>
                 <select
                   value={source}
                   onChange={(e) => setSource(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-700 text-slate-100 font-bold text-xs rounded-lg p-3 mt-1.5 focus:outline-none focus:border-sky-400"
+                  className="w-full bg-slate-950 border-2 border-slate-700 text-slate-100 font-extrabold text-xs rounded-xl p-3.5 mt-1.5 focus:outline-none focus:border-sky-400 cursor-pointer"
                 >
-                  <option value="voice">Voice Call</option>
-                  <option value="text">SMS Text</option>
-                  <option value="whatsapp">WhatsApp</option>
-                  <option value="web">Web Portal</option>
+                  <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="voice">Voice Call</option>
+                  <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="text">SMS Text</option>
+                  <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="whatsapp">WhatsApp</option>
+                  <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="web">Web Portal</option>
                 </select>
               </div>
 
               <div>
-                <label className="text-slate-300">Target Region:</label>
+                <label className="text-slate-200 text-sm">Target Region:</label>
                 <select
                   value={regionId}
                   onChange={(e) => setRegionId(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-700 text-slate-100 font-bold text-xs rounded-lg p-3 mt-1.5 focus:outline-none focus:border-sky-400"
+                  className="w-full bg-slate-950 border-2 border-slate-700 text-slate-100 font-extrabold text-xs rounded-xl p-3.5 mt-1.5 focus:outline-none focus:border-sky-400 cursor-pointer"
                 >
                   {regions.map((r) => (
-                    <option key={r.id} value={r.id}>
+                    <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" key={r.id} value={r.id}>
                       {r.district_city}
                     </option>
                   ))}

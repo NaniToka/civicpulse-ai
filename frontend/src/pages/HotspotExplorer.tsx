@@ -64,19 +64,19 @@ export const HotspotExplorer: React.FC<HotspotExplorerProps> = ({
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2.5">
           <Filter className="w-4 h-4 text-slate-300" />
           <select
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
-            className="bg-slate-950 border border-slate-700 text-slate-100 font-bold text-xs rounded-lg px-3.5 py-2 focus:outline-none focus:border-sky-400 font-mono"
+            className="bg-slate-950 border-2 border-slate-700 text-slate-100 font-extrabold text-xs rounded-xl px-4 py-2.5 focus:outline-none focus:border-sky-400 font-mono cursor-pointer"
           >
-            <option value="ALL">All Categories</option>
-            <option value="healthcare">Healthcare</option>
-            <option value="water">Clean Water</option>
-            <option value="electricity">Electricity</option>
-            <option value="transportation">Transportation</option>
-            <option value="sanitation">Sanitation</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="ALL">All Categories</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="healthcare">Healthcare</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="water">Clean Water</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="electricity">Electricity</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="transportation">Transportation</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="sanitation">Sanitation</option>
           </select>
         </div>
       </div>

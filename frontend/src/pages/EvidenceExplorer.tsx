@@ -43,11 +43,11 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
           <select
             value={selectedRegion}
             onChange={(e) => setSelectedRegion(e.target.value)}
-            className="bg-slate-950 border border-slate-700 text-slate-100 font-bold text-xs rounded-lg px-3.5 py-2 focus:outline-none focus:border-sky-400 font-mono"
+            className="bg-slate-950 border-2 border-slate-700 text-slate-100 font-extrabold text-xs rounded-xl px-4 py-2.5 focus:outline-none focus:border-sky-400 font-mono cursor-pointer"
           >
-            <option value="ALL">All Regions</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="ALL">All Regions</option>
             {regions.map((r) => (
-              <option key={r.id} value={r.id}>
+              <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" key={r.id} value={r.id}>
                 {r.district_city}, {r.country_code}
               </option>
             ))}
@@ -56,14 +56,14 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
           <select
             value={selectedType}
             onChange={(e) => setSelectedType(e.target.value)}
-            className="bg-slate-950 border border-slate-700 text-slate-100 font-bold text-xs rounded-lg px-3.5 py-2 focus:outline-none focus:border-sky-400 font-mono"
+            className="bg-slate-950 border-2 border-slate-700 text-slate-100 font-extrabold text-xs rounded-xl px-4 py-2.5 focus:outline-none focus:border-sky-400 font-mono cursor-pointer"
           >
-            <option value="ALL">All Evidence Types</option>
-            <option value="citizen_demand">Citizen Demand</option>
-            <option value="demand_momentum">Demand Momentum</option>
-            <option value="infrastructure_gap">Infrastructure Gap</option>
-            <option value="demographic_need">Demographic Need</option>
-            <option value="investment_context">Investment Context</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="ALL">All Evidence Types</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="citizen_demand">Citizen Demand</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="demand_momentum">Demand Momentum</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="infrastructure_gap">Infrastructure Gap</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="demographic_need">Demographic Need</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="investment_context">Investment Context</option>
           </select>
         </div>
       </div>

@@ -51,64 +51,64 @@ export const WhatIfScenario: React.FC<WhatIfScenarioProps> = ({ regions }) => {
     <div className="space-y-8 animate-in fade-in duration-300">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5">
         <div>
-          <div className="flex items-center gap-2">
-            <TestTube2 className="w-6 h-6 text-violet-400" />
-            <h1 className="text-2xl font-bold text-slate-100 tracking-tight font-mono">
+          <div className="flex items-center gap-2.5">
+            <TestTube2 className="w-7 h-7 text-violet-400" />
+            <h1 className="text-2xl md:text-3xl font-extrabold text-slate-100 tracking-tight font-mono">
               Scenario Lab & Counterfactual Policy Simulator
             </h1>
           </div>
-          <p className="text-sm text-slate-300 mt-1 font-sans font-medium">
+          <p className="text-sm text-slate-200 mt-1 font-sans font-semibold">
             Simulate how hypothetical capital allocations affect municipal deficit gap scores, priority levels, and citizen beneficiaries.
           </p>
         </div>
 
-        <div className="px-3.5 py-1.5 rounded-lg bg-amber-950 border border-amber-600 text-xs font-mono font-bold text-amber-200 shadow-sm">
+        <div className="px-4 py-2 rounded-xl bg-amber-950 border-2 border-amber-600 text-xs font-mono font-extrabold text-amber-200 shadow-md">
           Scenario estimate — not a government forecast
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-6 shadow-lg">
-          <div className="flex items-center gap-2 text-sm font-extrabold text-slate-100 font-mono">
-            <Sparkles className="w-4 h-4 text-violet-400" />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="p-7 md:p-8 rounded-2xl bg-slate-900 border-2 border-slate-800 space-y-7 shadow-xl">
+          <div className="flex items-center gap-2.5 text-base font-extrabold text-slate-100 font-mono border-b border-slate-800 pb-3">
+            <Sparkles className="w-5 h-5 text-violet-400" />
             <span>Configure Policy Intervention</span>
           </div>
 
-          <div className="space-y-2">
-            <label className="text-xs font-mono font-bold text-slate-300">Target Region:</label>
+          <div className="space-y-2.5">
+            <label className="text-xs font-mono font-extrabold text-slate-200 uppercase tracking-wider">Target Region:</label>
             <select
               value={selectedRegionId}
               onChange={(e) => setSelectedRegionId(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-700 text-slate-100 font-bold text-xs rounded-lg p-3 focus:outline-none focus:border-violet-400 font-mono"
+              className="w-full bg-slate-950 border-2 border-slate-700 text-slate-100 font-extrabold text-sm rounded-xl p-3.5 focus:outline-none focus:border-violet-400 font-mono shadow-sm cursor-pointer"
             >
               {regions.map((r) => (
-                <option key={r.id} value={r.id}>
+                <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" key={r.id} value={r.id}>
                   {r.district_city}, {r.country} ({r.population.toLocaleString()} pop)
                 </option>
               ))}
             </select>
           </div>
 
-          <div className="space-y-2">
-            <label className="text-xs font-mono font-bold text-slate-300">Infrastructure Sector:</label>
+          <div className="space-y-2.5">
+            <label className="text-xs font-mono font-extrabold text-slate-200 uppercase tracking-wider">Infrastructure Sector:</label>
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-700 text-slate-100 font-bold text-xs rounded-lg p-3 focus:outline-none focus:border-violet-400 font-mono"
+              className="w-full bg-slate-950 border-2 border-slate-700 text-slate-100 font-extrabold text-sm rounded-xl p-3.5 focus:outline-none focus:border-violet-400 font-mono shadow-sm cursor-pointer"
             >
-              <option value="healthcare">Healthcare</option>
-              <option value="water">Clean Water</option>
-              <option value="electricity">Electricity</option>
-              <option value="transportation">Transportation</option>
-              <option value="digital_connectivity">Digital Connectivity</option>
-              <option value="sanitation">Sanitation</option>
+              <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="healthcare">Healthcare</option>
+              <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="water">Clean Water</option>
+              <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="electricity">Electricity</option>
+              <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="transportation">Transportation</option>
+              <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="digital_connectivity">Digital Connectivity</option>
+              <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="sanitation">Sanitation</option>
             </select>
           </div>
 
-          <div className="space-y-3">
-            <div className="flex justify-between text-xs font-mono font-bold">
-              <span className="text-slate-300">Capital Investment Budget:</span>
-              <span className="text-emerald-400 font-extrabold text-sm">${budgetUsd.toLocaleString()} USD</span>
+          <div className="space-y-3.5">
+            <div className="flex justify-between text-xs font-mono font-extrabold">
+              <span className="text-slate-200 text-sm">Capital Investment Budget:</span>
+              <span className="text-emerald-400 font-extrabold text-base">${budgetUsd.toLocaleString()} USD</span>
             </div>
             <input
               type="range"
@@ -117,19 +117,19 @@ export const WhatIfScenario: React.FC<WhatIfScenarioProps> = ({ regions }) => {
               step={1000000}
               value={budgetUsd}
               onChange={(e) => setBudgetUsd(Number(e.target.value))}
-              className="w-full h-2.5 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-violet-400 border border-slate-700"
+              className="w-full h-3 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-violet-400 border-2 border-slate-700"
             />
-            <div className="flex justify-between text-xs text-slate-300 font-mono font-bold">
+            <div className="flex justify-between text-xs text-slate-200 font-mono font-extrabold">
               <span>$1M USD</span>
               <span>$25M USD</span>
               <span>$50M USD</span>
             </div>
           </div>
 
-          <div className="space-y-3">
-            <div className="flex justify-between text-xs font-mono font-bold">
-              <span className="text-slate-300">Target Sector Coverage Addition:</span>
-              <span className="text-sky-400 font-extrabold text-sm">+{targetCoveragePct}%</span>
+          <div className="space-y-3.5">
+            <div className="flex justify-between text-xs font-mono font-extrabold">
+              <span className="text-slate-200 text-sm">Target Sector Coverage Addition:</span>
+              <span className="text-sky-300 font-extrabold text-base">+{targetCoveragePct}%</span>
             </div>
             <input
               type="range"
@@ -138,81 +138,81 @@ export const WhatIfScenario: React.FC<WhatIfScenarioProps> = ({ regions }) => {
               step={5}
               value={targetCoveragePct}
               onChange={(e) => setTargetCoveragePct(Number(e.target.value))}
-              className="w-full h-2.5 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-violet-400 border border-slate-700"
+              className="w-full h-3 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-violet-400 border-2 border-slate-700"
             />
           </div>
 
           <button
             onClick={handleSimulate}
             disabled={loading}
-            className="w-full py-3.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-bold text-xs transition flex items-center justify-center gap-2 shadow-lg shadow-violet-950/60 disabled:opacity-50"
+            className="w-full py-4 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-extrabold text-sm transition flex items-center justify-center gap-2.5 shadow-xl shadow-violet-950/60 disabled:opacity-50"
           >
             {loading ? (
               <span>Executing Simulation Engine...</span>
             ) : (
               <>
-                <TestTube2 className="w-4 h-4" />
+                <TestTube2 className="w-5 h-5" />
                 <span>Execute Counterfactual Simulation</span>
               </>
             )}
           </button>
         </div>
 
-        <div className="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-6 flex flex-col justify-between shadow-lg">
+        <div className="p-7 md:p-8 rounded-2xl bg-slate-900 border-2 border-slate-800 space-y-7 flex flex-col justify-between shadow-xl">
           <div>
-            <div className="flex items-center gap-2 text-sm font-bold text-slate-100 font-mono mb-4">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            <div className="flex items-center gap-2.5 text-base font-extrabold text-slate-100 font-mono border-b border-slate-800 pb-3 mb-6">
+              <CheckCircle2 className="w-5 h-5 text-emerald-400" />
               <span>Simulated Intervention Impact</span>
             </div>
 
             {result ? (
               <div className="space-y-6">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="p-5 rounded-xl bg-slate-950 border border-slate-800 space-y-1 shadow-md">
-                    <span className="text-xs font-mono font-bold text-slate-400 uppercase">Original Priority Score</span>
-                    <div className="text-2xl font-extrabold font-mono text-rose-400">
+                <div className="grid grid-cols-2 gap-5">
+                  <div className="p-6 rounded-2xl bg-slate-950 border-2 border-slate-800 space-y-1.5 shadow-md">
+                    <span className="text-xs font-mono font-extrabold text-slate-300 uppercase tracking-wider">Original Priority Score</span>
+                    <div className="text-3xl font-extrabold font-mono text-rose-400">
                       {result.original_priority_score.toFixed(1)} / 100
                     </div>
-                    <span className="text-xs font-mono font-bold text-rose-300">Baseline Score</span>
+                    <span className="text-xs font-mono font-extrabold text-rose-300">Baseline Score</span>
                   </div>
 
-                  <div className="p-5 rounded-xl bg-slate-950 border border-emerald-700 space-y-1 shadow-md">
-                    <span className="text-xs font-mono font-bold text-slate-400 uppercase">Simulated Priority Score</span>
-                    <div className="text-2xl font-extrabold font-mono text-emerald-400">
+                  <div className="p-6 rounded-2xl bg-slate-950 border-2 border-emerald-600 space-y-1.5 shadow-md">
+                    <span className="text-xs font-mono font-extrabold text-slate-300 uppercase tracking-wider">Simulated Priority Score</span>
+                    <div className="text-3xl font-extrabold font-mono text-emerald-400">
                       {result.simulated_priority_score.toFixed(1)} / 100
                     </div>
-                    <span className="text-xs font-mono font-bold text-emerald-300">
+                    <span className="text-xs font-mono font-extrabold text-emerald-300">
                       Delta: {result.score_delta > 0 ? `+${result.score_delta}` : result.score_delta} pts
                     </span>
                   </div>
                 </div>
 
-                <div className="space-y-3 font-mono text-xs font-bold">
-                  <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 flex justify-between items-center">
-                    <span className="text-slate-300">Projected Capacity Deficit:</span>
-                    <span className="font-extrabold text-emerald-400 text-sm">{result.projected_gap_score.toFixed(2)} Score</span>
+                <div className="space-y-3.5 font-mono text-xs font-extrabold">
+                  <div className="p-5 rounded-2xl bg-slate-950 border-2 border-slate-800 flex justify-between items-center">
+                    <span className="text-slate-200 text-sm">Projected Capacity Deficit:</span>
+                    <span className="font-extrabold text-emerald-400 text-base">{result.projected_gap_score.toFixed(2)} Score</span>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 flex justify-between items-center">
-                    <span className="text-slate-300">Estimated Citizen Beneficiaries:</span>
-                    <span className="font-extrabold text-sky-400 text-sm">~{result.expected_population_beneficiaries.toLocaleString()} Residents</span>
+                  <div className="p-5 rounded-2xl bg-slate-950 border-2 border-slate-800 flex justify-between items-center">
+                    <span className="text-slate-300 text-sm">Estimated Citizen Beneficiaries:</span>
+                    <span className="font-extrabold text-sky-300 text-base">~{result.expected_population_beneficiaries.toLocaleString()} Residents</span>
                   </div>
                 </div>
 
-                <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs font-semibold text-slate-100 leading-relaxed">
+                <div className="p-5 rounded-2xl bg-slate-950 border-2 border-slate-800 text-sm font-bold text-slate-100 leading-relaxed">
                   "{result.simulation_notes}"
                 </div>
               </div>
             ) : (
-              <div className="py-16 text-center text-xs text-slate-300 font-bold space-y-2">
-                <TestTube2 className="w-8 h-8 text-slate-600 mx-auto" />
-                <p>Click "Execute Counterfactual Simulation" to calculate project impact.</p>
+              <div className="py-20 text-center text-sm text-slate-200 font-bold space-y-3">
+                <TestTube2 className="w-10 h-10 text-slate-500 mx-auto" />
+                <p className="text-base font-extrabold text-slate-200">Click "Execute Counterfactual Simulation" to calculate project impact.</p>
               </div>
             )}
           </div>
 
-          <div className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 font-mono font-bold flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-sky-400 shrink-0" />
+          <div className="p-4 rounded-xl bg-slate-950 border-2 border-slate-800 text-xs text-slate-200 font-mono font-extrabold flex items-center gap-2.5">
+            <ShieldCheck className="w-5 h-5 text-sky-400 shrink-0" />
             <span>Simulations are executed statelessly against backend priority formula.</span>
           </div>
         </div>

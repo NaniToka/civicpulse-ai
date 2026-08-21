@@ -11,6 +11,20 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold text-slate-100 tracking-tight;
   }
+
+  select {
+    font-weight: 800 !important;
+    color: #f8fafc !important;
+    background-color: #020617 !important;
+  }
+
+  option {
+    font-weight: 800 !important;
+    color: #f1f5f9 !important;
+    background-color: #0f172a !important;
+    padding: 10px 14px !important;
+    font-size: 14px !important;
+  }
 }
 
 /* Custom scrollbars */

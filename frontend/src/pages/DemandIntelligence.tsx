@@ -83,24 +83,24 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           <div className="relative col-span-1 sm:col-span-2 lg:col-span-1">
-            <Search className="w-4 h-4 absolute left-3 top-3 text-slate-400" />
+            <Search className="w-4 h-4 absolute left-3.5 top-3.5 text-slate-400" />
             <input
               type="text"
               placeholder="Search citizen feedback..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 bg-slate-950 border border-slate-700 rounded-lg text-xs font-semibold text-slate-100 placeholder-slate-400 focus:outline-none focus:border-sky-400"
+              className="w-full pl-10 pr-3.5 py-2.5 bg-slate-950 border-2 border-slate-700 rounded-xl text-xs font-extrabold text-slate-100 placeholder-slate-400 focus:outline-none focus:border-sky-400"
             />
           </div>
 
           <select
             value={selectedRegion}
             onChange={(e) => setSelectedRegion(e.target.value)}
-            className="bg-slate-950 border border-slate-700 text-slate-100 font-bold text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-sky-400 font-mono"
+            className="bg-slate-950 border-2 border-slate-700 text-slate-100 font-extrabold text-xs rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-sky-400 font-mono cursor-pointer"
           >
-            <option value="ALL">All Regions ({regions.length})</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="ALL">All Regions ({regions.length})</option>
             {regions.map((r) => (
-              <option key={r.id} value={r.id}>
+              <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" key={r.id} value={r.id}>
                 {r.district_city}, {r.country_code}
               </option>
             ))}
@@ -109,42 +109,42 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="bg-slate-950 border border-slate-700 text-slate-100 font-bold text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-sky-400 font-mono"
+            className="bg-slate-950 border-2 border-slate-700 text-slate-100 font-extrabold text-xs rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-sky-400 font-mono cursor-pointer"
           >
-            <option value="ALL">All Categories</option>
-            <option value="healthcare">Healthcare</option>
-            <option value="water">Clean Water</option>
-            <option value="electricity">Electricity</option>
-            <option value="transportation">Transportation</option>
-            <option value="digital_connectivity">Digital Connectivity</option>
-            <option value="sanitation">Sanitation</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="ALL">All Categories</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="healthcare">Healthcare</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="water">Clean Water</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="electricity">Electricity</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="transportation">Transportation</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="digital_connectivity">Digital Connectivity</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="sanitation">Sanitation</option>
           </select>
 
           <select
             value={selectedLanguage}
             onChange={(e) => setSelectedLanguage(e.target.value)}
-            className="bg-slate-950 border border-slate-700 text-slate-100 font-bold text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-sky-400 font-mono"
+            className="bg-slate-950 border-2 border-slate-700 text-slate-100 font-extrabold text-xs rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-sky-400 font-mono cursor-pointer"
           >
-            <option value="ALL">All Languages</option>
-            <option value="te">Telugu (te)</option>
-            <option value="hi">Hindi (hi)</option>
-            <option value="mr">Marathi (mr)</option>
-            <option value="pt">Portuguese (pt)</option>
-            <option value="zu">Zulu (zu)</option>
-            <option value="bn">Bengali (bn)</option>
-            <option value="en">English (en)</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="ALL">All Languages</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="te">Telugu (te)</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="hi">Hindi (hi)</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="mr">Marathi (mr)</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="pt">Portuguese (pt)</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="zu">Zulu (zu)</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="bn">Bengali (bn)</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="en">English (en)</option>
           </select>
 
           <select
             value={selectedUrgency}
             onChange={(e) => setSelectedUrgency(e.target.value)}
-            className="bg-slate-950 border border-slate-700 text-slate-100 font-bold text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-sky-400 font-mono"
+            className="bg-slate-950 border-2 border-slate-700 text-slate-100 font-extrabold text-xs rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-sky-400 font-mono cursor-pointer"
           >
-            <option value="ALL">All Urgency Levels</option>
-            <option value="CRITICAL">CRITICAL</option>
-            <option value="HIGH">HIGH</option>
-            <option value="MEDIUM">MEDIUM</option>
-            <option value="LOW">LOW</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="ALL">All Urgency Levels</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="CRITICAL">CRITICAL</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="HIGH">HIGH</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="MEDIUM">MEDIUM</option>
+            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="LOW">LOW</option>
           </select>
         </div>
       </div>
