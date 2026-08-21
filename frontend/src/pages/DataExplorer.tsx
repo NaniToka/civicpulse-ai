@@ -3,6 +3,7 @@ import { Database, Plus, CheckCircle2, ShieldAlert, MapPin, ArrowRight } from 'l
 import { CitizenRequest, InfrastructureIndicator, InvestmentProject, Region } from '../types';
 import { api } from '../services/api';
 import { RegionDetailModal } from '../components/common/RegionDetailModal';
+import { ThreeDBarChart } from '../components/common/ThreeDBarChart';
 
 interface DataExplorerProps {
   requests: CitizenRequest[];
@@ -388,6 +389,9 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
           </form>
         )}
       </div>
+
+      {/* 3D Animated Dataset Volume & Coverage Graph at the end */}
+      <ThreeDBarChart />
 
       <RegionDetailModal
         region={activeDetailRegion}
