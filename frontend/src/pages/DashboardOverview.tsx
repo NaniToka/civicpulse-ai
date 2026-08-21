@@ -150,43 +150,42 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
               </span>
             </div>
           </div>
-
           {/* Quick Launcher Pills */}
-          <div className="flex flex-wrap items-center gap-3 shrink-0">
+          <div className="grid grid-cols-2 lg:flex items-center gap-2.5 sm:gap-3 shrink-0 w-full sm:w-auto">
             <button
               onClick={() => onNavigate('feedback')}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white font-extrabold text-xs transition shadow-lg glow-cyan hover:scale-105 cursor-pointer"
+              className="flex items-center justify-center gap-2 px-3.5 sm:px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white font-extrabold text-xs transition shadow-lg glow-cyan hover:scale-105 cursor-pointer text-center"
             >
-              <MessageSquare className="w-4 h-4 text-emerald-300" />
-              <span>Citizen Comments Wall 🎉</span>
+              <MessageSquare className="w-4 h-4 text-emerald-300 shrink-0" />
+              <span className="truncate">Citizen Feedback 🎉</span>
             </button>
             <button
               onClick={() => onNavigate('demand')}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-extrabold text-xs transition shadow-lg shadow-cyan-950/80 glow-cyan hover:scale-105 cursor-pointer"
+              className="flex items-center justify-center gap-2 px-3.5 sm:px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-extrabold text-xs transition shadow-lg shadow-cyan-950/80 glow-cyan hover:scale-105 cursor-pointer text-center"
             >
-              <Globe2 className="w-4 h-4" />
-              <span>Multilingual Voice Feed</span>
+              <Globe2 className="w-4 h-4 shrink-0" />
+              <span className="truncate">Voice Feed</span>
             </button>
             <button
               onClick={() => onNavigate('scenarios')}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-indigo-200 border border-indigo-700/60 transition text-xs font-bold shadow-md"
+              className="flex items-center justify-center gap-2 px-3.5 sm:px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-indigo-200 border border-indigo-700/60 transition text-xs font-bold shadow-md cursor-pointer text-center"
             >
-              <Sparkles className="w-4 h-4 text-indigo-400" />
-              <span>Scenario Lab</span>
+              <Sparkles className="w-4 h-4 text-indigo-400 shrink-0" />
+              <span className="truncate">Scenario Lab</span>
             </button>
             <button
               onClick={() => onNavigate('hotspots')}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-emerald-300 border border-emerald-800/60 transition text-xs font-bold shadow-md"
+              className="flex items-center justify-center gap-2 px-3.5 sm:px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-emerald-300 border border-emerald-800/60 transition text-xs font-bold shadow-md cursor-pointer text-center"
             >
-              <Activity className="w-4 h-4 text-emerald-400" />
-              <span>Hotspot Matrix</span>
+              <Activity className="w-4 h-4 text-emerald-400 shrink-0" />
+              <span className="truncate">Hotspots</span>
             </button>
           </div>
         </div>
       </div>
 
-      {/* 2. Executive KPI Visual Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* 2. Top Executive Metric Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
         {/* Card 1: Citizen Signals */}
         <div className="p-5 rounded-2xl glass-card hover:glow-cyan group relative overflow-hidden">
           <div className="flex items-center justify-between">
@@ -197,8 +196,8 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
               <Users className="w-4 h-4" />
             </div>
           </div>
-          <div className="mt-4 space-y-1">
-            <div className="text-3xl font-extrabold text-slate-100 font-mono tracking-tight">
+          <div className="mt-3 space-y-1">
+            <div className="text-2xl sm:text-3xl font-extrabold text-slate-100 font-mono tracking-tight">
               {totalRequests > 100 ? totalRequests.toLocaleString() : '24,680'}
             </div>
             <div className="flex items-center gap-1.5 text-xs text-emerald-400 font-mono font-bold pt-1">

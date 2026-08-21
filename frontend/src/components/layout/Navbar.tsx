@@ -91,13 +91,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette, activeTab 
 
       {/* Mobile Navigation Full-Screen Overlay Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-x-0 top-16 bottom-0 bg-[#070b14]/98 backdrop-blur-2xl z-50 p-5 space-y-4 overflow-y-auto animate-in slide-in-from-top-4 duration-200 border-b border-slate-800">
+        <div className="md:hidden fixed inset-0 top-16 bg-[#070b14] z-50 p-5 space-y-4 overflow-y-auto border-b border-slate-800">
           <div className="flex items-center justify-between border-b border-slate-800 pb-3">
             <span className="text-xs font-mono font-extrabold text-cyan-400 uppercase tracking-widest flex items-center gap-2">
               <Compass className="w-4 h-4" />
               <span>Civic Navigation Menu</span>
             </span>
-            <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800">
+            <span className="text-[10px] font-mono font-extrabold text-emerald-400 bg-emerald-950 px-2.5 py-0.5 rounded-full border border-emerald-800">
               35 Districts Active
             </span>
           </div>
@@ -109,10 +109,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette, activeTab 
                 <button
                   key={item.id}
                   onClick={() => handleSelectTab(item.id)}
-                  className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-xl text-xs font-bold font-mono transition-all text-left ${
+                  className={`w-full flex items-center gap-3.5 px-4 py-3.5 rounded-xl text-xs font-bold font-mono transition-all text-left cursor-pointer ${
                     isActive
-                      ? 'bg-cyan-950 text-cyan-200 border border-cyan-500 shadow-lg glow-cyan'
-                      : 'bg-slate-900/80 text-slate-300 hover:bg-slate-800 hover:text-white border border-slate-800'
+                      ? 'bg-cyan-950 text-cyan-200 border-2 border-cyan-500 shadow-lg glow-cyan'
+                      : 'bg-slate-900 text-slate-300 hover:bg-slate-800 hover:text-white border border-slate-800'
                   }`}
                 >
                   <span className={isActive ? 'text-cyan-400' : 'text-slate-400'}>{item.icon}</span>
