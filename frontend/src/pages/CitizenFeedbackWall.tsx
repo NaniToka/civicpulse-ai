@@ -241,9 +241,17 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
             <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-100 font-sans">
               Indian States <span className="gradient-text-cyan">Citizen Comments & Ratings</span>
             </h1>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-medium">
-              Real-world citizen feedback from across Indian states & districts including positive praise 🎉, critical infrastructure alerts 🚨, and constructive suggestions with rich emoji reactions.
-            </p>
+            <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-[11px]">
+              <span className="px-3 py-1 rounded-full bg-emerald-950/90 border border-emerald-700/80 text-emerald-300 font-bold flex items-center gap-1">
+                <span>Positive Praise 🎉</span>
+              </span>
+              <span className="px-3 py-1 rounded-full bg-rose-950/90 border border-rose-700/80 text-rose-300 font-bold flex items-center gap-1">
+                <span>Critical Alerts 🚨</span>
+              </span>
+              <span className="px-3 py-1 rounded-full bg-indigo-950/90 border border-indigo-700/80 text-indigo-300 font-bold flex items-center gap-1">
+                <span>Rich Emojis & Ratings ⭐️</span>
+              </span>
+            </div>
           </div>
 
           <button

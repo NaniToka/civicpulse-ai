@@ -36,9 +36,17 @@ export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicato
           <h1 className="text-2xl md:text-3xl font-extrabold text-slate-100 tracking-tight font-sans">
             Infrastructure Deficit & Gap <span className="gradient-text-cyan">Intelligence</span>
           </h1>
-          <p className="text-xs md:text-sm text-slate-300 font-sans font-medium max-w-2xl">
-            Evaluating municipal operational capacity deficits against census population demand across 6 core sectors.
-          </p>
+          <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-[11px]">
+            <span className="px-3 py-1 rounded-full bg-cyan-950/90 border border-cyan-700/80 text-cyan-300 font-bold">
+              6 Core Sectors
+            </span>
+            <span className="px-3 py-1 rounded-full bg-indigo-950/90 border border-indigo-700/80 text-indigo-300 font-bold">
+              Municipal Capacity Deficits
+            </span>
+            <span className="px-3 py-1 rounded-full bg-emerald-950/90 border border-emerald-700/80 text-emerald-300 font-bold">
+              Census Population Demand
+            </span>
+          </div>
         </div>
       </div>
 

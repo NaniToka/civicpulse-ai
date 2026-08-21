@@ -34,9 +34,17 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
               Civic Evidence Explorer
             </h1>
           </div>
-          <p className="text-sm text-slate-300 mt-1 font-sans font-medium">
-            Explore granular evidence nodes, data sources, statistical confidence scores, and 6-step recommendation chains.
-          </p>
+          <div className="flex flex-wrap items-center gap-2 mt-2 font-mono text-[11px]">
+            <span className="px-3 py-1 rounded-full bg-indigo-950/90 border border-indigo-700/80 text-indigo-300 font-bold">
+              6-Step Evidence Nodes
+            </span>
+            <span className="px-3 py-1 rounded-full bg-cyan-950/90 border border-cyan-700/80 text-cyan-300 font-bold">
+              Statistical Confidence Scores
+            </span>
+            <span className="px-3 py-1 rounded-full bg-emerald-950/90 border border-emerald-700/80 text-emerald-300 font-bold">
+              Traceable Policymaker Audit
+            </span>
+          </div>
         </div>
 
         <div className="flex items-center gap-3">

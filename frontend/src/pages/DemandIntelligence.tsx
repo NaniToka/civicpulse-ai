@@ -86,9 +86,17 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
           <h1 className="text-2xl md:text-3xl font-extrabold text-slate-100 font-sans tracking-tight">
             Citizen Demand <span className="gradient-text-cyan">Intelligence Studio</span>
           </h1>
-          <p className="text-xs md:text-sm text-slate-300 leading-relaxed font-medium">
-            Capture multilingual citizen feedback, execute instant NLP script classification, and track emerging 30-day temporal demand velocity trends across BRICS municipal districts.
-          </p>
+          <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-[11px]">
+            <span className="px-3 py-1 rounded-full bg-cyan-950/90 border border-cyan-700/80 text-cyan-300 font-bold">
+              Instant AI NLP Pipeline
+            </span>
+            <span className="px-3 py-1 rounded-full bg-indigo-950/90 border border-indigo-700/80 text-indigo-300 font-bold">
+              7 Native Languages
+            </span>
+            <span className="px-3 py-1 rounded-full bg-emerald-950/90 border border-emerald-700/80 text-emerald-300 font-bold">
+              30-Day Velocity Trends
+            </span>
+          </div>
         </div>
 
         <div className="flex items-center gap-3 shrink-0">

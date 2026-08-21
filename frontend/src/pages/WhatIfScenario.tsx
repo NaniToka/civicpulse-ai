@@ -60,9 +60,17 @@ export const WhatIfScenario: React.FC<WhatIfScenarioProps> = ({ regions }) => {
               Scenario Lab & <span className="gradient-text-cyan">Counterfactual Policy Simulator</span>
             </h1>
           </div>
-          <p className="text-xs md:text-sm text-slate-300 mt-1 font-sans font-medium max-w-2xl">
-            Simulate how hypothetical capital allocations affect municipal deficit gap scores, priority levels, and citizen beneficiaries.
-          </p>
+          <div className="flex flex-wrap items-center gap-2 mt-2 font-mono text-[11px]">
+            <span className="px-3 py-1 rounded-full bg-cyan-950/90 border border-cyan-700/80 text-cyan-300 font-bold">
+              Counterfactual Simulation
+            </span>
+            <span className="px-3 py-1 rounded-full bg-indigo-950/90 border border-indigo-700/80 text-indigo-300 font-bold">
+              Capital Budget Allocation ($)
+            </span>
+            <span className="px-3 py-1 rounded-full bg-emerald-950/90 border border-emerald-700/80 text-emerald-300 font-bold">
+              Impacted Beneficiary Count
+            </span>
+          </div>
         </div>
 
         <div className="px-4 py-2 rounded-xl bg-amber-950/80 border border-amber-600/80 text-xs font-mono font-bold text-amber-200 shadow-md">

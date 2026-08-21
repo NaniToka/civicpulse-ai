@@ -70,9 +70,17 @@ export const RecommendationsView: React.FC<RecommendationsViewProps> = ({
               Priority <span className="gradient-text-cyan">Recommendations</span>
             </h1>
           </div>
-          <p className="text-xs md:text-sm text-slate-300 mt-1 font-sans font-medium max-w-2xl">
-            Evidence-backed capital infrastructure recommendations generated from citizen signals, deficit indices, and capital alignment.
-          </p>
+          <div className="flex flex-wrap items-center gap-2 mt-2 font-mono text-[11px]">
+            <span className="px-3 py-1 rounded-full bg-cyan-950/90 border border-cyan-700/80 text-cyan-300 font-bold">
+              8-Factor Formula
+            </span>
+            <span className="px-3 py-1 rounded-full bg-indigo-950/90 border border-indigo-700/80 text-indigo-300 font-bold">
+              Capital Alignment Risk
+            </span>
+            <span className="px-3 py-1 rounded-full bg-emerald-950/90 border border-emerald-700/80 text-emerald-300 font-bold">
+              Ranked Priority Score
+            </span>
+          </div>
         </div>
 
         {/* Filter Controls & Enter Region Details Action */}

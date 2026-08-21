@@ -62,9 +62,17 @@ export const HotspotExplorer: React.FC<HotspotExplorerProps> = ({
               Per-Capita Demand <span className="gradient-text-cyan">Hotspots</span>
             </h1>
           </div>
-          <p className="text-xs md:text-sm text-slate-300 mt-1 font-sans font-medium max-w-2xl">
-            Detecting demand hotspots by normalizing citizen signals against regional population (per 100,000 residents) and capacity gaps.
-          </p>
+          <div className="flex flex-wrap items-center gap-2 mt-2 font-mono text-[11px]">
+            <span className="px-3 py-1 rounded-full bg-amber-950/90 border border-amber-700/80 text-amber-300 font-bold">
+              100,000 Per-Capita Baseline
+            </span>
+            <span className="px-3 py-1 rounded-full bg-cyan-950/90 border border-cyan-700/80 text-cyan-300 font-bold">
+              Demographic Vulnerability Weight
+            </span>
+            <span className="px-3 py-1 rounded-full bg-rose-950/90 border border-rose-700/80 text-rose-300 font-bold">
+              Capacity Deficit Score
+            </span>
+          </div>
         </div>
 
         <div className="flex items-center gap-3">
