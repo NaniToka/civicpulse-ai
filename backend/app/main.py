@@ -52,6 +52,18 @@ app.add_middleware(
 app.include_router(api_router)
 
 
+@app.get("/", tags=["Root"])
+async def root():
+    """Root Endpoint returning service status and health check reference."""
+    return {
+        "service": "CivicPulse AI",
+        "status": "online",
+        "version": settings.VERSION,
+        "message": "Civic Intelligence API is running.",
+        "health": "/api/v1/health",
+    }
+
+
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
     """Global Exception Handler returning clean, production-safe JSON error payloads without stack traces."""
@@ -70,4 +82,4 @@ async def global_exception_handler(request: Request, exc: Exception):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("app.main:app", host=settings.BACKEND_HOST, port=settings.BACKEND_PORT, reload=True)
+    uvicorn.run("app.main:app", host=settings.BACKEND_HOST, port=settings.effective_port, reload=True)

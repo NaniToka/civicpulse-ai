@@ -9,7 +9,8 @@ class Settings(BaseSettings):
     # Server Settings
     BACKEND_HOST: str = "0.0.0.0"
     BACKEND_PORT: int = 8000
-    ALLOWED_CORS_ORIGINS: str = "http://localhost:5173,http://127.0.0.1:5173,http://localhost:3000,http://localhost:80,http://localhost"
+    PORT: int | None = None
+    ALLOWED_CORS_ORIGINS: str = "http://localhost:5173,http://127.0.0.1:5173,http://localhost:3000,http://localhost:80,http://localhost,https://civicpulse-ai-frontend.onrender.com"
 
     # Security
     SECRET_KEY: str = "dev-secret-key-change-in-production-civicpulse-ai-2026"
@@ -29,8 +30,19 @@ class Settings(BaseSettings):
     )
 
     @property
+    def effective_port(self) -> int:
+        return self.PORT if self.PORT is not None else self.BACKEND_PORT
+
+    @property
     def cors_origins_list(self) -> list[str]:
-        return [origin.strip() for origin in self.ALLOWED_CORS_ORIGINS.split(",") if origin.strip()]
+        raw_origins = [origin.strip().rstrip("/") for origin in self.ALLOWED_CORS_ORIGINS.split(",") if origin.strip()]
+        seen = set()
+        result = []
+        for o in raw_origins:
+            if o not in seen:
+                seen.add(o)
+                result.append(o)
+        return result
 
 
 settings = Settings()
