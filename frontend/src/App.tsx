@@ -118,7 +118,9 @@ export const App: React.FC = () => {
               {activeTab === 'recommendations' && (
                 <RecommendationsView
                   recommendations={recommendations}
+                  regions={regions}
                   onOpenEvidenceModal={(rec) => setSelectedModalRec(rec)}
+                  onNavigateToScenarios={() => setActiveTab('scenarios')}
                 />
               )}
 
