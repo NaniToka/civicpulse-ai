@@ -135,9 +135,20 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
               CivicPulse <span className="gradient-text-cyan">Executive Decision Intelligence</span>
             </h1>
 
-            <p className="text-xs md:text-sm text-slate-300 leading-relaxed max-w-2xl font-medium">
-              Structuring multilingual citizen feedback across 35 Indian districts into per-capita demand density hotspots, cross-referencing demographic census vulnerability & capacity deficit indices to generate traceable 6-step evidence trails for policymakers.
-            </p>
+            <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-[11px]">
+              <span className="px-3 py-1 rounded-full bg-cyan-950/90 border border-cyan-700/80 text-cyan-300 font-bold flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                7 Native Indian Languages
+              </span>
+              <span className="px-3 py-1 rounded-full bg-indigo-950/90 border border-indigo-700/80 text-indigo-300 font-bold flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
+                Per-Capita 100k Density
+              </span>
+              <span className="px-3 py-1 rounded-full bg-emerald-950/90 border border-emerald-700/80 text-emerald-300 font-bold flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                Traceable 6-Step Evidence Trail
+              </span>
+            </div>
           </div>
 
           {/* Quick Launcher Pills */}

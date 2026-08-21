@@ -72,9 +72,17 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
               Synthetic Demonstration <span className="gradient-text-cyan">Datasets</span>
             </h1>
           </div>
-          <p className="text-xs md:text-sm text-slate-300 mt-1 font-sans font-medium max-w-2xl">
-            Inspect the underlying datasets, census demographics, and test live multilingual citizen signal ingestion.
-          </p>
+          <div className="flex flex-wrap items-center gap-2 mt-2 font-mono text-[11px]">
+            <span className="px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-700/80 text-cyan-300 font-bold">
+              35 Indian Districts
+            </span>
+            <span className="px-3 py-1 rounded-full bg-indigo-950/80 border border-indigo-700/80 text-indigo-300 font-bold">
+              100% Demographic Census
+            </span>
+            <span className="px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-700/80 text-emerald-300 font-bold">
+              210 Deficit Indicators
+            </span>
+          </div>
         </div>
 
         <div className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-amber-950/80 border border-amber-600/80 text-xs font-mono font-bold text-amber-200 shadow-md">
