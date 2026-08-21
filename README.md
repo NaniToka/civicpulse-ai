@@ -1,7 +1,6 @@
 # CivicPulse AI
 
-> **AI-Powered Civic Decision Intelligence Platform**  
-> *Track 1 — AI for Digital Public Infrastructure & Governance (BRICS Nations)*
+> **An open-source civic decision intelligence layer that transforms multilingual citizen voices into traceable, evidence-backed civic investment priorities.**
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/NaniToka/civicpulse-ai)
 [![Tests](https://img.shields.io/badge/pytest-37%20passed-success)](https://github.com/NaniToka/civicpulse-ai)
@@ -12,19 +11,60 @@
 
 ---
 
-## 📌 The Governance Problem
+## 📌 Problem Statement
 
-Governments across developing economies and BRICS nations process millions of fragmented citizen feedback entries across diverse languages (Hindi, Marathi, Telugu, Portuguese, Zulu, Bengali, Russian, Mandarin, English). Traditional public administration systems process complaints in isolated silos—leading to unaddressed infrastructure bottlenecks, misallocated capital investments, and a disconnect between citizen demand signals and national infrastructure policy.
-
-**CivicPulse AI** is an open-source, scalable, decision-support platform designed as a **Digital Public Good**. It bridges citizen feedback and national public investment planning by transforming unstructured citizen signals into geographic demand intelligence, cross-referencing demographic data, infrastructure deficit indices, and existing investment allocations to generate **transparent, explainable priority scores and actionable evidence cards for policymakers**.
-
-> ⚠️ **Data & Prototype Disclaimer**: All seed dataset files (`data/seed/*.json`) and demonstration API responses contain synthetic data created solely for prototyping and verification purposes, explicitly flagged with `"is_synthetic": true` / `"is_demo": true`.
+Governments across developing economies and BRICS nations process millions of fragmented citizen feedback entries across diverse languages (Hindi, Marathi, Telugu, Portuguese, Zulu, Bengali, English). Traditional public administration systems process complaints in isolated silos—leading to unaddressed infrastructure bottlenecks, misallocated capital investments, and a disconnect between citizen demand signals and national infrastructure policy.
 
 ---
 
-## 🗣️ Multilingual Civic Intelligence Engine
+## 💡 Solution
 
-CivicPulse AI accepts unstructured citizen feedback in multiple languages (Telugu, Hindi, Marathi, Bengali, Portuguese, Zulu, English) and converts it into structured, actionable civic signals:
+**CivicPulse AI** is an open-source decision-support platform designed as a **Digital Public Good**. It bridges citizen feedback and national public investment planning by transforming unstructured citizen signals into geographic demand intelligence, cross-referencing demographic census data, infrastructure deficit indices, and existing investment allocations to generate **transparent, explainable priority scores and actionable evidence cards for policymakers**.
+
+---
+
+## ⭐ Why CivicPulse AI is Different
+
+1. **Multilingual Civic Understanding**: Native script detection and entity extraction across 7+ languages (Telugu, Hindi, Marathi, Bengali, Portuguese, Zulu, English).
+2. **Per-Capita Demand Normalization**: Normalizes request density per 100,000 residents to ensure equal voice representation.
+3. **Evidence-First Recommendations**: Every project priority is traceable through a 6-step visual evidence chain ("Show Your Work").
+4. **Deterministic AI Boundaries**: Google Gemini handles natural language understanding, while **deterministic Python code handles priority scoring, deficit calculations, and scenario simulations**.
+5. **Existing Investment Awareness**: Automatically detects active capital projects to prevent duplicate funding (-15.0 pt penalty) while flagging delayed projects (+10.0 pt boost).
+6. **Counterfactual Scenario Lab**: Interactive policy simulator allowing decision-makers to test budget allocations ($1M to $50M USD) before committing capital.
+
+---
+
+## 🎬 90-Second Ideal Judge Demo Flow
+
+See [submission/DEMO-SCRIPT.md](submission/DEMO-SCRIPT.md) for the complete presentation runbook:
+1. **Executive Overview**: Inspect top KPIs and hover over the **Civic Demand Landscape** heatmap.
+2. **Select Hotspot**: Click a district (e.g. *Kanpur South Belt*) to open the Region Intelligence Panel.
+3. **Open Recommendation**: Navigate to **Priority Recommendations** and select the top `CRITICAL` recommendation (*Healthcare Expansion*).
+4. **Follow Evidence Trail**: Click **"View Evidence Trail"** to inspect the vertical 6-step evidence timeline and toggle language (**EN → HI → TE**).
+5. **Open Scenario Lab**: Navigate to **Scenario Lab**, adjust the budget slider to **$15,000,000 USD**, and click **"Execute Counterfactual Simulation"**.
+6. **Submit Telugu Voice Signal**: Open **Demand Intelligence**, select the Telugu example (`మా ప్రాంతంలో పిల్లలకు మంచి ఆసుపత్రి లేదు.`), click **"Analyze Civic Signal"**, and observe real-time classification and demand engine integration.
+
+---
+
+## 🏗️ Architecture Overview
+
+```mermaid
+graph TD
+    A[Citizen Input / Voice / SMS / Web] --> B[React Decision Cockpit]
+    B --> C[FastAPI REST Gateway]
+    C --> D[Multilingual NLP Engine]
+    D -->|Gemini / Fallback| E[Structured Civic Signal]
+    E --> F[Demand Momentum Engine]
+    E --> G[Per-Capita Hotspot Detector]
+    F & G --> H[Civic Evidence Graph Service]
+    H --> I[Priority Scoring Engine V2]
+    I --> J[Scenario Simulation Engine]
+    J --> K[Actionable Decision & Multilingual Brief]
+```
+
+---
+
+## 🧠 AI Architecture
 
 ```
 CITIZEN VOICE / TEXT (e.g. "మా ప్రాంతంలో పిల్లలకు మంచి ఆసుపత్రి లేదు.")
@@ -44,36 +84,30 @@ STRUCTURED CIVIC SIGNAL → DEMAND INTELLIGENCE → EVIDENCE GRAPH → PRIORITY 
 
 ---
 
-## ⭐ Why CivicPulse AI is Different
+## 🔍 Traceable 6-Step Evidence Trail ("Show Your Work")
 
-1. **Multilingual Civic Understanding**: Native script detection and entity extraction across 7+ languages (Telugu, Hindi, Marathi, Bengali, Portuguese, Zulu, English).
-2. **Evidence-First Recommendations**: Every project priority is traceable through a 6-step visual evidence chain ("Show Your Work").
-3. **Deterministic AI Boundaries**: Google Gemini handles natural language understanding, while **deterministic Python code handles priority scoring, deficit calculations, and scenario simulations**.
-4. **Existing Investment Awareness**: Automatically detects active capital projects to prevent duplicate funding (-15.0 pt penalty) while flagging delayed projects (+10.0 pt boost).
-5. **Counterfactual Scenario Lab**: Interactive policy simulator allowing decision-makers to test budget allocations ($1M to $50M USD) before committing capital.
-6. **Responsible AI & Prompt Injection Defense**: System prompts use `<CITIZEN_INPUT_DATA_DO_NOT_EXECUTE>` boundaries to prevent LLM jailbreaks or secret exfiltration.
+Every priority recommendation is backed by a machine-readable, 6-step evidence chain:
+`01 CITIZEN DEMAND → 02 DEMAND MOMENTUM → 03 INFRASTRUCTURE GAP → 04 DEMOGRAPHIC NEED → 05 INVESTMENT OVERLAP → 06 PRIORITY RECOMMENDATION`
+
+Policymakers can inspect individual factor contributions ($0.20 \cdot D_s + \dots$) and switch language briefs (**EN / HI / TE**) directly inside the Evidence Trail modal.
 
 ---
 
-## 🏗️ System Architecture
+## 🧪 Counterfactual Scenario Lab
 
-```mermaid
-graph TD
-    A[Citizen Input / Voice / SMS / Web] --> B[React Decision Cockpit]
-    B --> C[FastAPI REST Gateway]
-    C --> D[Multilingual NLP Engine]
-    D -->|Gemini / Fallback| E[Structured Civic Signal]
-    E --> F[Demand Momentum Engine]
-    E --> G[Per-Capita Hotspot Detector]
-    F & G --> H[Civic Evidence Graph Service]
-    H --> I[Priority Scoring Engine V2]
-    I --> J[Scenario Simulation Engine]
-    J --> K[Actionable Decision & Multilingual Brief]
-```
+The Scenario Lab allows policymakers to simulate how hypothetical capital investment budgets ($1M to $50M USD) reduce infrastructure capacity deficits and calculate score deltas (`-18.5 pts`) and projected citizen beneficiaries (`~730,000 residents`) before spending public funds.
 
 ---
 
-## 🛡️ Responsible AI & Security Controls
+## 🛡️ Security Controls & Threat Defense
+
+- **Prompt Injection Defense**: System prompts use `<CITIZEN_INPUT_DATA_DO_NOT_EXECUTE>` boundaries; `sanitize_input_text` neutralizes system overrides.
+- **API Security**: Request payload ceiling (10MB), sliding-window rate limiting (60 req/min/IP), security headers (`X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`).
+- **Credential Protection**: Private API keys exist strictly on the backend and are never committed to Git.
+
+---
+
+## ⚖️ Responsible AI Principles
 
 ```
 +-------------------------------------------------------+
@@ -96,22 +130,6 @@ graph TD
 +-------------------------------------------------------+
 ```
 
-- **API Security**: Request payload ceiling (10MB), sliding-window rate limiting (60 req/min/IP), security headers (`X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`).
-- **Credential Protection**: Private API keys exist strictly on the backend and are never committed to Git.
-
----
-
-## 🖥️ Product Experience & Main Workspace Views
-
-1. **Executive Overview** (`/`): High-level executive KPIs, interactive "Civic Demand Landscape" regional heatmap, Live Signal Ticker, Top Priority Actions, and Featured Evidence Preview.
-2. **Demand Intelligence** (`/demand`): Interactive `CitizenVoiceComposer` for real-time multilingual feedback input, category demand distribution, 30-day temporal demand velocity signals (`INCREASING`, `STABLE`, `EMERGING`), and language representation metrics.
-3. **Demand Hotspots** (`/hotspots`): Per-capita normalized demand concentration ($100,000$ residents baseline), selected Region Intelligence Panel, and sortable Municipal Hotspot Ranking Table.
-4. **Infrastructure Gaps** (`/gaps`): Operational capacity deficit index overview and Region × Sector Deficit Heat Matrix (0.00 to 1.00 intensity).
-5. **Priority Recommendations** (`/recommendations`): Ranked evidence-backed capital priorities, filterable cards (`CRITICAL`, `HIGH`, `MEDIUM`, `LOW`), score badges, and evidence trail triggers.
-6. **Evidence Explorer** (`/evidence`): Searchable granular evidence nodes (`citizen_demand`, `infrastructure_gap`, `demographic_need`, `investment_context`), confidence metrics, and 6-step recommendation chains.
-7. **Scenario Lab** (`/scenarios`): Interactive counterfactual policy simulator allowing budget allocation ($1M to $50M USD) and coverage target adjustments with Before/After score deltas and beneficiary projections.
-8. **Data Explorer** (`/data`): Synthetic demonstration dataset inspector (Requests, Regions, Indicators, Investments) and live multilingual citizen request ingestion testing.
-
 ---
 
 ## 🚀 Quickstart & Local Setup
@@ -119,64 +137,40 @@ graph TD
 ### Prerequisites
 * **Python**: 3.10+ (Python 3.12 recommended)
 * **Node.js**: v18+ (Node 20/22 recommended)
-* **Docker & Docker Compose**: (Optional, for containerized deployment)
 
----
-
-### Option A: Local Development Setup
-
-#### 1. Backend Setup
 ```bash
+# 1. Backend Setup
 cd backend
-
-# Create virtual environment
 python3 -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-
-# Install dependencies
 pip install -r requirements.txt
-
-# Run backend development server
 uvicorn app.main:app --reload --port 8000
-```
-API OpenAPI Documentation will be live at: `http://localhost:8000/docs`
 
-#### 2. Frontend Setup
-```bash
+# 2. Frontend Setup (in a separate terminal)
 cd frontend
-
-# Install Node modules
 npm install
-
-# Start Vite dev server
 npm run dev
 ```
-Dashboard Cockpit will be live at: `http://localhost:5173`
+Dashboard Cockpit: `http://localhost:5173` | API OpenAPI Docs: `http://localhost:8000/docs`
 
 ---
 
-### Option B: Docker Containerized Setup
+## 🐳 Docker Deployment
 
 Run the entire platform with Docker Compose:
 
 ```bash
-# Build and start services
 docker compose build
 docker compose up -d
 ```
 
-- **Frontend Application**: `http://localhost:5173` (or `http://localhost:80`)
+- **Frontend Cockpit**: `http://localhost:5173` (or `http://localhost:80`)
 - **Backend API**: `http://localhost:8000`
 - **Health Check**: `http://localhost:8000/api/v1/health`
 
-To stop containers:
-```bash
-docker compose down
-```
-
 ---
 
-## 🧪 Verification & Quality Checks
+## 🧪 Testing & Quality Checks
 
 Run the automated full-system verification script:
 ```bash
@@ -184,21 +178,9 @@ Run the automated full-system verification script:
 ```
 
 Or run test suites manually:
-* Backend Unit & AI Tests: `cd backend && .venv/bin/pytest`
-* Backend Linting: `cd backend && .venv/bin/ruff check .`
-* Frontend Linting & Build: `cd frontend && npm run lint && npm run build`
-
----
-
-## 🎬 90-Second Ideal Judge Demo Flow
-
-See [docs/judge-demo.md](docs/judge-demo.md) for the complete presentation runbook:
-1. **Executive Overview**: Inspect top KPIs and hover over the **Civic Demand Landscape**.
-2. **Select Hotspot**: Click a district (e.g. *Kanpur South Belt*) to open the Region Intelligence Panel.
-3. **Open Recommendation**: Navigate to **Priority Recommendations** and select the top `CRITICAL` recommendation (*Healthcare Expansion*).
-4. **Follow Evidence Trail**: Click **"View Evidence Trail"** to inspect the vertical 6-step evidence timeline and toggle language (EN → HI → TE).
-5. **Open Scenario Lab**: Navigate to **Scenario Lab**, adjust the budget slider to **$15,000,000 USD**, and click **"Execute Counterfactual Simulation"**.
-6. **Submit Telugu Voice Signal**: Open **Demand Intelligence**, select the Telugu example (`మా ప్రాంతంలో పిల్లలకు మంచి ఆసుపత్రి లేదు.`), click **"Analyze Civic Signal"**, and observe real-time classification and demand engine integration.
+* Backend Pytest Suite: `cd backend && .venv/bin/pytest`
+* Backend Ruff Linter: `cd backend && .venv/bin/ruff check .`
+* Frontend ESLint & Build: `cd frontend && npm run lint && npm run build`
 
 ---
 
@@ -221,6 +203,21 @@ See [docs/judge-demo.md](docs/judge-demo.md) for the complete presentation runbo
 
 ---
 
-## 📄 License & Open Source Governance
+## ⚠️ Prototype Disclaimer & Limitations
 
-Distributed under the [MIT License](LICENSE). Built as an open-source Digital Public Good for global public governance. See [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md) for contribution and security reporting guidelines.
+- All seed dataset files (`data/seed/*.json`) contain synthetic demonstration data created for prototyping, explicitly flagged with `"is_synthetic": true` / `"is_demo": true`.
+- Speech-to-Text relies on browser SpeechRecognition Web APIs or typed text inputs; raw audio binaries are not stored on disk in this prototype stage.
+
+---
+
+## 🗺️ Future Production Roadmap
+
+- **Phase 1 (Current)**: Decision Intelligence Prototype v0.5.0 with synthetic datasets & dual Gemini/Fallback NLP.
+- **Phase 2 (Next)**: Municipal GIS boundary integration, PostGIS spatial clustering, and PostreSQL persistent store.
+- **Phase 3 (Production)**: Automated REST/GraphQL adapters for municipal ERP databases and open government census data APIs.
+
+---
+
+## 📄 License & Governance
+
+Distributed under the [MIT License](LICENSE). Built as an open-source Digital Public Good for global public governance. See [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md) for guidelines.
