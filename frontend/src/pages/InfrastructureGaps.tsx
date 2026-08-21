@@ -1,18 +1,21 @@
-import React from 'react';
-import { Building, Activity, Zap, Droplet, Bus, Wifi } from 'lucide-react';
+import React, { useState } from 'react';
+import { Building, Activity, Zap, Droplet, Bus, Wifi, MapPin, ArrowRight } from 'lucide-react';
 import { InfrastructureIndicator, Region } from '../types';
+import { RegionDetailModal } from '../components/common/RegionDetailModal';
 
 interface InfrastructureGapsProps {
   indicators: InfrastructureIndicator[];
   regions: Region[];
+  onNavigateToScenarios?: (regionId: string) => void;
 }
 
-export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicators, regions }) => {
+export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicators, regions, onNavigateToScenarios }) => {
+  const [activeDetailRegion, setActiveDetailRegion] = useState<Region | null>(null);
   const categories = ['healthcare', 'water', 'electricity', 'transportation', 'digital_connectivity', 'sanitation'];
 
   const categoryIcons: Record<string, React.ReactNode> = {
     healthcare: <Activity className="w-5 h-5 text-rose-400" />,
-    water: <Droplet className="w-5 h-5 text-sky-400" />,
+    water: <Droplet className="w-5 h-5 text-cyan-400" />,
     electricity: <Zap className="w-5 h-5 text-amber-400" />,
     transportation: <Bus className="w-5 h-5 text-indigo-400" />,
     digital_connectivity: <Wifi className="w-5 h-5 text-emerald-400" />,
@@ -21,13 +24,16 @@ export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicato
 
   return (
     <div className="space-y-8 animate-in fade-in duration-300">
-      <div className="border-b border-slate-800 pb-5">
-        <h1 className="text-2xl font-bold text-slate-100 tracking-tight font-mono">
-          Infrastructure Gap Intelligence
-        </h1>
-        <p className="text-sm text-slate-300 mt-1 font-sans font-medium">
-          Evaluating municipal operational capacity deficits against census population demand across 6 core sectors.
-        </p>
+      {/* Header */}
+      <div className="p-6 md:p-8 rounded-2xl glass-panel-cyan flex flex-col md:flex-row md:items-center justify-between gap-6 border border-cyan-800/40">
+        <div>
+          <h1 className="text-2xl md:text-3xl font-extrabold text-slate-100 tracking-tight font-sans">
+            Infrastructure Gap <span className="gradient-text-cyan">Intelligence</span>
+          </h1>
+          <p className="text-xs md:text-sm text-slate-300 mt-1 font-sans font-medium max-w-2xl">
+            Evaluating municipal operational capacity deficits against census population demand across 6 core sectors.
+          </p>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -39,10 +45,10 @@ export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicato
           const avgCoverage = Math.round((1 - avgDeficit) * 100);
 
           return (
-            <div key={cat} className="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-4 shadow-md">
+            <div key={cat} className="p-6 rounded-2xl glass-card space-y-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="p-2.5 rounded-xl bg-slate-950 border border-slate-800 shadow-sm">
+                  <div className="p-2.5 rounded-xl bg-slate-950/80 border border-slate-800 shadow-sm">
                     {categoryIcons[cat]}
                   </div>
                   <span className="text-sm font-bold text-slate-100 uppercase tracking-wide font-mono">{cat}</span>
@@ -59,7 +65,7 @@ export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicato
                 </div>
                 <div className="h-3 rounded-full bg-slate-950 overflow-hidden border border-slate-800">
                   <div
-                    className="h-full bg-gradient-to-r from-emerald-500 to-sky-500 rounded-full"
+                    className="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-500 rounded-full"
                     style={{ width: `${avgCoverage}%` }}
                   />
                 </div>
@@ -69,11 +75,12 @@ export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicato
         })}
       </div>
 
-      <div className="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-5 shadow-lg">
+      {/* Heat Matrix */}
+      <div className="p-6 md:p-8 rounded-2xl glass-card space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h3 className="text-lg font-bold text-slate-100 font-mono">Region × Sector Deficit Heat Matrix</h3>
-            <p className="text-xs text-slate-300 font-medium mt-0.5">Cell intensity indicates operational capacity gap severity (0.00 to 1.00).</p>
+            <h3 className="text-lg font-extrabold text-slate-100 font-mono">Region × Sector Deficit Heat Matrix</h3>
+            <p className="text-xs text-slate-300 font-medium mt-0.5">Cell intensity indicates operational capacity gap severity (0.00 to 1.00). Click any district to enter region details.</p>
           </div>
           <div className="flex items-center gap-2 text-xs font-mono font-bold">
             <span className="text-slate-300">Deficit Level:</span>
@@ -91,13 +98,14 @@ export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicato
                 {categories.map((c) => (
                   <th key={c} className="p-4 text-center uppercase">{c.slice(0, 10)}</th>
                 ))}
+                <th className="p-4 text-center">ACTION</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-800 font-bold">
               {regions.map((reg) => (
                 <tr key={reg.id} className="hover:bg-slate-950/80 transition">
                   <td className="p-4 font-bold text-slate-100 border-r border-slate-800">
-                    <div className="text-sm">{reg.district_city}</div>
+                    <div className="text-sm font-extrabold text-slate-100">{reg.district_city}</div>
                     <div className="text-xs text-slate-400 font-semibold">{reg.country}</div>
                   </td>
                   {categories.map((cat) => {
@@ -121,12 +129,28 @@ export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicato
                       </td>
                     );
                   })}
+                  <td className="p-3 text-center">
+                    <button
+                      onClick={() => setActiveDetailRegion(reg)}
+                      className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-extrabold text-[11px] flex items-center gap-1 shadow-md glow-cyan shrink-0"
+                    >
+                      <MapPin className="w-3 h-3" />
+                      <span>Enter Details</span>
+                      <ArrowRight className="w-3 h-3" />
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       </div>
+
+      <RegionDetailModal
+        region={activeDetailRegion}
+        onClose={() => setActiveDetailRegion(null)}
+        onNavigateToScenarios={onNavigateToScenarios}
+      />
     </div>
   );
 };

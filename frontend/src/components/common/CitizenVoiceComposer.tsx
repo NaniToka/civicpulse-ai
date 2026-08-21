@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles, Globe2, ShieldCheck, CheckCircle2, RefreshCw, Send, Radio } from 'lucide-react';
+import { Sparkles, Globe2, ShieldCheck, CheckCircle2, RefreshCw, Send, Radio, ArrowRight } from 'lucide-react';
 import { CitizenRequest, Region, StructuredAIOutput } from '../../types';
 import { api } from '../../services/api';
 import { PriorityBadge } from './PriorityBadge';
@@ -7,9 +7,10 @@ import { PriorityBadge } from './PriorityBadge';
 interface CitizenVoiceComposerProps {
   regions: Region[];
   onSignalAdded?: (req: CitizenRequest) => void;
+  onOpenRegionDetails?: (regionId: string) => void;
 }
 
-export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regions, onSignalAdded }) => {
+export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regions, onSignalAdded, onOpenRegionDetails }) => {
   const [rawText, setRawText] = useState('');
   const [languageHint, setLanguageHint] = useState('auto');
   const [selectedRegionId, setSelectedRegionId] = useState(regions[0]?.id || 'REG-IND-UP-KANP-02');
@@ -128,7 +129,7 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
           </div>
         </div>
 
-        <div className="flex items-center gap-2.5 text-xs font-mono">
+        <div className="flex flex-wrap items-center gap-2.5 text-xs font-mono">
           <span className="text-slate-300 font-extrabold font-mono text-xs">Target Region:</span>
           <select
             value={selectedRegionId}
@@ -141,6 +142,15 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
               </option>
             ))}
           </select>
+          {onOpenRegionDetails && (
+            <button
+              onClick={() => onOpenRegionDetails(selectedRegionId)}
+              className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-extrabold text-xs transition flex items-center gap-1.5 shadow-lg glow-cyan"
+            >
+              <span>Enter Region Details</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          )}
         </div>
       </div>
 

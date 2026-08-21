@@ -99,7 +99,12 @@ export const App: React.FC = () => {
               )}
 
               {activeTab === 'demand' && (
-                <DemandIntelligence requests={requests} regions={regions} trends={trends} />
+                <DemandIntelligence
+                  requests={requests}
+                  regions={regions}
+                  trends={trends}
+                  onNavigateToScenarios={() => setActiveTab('scenarios')}
+                />
               )}
 
               {activeTab === 'hotspots' && (
@@ -112,7 +117,11 @@ export const App: React.FC = () => {
               )}
 
               {activeTab === 'gaps' && (
-                <InfrastructureGaps indicators={indicators} regions={regions} />
+                <InfrastructureGaps
+                  indicators={indicators}
+                  regions={regions}
+                  onNavigateToScenarios={() => setActiveTab('scenarios')}
+                />
               )}
 
               {activeTab === 'recommendations' && (

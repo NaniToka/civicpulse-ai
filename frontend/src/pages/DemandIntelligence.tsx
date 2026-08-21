@@ -1,26 +1,30 @@
 import React, { useState } from 'react';
-import { Search, Filter, Globe2, TrendingUp, Layers } from 'lucide-react';
+import { Search, Filter, Globe2, TrendingUp, Layers, MapPin, ArrowRight } from 'lucide-react';
 import { CitizenRequest, DemandMomentumSignal, Region } from '../types';
 import { TrendBadge } from '../components/common/TrendBadge';
 import { CitizenVoiceComposer } from '../components/common/CitizenVoiceComposer';
+import { RegionDetailModal } from '../components/common/RegionDetailModal';
 
 interface DemandIntelligenceProps {
   requests: CitizenRequest[];
   regions: Region[];
   trends?: DemandMomentumSignal[];
   onSignalAdded?: (req: CitizenRequest) => void;
+  onNavigateToScenarios?: (regionId: string) => void;
 }
 
 export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
   requests,
   regions,
   onSignalAdded,
+  onNavigateToScenarios,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRegion, setSelectedRegion] = useState<string>('ALL');
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
   const [selectedLanguage, setSelectedLanguage] = useState<string>('ALL');
   const [selectedUrgency, setSelectedUrgency] = useState<string>('ALL');
+  const [activeDetailRegion, setActiveDetailRegion] = useState<Region | null>(null);
 
   const filteredRequests = requests.filter((r) => {
     if (selectedRegion !== 'ALL' && r.region_id !== selectedRegion) return false;
@@ -59,6 +63,15 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
     EN: 'English',
   };
 
+  const handleOpenRegionDetails = (regionId: string) => {
+    const reg = regions.find((r) => r.id === regionId);
+    if (reg) {
+      setActiveDetailRegion(reg);
+    } else {
+      setActiveDetailRegion(regions[0] || null);
+    }
+  };
+
   return (
     <div className="space-y-8 animate-in fade-in duration-300">
       {/* Header */}
@@ -87,7 +100,11 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
       </div>
 
       {/* Interactive Multilingual Citizen Voice Composer */}
-      <CitizenVoiceComposer regions={regions} onSignalAdded={onSignalAdded} />
+      <CitizenVoiceComposer
+        regions={regions}
+        onSignalAdded={onSignalAdded}
+        onOpenRegionDetails={handleOpenRegionDetails}
+      />
 
       {/* Filter Bar Console */}
       <div className="p-6 rounded-2xl glass-card space-y-4">
@@ -113,18 +130,32 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
             />
           </div>
 
-          <select
-            value={selectedRegion}
-            onChange={(e) => setSelectedRegion(e.target.value)}
-            className="bg-[#0b0f19] border border-slate-700 text-slate-100 font-bold text-xs rounded-xl px-3.5 py-2 focus:outline-none focus:border-cyan-400 font-mono cursor-pointer shadow-inner"
-          >
-            <option className="bg-[#0f172a] text-slate-100 font-bold text-sm py-2" value="ALL">All Regions ({regions.length})</option>
-            {regions.map((r) => (
-              <option className="bg-[#0f172a] text-slate-100 font-bold text-sm py-2" key={r.id} value={r.id}>
-                {r.district_city}, {r.country_code}
-              </option>
-            ))}
-          </select>
+          <div className="flex items-center gap-2 col-span-1 sm:col-span-2 lg:col-span-1">
+            <select
+              value={selectedRegion}
+              onChange={(e) => setSelectedRegion(e.target.value)}
+              className="w-full bg-[#0b0f19] border border-slate-700 text-slate-100 font-bold text-xs rounded-xl px-3.5 py-2 focus:outline-none focus:border-cyan-400 font-mono cursor-pointer shadow-inner"
+            >
+              <option className="bg-[#0f172a] text-slate-100 font-bold text-sm py-2" value="ALL">All Regions ({regions.length})</option>
+              {regions.map((r) => (
+                <option className="bg-[#0f172a] text-slate-100 font-bold text-sm py-2" key={r.id} value={r.id}>
+                  {r.district_city}, {r.country_code}
+                </option>
+              ))}
+            </select>
+
+            {selectedRegion !== 'ALL' && (
+              <button
+                onClick={() => handleOpenRegionDetails(selectedRegion)}
+                className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-extrabold text-xs transition flex items-center gap-1 shadow-lg glow-cyan shrink-0"
+                title="View selected region profile details"
+              >
+                <MapPin className="w-3.5 h-3.5" />
+                <span className="hidden xl:inline">Details</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
 
           <select
             value={selectedCategory}
@@ -296,6 +327,13 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
                   <div className="flex items-center gap-2.5 font-mono">
                     <span className="font-extrabold text-slate-100 text-sm">{req.id}</span>
                     <span className="text-cyan-300 font-bold">• {req.request_category || req.category}</span>
+                    <button
+                      onClick={() => handleOpenRegionDetails(req.region_id)}
+                      className="text-cyan-400 hover:underline flex items-center gap-1 font-bold"
+                    >
+                      <MapPin className="w-3 h-3" />
+                      <span>{req.region_id}</span>
+                    </button>
                     <span className="text-slate-400 font-semibold">• {req.source}</span>
                   </div>
                   <div className="flex items-center gap-3">
@@ -325,6 +363,13 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
           </div>
         )}
       </div>
+
+      {/* Region Profile Modal */}
+      <RegionDetailModal
+        region={activeDetailRegion}
+        onClose={() => setActiveDetailRegion(null)}
+        onNavigateToScenarios={onNavigateToScenarios}
+      />
     </div>
   );
 };
