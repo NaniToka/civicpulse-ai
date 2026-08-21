@@ -49,57 +49,40 @@
     "is_demo": true
   },
   {
-    "id": "IND-PUNE-DIG-01",
-    "region_id": "REG-IND-MH-PUNE-01",
-    "category": "digital_connectivity",
-    "current_capacity_pct": 60.0,
-    "demand_index": 72.0,
-    "coverage_ratio_pct": 65.0,
-    "gap_score": 0.45,
-    "category_specific_metrics": {
-      "broadband_coverage_pct": 65.0,
-      "mobile_coverage_pct": 82.0,
-      "public_internet_access": 0.40
-    },
-    "last_assessed": "2026-Q2",
-    "is_synthetic": true,
-    "is_demo": true
-  },
-  {
-    "id": "IND-BRA-SAN-01",
-    "region_id": "REG-BRA-SP-EAST-01",
+    "id": "IND-CHEN-SAN-01",
+    "region_id": "REG-IND-TN-CHEN-01",
     "category": "sanitation",
-    "current_capacity_pct": 35.0,
-    "demand_index": 89.0,
-    "coverage_ratio_pct": 40.0,
-    "gap_score": 0.72,
-    "category_specific_metrics": {
-      "piped_sewage_access_pct": 40.0,
-      "treatment_plant_capacity_pct": 35.0
-    },
-    "last_assessed": "2026-Q2",
-    "is_synthetic": true,
-    "is_demo": true
-  },
-  {
-    "id": "IND-ZAF-WTR-01",
-    "region_id": "REG-ZAF-GP-EKUR-01",
-    "category": "water",
     "current_capacity_pct": 38.0,
-    "demand_index": 84.0,
-    "coverage_ratio_pct": 42.0,
-    "gap_score": 0.70,
+    "demand_index": 87.0,
+    "coverage_ratio_pct": 41.0,
+    "gap_score": 0.74,
     "category_specific_metrics": {
-      "clean_water_access_pct": 42.0,
-      "supply_reliability": 0.38
+      "drainage_coverage_pct": 41.0,
+      "pumping_station_capacity": 0.38
     },
     "last_assessed": "2026-Q2",
     "is_synthetic": true,
     "is_demo": true
   },
   {
-    "id": "IND-ZAF-TRN-01",
-    "region_id": "REG-ZAF-GP-EKUR-01",
+    "id": "IND-ONG-WTR-01",
+    "region_id": "REG-IND-AP-ONG-01",
+    "category": "water",
+    "current_capacity_pct": 32.0,
+    "demand_index": 91.0,
+    "coverage_ratio_pct": 35.0,
+    "gap_score": 0.79,
+    "category_specific_metrics": {
+      "clean_water_access_pct": 35.0,
+      "desalination_capacity": 0.28
+    },
+    "last_assessed": "2026-Q2",
+    "is_synthetic": true,
+    "is_demo": true
+  },
+  {
+    "id": "IND-DEL-TRN-01",
+    "region_id": "REG-IND-DL-DEL-01",
     "category": "transportation",
     "current_capacity_pct": 52.0,
     "demand_index": 78.0,
@@ -107,7 +90,7 @@
     "gap_score": 0.55,
     "category_specific_metrics": {
       "transit_coverage_pct": 55.0,
-      "average_commute_time_mins": 75.0
+      "average_commute_time_mins": 70.0
     },
     "last_assessed": "2026-Q2",
     "is_synthetic": true,
