@@ -36,9 +36,9 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         self.ip_history: dict[str, list[float]] = defaultdict(list)
 
     async def dispatch(self, request: Request, call_next):
-        # Rate limit only POST analysis and simulation endpoints
+        # Rate limit POST analysis, ingestion, and simulation endpoints
         if request.method == "POST" and any(
-            path in request.url.path for path in ["/citizen-requests/analyze", "/scenarios"]
+            path in request.url.path for path in ["/citizen-requests", "/scenarios", "/scenario/what-if", "/ingest"]
         ):
             client_ip = request.client.host if request.client else "unknown"
             now = time.time()

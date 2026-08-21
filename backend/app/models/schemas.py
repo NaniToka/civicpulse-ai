@@ -332,9 +332,9 @@ class DemandHotspot(BaseModel):
 class CitizenRequestIngestInput(BaseModel):
     source: str = "web"
     language: str = "auto"
-    raw_text: str
-    latitude: float | None = None
-    longitude: float | None = None
+    raw_text: str = Field(min_length=1, max_length=10000)
+    latitude: float | None = Field(default=None, ge=-90.0, le=90.0)
+    longitude: float | None = Field(default=None, ge=-180.0, le=180.0)
     region_id: str | None = None
 
 
@@ -343,7 +343,7 @@ class ScenarioWhatIfInput(BaseModel):
     category: str
     budget_allocation_usd: float = Field(ge=0.0)
     policy_urgency_override: str | None = None  # LOW, MEDIUM, HIGH, CRITICAL
-    target_coverage_addition_pct: float | None = 10.0
+    target_coverage_addition_pct: float | None = Field(default=10.0, ge=0.0, le=100.0)
 
 
 class ScenarioWhatIfResult(BaseModel):
