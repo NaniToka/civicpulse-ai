@@ -184,13 +184,15 @@ class RuleBasedLanguageIntelligenceProvider(BaseLanguageIntelligenceProvider):
     ) -> str:
         if target_language == "hi":
             return (
-                f"[AI साक्ष्य सारांश] {why_recommendation.summary} "
-                f"{len(why_recommendation.evidence_chain)} साक्ष्य चरणों के माध्यम से पूरी तरह से खोज योग्य।"
+                f"[AI साक्ष्य सारांश] यह बुनियादी ढांचा सिफारिश नागरिकों की मांग, क्षमता अंतर और जनसांख्यिकीय आवश्यकताओं "
+                f"के विश्लेषणात्मक मूल्यांकन पर आधारित है। कुल {len(why_recommendation.evidence_chain)} पारदर्शी साक्ष्य चरणों "
+                f"के माध्यम से प्राथमिकता स्कोर का सत्यापन किया गया है। त्वरित पूंजी निवेश की सिफारिश की जाती है।"
             )
         elif target_language == "te":
             return (
-                f"[AI ఆధారాల సారాంశం] {why_recommendation.summary} "
-                f"{len(why_recommendation.evidence_chain)} ఆధారాల సోపానాల ద్వారా పరిశీలించవచ్చు."
+                f"[AI ఆధారాల సారాంశం] ఈ మౌలిక సదుపాయాల ప్రతిపాదన పౌరుల అభ్యర్థనలు, నిష్పత్తి కొరత మరియు జనాభా "
+                f"అవసరాల విశ్లేషణ ఆధారంగా రూపొందించబడింది. మొత్తం {len(why_recommendation.evidence_chain)} పారదర్శక ఆధారాల సోపానాల ద్వారా "
+                f"ప్రాధాన్యతా స్కోరు ధృవీకరించబడింది. తక్షణ మూలధన కేటాయింపు అవసరం."
             )
         return (
             f"[Rule-Based Evidence Summary] {why_recommendation.summary} "

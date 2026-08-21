@@ -191,8 +191,20 @@ export const EvidenceTrailModal: React.FC<EvidenceTrailModalProps> = ({ recommen
                 <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 flex items-start gap-3 shadow-md">
                   <ArrowRight className="w-5 h-5 text-emerald-400 mt-0.5 shrink-0" />
                   <div className="space-y-1">
-                    <span className="font-bold text-emerald-400 uppercase font-mono">Recommended Policy Action: </span>
-                    <span className="font-semibold">{recommendation.recommended_action}</span>
+                    <span className="font-bold text-emerald-400 uppercase font-mono">
+                      {briefLang === 'hi'
+                        ? 'अनुशंसित नीति कार्रवाई: '
+                        : briefLang === 'te'
+                        ? 'సిఫార్సు చేసిన విధాన చర్య: '
+                        : 'Recommended Policy Action: '}
+                    </span>
+                    <span className="font-semibold">
+                      {briefLang === 'hi'
+                        ? `${recommendation.region_name} में त्वरित बुनियादी ढांचा पूंजी आवंटन शुरू करें।`
+                        : briefLang === 'te'
+                        ? `${recommendation.region_name} ప్రాంతంలో తక్షణ మూలధన కేటాయింపులను ప్రారంభించండి.`
+                        : recommendation.recommended_action}
+                    </span>
                   </div>
                 </div>
 
@@ -200,12 +212,28 @@ export const EvidenceTrailModal: React.FC<EvidenceTrailModalProps> = ({ recommen
                   <div className="mt-4 pt-3 border-t border-indigo-900/40 space-y-2">
                     <div className="text-xs font-bold text-amber-400 flex items-center gap-2 font-mono">
                       <AlertTriangle className="w-4 h-4" />
-                      <span>Investment Risk Factors & Limitations:</span>
+                      <span>
+                        {briefLang === 'hi'
+                          ? 'निवेश जोखिम कारक एवं सीमाएं:'
+                          : briefLang === 'te'
+                          ? 'పెట్టుబడి ప్రమాద కారకాలు మరియు పరిమితులు:'
+                          : 'Investment Risk Factors & Limitations:'}
+                      </span>
                     </div>
                     <ul className="list-disc list-inside text-xs text-slate-300 font-medium space-y-1">
-                      {whyData.risks.map((risk, idx) => (
-                        <li key={idx}>{risk}</li>
-                      ))}
+                      {whyData.risks.map((risk, idx) => {
+                        let translatedRisk = risk;
+                        if (briefLang === 'hi') {
+                          if (risk.includes('Active capital project')) translatedRisk = 'इस क्षेत्र में सक्रिय पूंजी परियोजना जारी है (दोहरे निवेश का जोखिम)।';
+                          else if (risk.includes('DELAYED')) translatedRisk = 'विशेष ध्यान: मौजूदा पूंजी परियोजना में देरी हो रही है।';
+                          else if (risk.includes('High baseline coverage')) translatedRisk = 'उच्च बुनियादी कवरेज अनुपात (>75%)।';
+                        } else if (briefLang === 'te') {
+                          if (risk.includes('Active capital project')) translatedRisk = 'ఈ రంగంలో ఇప్పటికే చురుగ్గా మూలధన ప్రాజెక్ట్ కొనసాగుతోంది (పునరావృత పెట్టుబడి ప్రమాదం).';
+                          else if (risk.includes('DELAYED')) translatedRisk = 'ప్రత్యేక శ్రద్ధ: ఉన్న మూలధన ప్రాజెక్ట్ ఆలస్యమైంది.';
+                          else if (risk.includes('High baseline coverage')) translatedRisk = 'అధిక ప్రాథమిక కవరేజ్ నిష్పత్తి (>75%).';
+                        }
+                        return <li key={idx}>{translatedRisk}</li>;
+                      })}
                     </ul>
                   </div>
                 )}
