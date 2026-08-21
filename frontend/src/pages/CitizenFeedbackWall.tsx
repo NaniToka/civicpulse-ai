@@ -153,6 +153,7 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
   const [filterType, setFilterType] = useState<string>('ALL');
   const [filterState, setFilterState] = useState<string>('ALL');
   const [showComposer, setShowComposer] = useState<boolean>(false);
+  const [upvotedCommentIds, setUpvotedCommentIds] = useState<string[]>([]);
 
   // New Comment Form State
   const [newAuthor, setNewAuthor] = useState('');
@@ -191,6 +192,7 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
     };
 
     setComments([createdComment, ...comments]);
+    setUpvotedCommentIds([...upvotedCommentIds, createdComment.id]);
     setNewText('');
     setNewAuthor('');
     setPostedSuccess(true);
@@ -201,9 +203,19 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
   };
 
   const handleLikeComment = (id: string) => {
-    setComments((prev) =>
-      prev.map((c) => (c.id === id ? { ...c, likes: c.likes + 1 } : c))
-    );
+    const isAlreadyUpvoted = upvotedCommentIds.includes(id);
+
+    if (isAlreadyUpvoted) {
+      setUpvotedCommentIds((prev) => prev.filter((item) => item !== id));
+      setComments((prev) =>
+        prev.map((c) => (c.id === id ? { ...c, likes: Math.max(0, c.likes - 1) } : c))
+      );
+    } else {
+      setUpvotedCommentIds((prev) => [...prev, id]);
+      setComments((prev) =>
+        prev.map((c) => (c.id === id ? { ...c, likes: c.likes + 1 } : c))
+      );
+    }
   };
 
   const filteredComments = comments.filter((c) => {
