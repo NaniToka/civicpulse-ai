@@ -11,6 +11,7 @@ import { RecommendationsView } from './pages/RecommendationsView';
 import { EvidenceExplorer } from './pages/EvidenceExplorer';
 import { WhatIfScenario } from './pages/WhatIfScenario';
 import { DataExplorer } from './pages/DataExplorer';
+import { CitizenFeedbackWall } from './pages/CitizenFeedbackWall';
 import { api } from './services/api';
 import {
   Region,
@@ -110,6 +111,8 @@ export const App: React.FC = () => {
                   onNavigateToScenarios={() => setActiveTab('scenarios')}
                 />
               )}
+
+              {activeTab === 'feedback' && <CitizenFeedbackWall regions={regions} />}
 
               {activeTab === 'hotspots' && (
                 <HotspotExplorer

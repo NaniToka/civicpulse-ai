@@ -2,6 +2,7 @@ import React from 'react';
 import {
   LayoutDashboard,
   Search,
+  MessageSquare,
   Flame,
   AlertCircle,
   FileCheck,
@@ -18,6 +19,7 @@ import {
 export type NavTab =
   | 'dashboard'
   | 'demand'
+  | 'feedback'
   | 'hotspots'
   | 'gaps'
   | 'recommendations'
@@ -47,6 +49,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       items: [
         { id: 'dashboard', label: 'Executive Overview', icon: <LayoutDashboard className="w-4 h-4" /> },
         { id: 'demand', label: 'Demand Intelligence', icon: <Search className="w-4 h-4" /> },
+        { id: 'feedback', label: 'Citizen Comments', icon: <MessageSquare className="w-4 h-4" />, badge: 'Emojis' },
         { id: 'hotspots', label: 'Demand Hotspots', icon: <Flame className="w-4 h-4" /> },
       ],
     },

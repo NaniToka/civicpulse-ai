@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Command, ShieldAlert, Sparkles, Activity, Menu, X, Compass, LayoutDashboard, Search, Flame, AlertCircle, FileCheck, Network, TestTube2, Database } from 'lucide-react';
+import { Command, ShieldAlert, Sparkles, Activity, Menu, X, Compass, LayoutDashboard, Search, Flame, AlertCircle, FileCheck, Network, TestTube2, Database, MessageSquare } from 'lucide-react';
 import { NavTab } from './Sidebar';
 
 interface NavbarProps {
@@ -14,6 +14,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette, activeTab 
   const navItems: { id: NavTab; label: string; icon: React.ReactNode }[] = [
     { id: 'dashboard', label: 'Executive Overview', icon: <LayoutDashboard className="w-4 h-4" /> },
     { id: 'demand', label: 'Demand Intelligence', icon: <Search className="w-4 h-4" /> },
+    { id: 'feedback', label: 'Citizen Comments & Emojis', icon: <MessageSquare className="w-4 h-4" /> },
     { id: 'hotspots', label: 'Demand Hotspots', icon: <Flame className="w-4 h-4" /> },
     { id: 'gaps', label: 'Infrastructure Gaps', icon: <AlertCircle className="w-4 h-4" /> },
     { id: 'recommendations', label: 'Recommendations', icon: <FileCheck className="w-4 h-4" /> },

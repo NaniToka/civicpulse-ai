@@ -17,6 +17,7 @@ import {
   Activity,
   Search,
   Clock,
+  MessageSquare,
 } from 'lucide-react';
 import { CitizenRequest, PriorityRecommendation, Region } from '../types';
 import { PriorityBadge } from '../components/common/PriorityBadge';
@@ -142,8 +143,15 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
           {/* Quick Launcher Pills */}
           <div className="flex flex-wrap items-center gap-3 shrink-0">
             <button
+              onClick={() => onNavigate('feedback')}
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white font-extrabold text-xs transition shadow-lg glow-cyan hover:scale-105 cursor-pointer"
+            >
+              <MessageSquare className="w-4 h-4 text-emerald-300" />
+              <span>Citizen Comments Wall 🎉</span>
+            </button>
+            <button
               onClick={() => onNavigate('demand')}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-extrabold text-xs transition shadow-lg shadow-cyan-950/80 glow-cyan hover:scale-105"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-extrabold text-xs transition shadow-lg shadow-cyan-950/80 glow-cyan hover:scale-105 cursor-pointer"
             >
               <Globe2 className="w-4 h-4" />
               <span>Multilingual Voice Feed</span>
