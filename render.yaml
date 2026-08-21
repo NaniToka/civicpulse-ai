@@ -1,8 +1,8 @@
 # Render Deployment Blueprint for CivicPulse AI (v0.5.0)
-# Blueprint specification for dual-service Render deployment (Frontend Static + Backend Web Service)
+# Blueprint specification for dual-service Render deployment (Frontend Static Site + Backend Web Service)
 
 services:
-  # 1. Backend FastAPI Service
+  # 1. Backend FastAPI Web Service
   - type: web
     name: civicpulse-ai-backend
     runtime: python
@@ -25,12 +25,15 @@ services:
       - key: GEMINI_API_KEY
         sync: false  # Configure in Render Web Dashboard Secrets
 
-  # 2. Frontend React Production Build
-  - type: web
+  # 2. Frontend React Production Static Site
+  - type: static
     name: civicpulse-ai-frontend
-    runtime: node
     buildCommand: "cd frontend && npm ci && npm run build"
     staticPublishPath: ./frontend/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
     envVars:
       - key: VITE_API_BASE_URL
         value: "https://civicpulse-ai-backend-ehvg.onrender.com"
