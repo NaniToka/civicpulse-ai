@@ -69,19 +69,19 @@ export const ThreeDDonutChart: React.FC<ThreeDDonutChartProps> = ({ data, total 
         </div>
       </div>
 
-      {/* Main 3D Isometric Viewport (Expanded Circle Size) */}
-      <div className="relative w-full h-72 flex items-center justify-center my-auto cursor-grab active:cursor-grabbing z-10">
+      {/* Main 3D Isometric Viewport (Responsive Circle Size) */}
+      <div className="relative w-full h-64 sm:h-72 flex items-center justify-center my-auto cursor-grab active:cursor-grabbing z-10">
         {/* 3D Floor Glow Disc */}
         <div
-          className="absolute w-72 h-72 rounded-full bg-cyan-500/20 blur-2xl pointer-events-none transition-transform duration-300"
+          className="absolute w-56 h-56 sm:w-72 sm:h-72 rounded-full bg-cyan-500/20 blur-2xl pointer-events-none transition-transform duration-300"
           style={{
             transform: `perspective(800px) rotateX(${tiltAngle}deg) scaleY(0.35) translateY(90px)`,
           }}
         />
 
-        {/* 3D Extruded Cylinder Ring Assembly (Expanded Size) */}
+        {/* 3D Extruded Cylinder Ring Assembly */}
         <div
-          className="relative w-72 h-72 transition-transform duration-75 ease-out"
+          className="relative w-56 h-56 sm:w-72 sm:h-72 transition-transform duration-75 ease-out"
           style={{
             transform: `perspective(900px) rotateX(${tiltAngle}deg) rotateZ(${rotationDeg}deg)`,
             transformStyle: 'preserve-3d',

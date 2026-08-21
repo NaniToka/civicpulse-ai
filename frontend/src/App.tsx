@@ -70,7 +70,11 @@ export const App: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-civic-950 text-civic-100 font-sans selection:bg-sky-500 selection:text-slate-950">
-      <Navbar onOpenCommandPalette={() => setCommandPaletteOpen(true)} />
+      <Navbar
+        onOpenCommandPalette={() => setCommandPaletteOpen(true)}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+      />
 
       <div className="flex flex-1 overflow-hidden">
         <Sidebar
@@ -80,7 +84,7 @@ export const App: React.FC = () => {
           onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
         />
 
-        <main className="flex-1 p-6 lg:p-8 max-w-7xl mx-auto overflow-y-auto w-full">
+        <main className="flex-1 p-3 sm:p-6 lg:p-8 max-w-7xl mx-auto overflow-y-auto w-full">
           {loading ? (
             <div className="h-96 flex flex-col items-center justify-center space-y-3 text-slate-400 text-xs font-mono">
               <div className="w-8 h-8 rounded-full border-2 border-sky-500 border-t-transparent animate-spin" />
