@@ -16,7 +16,6 @@ import {
   BarChart3,
   Activity,
   Search,
-  PieChart,
   Clock,
 } from 'lucide-react';
 import { CitizenRequest, PriorityRecommendation, Region } from '../types';
@@ -24,6 +23,7 @@ import { PriorityBadge } from '../components/common/PriorityBadge';
 import { TrendBadge } from '../components/common/TrendBadge';
 import { NavTab } from '../components/layout/Sidebar';
 import { RegionDetailModal } from '../components/common/RegionDetailModal';
+import { ThreeDDonutChart } from '../components/common/ThreeDDonutChart';
 
 interface DashboardOverviewProps {
   recommendations: PriorityRecommendation[];
@@ -261,78 +261,10 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
         </div>
       </div>
 
-      {/* 3. Clean Circular Donut Chart & Multilingual Script Representation */}
+      {/* 3. 3D Animated Isometric Cylinder Donut Chart & Multilingual Script Representation */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* CLEAN CIRCULAR DONUT CHART */}
-        <div className="p-6 md:p-8 rounded-2xl glass-card space-y-6">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-4">
-            <div className="flex items-center gap-2.5">
-              <PieChart className="w-5 h-5 text-cyan-400" />
-              <h2 className="text-base font-bold text-slate-100 font-mono">
-                Sector Problem Distribution (Clean Circular Graph)
-              </h2>
-            </div>
-            <span className="text-xs font-mono font-bold text-cyan-300 bg-cyan-950 px-2.5 py-1 rounded border border-cyan-800">
-              6 Core Sectors
-            </span>
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-center justify-around gap-6">
-            {/* SVG Clean Donut Chart */}
-            <div className="relative w-48 h-48 shrink-0 flex items-center justify-center">
-              <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-                {(() => {
-                  let accumulatedPercent = 0;
-                  return categoryGraphData.map((item, idx) => {
-                    const percent = (item.count / graphTotal) * 100;
-                    const strokeDasharray = `${percent} ${100 - percent}`;
-                    const strokeDashoffset = -accumulatedPercent;
-                    accumulatedPercent += percent;
-
-                    return (
-                      <circle
-                        key={idx}
-                        cx="50"
-                        cy="50"
-                        r="38"
-                        fill="transparent"
-                        stroke={item.color}
-                        strokeWidth="15"
-                        strokeDasharray={strokeDasharray}
-                        strokeDashoffset={strokeDashoffset}
-                        pathLength="100"
-                        className="transition-all duration-500 hover:opacity-80 cursor-pointer"
-                      />
-                    );
-                  });
-                })()}
-              </svg>
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-center font-mono">
-                <span className="text-2xl font-extrabold text-slate-100">{graphTotal}</span>
-                <span className="text-[10px] text-slate-400 font-bold uppercase">SIGNALS</span>
-              </div>
-            </div>
-
-            {/* Circular Donut Legend Pills */}
-            <div className="space-y-2.5 w-full max-w-xs font-mono text-xs">
-              {categoryGraphData.map((item) => {
-                const pct = Math.round((item.count / graphTotal) * 100);
-                return (
-                  <div key={item.label} className="flex items-center justify-between p-2 rounded-xl bg-slate-950/80 border border-slate-800">
-                    <div className="flex items-center gap-2">
-                      <span className="w-3 h-3 rounded-full shrink-0" style={{ backgroundColor: item.color }} />
-                      <span className="text-slate-200 font-bold">{item.label}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-slate-400 font-bold">{item.count}</span>
-                      <span className="text-cyan-300 font-extrabold text-xs">({pct}%)</span>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
+        {/* 3D ANIMATED ISOMETRIC DONUT CHART */}
+        <ThreeDDonutChart data={categoryGraphData} total={graphTotal} />
 
         {/* Multilingual Citizen Representation */}
         <div className="p-6 md:p-8 rounded-2xl glass-card space-y-6">
