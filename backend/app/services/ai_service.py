@@ -97,35 +97,59 @@ class RuleBasedLanguageIntelligenceProvider(BaseLanguageIntelligenceProvider):
 
         # Intent classification
         intent = CivicIntent.REQUEST_IMPROVEMENT.value
-        if any(w in lower_text for w in ["outage", "broken", "cut", "फूटली", "ఫూట్", "కట్"]):
+        if any(w in lower_text for w in ["outage", "broken", "cut", "फूटली", "ఫూట్", "కట్", "कटौती"]):
             intent = CivicIntent.REPORT_OUTAGE.value
-        elif any(w in lower_text for w in ["new", "build", "construct", "కట్టాలి"]):
+        elif any(w in lower_text for w in ["new", "build", "construct", "कट्टालि", "बनाएं"]):
             intent = CivicIntent.REQUEST_NEW_INFRASTRUCTURE.value
 
         urgency = "MEDIUM"
         entities = []
-        if any(w in lower_text for w in ["critical", "emergency", "dying", "failing", "ఫूटली", "urgente", "అత్యవసరం"]):
+        if any(w in lower_text for w in ["critical", "emergency", "dying", "failing", "urgente", "अत्यवलोकन", "गंभीर"]):
             urgency = "CRITICAL"
             entities.append("Emergency Signal")
-        elif any(w in lower_text for w in ["daily", "broken", "disrupted", "outage", "खराब", "లేవు"]):
+        elif any(w in lower_text for w in ["daily", "broken", "disrupted", "outage", "खराब", "प्रदूषण", "कमजोर", "कटौती"]):
             urgency = "HIGH"
             entities.append("Service Disruption")
 
-        # English translation/normalization mapping for demo multilingual prompts
-        normalized_summary = cleaned[:200]
-        if "ఆసుపత్రి" in cleaned or "లేవు" in cleaned:
-            normalized_summary = "Lacks adequate hospital and healthcare facilities in the locality."
-        elif "పైన" in cleaned or "మంచినీరు" in cleaned or "पानी" in cleaned:
-            normalized_summary = "Drinking water supply disrupted; urgent pipeline repair required."
+        cat_display = get_category_display_name(cat_key)
+
+        # Comprehensive English translation & summary mapping for non-English inputs
+        if detected_code != "en":
+            if any(w in cleaned for w in ["जल प्रदूषण", "प्रदूषण", "दूषित", "गंदा पानी"]):
+                normalized_summary = "Severe water pollution and drinking water contamination reported in the locality."
+            elif any(w in cleaned for w in ["अस्पताल", "स्वास्थ्य", "डॉक्टर", "इलाज", "चिकित्सा"]):
+                normalized_summary = "Lack of adequate hospital facilities, medical staff, and primary health centers in the locality."
+            elif any(w in cleaned for w in ["पानी", "पाणी", "जल", "नल", "पाइपलाइन"]):
+                normalized_summary = "Drinking water supply disrupted; urgent pipeline repair and clean water supply required."
+            elif any(w in cleaned for w in ["बिजली", "कटौती", "जनरेटर", "लाइट"]):
+                normalized_summary = "Frequent power outages and clinic generator failures reported in the locality."
+            elif any(w in cleaned for w in ["सड़क", "खड्डों", "मार्ग", "पूल"]):
+                normalized_summary = "Damaged road infrastructure and hazardous potholes reported in the neighborhood."
+            elif any(w in cleaned for w in ["इंटरनेट", "ब्रॉडबैंड", "कनेक्शन", "संयोग"]):
+                normalized_summary = "Unreliable internet connectivity affecting students and local businesses in the area."
+            elif any(w in cleaned for w in ["कचरा", "गंदगी", "सफाई", "नाला"]):
+                normalized_summary = "Improper waste management and uncollected garbage accumulating in public areas."
+            elif "ఆసుపత్రి" in cleaned or "లేవు" in cleaned:
+                normalized_summary = "Lacks adequate hospital and pediatric healthcare facilities in the locality."
+            elif "మంచినీరు" in cleaned or "పైన" in cleaned:
+                normalized_summary = "Drinking water supply disrupted; urgent pipeline repair required."
+            elif "esgoto" in cleaned or "água" in cleaned:
+                normalized_summary = "No piped sewage or clean water treatment in the neighborhood."
+            elif "amanzi" in cleaned or "isibhedlela" in cleaned:
+                normalized_summary = "Severe water supply shortages and healthcare facility deficits reported."
+            else:
+                normalized_summary = f"Reported {cat_display.lower()} infrastructure deficit and service disruption in the locality."
+        else:
+            normalized_summary = cleaned[:200]
 
         return StructuredAIOutput(
             language=detected_code,
             category=cat_key,
-            subcategory=f"{get_category_display_name(cat_key)} Deficit",
+            subcategory=f"{cat_display} Deficit",
             intent=intent,
             location="Extracted Locality Landmark",
             urgency=urgency,
-            entities=entities if entities else [get_category_display_name(cat_key)],
+            entities=entities if entities else [cat_display],
             summary=normalized_summary,
             confidence=round(confidence, 2),
         )
@@ -219,7 +243,7 @@ JSON OUTPUT SCHEMA:
   "location": "<extracted landmark, street, or ward name or null>",
   "urgency": "<LOW|MEDIUM|HIGH|CRITICAL>",
   "entities": ["<list of extracted infrastructure entity strings>"],
-  "summary": "<English translation and normalized summary of citizen request>",
+  "summary": "<ALWAYS return the exact English translation and normalized summary of citizen request in plain English, regardless of input language>",
   "confidence": <float between 0.0 and 1.0>
 }}
 
@@ -250,33 +274,6 @@ JSON OUTPUT SCHEMA:
         logger.error("Gemini retry failed structured output validation. Resorting to deterministic fallback.")
         return await self.fallback.process_citizen_text(text, language_hint)
 
-    async def _call_and_validate(self, prompt: str) -> StructuredAIOutput | None:
-        try:
-            response = self._client.models.generate_content(
-                model=self.model_name,
-                contents=prompt
-            )
-            raw_text = response.text.strip()
-            raw_text = raw_text.removeprefix("```json")
-            raw_text = raw_text.removeprefix("```")
-            raw_text = raw_text.removesuffix("```")
-
-            parsed_json = json.loads(raw_text.strip())
-
-            structured_output = StructuredAIOutput(**parsed_json)
-            structured_output.category = normalize_category(structured_output.category)
-            structured_output.confidence = max(0.0, min(1.0, float(structured_output.confidence)))
-            return structured_output
-        except json.JSONDecodeError as err:
-            logger.warning(f"AI response JSON decode error: {err}")
-            return None
-        except ValidationError as val_err:
-            logger.warning(f"AI response schema validation error: {val_err}")
-            return None
-        except Exception as err:  # noqa: BLE001
-            logger.error(f"Gemini API invocation error: {err}")
-            return None
-
     async def generate_recommendation_reasoning(
         self,
         region_name: str,
@@ -286,28 +283,32 @@ JSON OUTPUT SCHEMA:
         target_language: str = "en"
     ) -> str:
         if not self._client:
-            return await self.fallback.generate_recommendation_reasoning(region_name, category, priority_score, evidence_summary, target_language)
+            return await self.fallback.generate_recommendation_reasoning(
+                region_name, category, priority_score, evidence_summary, target_language
+            )
 
-        cat_display = get_category_display_name(category)
-        prompt = f"""You are an executive civic infrastructure AI advisor for BRICS policymakers.
-Draft a concise 2-sentence explainable reasoning statement in language '{target_language}' for why the following project should be prioritized:
-
+        prompt = f"""Generate a concise, professional, 2-sentence policy decision reasoning for an infrastructure recommendation card.
+Target Language: {target_language} (en=English, hi=Hindi, te=Telugu)
 Region: {region_name}
-Category: {cat_display}
-Priority Score: {priority_score:.1f} / 100
-Evidence Summary: {evidence_summary}
+Sector Category: {category}
+Priority Score: {priority_score:.1f}/100
+Evidence Factors Summary: {evidence_summary}
 
-Be clear, factual, objective, and executive-level.
-"""
+Return ONLY the plain text reasoning in the specified target language without quotes or JSON wrappers."""
+
         try:
             response = self._client.models.generate_content(
                 model=self.model_name,
                 contents=prompt
             )
-            return response.text.strip()
-        except Exception as err:  # noqa: BLE001
-            logger.error(f"Gemini API error generating reasoning: {err}. Falling back.")
-            return await self.fallback.generate_recommendation_reasoning(region_name, category, priority_score, evidence_summary, target_language)
+            if response and response.text:
+                return response.text.strip()
+        except Exception as e:  # noqa: BLE001
+            logger.warning(f"Gemini reasoning generation failed: {e}. Falling back to rule-based logic.")
+
+        return await self.fallback.generate_recommendation_reasoning(
+            region_name, category, priority_score, evidence_summary, target_language
+        )
 
     async def generate_evidence_explanation(
         self, why_recommendation: WhyThisRecommendation, target_language: str = "en"
@@ -315,48 +316,73 @@ Be clear, factual, objective, and executive-level.
         if not self._client:
             return await self.fallback.generate_evidence_explanation(why_recommendation, target_language)
 
-        steps_summary = "\n".join(
-            f"Step {s.step} ({s.title}): {s.finding} [Value: {s.value}, Contribution: {s.contribution}]"
-            for s in why_recommendation.evidence_chain
-        )
-        prompt = f"""You are an executive explanation engine for CivicPulse AI.
-Draft a 3-sentence executive summary in language '{target_language}' explaining the evidence trail for this recommendation:
+        prompt = f"""Generate a 3-sentence executive policymaker decision brief summarizing the evidence for this infrastructure priority.
+Target Language: {target_language} (en=English, hi=Hindi, te=Telugu)
+Recommendation Summary: {why_recommendation.summary}
+Confidence Score: {(why_recommendation.overall_confidence * 100):.0f}%
+Evidence Steps Count: {len(why_recommendation.evidence_chain)}
 
-Recommendation ID: {why_recommendation.recommendation_id}
-Summary: {why_recommendation.summary}
+Return ONLY plain text summary in target language."""
 
-EVIDENCE TRAIL STEPS:
-{steps_summary}
-
-STRICT RULES:
-1. Use ONLY the provided evidence trail steps.
-2. DO NOT invent statistics, metrics, or scores.
-"""
         try:
             response = self._client.models.generate_content(
                 model=self.model_name,
                 contents=prompt
             )
-            return response.text.strip()
-        except Exception as err:  # noqa: BLE001
-            logger.error(f"Gemini API error generating evidence explanation: {err}. Falling back.")
-            return await self.fallback.generate_evidence_explanation(why_recommendation, target_language)
+            if response and response.text:
+                return response.text.strip()
+        except Exception as e:  # noqa: BLE001
+            logger.warning(f"Gemini evidence explanation failed: {e}. Falling back to rule-based logic.")
+
+        return await self.fallback.generate_evidence_explanation(why_recommendation, target_language)
+
+    async def _call_and_validate(self, prompt: str) -> StructuredAIOutput | None:
+        try:
+            response = self._client.models.generate_content(
+                model=self.model_name,
+                contents=prompt
+            )
+            if not response or not response.text:
+                return None
+
+            raw_json = response.text.strip()
+            # Strip markdown fences if present
+            if raw_json.startswith("```"):
+                raw_json = re.sub(r"^```(?:json)?\n?", "", raw_json)
+                raw_json = re.sub(r"\n?```$", "", raw_json).strip()
+
+            parsed = json.loads(raw_json)
+
+            # Clamp confidence to [0.0, 1.0]
+            if "confidence" in parsed and isinstance(parsed["confidence"], (int, float)):
+                parsed["confidence"] = max(0.0, min(1.0, float(parsed["confidence"])))
+
+            # Validate against Pydantic schema
+            output = StructuredAIOutput(**parsed)
+            # Normalize category key against controlled taxonomy
+            output.category = normalize_category(output.category)
+            return output
+        except (json.JSONDecodeError, ValidationError, Exception) as e:  # noqa: BLE001
+            logger.warning(f"Gemini structured output validation error: {e}")
+            return None
 
 
-# Backward compatible aliases
-BaseAIService = BaseLanguageIntelligenceProvider
-FallbackAIService = RuleBasedLanguageIntelligenceProvider
-GeminiAIService = GeminiLanguageIntelligenceProvider
-
-
-def get_ai_service() -> BaseLanguageIntelligenceProvider:
-    """Factory method to resolve configured AI provider."""
+def get_ai_provider() -> BaseLanguageIntelligenceProvider:
+    """
+    Factory function returning Gemini provider if GEMINI_API_KEY is configured,
+    else returns RuleBased fallback provider.
+    """
     if settings.GEMINI_API_KEY and settings.GEMINI_API_KEY.strip():
-        logger.info("Initializing GeminiLanguageIntelligenceProvider.")
+        logger.info(f"Initializing Gemini AI Provider with model '{settings.GEMINI_MODEL_NAME}'.")
         return GeminiLanguageIntelligenceProvider(
-            api_key=settings.GEMINI_API_KEY.strip(),
+            api_key=settings.GEMINI_API_KEY,
             model_name=settings.GEMINI_MODEL_NAME
         )
-    else:
-        logger.info("GEMINI_API_KEY unconfigured. Initializing RuleBasedLanguageIntelligenceProvider.")
-        return RuleBasedLanguageIntelligenceProvider()
+
+    logger.info("GEMINI_API_KEY is unconfigured. Initializing RuleBased Fallback AI Provider.")
+    return RuleBasedLanguageIntelligenceProvider()
+
+
+# Alias for backward compatibility across API routes
+get_ai_service = get_ai_provider
+

@@ -145,25 +145,28 @@ def normalize_category(input_str: str) -> str:
                 return key
 
     # Substring keyword heuristics for multilingual inputs (Hindi, Marathi, Telugu, Portuguese, Zulu, Bengali, English)
-    water_kw = ["water", "pipe", "aqua", "पानी", "पाणी", "জল", "água", "amanzi", "clean water", "నీరు", "తాగునీరు", "పైప్‌లైన్"]
-    sanitation_kw = ["sewer", "sewage", "esgoto", "sanitat", "drain", "latrine", "waste water", "మురుగునీరు"]
-    electricity_kw = ["power", "electr", "grid", "energy", "बिजली", "luz", "ogesi", "light", "విద్యుత్", "కరెంట్"]
-    healthcare_kw = ["health", "hosp", "clinic", "medic", "अस्पताल", "médico", "imithi", "doctor", "হাসপাতাল", "ఆసుపత్రి", "వైద్యం"]
-    education_kw = ["school", "educat", "teach", "class", "மாணவர்", "বিদ্যালয়", "పాఠశాల", "బడి"]
-    roads_kw = ["road", "pave", "street", "bridge", "highway", "मार्ग", "सड़क", "pothole", "రోడ్డు", "రహదారి"]
-    transportation_kw = ["transit", "bus", "train", "transport", "commute", "metro", "బస్సు", "రవాణా"]
-    digital_kw = ["internet", "broadband", "wifi", "telecom", "digital", "सेलुलर", "ইন্টারনেট", "ఇంటర్నెట్", "నెట్‌వర్క్"]
-    waste_kw = ["waste", "trash", "garbage", "rubbish", "landfill", "recycling", "చెత్త"]
-    safety_kw = ["police", "safety", "crime", "lighting", "security", "రక్షణ"]
+    electricity_kw = ["electricity", "power", "grid", "outage", "energy", "बिजली", "कटौती", "जनरेटर", "luz", "ogesi", "light", "విద్యుత్", "కరెంట్"]
+    healthcare_kw = ["healthcare", "health", "hospital", "clinic", "medic", "अस्पताल", "स्वास्थ्य", "डॉक्टर", "médico", "imithi", "doctor", "হাসপাতাল", "ఆసుపత్రి", "వైద్యం"]
+    environment_kw = ["environment", "pollution", "air quality", "green space", "प्रदूषण", "पर्यावरण", "प्रदुषण", "दूषित"]
+    water_kw = ["water", "drinking_water", "pipe", "aqua", "पानी", "पाणी", "पेयजल", "जल आपूर्ति", "água", "amanzi", "clean water", "నీరు", "తాగునీరు", "పైప్‌లైన్"]
+    sanitation_kw = ["sewer", "sewage", "esgoto", "sanitat", "drain", "latrine", "waste water", "मुరుగునీరు", "नाला", "सफाई"]
+    education_kw = ["school", "educat", "teach", "class", "स्कूल", "पढ़ाई", "छात्र", "विद्यार्थी", "বিদ্যালয়", "పాఠశాల", "బడి"]
+    roads_kw = ["road", "pave", "street", "bridge", "highway", "मार्ग", "सड़क", "खड्डों", "pothole", "రోడ్డు", "రహదారి"]
+    transportation_kw = ["transit", "bus", "train", "transport", "commute", "metro", "बस", "यातायात", "రవాణా", "బస్సు"]
+    digital_kw = ["internet", "broadband", "wifi", "telecom", "digital", "इंटरनेट", "कनेक्शन", "संयोग", "सेलुलर", "ইন্টারনেট", "ఇంటర్నెట్", "నెట్‌వర్క్"]
+    waste_kw = ["waste", "trash", "garbage", "rubbish", "landfill", "recycling", "कचरा", "गंदगी", "చెత్త"]
+    safety_kw = ["police", "safety", "crime", "lighting", "security", "सुरक्षा", "पुलिस", "रक्षण"]
 
-    if any(w in cleaned for w in water_kw):
-        return "water"
-    if any(w in cleaned for w in sanitation_kw):
-        return "sanitation"
     if any(w in cleaned for w in electricity_kw):
         return "electricity"
     if any(w in cleaned for w in healthcare_kw):
         return "healthcare"
+    if any(w in cleaned for w in environment_kw):
+        return "environment"
+    if any(w in cleaned for w in water_kw):
+        return "water"
+    if any(w in cleaned for w in sanitation_kw):
+        return "sanitation"
     if any(w in cleaned for w in education_kw):
         return "education"
     if any(w in cleaned for w in roads_kw):
