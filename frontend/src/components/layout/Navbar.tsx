@@ -50,13 +50,13 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <>
-      <header className="h-14 bg-[#121319] border-b border-white/[0.08] px-3 sm:px-6 flex items-center justify-between z-40 sticky top-0 shadow-sm">
+      <header className="h-14 bg-[#000000] border-b border-white/[0.08] px-3 sm:px-6 flex items-center justify-between z-40 sticky top-0 shadow-sm">
         {/* Brand Identity & Mobile Menu Toggle */}
         <div className="flex items-center gap-3">
           {/* Mobile Hamburger Toggle Button */}
           <button
             onClick={() => setMobileMenuOpen(true)}
-            className="md:hidden p-1.5 rounded-lg bg-[#1A1C24] border border-white/[0.08] text-slate-300 hover:text-white transition cursor-pointer flex items-center justify-center shrink-0"
+            className="md:hidden p-1.5 rounded-lg bg-[#0A0A0C] border border-white/[0.08] text-slate-300 hover:text-white transition cursor-pointer flex items-center justify-center shrink-0"
             title="Open Mobile Navigation Menu"
           >
             <Menu className="w-5 h-5" />
@@ -80,7 +80,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Right Controls: Command Palette & Demo Disclaimer */}
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Live Status Pill */}
-          <div className="hidden xl:flex items-center gap-2 px-2.5 py-1 rounded-lg bg-[#1A1C24] border border-white/[0.08] text-xs text-slate-300">
+          <div className="hidden xl:flex items-center gap-2 px-2.5 py-1 rounded-lg bg-[#0A0A0C] border border-white/[0.08] text-xs text-slate-300">
             <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
             <span className="text-[11px] font-medium text-slate-400">7 Languages Active</span>
           </div>
@@ -88,11 +88,11 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Command Palette Trigger */}
           <button
             onClick={onOpenCommandPalette}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#1A1C24] border border-white/[0.08] text-xs text-slate-300 hover:text-white hover:border-white/[0.16] transition cursor-pointer"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#0A0A0C] border border-white/[0.08] text-xs text-slate-300 hover:text-white hover:border-white/[0.16] transition cursor-pointer"
           >
             <Command className="w-3.5 h-3.5 text-slate-400 shrink-0" />
             <span className="hidden sm:inline text-xs text-slate-400">Search...</span>
-            <kbd className="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded bg-[#121319] border border-white/[0.08] text-[10px] font-mono text-slate-400">
+            <kbd className="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded bg-[#000000] border border-white/[0.08] text-[10px] font-mono text-slate-400">
               ⌘K
             </kbd>
           </button>
@@ -108,7 +108,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Full-Screen Mobile Navigation Overlay Modal */}
       {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 z-50 bg-[#0A0B0F] flex flex-col p-4 sm:p-6 overflow-y-auto">
+        <div className="md:hidden fixed inset-0 z-50 bg-[#000000] flex flex-col p-4 sm:p-6 overflow-y-auto">
           {/* Mobile Drawer Top Bar */}
           <div className="flex items-center justify-between border-b border-white/[0.08] pb-4 mb-4">
             <div className="flex items-center gap-3">
@@ -127,7 +127,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => setMobileMenuOpen(false)}
-              className="p-2 rounded-lg bg-[#121319] border border-white/[0.08] text-slate-300 hover:text-white transition cursor-pointer flex items-center gap-1 text-xs shrink-0"
+              className="p-2 rounded-lg bg-[#0A0A0C] border border-white/[0.08] text-slate-300 hover:text-white transition cursor-pointer flex items-center gap-1 text-xs shrink-0"
             >
               <X className="w-4 h-4 text-slate-400" />
               <span className="hidden xs:inline">Close</span>
@@ -145,7 +145,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   className={`w-full flex items-center justify-between p-3 rounded-lg text-left transition-colors cursor-pointer ${
                     isActive
                       ? 'bg-indigo-600/10 text-indigo-400 border border-indigo-500/30'
-                      : 'bg-[#121319] text-slate-300 hover:bg-[#1A1C24] hover:text-white border border-white/[0.08]'
+                      : 'bg-[#0A0A0C] text-slate-300 hover:bg-[#121215] hover:text-white border border-white/[0.08]'
                   }`}
                 >
                   <div className="flex items-center gap-3 min-w-0">
@@ -153,7 +153,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                       className={`p-2 rounded-md shrink-0 ${
                         isActive
                           ? 'bg-indigo-600/20 text-indigo-400'
-                          : 'bg-[#1A1C24] text-slate-400'
+                          : 'bg-[#121215] text-slate-400'
                       }`}
                     >
                       {item.icon}

@@ -45,9 +45,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 bg-[#0A0B0F]/80 backdrop-blur-sm p-4">
-      <div className="w-full max-w-2xl bg-[#121319] border border-white/[0.08] rounded-xl shadow-2xl overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-150">
-        <div className="flex items-center px-4 border-b border-white/[0.08] bg-[#1A1C24]">
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 bg-[#000000]/80 backdrop-blur-sm p-4">
+      <div className="w-full max-w-2xl bg-[#0A0A0C] border border-white/[0.08] rounded-xl shadow-2xl overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-150">
+        <div className="flex items-center px-4 border-b border-white/[0.08] bg-[#121215]">
           <Search className="w-4 h-4 text-indigo-400 mr-3 shrink-0" />
           <input
             type="text"
@@ -59,7 +59,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
           />
           <button
             onClick={onClose}
-            className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-[#121319] transition cursor-pointer"
+            className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-[#0A0A0C] transition cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -79,10 +79,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
                     onSelectTab(item.id);
                     onClose();
                   }}
-                  className="w-full flex items-center justify-between p-3 rounded-lg text-left hover:bg-[#1A1C24] transition-colors group cursor-pointer"
+                  className="w-full flex items-center justify-between p-3 rounded-lg text-left hover:bg-[#121215] transition-colors group cursor-pointer"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-md bg-[#0A0B0F] border border-white/[0.08]">
+                    <div className="p-2 rounded-md bg-[#000000] border border-white/[0.08]">
                       {item.icon}
                     </div>
                     <div>
@@ -102,9 +102,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
           )}
         </div>
 
-        <div className="px-4 py-2.5 bg-[#0A0B0F] border-t border-white/[0.08] flex items-center justify-between text-[11px] text-slate-400">
+        <div className="px-4 py-2.5 bg-[#000000] border-t border-white/[0.08] flex items-center justify-between text-[11px] text-slate-400">
           <div className="flex items-center gap-2">
-            <kbd className="px-1.5 py-0.5 rounded bg-[#1A1C24] border border-white/[0.08] text-slate-300 font-mono">ESC</kbd>
+            <kbd className="px-1.5 py-0.5 rounded bg-[#121215] border border-white/[0.08] text-slate-300 font-mono">ESC</kbd>
             <span>Close</span>
           </div>
           <div className="font-mono text-[10px]">CivicPulse AI Command System</div>

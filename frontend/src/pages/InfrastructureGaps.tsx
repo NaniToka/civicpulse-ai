@@ -25,7 +25,7 @@ export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicato
   return (
     <div className="space-y-8 animate-in fade-in duration-150">
       {/* 1. Page Header */}
-      <div className="p-6 md:p-8 rounded-xl bg-[#121319] border border-white/[0.08] flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm">
+      <div className="p-6 md:p-8 rounded-xl bg-[#0A0A0C] border border-white/[0.08] flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm">
         <div className="space-y-2">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-indigo-500" />
@@ -37,10 +37,10 @@ export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicato
             Infrastructure Deficit & Gap <span className="hero-gradient-text">Intelligence</span>
           </h1>
           <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-xs">
-            <span className="px-2.5 py-1 rounded-md bg-[#1A1C24] border border-white/[0.08] text-slate-300 font-medium">
+            <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
               6 Core Sectors
             </span>
-            <span className="px-2.5 py-1 rounded-md bg-[#1A1C24] border border-white/[0.08] text-slate-300 font-medium">
+            <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
               Municipal Capacity Deficits
             </span>
           </div>
@@ -48,13 +48,13 @@ export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicato
       </div>
 
       {/* 2. Explanatory Banner: What do the Deficit Scores Mean? */}
-      <div className="p-5 rounded-xl bg-[#121319] border border-white/[0.08] shadow-sm space-y-3 font-mono text-xs">
+      <div className="p-5 rounded-xl bg-[#0A0A0C] border border-white/[0.08] shadow-sm space-y-3 font-mono text-xs">
         <div className="flex items-center gap-2 text-slate-200 font-semibold">
           <HelpCircle className="w-4 h-4 text-indigo-400 shrink-0" />
           <span>Understanding Deficit Scores & Severity Levels:</span>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-          <div className="p-3.5 rounded-lg bg-[#1A1C24] border border-red-500/20 flex items-start gap-2.5">
+          <div className="p-3.5 rounded-lg bg-[#121215] border border-red-500/20 flex items-start gap-2.5">
             <ShieldAlert className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
             <div>
               <span className="font-semibold text-red-400">0.75 – 1.00 (Critical Deficit)</span>
@@ -62,7 +62,7 @@ export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicato
             </div>
           </div>
 
-          <div className="p-3.5 rounded-lg bg-[#1A1C24] border border-amber-500/20 flex items-start gap-2.5">
+          <div className="p-3.5 rounded-lg bg-[#121215] border border-amber-500/20 flex items-start gap-2.5">
             <ShieldAlert className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
             <div>
               <span className="font-semibold text-amber-400">0.50 – 0.74 (High Deficit)</span>
@@ -70,7 +70,7 @@ export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicato
             </div>
           </div>
 
-          <div className="p-3.5 rounded-lg bg-[#1A1C24] border border-green-500/20 flex items-start gap-2.5">
+          <div className="p-3.5 rounded-lg bg-[#121215] border border-green-500/20 flex items-start gap-2.5">
             <ShieldAlert className="w-4 h-4 text-green-400 shrink-0 mt-0.5" />
             <div>
               <span className="font-semibold text-green-400">0.00 – 0.49 (Stable)</span>
@@ -91,10 +91,10 @@ export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicato
           const deficitPct = Math.round(avgDeficit * 100);
 
           return (
-            <div key={cat} className="p-6 rounded-xl bg-[#121319] border border-white/[0.08] space-y-4 shadow-sm">
+            <div key={cat} className="p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.08] space-y-4 shadow-sm">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
-                  <div className="p-2 rounded-lg bg-[#1A1C24] border border-white/[0.08]">
+                  <div className="p-2 rounded-lg bg-[#121215] border border-white/[0.08]">
                     {categoryIcons[cat]}
                   </div>
                   <span className="text-xs font-semibold text-slate-100 uppercase tracking-wider font-mono">
@@ -112,7 +112,7 @@ export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicato
                   <span className="text-slate-400">Coverage vs Shortfall:</span>
                   <span className="text-green-400">{avgCoverage}% Coverage</span>
                 </div>
-                <div className="h-2 rounded-full bg-[#1A1C24] overflow-hidden border border-white/[0.08] flex">
+                <div className="h-2 rounded-full bg-[#121215] overflow-hidden border border-white/[0.08] flex">
                   <div
                     className="h-full bg-green-500 rounded-l-full"
                     style={{ width: `${avgCoverage}%` }}
@@ -131,7 +131,7 @@ export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicato
       </div>
 
       {/* 4. Region × Sector Deficit Heat Matrix Table */}
-      <div className="p-6 rounded-xl bg-[#121319] border border-white/[0.08] space-y-4 shadow-sm">
+      <div className="p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.08] space-y-4 shadow-sm">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/[0.08] pb-4">
           <div>
             <h3 className="text-[15px] font-semibold text-slate-100 font-mono">
@@ -151,7 +151,7 @@ export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicato
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs font-mono border-collapse">
-            <thead className="bg-[#1A1C24] text-slate-400 border-b border-white/[0.08] uppercase text-[11px]">
+            <thead className="bg-[#121215] text-slate-400 border-b border-white/[0.08] uppercase text-[11px]">
               <tr>
                 <th className="p-3 border-r border-white/[0.08]">INDIAN DISTRICT / CITY</th>
                 {categories.map((c) => (
@@ -164,7 +164,7 @@ export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicato
             </thead>
             <tbody className="divide-y divide-white/[0.08]">
               {regions.map((reg) => (
-                <tr key={reg.id} className="hover:bg-[#1A1C24] transition-colors">
+                <tr key={reg.id} className="hover:bg-[#121215] transition-colors">
                   <td className="p-3.5 border-r border-white/[0.08]">
                     <div className="text-xs font-semibold text-slate-100">{reg.district_city}</div>
                     <div className="text-[11px] text-slate-400">{reg.state_province}, {reg.country}</div>
@@ -174,7 +174,7 @@ export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicato
                     const gap = ind ? ind.gap_score : (reg.id.includes('KANP') && cat === 'healthcare' ? 0.85 : 0.55);
                     const gapPct = Math.round(gap * 100);
 
-                    let bgClass = 'bg-[#1A1C24] text-slate-300 border-white/[0.08]';
+                    let bgClass = 'bg-[#121215] text-slate-300 border-white/[0.08]';
                     let statusLabel = 'STABLE';
                     if (gap >= 0.75) {
                       bgClass = 'bg-red-500/10 text-red-400 border-red-500/20 font-semibold';
@@ -202,7 +202,7 @@ export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicato
                   <td className="p-3 text-center">
                     <button
                       onClick={() => setActiveDetailRegion(reg)}
-                      className="px-2.5 py-1 rounded-lg bg-[#1A1C24] hover:bg-[#161822] border border-white/[0.08] text-slate-300 text-[11px] font-medium flex items-center justify-center gap-1 mx-auto cursor-pointer"
+                      className="px-2.5 py-1 rounded-lg bg-[#121215] hover:bg-[#101014] border border-white/[0.08] text-slate-300 text-[11px] font-medium flex items-center justify-center gap-1 mx-auto cursor-pointer"
                     >
                       <MapPin className="w-3 h-3 text-indigo-400" />
                       <span>Details</span>

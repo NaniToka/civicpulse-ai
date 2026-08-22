@@ -70,7 +70,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <aside
-      className={`hidden md:flex bg-[#121319] border-r border-white/[0.08] flex-col transition-all duration-200 select-none ${
+      className={`hidden md:flex bg-[#000000] border-r border-white/[0.08] flex-col transition-all duration-200 select-none ${
         collapsed ? 'w-16' : 'w-60'
       }`}
     >
@@ -87,7 +87,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {onToggleCollapse && (
           <button
             onClick={onToggleCollapse}
-            className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-[#1A1C24] transition cursor-pointer"
+            className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-[#0A0A0C] transition cursor-pointer"
             title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           >
             {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
@@ -125,7 +125,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     <span className={isActive ? 'text-indigo-400' : 'text-slate-400'}>{item.icon}</span>
                     {!collapsed && <span className="flex-1 text-left truncate">{item.label}</span>}
                     {!collapsed && item.badge && (
-                      <span className="text-[10px] px-1.5 py-0.2 rounded bg-[#1A1C24] border border-white/[0.08] text-slate-400">
+                      <span className="text-[10px] px-1.5 py-0.2 rounded bg-[#0A0A0C] border border-white/[0.08] text-slate-400">
                         {item.badge}
                       </span>
                     )}
@@ -139,7 +139,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Bottom Footer Disclaimer */}
       {!collapsed && (
-        <div className="p-3.5 border-t border-white/[0.08] bg-[#0A0B0F] text-xs space-y-2">
+        <div className="p-3.5 border-t border-white/[0.08] bg-[#000000] text-xs space-y-2">
           <div className="flex items-center justify-between text-xs text-slate-300">
             <span className="flex items-center gap-1.5 text-slate-400 text-[11px]">
               <Activity className="w-3.5 h-3.5 text-green-400" />
@@ -150,7 +150,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </span>
           </div>
 
-          <div className="p-2.5 rounded-lg bg-[#121319] border border-white/[0.08] text-xs text-slate-300 flex items-start gap-2">
+          <div className="p-2.5 rounded-lg bg-[#0A0A0C] border border-white/[0.08] text-xs text-slate-300 flex items-start gap-2">
             <ShieldCheck className="w-3.5 h-3.5 text-slate-400 shrink-0 mt-0.5" />
             <div>
               <span className="font-semibold text-slate-300 text-[10px] uppercase tracking-wider block">

@@ -62,12 +62,12 @@ export const CitizenFeedbackFeed: React.FC<CitizenFeedbackFeedProps> = ({
               <select
                 value={source}
                 onChange={(e) => setSource(e.target.value)}
-                className="w-full bg-[#1A1C24] border border-white/[0.08] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-white/[0.16] cursor-pointer"
+                className="w-full bg-[#121215] border border-white/[0.08] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-white/[0.16] cursor-pointer"
               >
-                <option value="WhatsApp Voice Note" className="bg-[#1A1C24]">WhatsApp Voice Note</option>
-                <option value="IVR Call" className="bg-[#1A1C24]">IVR Voice Call</option>
-                <option value="USSD Gateway" className="bg-[#1A1C24]">USSD Gateway</option>
-                <option value="Web Intake" className="bg-[#1A1C24]">Web Portal Intake</option>
+                <option value="WhatsApp Voice Note" className="bg-[#121215]">WhatsApp Voice Note</option>
+                <option value="IVR Call" className="bg-[#121215]">IVR Voice Call</option>
+                <option value="USSD Gateway" className="bg-[#121215]">USSD Gateway</option>
+                <option value="Web Intake" className="bg-[#121215]">Web Portal Intake</option>
               </select>
             </div>
           </div>
@@ -81,7 +81,7 @@ export const CitizenFeedbackFeed: React.FC<CitizenFeedbackFeedProps> = ({
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               placeholder="e.g. पानी की पाइपलाइन 3 हफ्तों से टूटी है 5000 घर प्रभावित हैं..."
-              className="w-full bg-[#1A1C24] border border-white/[0.08] rounded-lg p-3 text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-white/[0.16]"
+              className="w-full bg-[#121215] border border-white/[0.08] rounded-lg p-3 text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-white/[0.16]"
             />
           </div>
 
@@ -100,7 +100,7 @@ export const CitizenFeedbackFeed: React.FC<CitizenFeedbackFeedProps> = ({
       <div className="space-y-3">
         <h3 className="text-sm font-semibold text-slate-200">Recent Citizen Demand Log ({requests.length} entries)</h3>
         {requests.map((req) => (
-          <div key={req.id} className="p-4 bg-[#121319] border border-white/[0.08] rounded-xl space-y-2.5 shadow-sm">
+          <div key={req.id} className="p-4 bg-[#0A0A0C] border border-white/[0.08] rounded-xl space-y-2.5 shadow-sm">
             <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
               <div className="flex items-center gap-2">
                 <Badge variant="accent">{req.request_category}</Badge>
@@ -112,11 +112,11 @@ export const CitizenFeedbackFeed: React.FC<CitizenFeedbackFeedProps> = ({
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs pt-1">
-              <div className="p-3 bg-[#1A1C24] rounded-lg border border-white/[0.08]">
+              <div className="p-3 bg-[#121215] rounded-lg border border-white/[0.08]">
                 <span className="text-slate-400 font-medium block">Original Text:</span>
                 <span className="text-slate-200 italic">"{req.original_text}"</span>
               </div>
-              <div className="p-3 bg-[#1A1C24] rounded-lg border border-white/[0.08]">
+              <div className="p-3 bg-[#121215] rounded-lg border border-white/[0.08]">
                 <span className="text-slate-400 font-medium block">English Translation:</span>
                 <span className="text-slate-200 font-medium">"{req.translated_text}"</span>
               </div>

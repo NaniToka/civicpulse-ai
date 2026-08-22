@@ -28,7 +28,7 @@ export const ThreeDDonutChart: React.FC<ThreeDDonutChartProps> = ({ data, total 
   }, [isRotating]);
 
   return (
-    <div className="relative flex flex-col items-center justify-between w-full min-h-[420px] p-6 rounded-xl bg-[#121319] border border-white/[0.08] overflow-hidden shadow-sm space-y-4">
+    <div className="relative flex flex-col items-center justify-between w-full min-h-[420px] p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.08] overflow-hidden shadow-sm space-y-4">
       {/* Top Header & 3D Control Bar */}
       <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-white/[0.08] pb-3 z-20">
         <div className="flex items-center gap-2 text-[10px] font-mono text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-md border border-indigo-500/20">
@@ -40,7 +40,7 @@ export const ThreeDDonutChart: React.FC<ThreeDDonutChartProps> = ({ data, total 
         <div className="flex items-center gap-2 self-end sm:self-auto">
           <button
             onClick={() => setIsRotating(!isRotating)}
-            className="px-2.5 py-1 rounded-lg bg-[#1A1C24] border border-white/[0.08] text-slate-300 hover:text-white transition font-mono text-[11px] font-medium flex items-center gap-1 cursor-pointer"
+            className="px-2.5 py-1 rounded-lg bg-[#121215] border border-white/[0.08] text-slate-300 hover:text-white transition font-mono text-[11px] font-medium flex items-center gap-1 cursor-pointer"
             title={isRotating ? 'Pause Rotation' : 'Spin 3D Ring'}
           >
             {isRotating ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
@@ -49,7 +49,7 @@ export const ThreeDDonutChart: React.FC<ThreeDDonutChartProps> = ({ data, total 
 
           <button
             onClick={() => setTiltAngle((prev) => (prev === 58 ? 40 : prev === 40 ? 70 : 58))}
-            className="px-2.5 py-1 rounded-lg bg-[#1A1C24] border border-white/[0.08] text-slate-300 hover:text-white transition font-mono text-[11px] font-medium flex items-center gap-1 cursor-pointer"
+            className="px-2.5 py-1 rounded-lg bg-[#121215] border border-white/[0.08] text-slate-300 hover:text-white transition font-mono text-[11px] font-medium flex items-center gap-1 cursor-pointer"
             title="Toggle 3D Tilt Angle"
           >
             <Layers className="w-3.5 h-3.5" />
@@ -58,7 +58,7 @@ export const ThreeDDonutChart: React.FC<ThreeDDonutChartProps> = ({ data, total 
 
           <button
             onClick={() => setRotationDeg(0)}
-            className="p-1 rounded-lg bg-[#1A1C24] border border-white/[0.08] text-slate-400 hover:text-slate-200 transition text-[10px] cursor-pointer"
+            className="p-1 rounded-lg bg-[#121215] border border-white/[0.08] text-slate-400 hover:text-slate-200 transition text-[10px] cursor-pointer"
             title="Reset Rotation"
           >
             <RotateCcw className="w-3.5 h-3.5" />
@@ -101,7 +101,7 @@ export const ThreeDDonutChart: React.FC<ThreeDDonutChartProps> = ({ data, total 
                     cy="50"
                     r="38"
                     fill="transparent"
-                    stroke="#0A0B0F"
+                    stroke="#000000"
                     strokeWidth="18"
                     strokeDasharray={dashArray}
                     strokeDashoffset={dashOffset}
@@ -190,14 +190,14 @@ export const ThreeDDonutChart: React.FC<ThreeDDonutChartProps> = ({ data, total 
         </div>
 
         {/* Compact Floating Core Badge */}
-        <div className="absolute z-20 flex flex-col items-center justify-center w-24 h-24 rounded-full bg-[#121319] border border-white/[0.16] shadow-md backdrop-blur-md pointer-events-none font-mono">
+        <div className="absolute z-20 flex flex-col items-center justify-center w-24 h-24 rounded-full bg-[#0A0A0C] border border-white/[0.16] shadow-md backdrop-blur-md pointer-events-none font-mono">
           <span className="text-xl font-bold tracking-tight text-slate-100">{total}</span>
           <span className="text-[9px] text-slate-400 font-semibold uppercase tracking-wider">SIGNALS</span>
         </div>
 
         {/* Hovered Slice Tooltip */}
         {activeSlice !== null && data[activeSlice] && (
-          <div className="absolute bottom-1 z-30 px-3.5 py-1.5 rounded-lg bg-[#1A1C24] border border-white/[0.16] text-center font-mono shadow-md animate-in fade-in duration-150">
+          <div className="absolute bottom-1 z-30 px-3.5 py-1.5 rounded-lg bg-[#121215] border border-white/[0.16] text-center font-mono shadow-md animate-in fade-in duration-150">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: data[activeSlice].color }} />
               <span className="text-slate-100 font-semibold text-xs">{data[activeSlice].label}</span>
@@ -222,7 +222,7 @@ export const ThreeDDonutChart: React.FC<ThreeDDonutChartProps> = ({ data, total 
               className={`p-2 rounded-lg border text-center transition-colors duration-150 cursor-pointer ${
                 isSelected
                   ? 'bg-indigo-600/10 border-indigo-500/40 text-indigo-400'
-                  : 'bg-[#1A1C24] border-white/[0.08] text-slate-300 hover:border-white/[0.16]'
+                  : 'bg-[#121215] border-white/[0.08] text-slate-300 hover:border-white/[0.16]'
               }`}
             >
               <div className="flex items-center justify-center gap-1.5 mb-1">

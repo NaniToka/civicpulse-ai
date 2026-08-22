@@ -70,7 +70,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0A0B0F] text-slate-200 font-sans selection:bg-indigo-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-[#000000] text-slate-200 font-sans selection:bg-indigo-500 selection:text-white">
       <Navbar
         onOpenCommandPalette={() => setCommandPaletteOpen(true)}
         activeTab={activeTab}

@@ -39,7 +39,7 @@ export const ThreeDBarChart: React.FC<ThreeDBarChartProps> = ({ metrics }) => {
   }, [isRotating]);
 
   return (
-    <div className="relative flex flex-col items-center justify-between w-full min-h-[460px] p-6 rounded-xl bg-[#121319] border border-white/[0.08] overflow-hidden shadow-sm space-y-6">
+    <div className="relative flex flex-col items-center justify-between w-full min-h-[460px] p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.08] overflow-hidden shadow-sm space-y-6">
       {/* Top Header & 3D Control Bar */}
       <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-white/[0.08] pb-4 z-20">
         <div className="flex items-center gap-3">
@@ -65,7 +65,7 @@ export const ThreeDBarChart: React.FC<ThreeDBarChartProps> = ({ metrics }) => {
         <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto font-mono text-[10px] font-medium">
           <button
             onClick={() => setIsRotating(!isRotating)}
-            className="px-3 py-1.5 rounded-lg bg-[#1A1C24] border border-white/[0.08] text-slate-300 hover:text-white transition flex items-center gap-1.5 cursor-pointer"
+            className="px-3 py-1.5 rounded-lg bg-[#121215] border border-white/[0.08] text-slate-300 hover:text-white transition flex items-center gap-1.5 cursor-pointer"
             title={isRotating ? 'Pause 3D Spin' : 'Spin 3D Chart'}
           >
             {isRotating ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
@@ -74,7 +74,7 @@ export const ThreeDBarChart: React.FC<ThreeDBarChartProps> = ({ metrics }) => {
 
           <button
             onClick={() => setTiltAngle((prev) => (prev === 55 ? 38 : prev === 38 ? 68 : 55))}
-            className="px-3 py-1.5 rounded-lg bg-[#1A1C24] border border-white/[0.08] text-slate-300 hover:text-white transition flex items-center gap-1.5 cursor-pointer"
+            className="px-3 py-1.5 rounded-lg bg-[#121215] border border-white/[0.08] text-slate-300 hover:text-white transition flex items-center gap-1.5 cursor-pointer"
             title="Toggle 3D Tilt Angle"
           >
             <Layers className="w-3.5 h-3.5" />
@@ -83,7 +83,7 @@ export const ThreeDBarChart: React.FC<ThreeDBarChartProps> = ({ metrics }) => {
 
           <button
             onClick={() => setRotationDeg(0)}
-            className="p-1.5 rounded-lg bg-[#1A1C24] border border-white/[0.08] text-slate-400 hover:text-slate-200 transition cursor-pointer"
+            className="p-1.5 rounded-lg bg-[#121215] border border-white/[0.08] text-slate-400 hover:text-slate-200 transition cursor-pointer"
             title="Reset Angle"
           >
             <RotateCcw className="w-3.5 h-3.5" />
@@ -160,7 +160,7 @@ export const ThreeDBarChart: React.FC<ThreeDBarChartProps> = ({ metrics }) => {
 
         {/* Upright Popover Badge */}
         {activePillar !== null && chartData[activePillar] && (
-          <div className="absolute top-4 z-30 px-4 py-2 rounded-xl bg-[#1A1C24] border border-white/[0.16] text-center font-mono shadow-md animate-in fade-in duration-150">
+          <div className="absolute top-4 z-30 px-4 py-2 rounded-xl bg-[#121215] border border-white/[0.16] text-center font-mono shadow-md animate-in fade-in duration-150">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: chartData[activePillar].color }} />
               <span className="text-slate-100 font-semibold text-xs">{chartData[activePillar].label}:</span>
@@ -183,7 +183,7 @@ export const ThreeDBarChart: React.FC<ThreeDBarChartProps> = ({ metrics }) => {
               className={`p-3 rounded-lg border text-center transition-colors duration-150 cursor-pointer ${
                 isSelected
                   ? 'bg-indigo-600/10 border-indigo-500/40 text-indigo-400'
-                  : 'bg-[#1A1C24] border-white/[0.08] text-slate-300 hover:border-white/[0.16]'
+                  : 'bg-[#121215] border-white/[0.08] text-slate-300 hover:border-white/[0.16]'
               }`}
             >
               <div className="flex items-center justify-center gap-1.5 mb-1">

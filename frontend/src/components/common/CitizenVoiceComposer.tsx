@@ -109,7 +109,7 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
   };
 
   return (
-    <div className="p-6 md:p-8 rounded-xl bg-[#121319] border border-white/[0.08] space-y-6 shadow-sm">
+    <div className="p-6 md:p-8 rounded-xl bg-[#0A0A0C] border border-white/[0.08] space-y-6 shadow-sm">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/[0.08] pb-5">
         <div className="flex items-center gap-3">
@@ -134,10 +134,10 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
           <select
             value={selectedRegionId}
             onChange={(e) => setSelectedRegionId(e.target.value)}
-            className="bg-[#1A1C24] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-white/[0.16] cursor-pointer"
+            className="bg-[#121215] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-white/[0.16] cursor-pointer"
           >
             {regions.map((r) => (
-              <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" key={r.id} value={r.id}>
+              <option className="bg-[#121215] text-slate-100 text-sm py-1" key={r.id} value={r.id}>
                 {r.district_city}, {r.country_code}
               </option>
             ))}
@@ -169,7 +169,7 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
                 setLanguageHint(sample.code);
                 handleAnalyze(sample.text, sample.code);
               }}
-              className="px-3 py-1.5 rounded-lg bg-[#1A1C24] border border-white/[0.08] hover:border-white/[0.16] text-xs text-slate-300 transition cursor-pointer"
+              className="px-3 py-1.5 rounded-lg bg-[#121215] border border-white/[0.08] hover:border-white/[0.16] text-xs text-slate-300 transition cursor-pointer"
             >
               {sample.label}
             </button>
@@ -185,7 +185,7 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
             value={rawText}
             onChange={(e) => setRawText(e.target.value)}
             placeholder="Type or paste citizen feedback in any language (e.g. 'మా ప్రాంతంలో సరైన ఆసుపత్రి సౌకర్యాలు లేవు.')..."
-            className="w-full p-4 bg-[#1A1C24] border border-white/[0.08] rounded-xl text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-white/[0.16] font-sans leading-relaxed"
+            className="w-full p-4 bg-[#121215] border border-white/[0.08] rounded-xl text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-white/[0.16] font-sans leading-relaxed"
           />
         </div>
 
@@ -196,16 +196,16 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
               <select
                 value={languageHint}
                 onChange={(e) => setLanguageHint(e.target.value)}
-                className="bg-[#1A1C24] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
+                className="bg-[#121215] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
               >
-                <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="auto">Auto Detect</option>
-                <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="te">Telugu (తెలుగు)</option>
-                <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="hi">Hindi (हिंदी)</option>
-                <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="mr">Marathi (मराठी)</option>
-                <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="bn">Bengali (বাংলা)</option>
-                <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="pt">Portuguese (pt)</option>
-                <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="zu">Zulu (zu)</option>
-                <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="en">English (en)</option>
+                <option className="bg-[#121215] text-slate-100 text-sm py-1" value="auto">Auto Detect</option>
+                <option className="bg-[#121215] text-slate-100 text-sm py-1" value="te">Telugu (తెలుగు)</option>
+                <option className="bg-[#121215] text-slate-100 text-sm py-1" value="hi">Hindi (हिंदी)</option>
+                <option className="bg-[#121215] text-slate-100 text-sm py-1" value="mr">Marathi (मराठी)</option>
+                <option className="bg-[#121215] text-slate-100 text-sm py-1" value="bn">Bengali (বাংলা)</option>
+                <option className="bg-[#121215] text-slate-100 text-sm py-1" value="pt">Portuguese (pt)</option>
+                <option className="bg-[#121215] text-slate-100 text-sm py-1" value="zu">Zulu (zu)</option>
+                <option className="bg-[#121215] text-slate-100 text-sm py-1" value="en">English (en)</option>
               </select>
             </div>
 
@@ -214,12 +214,12 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
               <select
                 value={channelSource}
                 onChange={(e) => setChannelSource(e.target.value)}
-                className="bg-[#1A1C24] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
+                className="bg-[#121215] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
               >
-                <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="voice">Voice Call</option>
-                <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="text">SMS Text</option>
-                <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="whatsapp">WhatsApp</option>
-                <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="web">Web Portal</option>
+                <option className="bg-[#121215] text-slate-100 text-sm py-1" value="voice">Voice Call</option>
+                <option className="bg-[#121215] text-slate-100 text-sm py-1" value="text">SMS Text</option>
+                <option className="bg-[#121215] text-slate-100 text-sm py-1" value="whatsapp">WhatsApp</option>
+                <option className="bg-[#121215] text-slate-100 text-sm py-1" value="web">Web Portal</option>
               </select>
             </div>
           </div>
@@ -243,7 +243,7 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
 
       {/* Step-by-Step Pipeline Animation */}
       {pipelineStep && (
-        <div className="p-3.5 rounded-lg bg-[#1A1C24] border border-indigo-500/30 flex items-center gap-3 text-xs font-mono text-indigo-400">
+        <div className="p-3.5 rounded-lg bg-[#121215] border border-indigo-500/30 flex items-center gap-3 text-xs font-mono text-indigo-400">
           <RefreshCw className="w-4 h-4 animate-spin text-indigo-400 shrink-0" />
           <span>{pipelineStep}</span>
         </div>
@@ -267,7 +267,7 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
 
       {/* Structured AI Analysis Result Preview Card */}
       {analysisResult && (
-        <div className="p-6 rounded-xl bg-[#1A1C24] border border-white/[0.08] space-y-4 animate-in fade-in duration-150 shadow-sm">
+        <div className="p-6 rounded-xl bg-[#121215] border border-white/[0.08] space-y-4 animate-in fade-in duration-150 shadow-sm">
           <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
             <div className="flex items-center gap-3">
               <span className="text-sm font-semibold text-slate-100">Extracted Civic Intelligence Signal</span>
@@ -281,17 +281,17 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono">
-            <div className="p-3.5 rounded-lg bg-[#121319] border border-white/[0.08]">
+            <div className="p-3.5 rounded-lg bg-[#0A0A0C] border border-white/[0.08]">
               <span className="text-slate-400 text-[11px] uppercase tracking-wider">Detected Language</span>
               <div className="text-slate-100 font-semibold text-base mt-1 uppercase">{analysisResult.language}</div>
             </div>
 
-            <div className="p-3.5 rounded-lg bg-[#121319] border border-white/[0.08]">
+            <div className="p-3.5 rounded-lg bg-[#0A0A0C] border border-white/[0.08]">
               <span className="text-slate-400 text-[11px] uppercase tracking-wider">Civic Category</span>
               <div className="text-indigo-400 font-semibold text-base mt-1 uppercase">{analysisResult.category}</div>
             </div>
 
-            <div className="p-3.5 rounded-lg bg-[#121319] border border-white/[0.08]">
+            <div className="p-3.5 rounded-lg bg-[#0A0A0C] border border-white/[0.08]">
               <span className="text-slate-400 text-[11px] uppercase tracking-wider">Urgency Signal</span>
               <div className="mt-1.5">
                 <PriorityBadge level={analysisResult.urgency} size="sm" />
@@ -301,7 +301,7 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
 
           <div className="space-y-1.5 text-xs">
             <span className="font-mono text-slate-400 text-[11px] uppercase">Normalized English Meaning:</span>
-            <div className="p-3.5 rounded-lg bg-[#121319] border border-white/[0.08] text-slate-200 text-sm italic">
+            <div className="p-3.5 rounded-lg bg-[#0A0A0C] border border-white/[0.08] text-slate-200 text-sm italic">
               "{analysisResult.summary}"
             </div>
           </div>

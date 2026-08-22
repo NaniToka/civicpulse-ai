@@ -25,10 +25,10 @@ export const MetricCard: React.FC<MetricCardProps> = ({
   };
 
   return (
-    <div className="bg-[#121319] border border-white/[0.08] rounded-xl p-6 flex flex-col justify-between shadow-sm hover:border-white/[0.16] transition-colors duration-150">
+    <div className="bg-[#0A0A0C] border border-white/[0.08] rounded-xl p-6 flex flex-col justify-between shadow-sm hover:border-white/[0.16] transition-colors duration-150">
       <div className="flex items-center justify-between">
         <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">{title}</span>
-        <div className="p-2 rounded-lg bg-[#1A1C24] border border-white/[0.08] text-slate-400">
+        <div className="p-2 rounded-lg bg-[#121215] border border-white/[0.08] text-slate-400">
           <Icon className="w-4 h-4" />
         </div>
       </div>

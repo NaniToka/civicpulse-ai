@@ -26,7 +26,7 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
 
   return (
     <div className="space-y-8 animate-in fade-in duration-150">
-      <div className="p-6 md:p-8 rounded-xl bg-[#121319] border border-white/[0.08] flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm">
+      <div className="p-6 md:p-8 rounded-xl bg-[#0A0A0C] border border-white/[0.08] flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm">
         <div>
           <div className="flex items-center gap-2">
             <Network className="w-5 h-5 text-indigo-400" />
@@ -35,10 +35,10 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
             </h1>
           </div>
           <div className="flex flex-wrap items-center gap-2 mt-2 font-mono text-xs">
-            <span className="px-2.5 py-1 rounded-md bg-[#1A1C24] border border-white/[0.08] text-slate-300 font-medium">
+            <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
               6-Step Evidence Nodes
             </span>
-            <span className="px-2.5 py-1 rounded-md bg-[#1A1C24] border border-white/[0.08] text-slate-300 font-medium">
+            <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
               Traceable Audit Trail
             </span>
           </div>
@@ -48,11 +48,11 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
           <select
             value={selectedRegion}
             onChange={(e) => setSelectedRegion(e.target.value)}
-            className="bg-[#1A1C24] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
+            className="bg-[#121215] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
           >
-            <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="ALL">All Regions</option>
+            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="ALL">All Regions</option>
             {regions.map((r) => (
-              <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" key={r.id} value={r.id}>
+              <option className="bg-[#121215] text-slate-100 text-sm py-1" key={r.id} value={r.id}>
                 {r.district_city}, {r.country_code}
               </option>
             ))}
@@ -61,19 +61,19 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
           <select
             value={selectedType}
             onChange={(e) => setSelectedType(e.target.value)}
-            className="bg-[#1A1C24] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
+            className="bg-[#121215] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
           >
-            <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="ALL">All Evidence Types</option>
-            <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="citizen_demand">Citizen Demand</option>
-            <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="demand_momentum">Demand Momentum</option>
-            <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="infrastructure_gap">Infrastructure Gap</option>
-            <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="demographic_need">Demographic Need</option>
-            <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="investment_context">Investment Context</option>
+            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="ALL">All Evidence Types</option>
+            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="citizen_demand">Citizen Demand</option>
+            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="demand_momentum">Demand Momentum</option>
+            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="infrastructure_gap">Infrastructure Gap</option>
+            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="demographic_need">Demographic Need</option>
+            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="investment_context">Investment Context</option>
           </select>
         </div>
       </div>
 
-      <div className="p-6 rounded-xl bg-[#121319] border border-white/[0.08] space-y-4 shadow-sm">
+      <div className="p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.08] space-y-4 shadow-sm">
         <h2 className="text-[15px] font-semibold text-slate-100 font-mono">6-Step Recommendation Evidence Chains</h2>
         <p className="text-xs text-slate-400">Select a recommendation to inspect its complete machine-readable evidence trail.</p>
 
@@ -82,7 +82,7 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
             <div
               key={rec.id}
               onClick={() => onOpenEvidenceModal && onOpenEvidenceModal(rec)}
-              className="p-5 rounded-lg bg-[#1A1C24] border border-white/[0.08] hover:border-white/[0.16] transition-colors cursor-pointer space-y-3 shadow-sm group"
+              className="p-5 rounded-lg bg-[#121215] border border-white/[0.08] hover:border-white/[0.16] transition-colors cursor-pointer space-y-3 shadow-sm group"
             >
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold font-mono text-indigo-400 uppercase">{rec.category}</span>
@@ -102,14 +102,14 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
         </div>
       </div>
 
-      <div className="p-6 rounded-xl bg-[#121319] border border-white/[0.08] space-y-4 shadow-sm">
+      <div className="p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.08] space-y-4 shadow-sm">
         <h2 className="text-[15px] font-semibold text-slate-100 font-mono">
           Granular Evidence Nodes ({filteredItems.length})
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredItems.map((item) => (
-            <div key={item.id} className="p-4 rounded-lg bg-[#1A1C24] border border-white/[0.08] space-y-2.5 shadow-sm">
+            <div key={item.id} className="p-4 rounded-lg bg-[#121215] border border-white/[0.08] space-y-2.5 shadow-sm">
               <div className="flex items-center justify-between text-xs">
                 <span className="font-mono text-indigo-400 uppercase font-medium text-[10px] bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20">
                   {item.type}

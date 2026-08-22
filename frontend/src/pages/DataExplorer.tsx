@@ -64,7 +64,7 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
   return (
     <div className="space-y-8 animate-in fade-in duration-150">
       {/* Header */}
-      <div className="p-6 md:p-8 rounded-xl bg-[#121319] border border-white/[0.08] flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm">
+      <div className="p-6 md:p-8 rounded-xl bg-[#0A0A0C] border border-white/[0.08] flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm">
         <div>
           <div className="flex items-center gap-2">
             <Database className="w-5 h-5 text-indigo-400" />
@@ -73,16 +73,16 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
             </h1>
           </div>
           <div className="flex flex-wrap items-center gap-2 mt-2 font-mono text-xs">
-            <span className="px-2.5 py-1 rounded-md bg-[#1A1C24] border border-white/[0.08] text-slate-300 font-medium">
+            <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
               35 Indian Districts
             </span>
-            <span className="px-2.5 py-1 rounded-md bg-[#1A1C24] border border-white/[0.08] text-slate-300 font-medium">
+            <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
               Demographic Census
             </span>
           </div>
         </div>
 
-        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1A1C24] border border-white/[0.08] text-xs font-mono font-medium text-amber-400">
+        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#121215] border border-white/[0.08] text-xs font-mono font-medium text-amber-400">
           <ShieldAlert className="w-4 h-4 text-amber-400" />
           <span>DEMO DATASET</span>
         </div>
@@ -142,13 +142,13 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
         </button>
       </div>
 
-      <div className="p-6 rounded-xl bg-[#121319] border border-white/[0.08] space-y-4 shadow-sm">
+      <div className="p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.08] space-y-4 shadow-sm">
         {activeTab === 'requests' && (
           <div className="space-y-4">
             <h3 className="text-[15px] font-semibold text-slate-100 font-mono">Citizen Requests Data</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs font-mono border-collapse">
-                <thead className="bg-[#1A1C24] text-slate-400 border-b border-white/[0.08] uppercase text-[11px]">
+                <thead className="bg-[#121215] text-slate-400 border-b border-white/[0.08] uppercase text-[11px]">
                   <tr>
                     <th className="p-3">ID</th>
                     <th className="p-3">REGION</th>
@@ -160,7 +160,7 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
                 </thead>
                 <tbody className="divide-y divide-white/[0.08]">
                   {requests.map((r) => (
-                    <tr key={r.id} className="hover:bg-[#1A1C24] transition-colors">
+                    <tr key={r.id} className="hover:bg-[#121215] transition-colors">
                       <td className="p-3 font-semibold text-indigo-400">{r.id}</td>
                       <td className="p-3">
                         <button
@@ -188,7 +188,7 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
             <h3 className="text-[15px] font-semibold text-slate-100 font-mono">Regions & Demographic Census Data</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs font-mono border-collapse">
-                <thead className="bg-[#1A1C24] text-slate-400 border-b border-white/[0.08] uppercase text-[11px]">
+                <thead className="bg-[#121215] text-slate-400 border-b border-white/[0.08] uppercase text-[11px]">
                   <tr>
                     <th className="p-3">ID</th>
                     <th className="p-3">CITY</th>
@@ -201,7 +201,7 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
                 </thead>
                 <tbody className="divide-y divide-white/[0.08]">
                   {regions.map((r) => (
-                    <tr key={r.id} className="hover:bg-[#1A1C24] transition-colors">
+                    <tr key={r.id} className="hover:bg-[#121215] transition-colors">
                       <td className="p-3 font-semibold text-indigo-400">{r.id}</td>
                       <td className="p-3 font-semibold text-slate-100">{r.district_city}</td>
                       <td className="p-3 text-slate-400">{r.country}</td>
@@ -211,7 +211,7 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
                       <td className="p-3">
                         <button
                           onClick={() => setActiveDetailRegion(r)}
-                          className="px-2.5 py-1 rounded-lg bg-[#1A1C24] hover:bg-[#161822] border border-white/[0.08] text-slate-300 text-[11px] font-medium flex items-center gap-1 cursor-pointer"
+                          className="px-2.5 py-1 rounded-lg bg-[#121215] hover:bg-[#101014] border border-white/[0.08] text-slate-300 text-[11px] font-medium flex items-center gap-1 cursor-pointer"
                         >
                           <MapPin className="w-3 h-3 text-indigo-400" />
                           <span>Details</span>
@@ -231,7 +231,7 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
             <h3 className="text-[15px] font-semibold text-slate-100 font-mono">Infrastructure Capacity Indicators</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs font-mono border-collapse">
-                <thead className="bg-[#1A1C24] text-slate-400 border-b border-white/[0.08] uppercase text-[11px]">
+                <thead className="bg-[#121215] text-slate-400 border-b border-white/[0.08] uppercase text-[11px]">
                   <tr>
                     <th className="p-3">ID</th>
                     <th className="p-3">REGION</th>
@@ -242,7 +242,7 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
                 </thead>
                 <tbody className="divide-y divide-white/[0.08]">
                   {indicators.map((ind) => (
-                    <tr key={ind.id} className="hover:bg-[#1A1C24] transition-colors">
+                    <tr key={ind.id} className="hover:bg-[#121215] transition-colors">
                       <td className="p-3 text-slate-300">{ind.id}</td>
                       <td className="p-3">
                         <button
@@ -269,7 +269,7 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
             <h3 className="text-[15px] font-semibold text-slate-100 font-mono">Public Capital Investments</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs font-mono border-collapse">
-                <thead className="bg-[#1A1C24] text-slate-400 border-b border-white/[0.08] uppercase text-[11px]">
+                <thead className="bg-[#121215] text-slate-400 border-b border-white/[0.08] uppercase text-[11px]">
                   <tr>
                     <th className="p-3">ID</th>
                     <th className="p-3">PROJECT NAME</th>
@@ -281,7 +281,7 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
                 </thead>
                 <tbody className="divide-y divide-white/[0.08]">
                   {investments.map((inv) => (
-                    <tr key={inv.id} className="hover:bg-[#1A1C24] transition-colors">
+                    <tr key={inv.id} className="hover:bg-[#121215] transition-colors">
                       <td className="p-3 text-slate-300">{inv.id}</td>
                       <td className="p-3 font-semibold text-slate-100">{inv.project_name}</td>
                       <td className="p-3">
@@ -309,7 +309,7 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
             <h3 className="text-[15px] font-semibold text-slate-100 font-mono">Ingest Multilingual Citizen Feedback Signal</h3>
 
             {successMsg && (
-              <div className="p-3.5 rounded-lg bg-[#1A1C24] border border-green-500/30 text-xs font-medium text-green-400 flex items-center gap-2 shadow-sm">
+              <div className="p-3.5 rounded-lg bg-[#121215] border border-green-500/30 text-xs font-medium text-green-400 flex items-center gap-2 shadow-sm">
                 <CheckCircle2 className="w-4 h-4 text-green-400 shrink-0" />
                 <span>{successMsg}</span>
               </div>
@@ -323,7 +323,7 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
                 placeholder="Enter feedback in Hindi, Marathi, Portuguese, Zulu, Bengali, English..."
                 value={rawText}
                 onChange={(e) => setRawText(e.target.value)}
-                className="w-full p-3 bg-[#1A1C24] border border-white/[0.08] rounded-lg text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-white/[0.16] font-sans leading-relaxed"
+                className="w-full p-3 bg-[#121215] border border-white/[0.08] rounded-lg text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-white/[0.16] font-sans leading-relaxed"
               />
             </div>
 
@@ -333,14 +333,14 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
                 <select
                   value={language}
                   onChange={(e) => setLanguage(e.target.value)}
-                  className="w-full bg-[#1A1C24] border border-white/[0.08] text-slate-100 text-xs rounded-lg p-2.5 focus:outline-none cursor-pointer"
+                  className="w-full bg-[#121215] border border-white/[0.08] text-slate-100 text-xs rounded-lg p-2.5 focus:outline-none cursor-pointer"
                 >
-                  <option className="bg-[#1A1C24] text-slate-100 text-xs py-1" value="hi">Hindi (hi)</option>
-                  <option className="bg-[#1A1C24] text-slate-100 text-xs py-1" value="mr">Marathi (mr)</option>
-                  <option className="bg-[#1A1C24] text-slate-100 text-xs py-1" value="pt">Portuguese (pt)</option>
-                  <option className="bg-[#1A1C24] text-slate-100 text-xs py-1" value="zu">Zulu (zu)</option>
-                  <option className="bg-[#1A1C24] text-slate-100 text-xs py-1" value="bn">Bengali (bn)</option>
-                  <option className="bg-[#1A1C24] text-slate-100 text-xs py-1" value="en">English (en)</option>
+                  <option className="bg-[#121215] text-slate-100 text-xs py-1" value="hi">Hindi (hi)</option>
+                  <option className="bg-[#121215] text-slate-100 text-xs py-1" value="mr">Marathi (mr)</option>
+                  <option className="bg-[#121215] text-slate-100 text-xs py-1" value="pt">Portuguese (pt)</option>
+                  <option className="bg-[#121215] text-slate-100 text-xs py-1" value="zu">Zulu (zu)</option>
+                  <option className="bg-[#121215] text-slate-100 text-xs py-1" value="bn">Bengali (bn)</option>
+                  <option className="bg-[#121215] text-slate-100 text-xs py-1" value="en">English (en)</option>
                 </select>
               </div>
 
@@ -349,12 +349,12 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
                 <select
                   value={source}
                   onChange={(e) => setSource(e.target.value)}
-                  className="w-full bg-[#1A1C24] border border-white/[0.08] text-slate-100 text-xs rounded-lg p-2.5 focus:outline-none cursor-pointer"
+                  className="w-full bg-[#121215] border border-white/[0.08] text-slate-100 text-xs rounded-lg p-2.5 focus:outline-none cursor-pointer"
                 >
-                  <option className="bg-[#1A1C24] text-slate-100 text-xs py-1" value="voice">Voice Call</option>
-                  <option className="bg-[#1A1C24] text-slate-100 text-xs py-1" value="text">SMS Text</option>
-                  <option className="bg-[#1A1C24] text-slate-100 text-xs py-1" value="whatsapp">WhatsApp</option>
-                  <option className="bg-[#1A1C24] text-slate-100 text-xs py-1" value="web">Web Portal</option>
+                  <option className="bg-[#121215] text-slate-100 text-xs py-1" value="voice">Voice Call</option>
+                  <option className="bg-[#121215] text-slate-100 text-xs py-1" value="text">SMS Text</option>
+                  <option className="bg-[#121215] text-slate-100 text-xs py-1" value="whatsapp">WhatsApp</option>
+                  <option className="bg-[#121215] text-slate-100 text-xs py-1" value="web">Web Portal</option>
                 </select>
               </div>
 
@@ -373,10 +373,10 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
                 <select
                   value={regionId}
                   onChange={(e) => setRegionId(e.target.value)}
-                  className="w-full bg-[#1A1C24] border border-white/[0.08] text-slate-100 text-xs rounded-lg p-2.5 focus:outline-none cursor-pointer"
+                  className="w-full bg-[#121215] border border-white/[0.08] text-slate-100 text-xs rounded-lg p-2.5 focus:outline-none cursor-pointer"
                 >
                   {regions.map((r) => (
-                    <option className="bg-[#1A1C24] text-slate-100 text-xs py-1" key={r.id} value={r.id}>
+                    <option className="bg-[#121215] text-slate-100 text-xs py-1" key={r.id} value={r.id}>
                       {r.district_city}
                     </option>
                   ))}

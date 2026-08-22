@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-[#0A0B0F] text-slate-200 antialiased selection:bg-indigo-500 selection:text-white tracking-normal min-h-screen;
+    @apply bg-[#000000] text-slate-200 antialiased selection:bg-indigo-500 selection:text-white tracking-normal min-h-screen;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
@@ -20,7 +20,7 @@
   select {
     font-weight: 500 !important;
     color: #f8fafc !important;
-    background-color: #121319 !important;
+    background-color: #0A0A0C !important;
     border-color: rgba(255, 255, 255, 0.08) !important;
     border-radius: 8px !important;
   }
@@ -28,7 +28,7 @@
   option {
     font-weight: 500 !important;
     color: #f1f5f9 !important;
-    background-color: #1A1C24 !important;
+    background-color: #121215 !important;
     padding: 8px 12px !important;
     font-size: 14px !important;
   }
@@ -37,15 +37,15 @@
 @layer utilities {
   /* Card Surface Utilities */
   .glass-card, .glass-card-interactive {
-    @apply bg-[#121319] border border-white/[0.08] rounded-xl transition-colors duration-150 shadow-sm;
+    @apply bg-[#0A0A0C] border border-white/[0.08] rounded-xl transition-colors duration-150 shadow-sm;
   }
 
   .glass-card-interactive:hover {
-    @apply border-white/[0.16] bg-[#161822];
+    @apply border-white/[0.16] bg-[#101014];
   }
 
   .glass-panel-cyan, .glass-panel-indigo, .glass-panel-emerald, .glass-panel-rose {
-    @apply bg-[#121319] border border-white/[0.08] rounded-xl shadow-sm;
+    @apply bg-[#0A0A0C] border border-white/[0.08] rounded-xl shadow-sm;
   }
 
   /* Glow effects removed & mapped to clean subtle borders */
@@ -81,10 +81,10 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0A0B0F;
+  background: #000000;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1F222F;
+  background: #121215;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {

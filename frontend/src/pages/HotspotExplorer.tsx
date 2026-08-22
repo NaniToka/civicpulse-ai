@@ -54,7 +54,7 @@ export const HotspotExplorer: React.FC<HotspotExplorerProps> = ({
   return (
     <div className="space-y-8 animate-in fade-in duration-150">
       {/* Header */}
-      <div className="p-6 md:p-8 rounded-xl bg-[#121319] border border-white/[0.08] flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm">
+      <div className="p-6 md:p-8 rounded-xl bg-[#0A0A0C] border border-white/[0.08] flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm">
         <div>
           <div className="flex items-center gap-2">
             <Flame className="w-5 h-5 text-amber-400" />
@@ -63,10 +63,10 @@ export const HotspotExplorer: React.FC<HotspotExplorerProps> = ({
             </h1>
           </div>
           <div className="flex flex-wrap items-center gap-2 mt-2 font-mono text-xs">
-            <span className="px-2.5 py-1 rounded-md bg-[#1A1C24] border border-white/[0.08] text-slate-300 font-medium">
+            <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
               100,000 Per-Capita Baseline
             </span>
-            <span className="px-2.5 py-1 rounded-md bg-[#1A1C24] border border-white/[0.08] text-slate-300 font-medium">
+            <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
               Capacity Deficit Weight
             </span>
           </div>
@@ -77,14 +77,14 @@ export const HotspotExplorer: React.FC<HotspotExplorerProps> = ({
           <select
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
-            className="bg-[#1A1C24] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
+            className="bg-[#121215] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
           >
-            <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="ALL">All Categories</option>
-            <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="healthcare">Healthcare</option>
-            <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="water">Clean Water</option>
-            <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="electricity">Electricity</option>
-            <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="transportation">Transportation</option>
-            <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="sanitation">Sanitation</option>
+            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="ALL">All Categories</option>
+            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="healthcare">Healthcare</option>
+            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="water">Clean Water</option>
+            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="electricity">Electricity</option>
+            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="transportation">Transportation</option>
+            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="sanitation">Sanitation</option>
           </select>
         </div>
       </div>
@@ -104,8 +104,8 @@ export const HotspotExplorer: React.FC<HotspotExplorerProps> = ({
                   onClick={() => setSelectedRegionId(item.region.id)}
                   className={`p-5 rounded-xl border transition-colors cursor-pointer relative shadow-sm ${
                     isSelected
-                      ? 'bg-[#1A1C24] border-amber-500/40'
-                      : 'bg-[#121319] border-white/[0.08] hover:border-white/[0.16]'
+                      ? 'bg-[#121215] border-amber-500/40'
+                      : 'bg-[#0A0A0C] border-white/[0.08] hover:border-white/[0.16]'
                   }`}
                 >
                   <div className="flex justify-between items-start mb-2">
@@ -139,7 +139,7 @@ export const HotspotExplorer: React.FC<HotspotExplorerProps> = ({
         </div>
 
         {/* Region Intelligence Side Panel */}
-        <div className="p-6 rounded-xl bg-[#121319] border border-white/[0.08] space-y-5 shadow-sm">
+        <div className="p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.08] space-y-5 shadow-sm">
           <div>
             <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
               <span className="text-xs font-mono text-indigo-400 font-medium uppercase">Region Profile</span>
@@ -150,27 +150,27 @@ export const HotspotExplorer: React.FC<HotspotExplorerProps> = ({
           </div>
 
           <div className="space-y-2 text-xs font-mono">
-            <div className="p-3 rounded-lg bg-[#1A1C24] border border-white/[0.08] flex justify-between items-center">
+            <div className="p-3 rounded-lg bg-[#121215] border border-white/[0.08] flex justify-between items-center">
               <span className="text-slate-400">Population:</span>
               <span className="font-semibold text-slate-100">{selectedRegion.population.toLocaleString()}</span>
             </div>
 
-            <div className="p-3 rounded-lg bg-[#1A1C24] border border-white/[0.08] flex justify-between items-center">
+            <div className="p-3 rounded-lg bg-[#121215] border border-white/[0.08] flex justify-between items-center">
               <span className="text-slate-400">Vulnerability Index:</span>
               <span className="font-semibold text-amber-400">{selectedRegion.vulnerability_index.toFixed(2)}</span>
             </div>
 
-            <div className="p-3 rounded-lg bg-[#1A1C24] border border-white/[0.08] flex justify-between items-center">
+            <div className="p-3 rounded-lg bg-[#121215] border border-white/[0.08] flex justify-between items-center">
               <span className="text-slate-400">Youth Demographic %:</span>
               <span className="font-semibold text-indigo-400">{selectedRegion.youth_percentage || 32.0}%</span>
             </div>
 
-            <div className="p-3 rounded-lg bg-[#1A1C24] border border-white/[0.08] flex justify-between items-center">
+            <div className="p-3 rounded-lg bg-[#121215] border border-white/[0.08] flex justify-between items-center">
               <span className="text-slate-400">Elderly Demographic %:</span>
               <span className="font-semibold text-indigo-400">{selectedRegion.elderly_percentage || 14.0}%</span>
             </div>
 
-            <div className="p-3 rounded-lg bg-[#1A1C24] border border-white/[0.08] flex justify-between items-center">
+            <div className="p-3 rounded-lg bg-[#121215] border border-white/[0.08] flex justify-between items-center">
               <span className="text-slate-400">Primary Language:</span>
               <span className="font-semibold text-green-400">{selectedRegion.primary_language.toUpperCase()}</span>
             </div>
@@ -187,7 +187,7 @@ export const HotspotExplorer: React.FC<HotspotExplorerProps> = ({
 
             <button
               onClick={() => onNavigate && onNavigate('recommendations')}
-              className="w-full py-2.5 rounded-lg bg-[#1A1C24] hover:bg-[#161822] text-slate-200 border border-white/[0.08] text-xs transition flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full py-2.5 rounded-lg bg-[#121215] hover:bg-[#101014] text-slate-200 border border-white/[0.08] text-xs transition flex items-center justify-center gap-2 cursor-pointer"
             >
               <span>Evidence Priorities</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -197,12 +197,12 @@ export const HotspotExplorer: React.FC<HotspotExplorerProps> = ({
       </div>
 
       {/* Municipal Hotspot Ranking Table */}
-      <div className="p-6 rounded-xl bg-[#121319] border border-white/[0.08] space-y-4 shadow-sm">
+      <div className="p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.08] space-y-4 shadow-sm">
         <h3 className="text-[15px] font-semibold text-slate-100">Municipal Hotspot Ranking Table</h3>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs font-mono border-collapse">
-            <thead className="bg-[#1A1C24] text-slate-400 border-b border-white/[0.08] uppercase text-[11px]">
+            <thead className="bg-[#121215] text-slate-400 border-b border-white/[0.08] uppercase text-[11px]">
               <tr>
                 <th className="p-3">RANK</th>
                 <th className="p-3">REGION</th>
@@ -216,7 +216,7 @@ export const HotspotExplorer: React.FC<HotspotExplorerProps> = ({
             </thead>
             <tbody className="divide-y divide-white/[0.08]">
               {hotspotItems.map((item) => (
-                <tr key={item.region.id} className="hover:bg-[#1A1C24] transition-colors">
+                <tr key={item.region.id} className="hover:bg-[#121215] transition-colors">
                   <td className="p-3 font-semibold text-amber-400">#{item.rank}</td>
                   <td className="p-3 font-semibold text-slate-100">{item.region.district_city}</td>
                   <td className="p-3 text-slate-400">{item.region.country}</td>
@@ -227,7 +227,7 @@ export const HotspotExplorer: React.FC<HotspotExplorerProps> = ({
                   <td className="p-3">
                     <button
                       onClick={() => setActiveDetailRegion(item.region)}
-                      className="px-2.5 py-1 rounded-lg bg-[#1A1C24] hover:bg-[#161822] border border-white/[0.08] text-slate-300 text-[11px] font-medium flex items-center gap-1 cursor-pointer"
+                      className="px-2.5 py-1 rounded-lg bg-[#121215] hover:bg-[#101014] border border-white/[0.08] text-slate-300 text-[11px] font-medium flex items-center gap-1 cursor-pointer"
                     >
                       <span>Details</span>
                       <ArrowRight className="w-3 h-3" />

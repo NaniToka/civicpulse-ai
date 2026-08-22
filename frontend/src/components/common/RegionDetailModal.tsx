@@ -18,13 +18,13 @@ export const RegionDetailModal: React.FC<RegionDetailModalProps> = ({
   if (!region) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#0A0B0F]/80 backdrop-blur-sm animate-in fade-in duration-150">
-      <div className="w-full max-w-3xl max-h-[90vh] bg-[#121319] border border-white/[0.08] rounded-xl shadow-2xl overflow-hidden flex flex-col">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#000000]/80 backdrop-blur-sm animate-in fade-in duration-150">
+      <div className="w-full max-w-3xl max-h-[90vh] bg-[#0A0A0C] border border-white/[0.08] rounded-xl shadow-2xl overflow-hidden flex flex-col">
         {/* Modal Header */}
-        <div className="p-6 border-b border-white/[0.08] bg-[#1A1C24] flex items-start justify-between">
+        <div className="p-6 border-b border-white/[0.08] bg-[#121215] flex items-start justify-between">
           <div className="space-y-1">
             <div className="flex items-center gap-2.5">
-              <span className="text-xs font-mono font-medium px-2 py-0.5 rounded bg-[#121319] text-slate-300 border border-white/[0.08] uppercase">
+              <span className="text-xs font-mono font-medium px-2 py-0.5 rounded bg-[#0A0A0C] text-slate-300 border border-white/[0.08] uppercase">
                 {region.country_code} • DISTRICT PROFILE
               </span>
               <span className="text-xs font-mono text-green-400 font-medium flex items-center gap-1">
@@ -43,7 +43,7 @@ export const RegionDetailModal: React.FC<RegionDetailModalProps> = ({
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-[#121319] transition cursor-pointer"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-[#0A0A0C] transition cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -53,7 +53,7 @@ export const RegionDetailModal: React.FC<RegionDetailModalProps> = ({
         <div className="p-6 overflow-y-auto space-y-6">
           {/* Key Census Statistics Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="p-4 rounded-xl bg-[#1A1C24] border border-white/[0.08]">
+            <div className="p-4 rounded-xl bg-[#121215] border border-white/[0.08]">
               <div className="flex items-center justify-between text-slate-400 text-xs font-mono">
                 <span>Total Population</span>
                 <Users className="w-4 h-4 text-indigo-400" />
@@ -66,7 +66,7 @@ export const RegionDetailModal: React.FC<RegionDetailModalProps> = ({
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-[#1A1C24] border border-white/[0.08]">
+            <div className="p-4 rounded-xl bg-[#121215] border border-white/[0.08]">
               <div className="flex items-center justify-between text-slate-400 text-xs font-mono">
                 <span>Vulnerability Index</span>
                 <ShieldAlert className="w-4 h-4 text-amber-400" />
@@ -79,7 +79,7 @@ export const RegionDetailModal: React.FC<RegionDetailModalProps> = ({
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-[#1A1C24] border border-white/[0.08]">
+            <div className="p-4 rounded-xl bg-[#121215] border border-white/[0.08]">
               <div className="flex items-center justify-between text-slate-400 text-xs font-mono">
                 <span>Digital Access Rate</span>
                 <Activity className="w-4 h-4 text-green-400" />
@@ -94,7 +94,7 @@ export const RegionDetailModal: React.FC<RegionDetailModalProps> = ({
           </div>
 
           {/* Demographic Composition Meters */}
-          <div className="p-5 rounded-xl bg-[#1A1C24] border border-white/[0.08] space-y-4">
+          <div className="p-5 rounded-xl bg-[#121215] border border-white/[0.08] space-y-4">
             <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider font-mono flex items-center gap-2">
               <BarChart2 className="w-4 h-4 text-indigo-400" />
               <span>Demographic Need Breakdown</span>
@@ -106,7 +106,7 @@ export const RegionDetailModal: React.FC<RegionDetailModalProps> = ({
                   <span>Youth Population Share</span>
                   <span className="text-indigo-400">{(region.youth_percentage || 35).toFixed(1)}%</span>
                 </div>
-                <div className="h-2 rounded-full bg-[#121319] overflow-hidden border border-white/[0.08]">
+                <div className="h-2 rounded-full bg-[#0A0A0C] overflow-hidden border border-white/[0.08]">
                   <div
                     className="h-full bg-indigo-500 rounded-full"
                     style={{ width: `${region.youth_percentage || 35}%` }}
@@ -119,7 +119,7 @@ export const RegionDetailModal: React.FC<RegionDetailModalProps> = ({
                   <span>Elderly Population Share</span>
                   <span className="text-indigo-400">{(region.elderly_percentage || 18).toFixed(1)}%</span>
                 </div>
-                <div className="h-2 rounded-full bg-[#121319] overflow-hidden border border-white/[0.08]">
+                <div className="h-2 rounded-full bg-[#0A0A0C] overflow-hidden border border-white/[0.08]">
                   <div
                     className="h-full bg-indigo-400 rounded-full"
                     style={{ width: `${region.elderly_percentage || 18}%` }}
@@ -130,7 +130,7 @@ export const RegionDetailModal: React.FC<RegionDetailModalProps> = ({
           </div>
 
           {/* District Infrastructure Summary Card */}
-          <div className="p-5 rounded-xl bg-[#1A1C24] border border-white/[0.08] space-y-2">
+          <div className="p-5 rounded-xl bg-[#121215] border border-white/[0.08] space-y-2">
             <div className="flex items-center gap-2 text-xs font-mono text-indigo-400 uppercase font-semibold">
               <Building2 className="w-4 h-4 text-indigo-400" />
               <span>District Decision Summary</span>
@@ -142,7 +142,7 @@ export const RegionDetailModal: React.FC<RegionDetailModalProps> = ({
         </div>
 
         {/* Modal Footer Actions */}
-        <div className="p-4 border-t border-white/[0.08] bg-[#1A1C24] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono">
+        <div className="p-4 border-t border-white/[0.08] bg-[#121215] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono">
           <div className="flex items-center gap-2 text-slate-400">
             <span>Region ID: {region.id}</span>
           </div>
@@ -154,7 +154,7 @@ export const RegionDetailModal: React.FC<RegionDetailModalProps> = ({
                   onClose();
                   onNavigateToScenarios(region.id);
                 }}
-                className="px-3.5 py-1.5 rounded-lg bg-[#121319] hover:bg-[#161822] border border-white/[0.08] text-slate-200 transition flex items-center gap-1.5 cursor-pointer font-sans"
+                className="px-3.5 py-1.5 rounded-lg bg-[#0A0A0C] hover:bg-[#101014] border border-white/[0.08] text-slate-200 transition flex items-center gap-1.5 cursor-pointer font-sans"
               >
                 <Zap className="w-3.5 h-3.5 text-indigo-400" />
                 <span>Simulate Scenario</span>
@@ -176,7 +176,7 @@ export const RegionDetailModal: React.FC<RegionDetailModalProps> = ({
 
             <button
               onClick={onClose}
-              className="px-3.5 py-1.5 rounded-lg bg-[#121319] hover:bg-[#161822] border border-white/[0.08] text-slate-300 transition cursor-pointer font-sans"
+              className="px-3.5 py-1.5 rounded-lg bg-[#0A0A0C] hover:bg-[#101014] border border-white/[0.08] text-slate-300 transition cursor-pointer font-sans"
             >
               Close
             </button>

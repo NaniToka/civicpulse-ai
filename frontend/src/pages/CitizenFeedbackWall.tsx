@@ -229,7 +229,7 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
   return (
     <div className="space-y-8 animate-in fade-in duration-150">
       {/* 1. Header Banner */}
-      <div className="rounded-xl bg-[#121319] border border-white/[0.08] p-6 md:p-8 space-y-4 shadow-sm">
+      <div className="rounded-xl bg-[#0A0A0C] border border-white/[0.08] p-6 md:p-8 space-y-4 shadow-sm">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="space-y-2 max-w-2xl">
             <div className="flex items-center gap-2">
@@ -242,10 +242,10 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
               Indian States <span className="hero-gradient-text">Citizen Comments & Ratings</span>
             </h1>
             <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-xs">
-              <span className="px-2.5 py-1 rounded-md bg-[#1A1C24] border border-white/[0.08] text-slate-300 font-medium">
+              <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
                 Verified Citizen Wall
               </span>
-              <span className="px-2.5 py-1 rounded-md bg-[#1A1C24] border border-white/[0.08] text-slate-300 font-medium">
+              <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
                 7 Native Languages
               </span>
             </div>
@@ -263,7 +263,7 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
 
       {/* 2. Interactive Post Feedback Form Modal / Drawer */}
       {showComposer && (
-        <div className="p-6 rounded-xl bg-[#121319] border border-white/[0.08] shadow-lg space-y-4 animate-in slide-in-from-top-2 duration-150">
+        <div className="p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.08] shadow-lg space-y-4 animate-in slide-in-from-top-2 duration-150">
           <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
             <div className="flex items-center gap-2 font-mono">
               <Sparkles className="w-4 h-4 text-indigo-400" />
@@ -296,7 +296,7 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
                     placeholder="e.g. Rajesh Kumar"
                     value={newAuthor}
                     onChange={(e) => setNewAuthor(e.target.value)}
-                    className="w-full bg-[#1A1C24] border border-white/[0.08] rounded-lg px-3 py-1.5 text-slate-100 focus:outline-none focus:border-white/[0.16]"
+                    className="w-full bg-[#121215] border border-white/[0.08] rounded-lg px-3 py-1.5 text-slate-100 focus:outline-none focus:border-white/[0.16]"
                     required
                   />
                 </div>
@@ -310,10 +310,10 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
                   <select
                     value={newRegionId}
                     onChange={(e) => setNewRegionId(e.target.value)}
-                    className="w-full bg-[#1A1C24] border border-white/[0.08] text-slate-100 rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
+                    className="w-full bg-[#121215] border border-white/[0.08] text-slate-100 rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
                   >
                     {regions.map((r) => (
-                      <option key={r.id} value={r.id} className="bg-[#1A1C24]">
+                      <option key={r.id} value={r.id} className="bg-[#121215]">
                         {r.district_city}, {r.state_province}
                       </option>
                     ))}
@@ -329,11 +329,11 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
                   <select
                     value={newType}
                     onChange={(e) => setNewType(e.target.value as 'POSITIVE' | 'CRITICAL' | 'SUGGESTION')}
-                    className="w-full bg-[#1A1C24] border border-white/[0.08] text-slate-100 rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
+                    className="w-full bg-[#121215] border border-white/[0.08] text-slate-100 rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
                   >
-                    <option value="POSITIVE" className="bg-[#1A1C24]">Positive Praise</option>
-                    <option value="CRITICAL" className="bg-[#1A1C24]">Critical Issue</option>
-                    <option value="SUGGESTION" className="bg-[#1A1C24]">Suggestion</option>
+                    <option value="POSITIVE" className="bg-[#121215]">Positive Praise</option>
+                    <option value="CRITICAL" className="bg-[#121215]">Critical Issue</option>
+                    <option value="SUGGESTION" className="bg-[#121215]">Suggestion</option>
                   </select>
                 </div>
               </div>
@@ -345,14 +345,14 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
                   <select
                     value={newCategory}
                     onChange={(e) => setNewCategory(e.target.value)}
-                    className="w-full bg-[#1A1C24] border border-white/[0.08] text-slate-100 rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
+                    className="w-full bg-[#121215] border border-white/[0.08] text-slate-100 rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
                   >
-                    <option value="Clean Water" className="bg-[#1A1C24]">Clean Water</option>
-                    <option value="Healthcare" className="bg-[#1A1C24]">Healthcare</option>
-                    <option value="Sanitation & Drainage" className="bg-[#1A1C24]">Sanitation & Drainage</option>
-                    <option value="Electricity & Power" className="bg-[#1A1C24]">Electricity & Power</option>
-                    <option value="Transportation" className="bg-[#1A1C24]">Transportation</option>
-                    <option value="Digital Connectivity" className="bg-[#1A1C24]">Digital Connectivity</option>
+                    <option value="Clean Water" className="bg-[#121215]">Clean Water</option>
+                    <option value="Healthcare" className="bg-[#121215]">Healthcare</option>
+                    <option value="Sanitation & Drainage" className="bg-[#121215]">Sanitation & Drainage</option>
+                    <option value="Electricity & Power" className="bg-[#121215]">Electricity & Power</option>
+                    <option value="Transportation" className="bg-[#121215]">Transportation</option>
+                    <option value="Digital Connectivity" className="bg-[#121215]">Digital Connectivity</option>
                   </select>
                 </div>
 
@@ -383,13 +383,13 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
                   <Smile className="w-3.5 h-3.5 text-indigo-400" />
                   <span>Click Emojis to Insert in Quote:</span>
                 </label>
-                <div className="flex flex-wrap gap-1.5 p-2 rounded-lg bg-[#1A1C24] border border-white/[0.08]">
+                <div className="flex flex-wrap gap-1.5 p-2 rounded-lg bg-[#121215] border border-white/[0.08]">
                   {emojiList.map((emoji) => (
                     <button
                       type="button"
                       key={emoji}
                       onClick={() => handleAppendEmoji(emoji)}
-                      className="p-1 rounded bg-[#121319] hover:bg-[#161822] border border-white/[0.08] text-xs transition cursor-pointer"
+                      className="p-1 rounded bg-[#0A0A0C] hover:bg-[#101014] border border-white/[0.08] text-xs transition cursor-pointer"
                     >
                       {emoji}
                     </button>
@@ -405,7 +405,7 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
                   placeholder="Share details about water, road, hospital, or power conditions in your area..."
                   value={newText}
                   onChange={(e) => setNewText(e.target.value)}
-                  className="w-full bg-[#1A1C24] border border-white/[0.08] rounded-lg p-3 text-slate-100 font-sans text-xs focus:outline-none focus:border-white/[0.16]"
+                  className="w-full bg-[#121215] border border-white/[0.08] rounded-lg p-3 text-slate-100 font-sans text-xs focus:outline-none focus:border-white/[0.16]"
                   required
                 />
               </div>
@@ -414,7 +414,7 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
                 <button
                   type="button"
                   onClick={() => setShowComposer(false)}
-                  className="px-3.5 py-1.5 rounded-lg bg-[#1A1C24] border border-white/[0.08] text-slate-300 font-medium cursor-pointer"
+                  className="px-3.5 py-1.5 rounded-lg bg-[#121215] border border-white/[0.08] text-slate-300 font-medium cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -432,7 +432,7 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
       )}
 
       {/* 3. Filters Bar (Good / Bad / Suggestions / State) */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 rounded-xl bg-[#121319] border border-white/[0.08] font-mono text-xs shadow-sm">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 rounded-xl bg-[#0A0A0C] border border-white/[0.08] font-mono text-xs shadow-sm">
         <div className="flex flex-wrap items-center gap-2">
           <Filter className="w-4 h-4 text-indigo-400" />
           <span className="text-slate-400 font-medium">Filter Sentiment:</span>
@@ -441,7 +441,7 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
             className={`px-3 py-1.5 rounded-lg font-medium transition cursor-pointer ${
               filterType === 'ALL'
                 ? 'bg-indigo-600 text-white'
-                : 'bg-[#1A1C24] border border-white/[0.08] text-slate-300 hover:border-white/[0.16]'
+                : 'bg-[#121215] border border-white/[0.08] text-slate-300 hover:border-white/[0.16]'
             }`}
           >
             All ({comments.length})
@@ -451,7 +451,7 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
             className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1 cursor-pointer ${
               filterType === 'POSITIVE'
                 ? 'bg-green-500/10 text-green-400 border border-green-500/20'
-                : 'bg-[#1A1C24] border border-white/[0.08] text-slate-300 hover:border-white/[0.16]'
+                : 'bg-[#121215] border border-white/[0.08] text-slate-300 hover:border-white/[0.16]'
             }`}
           >
             <span>Praise</span>
@@ -461,7 +461,7 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
             className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1 cursor-pointer ${
               filterType === 'CRITICAL'
                 ? 'bg-red-500/10 text-red-400 border border-red-500/20'
-                : 'bg-[#1A1C24] border border-white/[0.08] text-slate-300 hover:border-white/[0.16]'
+                : 'bg-[#121215] border border-white/[0.08] text-slate-300 hover:border-white/[0.16]'
             }`}
           >
             <span>Critical</span>
@@ -471,7 +471,7 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
             className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1 cursor-pointer ${
               filterType === 'SUGGESTION'
                 ? 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20'
-                : 'bg-[#1A1C24] border border-white/[0.08] text-slate-300 hover:border-white/[0.16]'
+                : 'bg-[#121215] border border-white/[0.08] text-slate-300 hover:border-white/[0.16]'
             }`}
           >
             <span>Suggestions</span>
@@ -483,7 +483,7 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
           <select
             value={filterState}
             onChange={(e) => setFilterState(e.target.value)}
-            className="bg-[#1A1C24] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
+            className="bg-[#121215] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
           >
             <option value="ALL">All Indian States</option>
             {stateOptions.map((st) => (
@@ -500,13 +500,13 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
         {filteredComments.map((comment) => (
           <div
             key={comment.id}
-            className="p-5 rounded-xl bg-[#121319] border border-white/[0.08] hover:border-white/[0.16] transition-colors shadow-sm flex flex-col justify-between space-y-4"
+            className="p-5 rounded-xl bg-[#0A0A0C] border border-white/[0.08] hover:border-white/[0.16] transition-colors shadow-sm flex flex-col justify-between space-y-4"
           >
             <div>
               {/* Comment Header */}
               <div className="flex items-start justify-between gap-3 border-b border-white/[0.08] pb-3">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-7 h-7 rounded-full bg-[#1A1C24] border border-white/[0.08] flex items-center justify-center text-indigo-400 font-semibold text-xs font-mono">
+                  <div className="w-7 h-7 rounded-full bg-[#121215] border border-white/[0.08] flex items-center justify-center text-indigo-400 font-semibold text-xs font-mono">
                     {comment.citizenName[0]}
                   </div>
                   <div>
@@ -571,7 +571,7 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
                     className={`flex items-center gap-1.5 px-3 py-1 rounded-lg border transition-colors text-xs font-medium cursor-pointer ${
                       isUpvoted
                         ? 'bg-indigo-600 border-indigo-500 text-white'
-                        : 'bg-[#1A1C24] border-white/[0.08] text-slate-300 hover:border-white/[0.16]'
+                        : 'bg-[#121215] border-white/[0.08] text-slate-300 hover:border-white/[0.16]'
                     }`}
                     title={isUpvoted ? 'Remove your upvote' : 'Upvote this comment'}
                   >
