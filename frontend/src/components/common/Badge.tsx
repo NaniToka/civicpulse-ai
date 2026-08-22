@@ -12,22 +12,22 @@ export const Badge: React.FC<BadgeProps> = ({
   size = 'sm',
 }) => {
   const variantStyles = {
-    neutral: 'bg-civic-800 text-civic-200 border-civic-700',
-    success: 'bg-emerald-950/60 text-emerald-400 border-emerald-800/60',
-    warning: 'bg-amber-950/60 text-amber-400 border-amber-800/60',
-    danger: 'bg-rose-950/60 text-rose-400 border-rose-800/60',
-    accent: 'bg-sky-950/60 text-sky-400 border-sky-800/60',
-    purple: 'bg-purple-950/60 text-purple-400 border-purple-800/60',
+    neutral: 'bg-white/[0.04] text-slate-300 border-white/[0.08]',
+    success: 'bg-green-500/10 text-green-400 border-green-500/20',
+    warning: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
+    danger: 'bg-red-500/10 text-red-400 border-red-500/20',
+    accent: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20',
+    purple: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20',
   };
 
   const sizeStyles = {
-    sm: 'text-xs px-2 py-0.5',
-    md: 'text-sm px-2.5 py-1',
+    sm: 'text-[11px] px-2 py-0.5 font-medium tracking-wide',
+    md: 'text-xs px-2.5 py-1 font-medium tracking-wide',
   };
 
   return (
     <span
-      className={`inline-flex items-center font-medium rounded border ${variantStyles[variant]} ${sizeStyles[size]}`}
+      className={`inline-flex items-center rounded-md border ${variantStyles[variant]} ${sizeStyles[size]}`}
     >
       {children}
     </span>

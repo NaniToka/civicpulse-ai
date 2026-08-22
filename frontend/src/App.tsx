@@ -70,7 +70,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-civic-950 text-civic-100 font-sans selection:bg-sky-500 selection:text-slate-950">
+    <div className="min-h-screen flex flex-col bg-[#0A0B0F] text-slate-200 font-sans selection:bg-indigo-500 selection:text-white">
       <Navbar
         onOpenCommandPalette={() => setCommandPaletteOpen(true)}
         activeTab={activeTab}
@@ -85,10 +85,10 @@ export const App: React.FC = () => {
           onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
         />
 
-        <main className="flex-1 p-3 sm:p-6 lg:p-8 max-w-7xl mx-auto overflow-y-auto w-full">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto overflow-y-auto w-full">
           {loading ? (
             <div className="h-96 flex flex-col items-center justify-center space-y-3 text-slate-400 text-xs font-mono">
-              <div className="w-8 h-8 rounded-full border-2 border-sky-500 border-t-transparent animate-spin" />
+              <div className="w-7 h-7 rounded-full border-2 border-indigo-500 border-t-transparent animate-spin" />
               <span>Initializing CivicPulse Intelligence Platform...</span>
             </div>
           ) : (

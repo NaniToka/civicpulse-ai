@@ -116,68 +116,66 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
   };
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-300">
+    <div className="space-y-8 animate-in fade-in duration-150">
       {/* 1. Hero Command Cockpit Banner */}
-      <div className="relative overflow-hidden rounded-2xl glass-panel-cyan p-6 md:p-8 space-y-6 border border-cyan-800/40">
-        <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-          <div className="space-y-3 max-w-3xl">
-            <div className="flex flex-wrap items-center gap-2.5">
-              <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-700/60 text-[11px] font-mono font-extrabold text-cyan-300">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                <span>SYSTEM ACTIVE • INDIA CIVIC DECISION ENGINE V2</span>
-              </div>
-              <span className="text-xs font-mono font-bold text-slate-300 bg-slate-900/80 px-2.5 py-0.5 rounded border border-slate-800">
-                35 Indian Districts
+      <div className="rounded-xl bg-[#121319] border border-white/[0.08] p-6 md:p-8 space-y-6 shadow-sm">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div className="space-y-2 max-w-3xl">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-green-500" />
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 font-mono">
+                Civic Decision Engine • Active
               </span>
             </div>
 
-            <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight font-sans text-slate-100">
-              CivicPulse <span className="gradient-text-cyan">Executive Decision Intelligence</span>
+            <h1 className="text-2xl md:text-[28px] font-semibold tracking-tight text-slate-100">
+              CivicPulse <span className="hero-gradient-text">Executive Decision Intelligence</span>
             </h1>
 
-            <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-[11px]">
-              <span className="px-3 py-1 rounded-full bg-cyan-950/90 border border-cyan-700/80 text-cyan-300 font-bold flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-                7 Native Indian Languages
-              </span>
-              <span className="px-3 py-1 rounded-full bg-indigo-950/90 border border-indigo-700/80 text-indigo-300 font-bold flex items-center gap-1.5">
+            <p className="text-xs sm:text-sm text-slate-400">
+              Multilingual citizen demand analysis & infrastructure capital allocation prioritization.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-2 pt-2 font-mono text-xs">
+              <span className="px-2.5 py-1 rounded-md bg-[#1A1C24] border border-white/[0.08] text-slate-300 font-medium flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
-                Per-Capita 100k Density
+                35 Districts Covered
               </span>
-              <span className="px-3 py-1 rounded-full bg-emerald-950/90 border border-emerald-700/80 text-emerald-300 font-bold flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                Traceable 6-Step Evidence Trail
+              <span className="px-2.5 py-1 rounded-md bg-[#1A1C24] border border-white/[0.08] text-slate-300 font-medium flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
+                7 Native Languages
               </span>
             </div>
           </div>
-          {/* Quick Launcher Pills */}
-          <div className="grid grid-cols-2 lg:flex items-center gap-2.5 sm:gap-3 shrink-0 w-full sm:w-auto">
+
+          {/* Quick Launcher Buttons */}
+          <div className="grid grid-cols-2 lg:flex items-center gap-2.5 shrink-0 w-full sm:w-auto">
             <button
               onClick={() => onNavigate('feedback')}
-              className="flex items-center justify-center gap-2 px-3.5 sm:px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white font-extrabold text-xs transition shadow-lg glow-cyan hover:scale-105 cursor-pointer text-center"
+              className="flex items-center justify-center gap-2 px-3.5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-xs transition cursor-pointer text-center"
             >
-              <MessageSquare className="w-4 h-4 text-emerald-300 shrink-0" />
-              <span className="truncate">Citizen Feedback 🎉</span>
+              <MessageSquare className="w-3.5 h-3.5 shrink-0" />
+              <span className="truncate">Citizen Feedback</span>
             </button>
             <button
               onClick={() => onNavigate('demand')}
-              className="flex items-center justify-center gap-2 px-3.5 sm:px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-extrabold text-xs transition shadow-lg shadow-cyan-950/80 glow-cyan hover:scale-105 cursor-pointer text-center"
+              className="flex items-center justify-center gap-2 px-3.5 py-2 rounded-lg bg-[#1A1C24] hover:bg-[#161822] border border-white/[0.08] text-slate-200 font-medium text-xs transition cursor-pointer text-center"
             >
-              <Globe2 className="w-4 h-4 shrink-0" />
+              <Globe2 className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
               <span className="truncate">Voice Feed</span>
             </button>
             <button
               onClick={() => onNavigate('scenarios')}
-              className="flex items-center justify-center gap-2 px-3.5 sm:px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-indigo-200 border border-indigo-700/60 transition text-xs font-bold shadow-md cursor-pointer text-center"
+              className="flex items-center justify-center gap-2 px-3.5 py-2 rounded-lg bg-[#1A1C24] hover:bg-[#161822] border border-white/[0.08] text-slate-200 font-medium text-xs transition cursor-pointer text-center"
             >
-              <Sparkles className="w-4 h-4 text-indigo-400 shrink-0" />
+              <Sparkles className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
               <span className="truncate">Scenario Lab</span>
             </button>
             <button
               onClick={() => onNavigate('hotspots')}
-              className="flex items-center justify-center gap-2 px-3.5 sm:px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-emerald-300 border border-emerald-800/60 transition text-xs font-bold shadow-md cursor-pointer text-center"
+              className="flex items-center justify-center gap-2 px-3.5 py-2 rounded-lg bg-[#1A1C24] hover:bg-[#161822] border border-white/[0.08] text-slate-200 font-medium text-xs transition cursor-pointer text-center"
             >
-              <Activity className="w-4 h-4 text-emerald-400 shrink-0" />
+              <Activity className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
               <span className="truncate">Hotspots</span>
             </button>
           </div>
@@ -185,157 +183,157 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
       </div>
 
       {/* 2. Top Executive Metric Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Card 1: Citizen Signals */}
-        <div className="p-5 rounded-2xl glass-card hover:glow-cyan group relative overflow-hidden">
+        <div className="p-6 rounded-xl bg-[#121319] border border-white/[0.08] hover:border-white/[0.16] transition-colors duration-150 shadow-sm flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-widest font-mono">
+            <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
               Total Problems Raised
             </span>
-            <div className="p-2.5 rounded-xl bg-cyan-950/80 border border-cyan-800/60 text-cyan-400 shadow-inner">
+            <div className="p-2 rounded-lg bg-[#1A1C24] border border-white/[0.08] text-slate-400">
               <Users className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-3 space-y-1">
-            <div className="text-2xl sm:text-3xl font-extrabold text-slate-100 font-mono tracking-tight">
+            <div className="text-2xl font-semibold text-slate-100 tracking-tight font-mono">
               {totalRequests > 100 ? totalRequests.toLocaleString() : '24,680'}
             </div>
-            <div className="flex items-center gap-1.5 text-xs text-emerald-400 font-mono font-bold pt-1">
+            <div className="flex items-center gap-1.5 text-xs text-green-400 font-medium">
               <TrendingUp className="w-3.5 h-3.5" />
               <span>+18.4% temporal acceleration</span>
             </div>
           </div>
-          <div className="mt-3 h-1.5 w-full bg-slate-800/80 rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-cyan-400 to-indigo-500 rounded-full w-[78%]" />
+          <div className="mt-3 h-1.5 w-full bg-[#1A1C24] rounded-full overflow-hidden border border-white/[0.08]">
+            <div className="h-full bg-indigo-500 rounded-full w-[78%]" />
           </div>
         </div>
 
         {/* Card 2: Regions Analyzed */}
-        <div className="p-5 rounded-2xl glass-card hover:glow-indigo group relative overflow-hidden">
+        <div className="p-6 rounded-xl bg-[#121319] border border-white/[0.08] hover:border-white/[0.16] transition-colors duration-150 shadow-sm flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-widest font-mono">
-              Indian Districts Covered
+            <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+              Districts Covered
             </span>
-            <div className="p-2.5 rounded-xl bg-indigo-950/80 border border-indigo-800/60 text-indigo-400 shadow-inner">
+            <div className="p-2 rounded-lg bg-[#1A1C24] border border-white/[0.08] text-slate-400">
               <MapPin className="w-4 h-4" />
             </div>
           </div>
-          <div className="mt-4 space-y-1">
-            <div className="text-3xl font-extrabold text-slate-100 font-mono tracking-tight">
+          <div className="mt-3 space-y-1">
+            <div className="text-2xl font-semibold text-slate-100 tracking-tight font-mono">
               {totalRegions}
             </div>
-            <div className="text-xs text-indigo-300 font-mono font-bold pt-1">
+            <div className="text-xs text-slate-400 font-medium">
               100% census data attached
             </div>
           </div>
-          <div className="mt-3 h-1.5 w-full bg-slate-800/80 rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full w-[100%]" />
+          <div className="mt-3 h-1.5 w-full bg-[#1A1C24] rounded-full overflow-hidden border border-white/[0.08]">
+            <div className="h-full bg-indigo-500 rounded-full w-[100%]" />
           </div>
         </div>
 
         {/* Card 3: Infrastructure Deficits */}
-        <div className="p-5 rounded-2xl glass-card hover:glow-amber group relative overflow-hidden">
+        <div className="p-6 rounded-xl bg-[#121319] border border-white/[0.08] hover:border-white/[0.16] transition-colors duration-150 shadow-sm flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-widest font-mono">
+            <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
               Deficits Identified
             </span>
-            <div className="p-2.5 rounded-xl bg-amber-950/80 border border-amber-800/60 text-amber-400 shadow-inner">
+            <div className="p-2 rounded-lg bg-[#1A1C24] border border-white/[0.08] text-amber-400">
               <AlertTriangle className="w-4 h-4" />
             </div>
           </div>
-          <div className="mt-4 space-y-1">
-            <div className="text-3xl font-extrabold text-slate-100 font-mono tracking-tight">126</div>
-            <div className="text-xs text-amber-400 font-mono font-bold pt-1">
+          <div className="mt-3 space-y-1">
+            <div className="text-2xl font-semibold text-slate-100 tracking-tight font-mono">126</div>
+            <div className="text-xs text-amber-400 font-medium">
               Avg gap score: 0.68 / 1.00
             </div>
           </div>
-          <div className="mt-3 h-1.5 w-full bg-slate-800/80 rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-amber-500 to-orange-500 rounded-full w-[68%]" />
+          <div className="mt-3 h-1.5 w-full bg-[#1A1C24] rounded-full overflow-hidden border border-white/[0.08]">
+            <div className="h-full bg-amber-500 rounded-full w-[68%]" />
           </div>
         </div>
 
         {/* Card 4: High-Priority Needs */}
-        <div className="p-5 rounded-2xl glass-card hover:glow-rose group relative overflow-hidden">
+        <div className="p-6 rounded-xl bg-[#121319] border border-white/[0.08] hover:border-white/[0.16] transition-colors duration-150 shadow-sm flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-widest font-mono">
+            <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
               Critical Needs
             </span>
-            <div className="p-2.5 rounded-xl bg-rose-950/80 border border-rose-800/60 text-rose-400 shadow-inner">
+            <div className="p-2 rounded-lg bg-[#1A1C24] border border-white/[0.08] text-red-400">
               <FileCheck className="w-4 h-4" />
             </div>
           </div>
-          <div className="mt-4 space-y-1">
-            <div className="text-3xl font-extrabold text-slate-100 font-mono tracking-tight">
+          <div className="mt-3 space-y-1">
+            <div className="text-2xl font-semibold text-slate-100 tracking-tight font-mono">
               {criticalRecs.length || 18}
             </div>
-            <div className="text-xs text-rose-400 font-mono font-bold pt-1 flex items-center gap-1">
-              <Zap className="w-3 h-3 text-rose-400" />
+            <div className="text-xs text-red-400 font-medium flex items-center gap-1">
+              <Zap className="w-3.5 h-3.5 text-red-400" />
               <span>Requires fast-track capital</span>
             </div>
           </div>
-          <div className="mt-3 h-1.5 w-full bg-slate-800/80 rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-rose-500 to-pink-500 rounded-full w-[85%]" />
+          <div className="mt-3 h-1.5 w-full bg-[#1A1C24] rounded-full overflow-hidden border border-white/[0.08]">
+            <div className="h-full bg-red-500 rounded-full w-[85%]" />
           </div>
         </div>
       </div>
 
       {/* 3. 3D Animated Isometric Cylinder Donut Chart & Multilingual Script Representation */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* 3D ANIMATED ISOMETRIC DONUT CHART */}
+        {/* 3D ISOMETRIC DONUT CHART */}
         <ThreeDDonutChart data={categoryGraphData} total={graphTotal} />
 
         {/* Multilingual Citizen Representation */}
-        <div className="p-6 md:p-8 rounded-2xl glass-card space-y-6">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div className="p-6 rounded-xl bg-[#121319] border border-white/[0.08] space-y-5 shadow-sm">
+          <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
             <div className="flex items-center gap-2">
-              <Globe2 className="w-5 h-5 text-indigo-400" />
-              <h3 className="text-base font-bold text-slate-100 font-mono">Multilingual Voice Representation</h3>
+              <Globe2 className="w-4 h-4 text-indigo-400" />
+              <h3 className="text-[15px] font-semibold text-slate-100">Multilingual Voice Representation</h3>
             </div>
-            <span className="text-xs font-mono text-emerald-300 font-bold bg-emerald-950/80 px-2.5 py-1 rounded border border-emerald-700/80">
+            <span className="text-xs font-mono text-indigo-400 bg-indigo-500/10 px-2.5 py-0.5 rounded border border-indigo-500/20 font-medium">
               7 Languages Active
             </span>
           </div>
 
           <div className="grid grid-cols-2 gap-3 font-mono text-xs">
-            <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800">
-              <div className="text-slate-300 font-bold">Hindi (हिंदी)</div>
-              <div className="text-xl font-extrabold text-cyan-400 mt-1">35% share</div>
+            <div className="p-3.5 rounded-lg bg-[#1A1C24] border border-white/[0.08]">
+              <div className="text-slate-300 font-medium">Hindi (हिंदी)</div>
+              <div className="text-lg font-semibold text-indigo-400 mt-1">35% share</div>
               <div className="text-[11px] text-slate-400 mt-0.5">Kanpur, Delhi, Jaipur, Patna</div>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800">
-              <div className="text-slate-300 font-bold">Telugu (తెలుగు)</div>
-              <div className="text-xl font-extrabold text-cyan-400 mt-1">22% share</div>
+            <div className="p-3.5 rounded-lg bg-[#1A1C24] border border-white/[0.08]">
+              <div className="text-slate-300 font-medium">Telugu (తెలుగు)</div>
+              <div className="text-lg font-semibold text-indigo-400 mt-1">22% share</div>
               <div className="text-[11px] text-slate-400 mt-0.5">Ongole, Hyderabad, Vizag</div>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800">
-              <div className="text-slate-300 font-bold">Marathi (मराठी)</div>
-              <div className="text-xl font-extrabold text-cyan-400 mt-1">18% share</div>
+            <div className="p-3.5 rounded-lg bg-[#1A1C24] border border-white/[0.08]">
+              <div className="text-slate-300 font-medium">Marathi (मराठी)</div>
+              <div className="text-lg font-semibold text-indigo-400 mt-1">18% share</div>
               <div className="text-[11px] text-slate-400 mt-0.5">Pune, Mumbai, Nagpur</div>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800">
-              <div className="text-slate-300 font-bold">Tamil & Punjabi</div>
-              <div className="text-xl font-extrabold text-cyan-400 mt-1">15% share</div>
+            <div className="p-3.5 rounded-lg bg-[#1A1C24] border border-white/[0.08]">
+              <div className="text-slate-300 font-medium">Tamil & Punjabi</div>
+              <div className="text-lg font-semibold text-indigo-400 mt-1">15% share</div>
               <div className="text-[11px] text-slate-400 mt-0.5">Chennai, Ludhiana, Amritsar</div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* 4. MASTER "WHERE AND WHEN PROBLEMS RAISED" INTERACTIVE STREAM TABLE */}
-      <div className="p-6 md:p-8 rounded-2xl glass-card space-y-5">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+      {/* 4. MASTER "WHERE AND WHEN PROBLEMS RAISED" STREAM TABLE */}
+      <div className="p-6 rounded-xl bg-[#121319] border border-white/[0.08] space-y-4 shadow-sm">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.08] pb-4">
           <div>
-            <div className="flex items-center gap-2 font-mono">
-              <Clock className="w-5 h-5 text-cyan-400" />
-              <h3 className="text-lg font-extrabold text-slate-100 font-sans">
-                Real-Time Citizen Problems Log: <span className="gradient-text-cyan">Where & When Raised</span>
+            <div className="flex items-center gap-2">
+              <Clock className="w-4 h-4 text-indigo-400" />
+              <h3 className="text-[15px] font-semibold text-slate-100">
+                Real-Time Citizen Problems Log: Where & When Raised
               </h3>
             </div>
-            <p className="text-xs text-slate-300 font-medium mt-0.5">
-              Live audit stream detailing how many problems were raised, in which Indian District/State, and exact timestamp logging.
+            <p className="text-xs text-slate-400 mt-0.5">
+              Live audit stream detailing problems raised per Indian District/State and timestamp logging.
             </p>
           </div>
 
@@ -347,14 +345,14 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
                 placeholder="Search location or problem..."
                 value={tableSearchQuery}
                 onChange={(e) => setTableSearchQuery(e.target.value)}
-                className="pl-9 pr-3 py-1.5 bg-[#0b0f19] border border-slate-700 rounded-xl text-xs font-bold text-slate-100 placeholder-slate-400 focus:outline-none focus:border-cyan-400 font-mono"
+                className="pl-8 pr-3 py-1.5 bg-[#1A1C24] border border-white/[0.08] rounded-lg text-xs text-slate-100 placeholder-slate-400 focus:outline-none"
               />
             </div>
 
             <select
               value={tableCategoryFilter}
               onChange={(e) => setTableCategoryFilter(e.target.value)}
-              className="bg-[#0b0f19] border border-slate-700 text-slate-100 font-bold text-xs rounded-xl px-3 py-1.5 focus:outline-none focus:border-cyan-400 font-mono cursor-pointer"
+              className="bg-[#1A1C24] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
             >
               <option value="ALL">All Sectors</option>
               <option value="healthcare">Healthcare</option>
@@ -368,51 +366,45 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs font-mono border-collapse">
-            <thead className="bg-slate-950 text-slate-200 border-b border-slate-800 font-bold">
+            <thead className="bg-[#1A1C24] text-slate-400 border-b border-white/[0.08] uppercase text-[11px]">
               <tr>
-                <th className="p-3.5">SIGNAL ID</th>
-                <th className="p-3.5">WHERE (DISTRICT / STATE)</th>
-                <th className="p-3.5">SECTOR</th>
-                <th className="p-3.5">URGENCY</th>
-                <th className="p-3.5">WHEN (TIMESTAMP)</th>
-                <th className="p-3.5">CITIZEN FEEDBACK PROBLEM</th>
-                <th className="p-3.5">ACTION</th>
+                <th className="p-3">SIGNAL ID</th>
+                <th className="p-3">WHERE (DISTRICT / STATE)</th>
+                <th className="p-3">SECTOR</th>
+                <th className="p-3">URGENCY</th>
+                <th className="p-3">WHEN (TIMESTAMP)</th>
+                <th className="p-3">CITIZEN FEEDBACK PROBLEM</th>
+                <th className="p-3">ACTION</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/80 font-medium">
+            <tbody className="divide-y divide-white/[0.08]">
               {filteredProblemStream.map((req) => (
-                <tr key={req.id} className="hover:bg-slate-950/80 transition">
-                  <td className="p-3.5 font-extrabold text-cyan-400">{req.id}</td>
-                  <td className="p-3.5">
+                <tr key={req.id} className="hover:bg-[#1A1C24] transition-colors">
+                  <td className="p-3 font-semibold text-indigo-400">{req.id}</td>
+                  <td className="p-3">
                     <button
                       onClick={() => handleOpenRegionDetails(req.region_id)}
-                      className="text-slate-100 hover:text-cyan-300 font-extrabold hover:underline flex items-center gap-1 text-xs"
+                      className="text-slate-200 hover:text-indigo-400 font-semibold hover:underline flex items-center gap-1 text-xs cursor-pointer"
                     >
-                      <MapPin className="w-3.5 h-3.5 text-cyan-400" />
+                      <MapPin className="w-3.5 h-3.5 text-indigo-400" />
                       <span>{req.region_id}</span>
                     </button>
                   </td>
-                  <td className="p-3.5 text-cyan-300 font-bold uppercase">{req.request_category || req.category}</td>
-                  <td className="p-3.5">
-                    <span className={`px-2.5 py-0.5 rounded-md text-[10px] font-bold font-mono ${
-                      (req.urgency || req.extracted_entities.severity) === 'CRITICAL'
-                        ? 'bg-rose-950 text-rose-300 border border-rose-800'
-                        : 'bg-amber-950 text-amber-300 border border-amber-800'
-                    }`}>
-                      {req.urgency || req.extracted_entities.severity}
-                    </span>
+                  <td className="p-3 text-slate-300 uppercase">{req.request_category || req.category}</td>
+                  <td className="p-3">
+                    <PriorityBadge level={req.urgency || req.extracted_entities.severity} size="sm" />
                   </td>
-                  <td className="p-3.5 text-slate-300 font-semibold">{req.timestamp ? req.timestamp.replace('T', ' ').slice(0, 16) : '2026-08-21 14:30'} IST</td>
-                  <td className="p-3.5 max-w-xs">
-                    <div className="text-slate-100 font-semibold text-xs truncate font-sans">"{req.original_text}"</div>
+                  <td className="p-3 text-slate-400">{req.timestamp ? req.timestamp.replace('T', ' ').slice(0, 16) : '2026-08-21 14:30'} IST</td>
+                  <td className="p-3 max-w-xs">
+                    <div className="text-slate-200 text-xs truncate font-sans">"{req.original_text}"</div>
                     <div className="text-slate-400 text-[11px] italic truncate">→ {req.translated_text}</div>
                   </td>
-                  <td className="p-3.5">
+                  <td className="p-3">
                     <button
                       onClick={() => handleOpenRegionDetails(req.region_id)}
-                      className="px-2.5 py-1 rounded-lg bg-cyan-950 text-cyan-300 border border-cyan-700 hover:bg-cyan-900 font-bold text-[10px] flex items-center gap-1"
+                      className="px-2.5 py-1 rounded-lg bg-[#1A1C24] hover:bg-[#161822] border border-white/[0.08] text-slate-300 font-medium text-[11px] flex items-center gap-1 cursor-pointer"
                     >
-                      <span>Enter Details</span>
+                      <span>Details</span>
                       <ArrowRight className="w-3 h-3" />
                     </button>
                   </td>
@@ -424,24 +416,24 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
       </div>
 
       {/* 5. Geographic Demand Landscape (100k Per-Capita Baseline) */}
-      <div className="p-6 md:p-8 rounded-2xl glass-card space-y-6">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800/80 pb-5">
+      <div className="p-6 rounded-xl bg-[#121319] border border-white/[0.08] space-y-5 shadow-sm">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.08] pb-4">
           <div>
-            <h2 className="text-lg font-bold text-slate-100 flex items-center gap-2.5 font-mono">
-              <Building2 className="w-5 h-5 text-cyan-400" />
-              <span>Indian Districts Demand Landscape (100k Per-Capita Baseline)</span>
+            <h2 className="text-[15px] font-semibold text-slate-100 flex items-center gap-2">
+              <Building2 className="w-4 h-4 text-indigo-400" />
+              <span>Districts Demand Landscape (100k Per-Capita Baseline)</span>
             </h2>
-            <p className="text-xs text-slate-400 mt-1">
-              Geographic demand concentration normalized per 100,000 residents vs municipal infrastructure deficit scores.
+            <p className="text-xs text-slate-400 mt-0.5">
+              Geographic demand concentration normalized per 100,000 residents vs deficit scores.
             </p>
           </div>
 
-          <div className="flex items-center gap-3">
-            <span className="text-xs font-mono text-slate-300 font-bold">Target District:</span>
+          <div className="flex items-center gap-3 text-xs">
+            <span className="text-slate-400 font-medium">Target District:</span>
             <select
               value={selectedRegionId}
               onChange={(e) => setSelectedRegionId(e.target.value)}
-              className="bg-slate-950 border border-slate-700/80 text-slate-100 text-xs font-bold rounded-xl px-4 py-2 focus:outline-none focus:border-cyan-500 font-mono shadow-inner cursor-pointer"
+              className="bg-[#1A1C24] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
             >
               {regions.map((r) => (
                 <option key={r.id} value={r.id}>
@@ -465,33 +457,33 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
               <button
                 key={reg.id}
                 onClick={() => setSelectedRegionId(reg.id)}
-                className={`p-5 rounded-2xl border text-left transition-all duration-300 relative flex flex-col justify-between ${
+                className={`p-5 rounded-xl border text-left transition-colors duration-150 cursor-pointer flex flex-col justify-between ${
                   isSelected
-                    ? 'bg-gradient-to-br from-cyan-950/80 via-slate-900 to-slate-950 border-cyan-500 shadow-xl shadow-cyan-950/80 ring-2 ring-cyan-500/40 glow-cyan'
-                    : 'glass-card hover:border-slate-700'
+                    ? 'bg-[#1A1C24] border-indigo-500/40'
+                    : 'bg-[#121319] border-white/[0.08] hover:border-white/[0.16]'
                 }`}
               >
                 <div>
-                  <div className="flex justify-between items-start mb-3">
-                    <span className="text-sm font-extrabold text-slate-100 font-sans tracking-tight">{reg.district_city}</span>
-                    <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-slate-900 border border-slate-800 text-cyan-400">
+                  <div className="flex justify-between items-start mb-2">
+                    <span className="text-sm font-semibold text-slate-100 tracking-tight">{reg.district_city}</span>
+                    <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-[#121319] border border-white/[0.08] text-slate-400">
                       {reg.country_code}
                     </span>
                   </div>
 
-                  <div className="text-2xl font-extrabold text-slate-100 font-mono tracking-tight mt-1">
-                    {perCapita.toLocaleString()} <span className="text-xs text-slate-400 font-semibold font-mono">/ 100k</span>
+                  <div className="text-xl font-semibold text-slate-100 font-mono tracking-tight mt-1">
+                    {perCapita.toLocaleString()} <span className="text-xs text-slate-400 font-normal">/ 100k</span>
                   </div>
 
                   <div className="mt-3 space-y-1">
-                    <div className="flex justify-between text-[10px] font-mono text-slate-400 font-bold">
+                    <div className="flex justify-between text-[10px] font-mono text-slate-400">
                       <span>Density Meter</span>
-                      <span className="text-cyan-300">{densityPct}%</span>
+                      <span className="text-indigo-400">{densityPct}%</span>
                     </div>
-                    <div className="h-2 w-full bg-slate-900 rounded-full overflow-hidden border border-slate-800">
+                    <div className="h-1.5 w-full bg-[#121319] rounded-full overflow-hidden border border-white/[0.08]">
                       <div
-                        className={`h-full rounded-full transition-all duration-500 ${
-                          isSelected ? 'bg-gradient-to-r from-cyan-400 to-emerald-400' : 'bg-gradient-to-r from-slate-700 to-cyan-600'
+                        className={`h-full rounded-full transition-all duration-300 ${
+                          isSelected ? 'bg-indigo-500' : 'bg-slate-600'
                         }`}
                         style={{ width: `${densityPct}%` }}
                       />
@@ -499,14 +491,14 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
                   </div>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-slate-800/60 space-y-1.5 text-xs font-mono">
+                <div className="mt-4 pt-3 border-t border-white/[0.08] space-y-1 text-xs font-mono">
                   <div className="flex justify-between text-slate-400">
                     <span>Population:</span>
-                    <span className="text-slate-200 font-bold">{reg.population.toLocaleString()}</span>
+                    <span className="text-slate-200">{reg.population.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-slate-400">
                     <span>Vulnerability:</span>
-                    <span className="text-amber-400 font-bold">{reg.vulnerability_index.toFixed(2)}</span>
+                    <span className="text-amber-400">{reg.vulnerability_index.toFixed(2)}</span>
                   </div>
                 </div>
               </button>
@@ -516,34 +508,34 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
 
         {/* Selected Region Intelligence Banner */}
         {selectedRegion && (
-          <div className="p-4 rounded-xl bg-slate-950/90 border border-slate-800/90 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs">
+          <div className="p-4 rounded-lg bg-[#1A1C24] border border-white/[0.08] flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-cyan-950 text-cyan-400 border border-cyan-800/80 shadow-md">
-                <ShieldCheck className="w-5 h-5" />
+              <div className="p-2 rounded-lg bg-[#121319] text-indigo-400 border border-white/[0.08]">
+                <ShieldCheck className="w-4 h-4" />
               </div>
               <div>
-                <span className="font-extrabold text-slate-100 text-sm font-sans">
+                <span className="font-semibold text-slate-100 text-sm">
                   {selectedRegion.district_city}, {selectedRegion.state_province}, {selectedRegion.country}
                 </span>
                 <p className="text-slate-400 text-xs mt-0.5 font-mono">
-                  Demographic Vulnerability: <strong className="text-amber-400">{selectedRegion.vulnerability_index.toFixed(2)}</strong> • Primary Language: <strong className="text-cyan-300">{selectedRegion.primary_language.toUpperCase()}</strong>
+                  Demographic Vulnerability: <strong className="text-amber-400">{selectedRegion.vulnerability_index.toFixed(2)}</strong> • Primary Language: <strong className="text-indigo-400">{selectedRegion.primary_language.toUpperCase()}</strong>
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <button
                 onClick={() => handleOpenRegionDetails(selectedRegion.id)}
-                className="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-extrabold transition font-mono text-xs shadow-md glow-cyan flex items-center gap-1.5"
+                className="px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium transition text-xs flex items-center gap-1.5 cursor-pointer shadow-sm"
               >
-                <MapPin className="w-4 h-4" />
-                <span>Enter Region Details</span>
+                <MapPin className="w-3.5 h-3.5" />
+                <span>Region Details</span>
               </button>
               <button
                 onClick={() => onNavigate('hotspots')}
-                className="px-4 py-2 rounded-xl bg-slate-900 border border-slate-700/80 text-cyan-300 hover:text-white transition font-mono text-xs font-bold shadow-md hover:bg-slate-800 flex items-center gap-1.5"
+                className="px-3.5 py-1.5 rounded-lg bg-[#121319] hover:bg-[#161822] border border-white/[0.08] text-slate-200 transition text-xs flex items-center gap-1.5 cursor-pointer"
               >
-                <span>Explore Region Hotspots</span>
-                <ArrowRight className="w-4 h-4" />
+                <span>Hotspots</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>
@@ -551,38 +543,38 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
       </div>
 
       {/* 6. Visual 8-Factor Prioritization Model Card */}
-      <div className="p-6 md:p-8 rounded-2xl glass-card space-y-6">
-        <div className="flex items-center justify-between border-b border-slate-800/80 pb-4">
+      <div className="p-6 rounded-xl bg-[#121319] border border-white/[0.08] space-y-4 shadow-sm">
+        <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
           <div>
-            <h2 className="text-base font-bold text-slate-100 font-mono flex items-center gap-2">
-              <BarChart3 className="w-5 h-5 text-indigo-400" />
+            <h2 className="text-[15px] font-semibold text-slate-100 flex items-center gap-2">
+              <BarChart3 className="w-4 h-4 text-indigo-400" />
               <span>Deterministic 8-Factor Prioritization Formula (V2)</span>
             </h2>
             <p className="text-xs text-slate-400 mt-0.5">
-              100% mathematical formula combining citizen signals, deficit gaps, census demographics, and investment risks.
+              Mathematical formula combining citizen signals, deficit gaps, census demographics, and risk penalties.
             </p>
           </div>
-          <span className="px-3 py-1 rounded-md bg-indigo-950 text-indigo-300 border border-indigo-800 text-xs font-mono font-bold">
-            Score = Σ(Weight × Factor) - Risk Penalties
+          <span className="px-2.5 py-1 rounded bg-[#1A1C24] text-slate-300 border border-white/[0.08] text-xs font-mono">
+            Score = Σ(Weight × Factor) - Risk
           </span>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
           {[
-            { label: 'Demand', weight: '20%', color: 'from-cyan-500 to-blue-600' },
-            { label: 'Deficit Gap', weight: '20%', color: 'from-indigo-500 to-purple-600' },
-            { label: 'Population', weight: '15%', color: 'from-teal-500 to-emerald-600' },
-            { label: 'Demographic', weight: '15%', color: 'from-amber-500 to-orange-600' },
-            { label: 'Momentum', weight: '10%', color: 'from-cyan-500 to-cyan-600' },
-            { label: 'Urgency', weight: '10%', color: 'from-rose-500 to-red-600' },
-            { label: 'Alignment', weight: '5%', color: 'from-violet-500 to-indigo-600' },
-            { label: 'Evidence Q', weight: '5%', color: 'from-emerald-500 to-teal-600' },
+            { label: 'Demand', weight: '20%' },
+            { label: 'Deficit Gap', weight: '20%' },
+            { label: 'Population', weight: '15%' },
+            { label: 'Demographic', weight: '15%' },
+            { label: 'Momentum', weight: '10%' },
+            { label: 'Urgency', weight: '10%' },
+            { label: 'Alignment', weight: '5%' },
+            { label: 'Evidence Q', weight: '5%' },
           ].map((f) => (
-            <div key={f.label} className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800/80 text-center space-y-2">
-              <div className="text-[11px] font-bold text-slate-300 font-mono truncate">{f.label}</div>
-              <div className="text-lg font-extrabold text-slate-100 font-mono">{f.weight}</div>
-              <div className="h-1.5 w-full bg-slate-900 rounded-full overflow-hidden">
-                <div className={`h-full bg-gradient-to-r ${f.color} rounded-full w-full`} />
+            <div key={f.label} className="p-3 rounded-lg bg-[#1A1C24] border border-white/[0.08] text-center space-y-1.5">
+              <div className="text-[11px] font-semibold text-slate-400 font-mono truncate">{f.label}</div>
+              <div className="text-base font-semibold text-slate-100 font-mono">{f.weight}</div>
+              <div className="h-1.5 w-full bg-[#121319] rounded-full overflow-hidden border border-white/[0.08]">
+                <div className="h-full bg-indigo-500 rounded-full w-full" />
               </div>
             </div>
           ))}
@@ -592,40 +584,40 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
       {/* 7. Top Priority Actions & Featured Evidence Preview */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Top 5 Priority Recommendations */}
-        <div className="lg:col-span-2 p-6 md:p-8 rounded-2xl glass-card space-y-5">
-          <div className="flex items-center justify-between border-b border-slate-800/80 pb-4">
+        <div className="lg:col-span-2 p-6 rounded-xl bg-[#121319] border border-white/[0.08] space-y-4 shadow-sm">
+          <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
             <div>
-              <h2 className="text-lg font-bold text-slate-100 font-mono">Ranked Priority Actions</h2>
+              <h2 className="text-[15px] font-semibold text-slate-100">Ranked Priority Actions</h2>
               <p className="text-xs text-slate-400">Traceable evidence-backed capital investment recommendations.</p>
             </div>
             <button
               onClick={() => onNavigate('recommendations')}
-              className="text-xs font-mono font-bold text-cyan-400 hover:text-cyan-300 flex items-center gap-1"
+              className="text-xs font-mono font-medium text-indigo-400 hover:text-indigo-300 flex items-center gap-1 cursor-pointer"
             >
-              <span>Full Recommendations List ({recommendations.length})</span>
+              <span>Full List ({recommendations.length})</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
 
-          <div className="space-y-3.5">
+          <div className="space-y-3">
             {topRecommendations.map((rec, index) => (
               <div
                 key={rec.id}
-                className="p-5 rounded-xl glass-card-interactive flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                className="p-4 rounded-lg bg-[#1A1C24] border border-white/[0.08] hover:border-white/[0.16] transition-colors duration-150 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
               >
-                <div className="flex items-start gap-4">
-                  <span className="text-base font-mono font-extrabold text-cyan-400 w-7 pt-0.5">
+                <div className="flex items-start gap-3">
+                  <span className="text-xs font-mono font-semibold text-indigo-400 w-6 pt-0.5">
                     #{index + 1}
                   </span>
                   <div>
-                    <div className="flex items-center gap-2.5">
-                      <span className="text-base font-extrabold text-slate-100 font-sans tracking-tight">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-semibold text-slate-100 tracking-tight">
                         {rec.category.toUpperCase()}
                       </span>
                       <PriorityBadge level={rec.priority_level} score={rec.priority_score} size="sm" />
                     </div>
-                    <div className="text-xs text-slate-300 font-semibold mt-0.5 font-mono">{rec.region_name}</div>
-                    <div className="text-xs text-slate-400 mt-1 italic line-clamp-1">{rec.reasoning}</div>
+                    <div className="text-xs text-slate-400 font-mono mt-0.5">{rec.region_name}</div>
+                    <div className="text-xs text-slate-300 mt-1 italic line-clamp-1">{rec.reasoning}</div>
                   </div>
                 </div>
 
@@ -635,7 +627,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
                   )}
                   <button
                     onClick={() => onOpenEvidenceModal && onOpenEvidenceModal(rec)}
-                    className="px-3.5 py-2 rounded-xl bg-cyan-950 text-cyan-300 border border-cyan-800/80 hover:bg-cyan-900 transition text-xs font-bold flex items-center gap-1 shadow-sm"
+                    className="px-3 py-1.5 rounded-lg bg-[#121319] hover:bg-[#161822] border border-white/[0.08] text-slate-300 transition text-xs font-medium flex items-center gap-1 cursor-pointer"
                   >
                     <span>View Evidence</span>
                     <ChevronRight className="w-4 h-4" />
@@ -646,46 +638,46 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
           </div>
         </div>
 
-        {/* Featured Evidence Chain Signature Preview Card */}
-        <div className="p-6 md:p-8 rounded-2xl glass-panel-indigo space-y-6 flex flex-col justify-between">
+        {/* Featured Evidence Chain Preview Card */}
+        <div className="p-6 rounded-xl bg-[#121319] border border-white/[0.08] space-y-5 flex flex-col justify-between shadow-sm">
           <div>
-            <div className="flex items-center gap-2.5 mb-4">
-              <Network className="w-5 h-5 text-indigo-400" />
-              <h3 className="text-xs font-bold text-indigo-300 uppercase tracking-widest font-mono">
+            <div className="flex items-center gap-2 mb-4">
+              <Network className="w-4 h-4 text-indigo-400" />
+              <h3 className="text-xs font-semibold text-slate-300 uppercase tracking-wider font-mono">
                 Featured Evidence Chain Preview
               </h3>
             </div>
             {featuredRec && (
               <>
-                <div className="flex items-center justify-between mb-5 p-4 rounded-xl bg-slate-950/80 border border-indigo-900/60">
+                <div className="flex items-center justify-between mb-4 p-3.5 rounded-lg bg-[#1A1C24] border border-white/[0.08]">
                   <div>
-                    <h4 className="text-base font-extrabold text-slate-100">{featuredRec.category.toUpperCase()}</h4>
-                    <span className="text-xs font-mono text-slate-300">{featuredRec.region_name}</span>
+                    <h4 className="text-sm font-semibold text-slate-100">{featuredRec.category.toUpperCase()}</h4>
+                    <span className="text-xs font-mono text-slate-400">{featuredRec.region_name}</span>
                   </div>
                   <PriorityBadge level={featuredRec.priority_level} score={featuredRec.priority_score} size="sm" />
                 </div>
 
                 {/* Vertical Evidence Chain Step Preview */}
-                <div className="space-y-4 relative before:absolute before:left-2.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-indigo-900/60 pl-6 text-xs">
+                <div className="space-y-3 relative before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-white/[0.08] pl-5 text-xs">
                   <div className="relative">
-                    <span className="absolute -left-6 top-1 w-3 h-3 rounded-full bg-cyan-400 glow-cyan" />
-                    <div className="font-bold text-slate-200">14 Verified Citizen Signals</div>
+                    <span className="absolute -left-5 top-1 w-2.5 h-2.5 rounded-full bg-indigo-500" />
+                    <div className="font-semibold text-slate-200">14 Verified Citizen Signals</div>
                     <div className="text-[11px] text-slate-400 font-mono">High demand density logged</div>
                   </div>
                   <div className="relative">
-                    <span className="absolute -left-6 top-1 w-3 h-3 rounded-full bg-amber-400 glow-amber" />
-                    <div className="font-bold text-slate-200">Capacity Gap: 0.82 Deficit</div>
+                    <span className="absolute -left-5 top-1 w-2.5 h-2.5 rounded-full bg-amber-500" />
+                    <div className="font-semibold text-slate-200">Capacity Gap: 0.82 Deficit</div>
                     <div className="text-[11px] text-slate-400 font-mono">Baseline capacity deficit</div>
                   </div>
                   <div className="relative">
-                    <span className="absolute -left-6 top-1 w-3 h-3 rounded-full bg-indigo-400 glow-indigo" />
-                    <div className="font-bold text-slate-200">Demand Velocity Trend</div>
+                    <span className="absolute -left-5 top-1 w-2.5 h-2.5 rounded-full bg-indigo-400" />
+                    <div className="font-semibold text-slate-200">Demand Velocity Trend</div>
                     <div className="text-[11px] text-slate-400 font-mono">+25% 30-day temporal change</div>
                   </div>
                   <div className="relative">
-                    <span className="absolute -left-6 top-1 w-3 h-3 rounded-full bg-rose-500 glow-rose" />
-                    <div className="font-bold text-rose-300">Priority Score: {featuredRec.priority_score.toFixed(1)}/100</div>
-                    <div className="text-[11px] text-rose-400 font-mono">Fast-track allocation required</div>
+                    <span className="absolute -left-5 top-1 w-2.5 h-2.5 rounded-full bg-red-500" />
+                    <div className="font-semibold text-red-400">Priority Score: {featuredRec.priority_score.toFixed(1)}/100</div>
+                    <div className="text-[11px] text-slate-400 font-mono">Fast-track allocation required</div>
                   </div>
                 </div>
               </>
@@ -695,10 +687,10 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
           {featuredRec && (
             <button
               onClick={() => onOpenEvidenceModal && onOpenEvidenceModal(featuredRec)}
-              className="w-full py-3 rounded-xl bg-indigo-900/80 hover:bg-indigo-800 text-indigo-100 border border-indigo-700/80 text-xs font-bold transition flex items-center justify-center gap-2 shadow-lg glow-indigo"
+              className="w-full py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
             >
-              <span>Inspect Full 6-Step Evidence Trail</span>
-              <ArrowRight className="w-4 h-4" />
+              <span>Inspect 6-Step Evidence Trail</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </button>
           )}
         </div>

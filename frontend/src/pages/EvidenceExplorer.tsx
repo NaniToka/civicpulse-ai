@@ -25,37 +25,34 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
   });
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-300">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+    <div className="space-y-8 animate-in fade-in duration-150">
+      <div className="p-6 md:p-8 rounded-xl bg-[#121319] border border-white/[0.08] flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm">
         <div>
           <div className="flex items-center gap-2">
-            <Network className="w-6 h-6 text-indigo-400" />
-            <h1 className="text-2xl font-bold text-slate-100 tracking-tight font-mono">
-              Civic Evidence Explorer
+            <Network className="w-5 h-5 text-indigo-400" />
+            <h1 className="text-2xl md:text-[28px] font-semibold text-slate-100 tracking-tight">
+              Civic Evidence <span className="hero-gradient-text">Explorer</span>
             </h1>
           </div>
-          <div className="flex flex-wrap items-center gap-2 mt-2 font-mono text-[11px]">
-            <span className="px-3 py-1 rounded-full bg-indigo-950/90 border border-indigo-700/80 text-indigo-300 font-bold">
+          <div className="flex flex-wrap items-center gap-2 mt-2 font-mono text-xs">
+            <span className="px-2.5 py-1 rounded-md bg-[#1A1C24] border border-white/[0.08] text-slate-300 font-medium">
               6-Step Evidence Nodes
             </span>
-            <span className="px-3 py-1 rounded-full bg-cyan-950/90 border border-cyan-700/80 text-cyan-300 font-bold">
-              Statistical Confidence Scores
-            </span>
-            <span className="px-3 py-1 rounded-full bg-emerald-950/90 border border-emerald-700/80 text-emerald-300 font-bold">
-              Traceable Policymaker Audit
+            <span className="px-2.5 py-1 rounded-md bg-[#1A1C24] border border-white/[0.08] text-slate-300 font-medium">
+              Traceable Audit Trail
             </span>
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 font-mono text-xs">
           <select
             value={selectedRegion}
             onChange={(e) => setSelectedRegion(e.target.value)}
-            className="bg-slate-950 border-2 border-slate-700 text-slate-100 font-extrabold text-xs rounded-xl px-4 py-2.5 focus:outline-none focus:border-sky-400 font-mono cursor-pointer"
+            className="bg-[#1A1C24] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
           >
-            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="ALL">All Regions</option>
+            <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="ALL">All Regions</option>
             {regions.map((r) => (
-              <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" key={r.id} value={r.id}>
+              <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" key={r.id} value={r.id}>
                 {r.district_city}, {r.country_code}
               </option>
             ))}
@@ -64,39 +61,39 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
           <select
             value={selectedType}
             onChange={(e) => setSelectedType(e.target.value)}
-            className="bg-slate-950 border-2 border-slate-700 text-slate-100 font-extrabold text-xs rounded-xl px-4 py-2.5 focus:outline-none focus:border-sky-400 font-mono cursor-pointer"
+            className="bg-[#1A1C24] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
           >
-            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="ALL">All Evidence Types</option>
-            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="citizen_demand">Citizen Demand</option>
-            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="demand_momentum">Demand Momentum</option>
-            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="infrastructure_gap">Infrastructure Gap</option>
-            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="demographic_need">Demographic Need</option>
-            <option className="bg-slate-900 text-slate-100 font-extrabold text-sm py-2" value="investment_context">Investment Context</option>
+            <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="ALL">All Evidence Types</option>
+            <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="citizen_demand">Citizen Demand</option>
+            <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="demand_momentum">Demand Momentum</option>
+            <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="infrastructure_gap">Infrastructure Gap</option>
+            <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="demographic_need">Demographic Need</option>
+            <option className="bg-[#1A1C24] text-slate-100 text-sm py-1" value="investment_context">Investment Context</option>
           </select>
         </div>
       </div>
 
-      <div className="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-5 shadow-lg">
-        <h2 className="text-lg font-bold text-slate-100 font-mono">6-Step Recommendation Evidence Chains</h2>
-        <p className="text-xs text-slate-300 font-medium">Select a recommendation to inspect its complete machine-readable evidence trail.</p>
+      <div className="p-6 rounded-xl bg-[#121319] border border-white/[0.08] space-y-4 shadow-sm">
+        <h2 className="text-[15px] font-semibold text-slate-100 font-mono">6-Step Recommendation Evidence Chains</h2>
+        <p className="text-xs text-slate-400">Select a recommendation to inspect its complete machine-readable evidence trail.</p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {recommendations.slice(0, 4).map((rec) => (
             <div
               key={rec.id}
               onClick={() => onOpenEvidenceModal && onOpenEvidenceModal(rec)}
-              className="p-5 rounded-xl bg-slate-950 border border-slate-800 hover:border-slate-700 transition cursor-pointer space-y-3 shadow-md group"
+              className="p-5 rounded-lg bg-[#1A1C24] border border-white/[0.08] hover:border-white/[0.16] transition-colors cursor-pointer space-y-3 shadow-sm group"
             >
               <div className="flex items-center justify-between">
-                <span className="text-xs font-extrabold font-mono text-sky-400 uppercase">{rec.category}</span>
-                <span className="text-xs font-mono font-bold text-slate-400">{rec.id}</span>
+                <span className="text-xs font-semibold font-mono text-indigo-400 uppercase">{rec.category}</span>
+                <span className="text-xs font-mono text-slate-400">{rec.id}</span>
               </div>
-              <h3 className="text-base font-bold text-slate-100 group-hover:text-sky-300 transition">{rec.region_name}</h3>
-              <p className="text-xs text-slate-200 font-semibold leading-relaxed">"{rec.reasoning}"</p>
+              <h3 className="text-base font-semibold text-slate-100 group-hover:text-indigo-400 transition-colors">{rec.region_name}</h3>
+              <p className="text-xs text-slate-300 italic leading-relaxed">"{rec.reasoning}"</p>
 
-              <div className="flex items-center justify-between text-xs pt-3 border-t border-slate-800 font-mono font-bold">
-                <span className="text-emerald-400">+{(rec.confidence * 100).toFixed(0)}% Confidence</span>
-                <span className="text-sky-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              <div className="flex items-center justify-between text-xs pt-3 border-t border-white/[0.08] font-mono">
+                <span className="text-green-400 font-medium">+{(rec.confidence * 100).toFixed(0)}% Confidence</span>
+                <span className="text-indigo-400 font-medium flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
                   Open Evidence Chain →
                 </span>
               </div>
@@ -105,27 +102,27 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
         </div>
       </div>
 
-      <div className="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-5 shadow-lg">
-        <h2 className="text-lg font-bold text-slate-100 font-mono">
+      <div className="p-6 rounded-xl bg-[#121319] border border-white/[0.08] space-y-4 shadow-sm">
+        <h2 className="text-[15px] font-semibold text-slate-100 font-mono">
           Granular Evidence Nodes ({filteredItems.length})
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredItems.map((item) => (
-            <div key={item.id} className="p-5 rounded-xl bg-slate-950 border border-slate-800 space-y-3 shadow-md">
+            <div key={item.id} className="p-4 rounded-lg bg-[#1A1C24] border border-white/[0.08] space-y-2.5 shadow-sm">
               <div className="flex items-center justify-between text-xs">
-                <span className="font-mono text-indigo-200 uppercase font-extrabold text-xs bg-indigo-950 px-2.5 py-1 rounded border border-indigo-700">
+                <span className="font-mono text-indigo-400 uppercase font-medium text-[10px] bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20">
                   {item.type}
                 </span>
-                <span className="text-slate-400 font-mono font-bold text-xs">{item.id}</span>
+                <span className="text-slate-400 font-mono text-[11px]">{item.id}</span>
               </div>
 
-              <div className="text-sm font-extrabold text-slate-100">{item.metric}</div>
-              <div className="text-xs text-slate-200 font-semibold leading-relaxed">"{item.explanation}"</div>
+              <div className="text-sm font-semibold text-slate-100 tracking-tight">{item.metric}</div>
+              <div className="text-xs text-slate-300 italic leading-relaxed">"{item.explanation}"</div>
 
-              <div className="pt-3 border-t border-slate-800 flex items-center justify-between text-xs font-mono font-bold">
-                <span className="text-slate-300">Source: <span className="text-slate-100">{item.source}</span></span>
-                <span className="text-emerald-400">+{(item.confidence * 100).toFixed(0)}%</span>
+              <div className="pt-2.5 border-t border-white/[0.08] flex items-center justify-between text-xs font-mono">
+                <span className="text-slate-400">Source: <span className="text-slate-200">{item.source}</span></span>
+                <span className="text-green-400 font-medium">+{(item.confidence * 100).toFixed(0)}%</span>
               </div>
             </div>
           ))}

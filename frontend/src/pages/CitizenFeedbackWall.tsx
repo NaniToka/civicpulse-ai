@@ -227,71 +227,68 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
   const stateOptions = Array.from(new Set(regions.map((r) => r.state_province)));
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-300">
+    <div className="space-y-8 animate-in fade-in duration-150">
       {/* 1. Header Banner */}
-      <div className="relative overflow-hidden rounded-2xl glass-panel-cyan p-6 md:p-8 space-y-4 border border-cyan-800/40">
+      <div className="rounded-xl bg-[#121319] border border-white/[0.08] p-6 md:p-8 space-y-4 shadow-sm">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="space-y-2 max-w-2xl">
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
-              <span className="text-xs font-mono font-extrabold text-cyan-300 bg-cyan-950 px-3 py-1 rounded-full border border-cyan-700">
-                LIVE COMMUNITY FEEDBACK WALL
+              <span className="w-2 h-2 rounded-full bg-green-500" />
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 font-mono">
+                Community Feedback Wall
               </span>
             </div>
-            <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-100 font-sans">
-              Indian States <span className="gradient-text-cyan">Citizen Comments & Ratings</span>
+            <h1 className="text-2xl md:text-[28px] font-semibold tracking-tight text-slate-100 font-sans">
+              Indian States <span className="hero-gradient-text">Citizen Comments & Ratings</span>
             </h1>
-            <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-[11px]">
-              <span className="px-3 py-1 rounded-full bg-emerald-950/90 border border-emerald-700/80 text-emerald-300 font-bold flex items-center gap-1">
-                <span>Positive Praise 🎉</span>
+            <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-xs">
+              <span className="px-2.5 py-1 rounded-md bg-[#1A1C24] border border-white/[0.08] text-slate-300 font-medium">
+                Verified Citizen Wall
               </span>
-              <span className="px-3 py-1 rounded-full bg-rose-950/90 border border-rose-700/80 text-rose-300 font-bold flex items-center gap-1">
-                <span>Critical Alerts 🚨</span>
-              </span>
-              <span className="px-3 py-1 rounded-full bg-indigo-950/90 border border-indigo-700/80 text-indigo-300 font-bold flex items-center gap-1">
-                <span>Rich Emojis & Ratings ⭐️</span>
+              <span className="px-2.5 py-1 rounded-md bg-[#1A1C24] border border-white/[0.08] text-slate-300 font-medium">
+                7 Native Languages
               </span>
             </div>
           </div>
 
           <button
             onClick={() => setShowComposer(!showComposer)}
-            className="flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-extrabold text-xs transition shadow-lg shadow-cyan-950/80 glow-cyan cursor-pointer shrink-0 self-start md:self-auto"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-xs transition cursor-pointer shrink-0 self-start md:self-auto shadow-sm"
           >
             <PlusCircle className="w-4 h-4" />
-            <span>Post Citizen Feedback</span>
+            <span>Post Feedback</span>
           </button>
         </div>
       </div>
 
       {/* 2. Interactive Post Feedback Form Modal / Drawer */}
       {showComposer && (
-        <div className="p-6 rounded-2xl glass-card border-2 border-cyan-500/60 shadow-2xl space-y-5 animate-in slide-in-from-top-4 duration-300">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div className="p-6 rounded-xl bg-[#121319] border border-white/[0.08] shadow-lg space-y-4 animate-in slide-in-from-top-2 duration-150">
+          <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
             <div className="flex items-center gap-2 font-mono">
-              <Sparkles className="w-5 h-5 text-cyan-400" />
-              <h3 className="text-base font-extrabold text-slate-100">Post New Citizen Feedback & Emojis</h3>
+              <Sparkles className="w-4 h-4 text-indigo-400" />
+              <h3 className="text-sm font-semibold text-slate-100">Post New Citizen Feedback</h3>
             </div>
             <button
               onClick={() => setShowComposer(false)}
-              className="text-xs font-mono font-bold text-slate-400 hover:text-white"
+              className="text-xs font-mono text-slate-400 hover:text-white cursor-pointer"
             >
               Cancel ✕
             </button>
           </div>
 
           {postedSuccess ? (
-            <div className="p-4 rounded-xl bg-emerald-950/90 border border-emerald-600 text-emerald-300 text-xs font-mono font-bold flex items-center gap-2">
-              <CheckCircle2 className="w-5 h-5 text-emerald-400" />
-              <span>Feedback posted successfully to the live Indian community wall! 🎉</span>
+            <div className="p-3.5 rounded-lg bg-green-500/10 border border-green-500/20 text-green-400 text-xs font-mono font-medium flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-green-400" />
+              <span>Feedback posted successfully to the community wall!</span>
             </div>
           ) : (
             <form onSubmit={handleAddComment} className="space-y-4 font-mono text-xs">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {/* Author Name */}
                 <div className="space-y-1.5">
-                  <label className="text-slate-300 font-bold flex items-center gap-1.5">
-                    <User className="w-3.5 h-3.5 text-cyan-400" />
+                  <label className="text-slate-400 font-medium flex items-center gap-1.5">
+                    <User className="w-3.5 h-3.5 text-indigo-400" />
                     <span>Your Name:</span>
                   </label>
                   <input
@@ -299,44 +296,44 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
                     placeholder="e.g. Rajesh Kumar"
                     value={newAuthor}
                     onChange={(e) => setNewAuthor(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2 text-slate-100 font-bold focus:outline-none focus:border-cyan-400"
+                    className="w-full bg-[#1A1C24] border border-white/[0.08] rounded-lg px-3 py-1.5 text-slate-100 focus:outline-none focus:border-white/[0.16]"
                     required
                   />
                 </div>
 
                 {/* State & District Selector */}
                 <div className="space-y-1.5">
-                  <label className="text-slate-300 font-bold flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-cyan-400" />
+                  <label className="text-slate-400 font-medium flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-indigo-400" />
                     <span>Your District & State:</span>
                   </label>
                   <select
                     value={newRegionId}
                     onChange={(e) => setNewRegionId(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-700 text-slate-100 font-bold rounded-xl px-3.5 py-2 focus:outline-none focus:border-cyan-400 cursor-pointer"
+                    className="w-full bg-[#1A1C24] border border-white/[0.08] text-slate-100 rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
                   >
                     {regions.map((r) => (
-                      <option key={r.id} value={r.id}>
+                      <option key={r.id} value={r.id} className="bg-[#1A1C24]">
                         {r.district_city}, {r.state_province}
                       </option>
                     ))}
                   </select>
                 </div>
 
-                {/* Feedback Type (Good / Bad / Suggestion) */}
+                {/* Feedback Type */}
                 <div className="space-y-1.5">
-                  <label className="text-slate-300 font-bold flex items-center gap-1.5">
-                    <Tag className="w-3.5 h-3.5 text-cyan-400" />
+                  <label className="text-slate-400 font-medium flex items-center gap-1.5">
+                    <Tag className="w-3.5 h-3.5 text-indigo-400" />
                     <span>Feedback Sentiment:</span>
                   </label>
                   <select
                     value={newType}
                     onChange={(e) => setNewType(e.target.value as 'POSITIVE' | 'CRITICAL' | 'SUGGESTION')}
-                    className="w-full bg-slate-950 border border-slate-700 text-slate-100 font-bold rounded-xl px-3.5 py-2 focus:outline-none focus:border-cyan-400 cursor-pointer"
+                    className="w-full bg-[#1A1C24] border border-white/[0.08] text-slate-100 rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
                   >
-                    <option value="POSITIVE">Good / Praise 🎉</option>
-                    <option value="CRITICAL">Bad / Critical Issue 🚨</option>
-                    <option value="SUGGESTION">Suggestion 💡</option>
+                    <option value="POSITIVE" className="bg-[#1A1C24]">Positive Praise</option>
+                    <option value="CRITICAL" className="bg-[#1A1C24]">Critical Issue</option>
+                    <option value="SUGGESTION" className="bg-[#1A1C24]">Suggestion</option>
                   </select>
                 </div>
               </div>
@@ -344,55 +341,55 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Infrastructure Sector */}
                 <div className="space-y-1.5">
-                  <label className="text-slate-300 font-bold">Infrastructure Sector:</label>
+                  <label className="text-slate-400 font-medium">Infrastructure Sector:</label>
                   <select
                     value={newCategory}
                     onChange={(e) => setNewCategory(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-700 text-slate-100 font-bold rounded-xl px-3.5 py-2 focus:outline-none focus:border-cyan-400 cursor-pointer"
+                    className="w-full bg-[#1A1C24] border border-white/[0.08] text-slate-100 rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
                   >
-                    <option value="Clean Water">Clean Water 💧</option>
-                    <option value="Healthcare">Healthcare 🏥</option>
-                    <option value="Sanitation & Drainage">Sanitation & Drainage 🚽</option>
-                    <option value="Electricity & Power">Electricity & Power ⚡</option>
-                    <option value="Transportation">Transportation 🚌</option>
-                    <option value="Digital Connectivity">Digital Connectivity 📶</option>
+                    <option value="Clean Water" className="bg-[#1A1C24]">Clean Water</option>
+                    <option value="Healthcare" className="bg-[#1A1C24]">Healthcare</option>
+                    <option value="Sanitation & Drainage" className="bg-[#1A1C24]">Sanitation & Drainage</option>
+                    <option value="Electricity & Power" className="bg-[#1A1C24]">Electricity & Power</option>
+                    <option value="Transportation" className="bg-[#1A1C24]">Transportation</option>
+                    <option value="Digital Connectivity" className="bg-[#1A1C24]">Digital Connectivity</option>
                   </select>
                 </div>
 
                 {/* Star Rating */}
                 <div className="space-y-1.5">
-                  <label className="text-slate-300 font-bold">Rating (1 to 5 Stars):</label>
-                  <div className="flex items-center gap-2 pt-1">
+                  <label className="text-slate-400 font-medium">Rating (1 to 5 Stars):</label>
+                  <div className="flex items-center gap-2 pt-0.5">
                     {[1, 2, 3, 4, 5].map((star) => (
                       <button
                         type="button"
                         key={star}
                         onClick={() => setNewRating(star)}
-                        className={`text-lg transition cursor-pointer ${
-                          star <= newRating ? 'text-amber-400 scale-110' : 'text-slate-700'
+                        className={`text-base transition cursor-pointer ${
+                          star <= newRating ? 'text-amber-400' : 'text-slate-600'
                         }`}
                       >
                         ★
                       </button>
                     ))}
-                    <span className="text-slate-400 font-bold text-xs ml-2">({newRating}/5 Stars)</span>
+                    <span className="text-slate-400 text-xs ml-1">({newRating}/5 Stars)</span>
                   </div>
                 </div>
               </div>
 
               {/* Emoji Quick Insert Bar */}
               <div className="space-y-1.5">
-                <label className="text-slate-300 font-bold flex items-center gap-1.5">
-                  <Smile className="w-3.5 h-3.5 text-cyan-400" />
-                  <span>Click Emojis to Insert:</span>
+                <label className="text-slate-400 font-medium flex items-center gap-1.5">
+                  <Smile className="w-3.5 h-3.5 text-indigo-400" />
+                  <span>Click Emojis to Insert in Quote:</span>
                 </label>
-                <div className="flex flex-wrap gap-1.5 p-2 rounded-xl bg-slate-950 border border-slate-800">
+                <div className="flex flex-wrap gap-1.5 p-2 rounded-lg bg-[#1A1C24] border border-white/[0.08]">
                   {emojiList.map((emoji) => (
                     <button
                       type="button"
                       key={emoji}
                       onClick={() => handleAppendEmoji(emoji)}
-                      className="p-1.5 rounded-lg bg-slate-900 hover:bg-cyan-950 hover:border-cyan-500 border border-slate-700 text-sm transition cursor-pointer"
+                      className="p-1 rounded bg-[#121319] hover:bg-[#161822] border border-white/[0.08] text-xs transition cursor-pointer"
                     >
                       {emoji}
                     </button>
@@ -402,31 +399,31 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
 
               {/* Comment Textarea */}
               <div className="space-y-1.5">
-                <label className="text-slate-300 font-bold">Feedback Details & Comments:</label>
+                <label className="text-slate-400 font-medium">Feedback Details & Comments:</label>
                 <textarea
                   rows={3}
                   placeholder="Share details about water, road, hospital, or power conditions in your area..."
                   value={newText}
                   onChange={(e) => setNewText(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-slate-100 font-sans text-xs focus:outline-none focus:border-cyan-400"
+                  className="w-full bg-[#1A1C24] border border-white/[0.08] rounded-lg p-3 text-slate-100 font-sans text-xs focus:outline-none focus:border-white/[0.16]"
                   required
                 />
               </div>
 
-              <div className="flex justify-end gap-3 pt-2">
+              <div className="flex justify-end gap-3 pt-1">
                 <button
                   type="button"
                   onClick={() => setShowComposer(false)}
-                  className="px-4 py-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 hover:text-white transition font-bold"
+                  className="px-3.5 py-1.5 rounded-lg bg-[#1A1C24] border border-white/[0.08] text-slate-300 font-medium cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2 rounded-xl bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-extrabold transition shadow-md glow-cyan flex items-center gap-1.5 cursor-pointer"
+                  className="px-4 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium transition flex items-center gap-1.5 cursor-pointer shadow-sm"
                 >
-                  <Send className="w-4 h-4" />
-                  <span>Publish Citizen Comment</span>
+                  <Send className="w-3.5 h-3.5" />
+                  <span>Publish Comment</span>
                 </button>
               </div>
             </form>
@@ -435,58 +432,58 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
       )}
 
       {/* 3. Filters Bar (Good / Bad / Suggestions / State) */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 rounded-2xl glass-card font-mono text-xs">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 rounded-xl bg-[#121319] border border-white/[0.08] font-mono text-xs shadow-sm">
         <div className="flex flex-wrap items-center gap-2">
-          <Filter className="w-4 h-4 text-cyan-400" />
-          <span className="font-bold text-slate-300">Filter Sentiment:</span>
+          <Filter className="w-4 h-4 text-indigo-400" />
+          <span className="text-slate-400 font-medium">Filter Sentiment:</span>
           <button
             onClick={() => setFilterType('ALL')}
-            className={`px-3 py-1.5 rounded-xl font-bold transition ${
+            className={`px-3 py-1.5 rounded-lg font-medium transition cursor-pointer ${
               filterType === 'ALL'
-                ? 'bg-cyan-950 text-cyan-300 border border-cyan-500'
-                : 'bg-slate-950 border border-slate-800 text-slate-400 hover:text-slate-200'
+                ? 'bg-indigo-600 text-white'
+                : 'bg-[#1A1C24] border border-white/[0.08] text-slate-300 hover:border-white/[0.16]'
             }`}
           >
-            All Feedback ({comments.length})
+            All ({comments.length})
           </button>
           <button
             onClick={() => setFilterType('POSITIVE')}
-            className={`px-3 py-1.5 rounded-xl font-bold transition flex items-center gap-1 ${
+            className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1 cursor-pointer ${
               filterType === 'POSITIVE'
-                ? 'bg-emerald-950 text-emerald-300 border border-emerald-500'
-                : 'bg-slate-950 border border-slate-800 text-slate-400 hover:text-emerald-300'
+                ? 'bg-green-500/10 text-green-400 border border-green-500/20'
+                : 'bg-[#1A1C24] border border-white/[0.08] text-slate-300 hover:border-white/[0.16]'
             }`}
           >
-            <span>Good / Praise 🎉</span>
+            <span>Praise</span>
           </button>
           <button
             onClick={() => setFilterType('CRITICAL')}
-            className={`px-3 py-1.5 rounded-xl font-bold transition flex items-center gap-1 ${
+            className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1 cursor-pointer ${
               filterType === 'CRITICAL'
-                ? 'bg-rose-950 text-rose-300 border border-rose-500'
-                : 'bg-slate-950 border border-slate-800 text-slate-400 hover:text-rose-300'
+                ? 'bg-red-500/10 text-red-400 border border-red-500/20'
+                : 'bg-[#1A1C24] border border-white/[0.08] text-slate-300 hover:border-white/[0.16]'
             }`}
           >
-            <span>Bad / Critical 🚨</span>
+            <span>Critical</span>
           </button>
           <button
             onClick={() => setFilterType('SUGGESTION')}
-            className={`px-3 py-1.5 rounded-xl font-bold transition flex items-center gap-1 ${
+            className={`px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1 cursor-pointer ${
               filterType === 'SUGGESTION'
-                ? 'bg-indigo-950 text-indigo-300 border border-indigo-500'
-                : 'bg-slate-950 border border-slate-800 text-slate-400 hover:text-indigo-300'
+                ? 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20'
+                : 'bg-[#1A1C24] border border-white/[0.08] text-slate-300 hover:border-white/[0.16]'
             }`}
           >
-            <span>Suggestions 💡</span>
+            <span>Suggestions</span>
           </button>
         </div>
 
         <div className="flex items-center gap-2 self-end sm:self-auto">
-          <span className="font-bold text-slate-400">State:</span>
+          <span className="text-slate-400 font-medium">State:</span>
           <select
             value={filterState}
             onChange={(e) => setFilterState(e.target.value)}
-            className="bg-slate-950 border border-slate-700 text-slate-100 font-bold rounded-xl px-3 py-1.5 focus:outline-none focus:border-cyan-400 cursor-pointer"
+            className="bg-[#1A1C24] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
           >
             <option value="ALL">All Indian States</option>
             {stateOptions.map((st) => (
@@ -503,72 +500,66 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
         {filteredComments.map((comment) => (
           <div
             key={comment.id}
-            className={`p-5 rounded-2xl glass-card space-y-4 border transition-all duration-300 relative flex flex-col justify-between ${
-              comment.type === 'POSITIVE'
-                ? 'hover:border-emerald-500/80 hover:shadow-emerald-950/40'
-                : comment.type === 'CRITICAL'
-                ? 'hover:border-rose-500/80 hover:shadow-rose-950/40'
-                : 'hover:border-indigo-500/80 hover:shadow-indigo-950/40'
-            }`}
+            className="p-5 rounded-xl bg-[#121319] border border-white/[0.08] hover:border-white/[0.16] transition-colors shadow-sm flex flex-col justify-between space-y-4"
           >
             <div>
               {/* Comment Header */}
-              <div className="flex items-start justify-between gap-3 border-b border-slate-800/80 pb-3">
+              <div className="flex items-start justify-between gap-3 border-b border-white/[0.08] pb-3">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center text-cyan-400 font-extrabold text-xs font-mono">
+                  <div className="w-7 h-7 rounded-full bg-[#1A1C24] border border-white/[0.08] flex items-center justify-center text-indigo-400 font-semibold text-xs font-mono">
                     {comment.citizenName[0]}
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="font-extrabold text-slate-100 text-sm font-sans">{comment.citizenName}</span>
+                      <span className="font-semibold text-slate-100 text-sm font-sans">{comment.citizenName}</span>
                       {comment.isVerifiedCitizen && (
-                        <span className="text-[9px] font-mono font-bold text-emerald-400 bg-emerald-950 px-1.5 py-0.5 rounded border border-emerald-800">
-                          VERIFIED CITIZEN ✓
+                        <span className="text-[9px] font-mono font-medium text-green-400 bg-green-500/10 px-1.5 py-0.5 rounded border border-green-500/20">
+                          VERIFIED
                         </span>
                       )}
                     </div>
                     <div className="text-[11px] font-mono text-slate-400 flex items-center gap-1 mt-0.5">
-                      <MapPin className="w-3 h-3 text-cyan-400" />
+                      <MapPin className="w-3 h-3 text-indigo-400" />
                       <span>{comment.districtCity}, {comment.stateProvince}</span>
                     </div>
                   </div>
                 </div>
 
                 <span
-                  className={`px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold border ${
+                  className={`px-2.5 py-0.5 rounded-md text-[10px] font-mono font-medium ${
                     comment.type === 'POSITIVE'
-                      ? 'bg-emerald-950 text-emerald-300 border-emerald-700'
+                      ? 'bg-green-500/10 text-green-400 border border-green-500/20'
                       : comment.type === 'CRITICAL'
-                      ? 'bg-rose-950 text-rose-300 border-rose-700'
-                      : 'bg-indigo-950 text-indigo-300 border-indigo-700'
+                      ? 'bg-red-500/10 text-red-400 border border-red-500/20'
+                      : 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20'
                   }`}
                 >
-                  {comment.type === 'POSITIVE' ? 'GOOD PRAISE 🎉' : comment.type === 'CRITICAL' ? 'CRITICAL ALERT 🚨' : 'SUGGESTION 💡'}
+                  {comment.type === 'POSITIVE' ? 'PRAISE' : comment.type === 'CRITICAL' ? 'CRITICAL' : 'SUGGESTION'}
                 </span>
               </div>
 
               {/* Comment Body */}
               <div className="py-3 space-y-2">
                 <div className="flex items-center justify-between text-xs font-mono">
-                  <span className="font-bold text-cyan-300 bg-cyan-950/80 px-2 py-0.5 rounded border border-cyan-800">
+                  <span className="text-slate-300 font-medium">
                     {comment.category}
                   </span>
-                  <div className="text-amber-400 font-bold">
+                  <div className="text-amber-400">
                     {'★'.repeat(comment.rating)}
                     {'☆'.repeat(5 - comment.rating)}
                   </div>
                 </div>
 
-                <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-sans font-medium pt-1">
+                <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-sans pt-1">
                   "{comment.commentText}"
                 </p>
               </div>
             </div>
 
             {/* Comment Footer */}
-            <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-slate-400">
+            <div className="pt-3 border-t border-white/[0.08] flex items-center justify-between text-xs font-mono text-slate-400">
               <span className="flex items-center gap-1 text-[11px]">
-                <Clock className="w-3 h-3 text-slate-500" />
+                <Clock className="w-3 h-3 text-slate-400" />
                 <span>{comment.timestamp}</span>
               </span>
 
@@ -577,15 +568,15 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
                 return (
                   <button
                     onClick={() => handleLikeComment(comment.id)}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border transition-all duration-200 font-bold cursor-pointer ${
+                    className={`flex items-center gap-1.5 px-3 py-1 rounded-lg border transition-colors text-xs font-medium cursor-pointer ${
                       isUpvoted
-                        ? 'bg-cyan-950/90 border-cyan-400 text-cyan-200 shadow-md shadow-cyan-950 glow-cyan scale-105'
-                        : 'bg-slate-900 border-slate-800 text-slate-300 hover:text-cyan-300 hover:border-cyan-500'
+                        ? 'bg-indigo-600 border-indigo-500 text-white'
+                        : 'bg-[#1A1C24] border-white/[0.08] text-slate-300 hover:border-white/[0.16]'
                     }`}
                     title={isUpvoted ? 'Remove your upvote' : 'Upvote this comment'}
                   >
-                    <ThumbsUp className={`w-3.5 h-3.5 ${isUpvoted ? 'text-cyan-300 fill-cyan-400' : 'text-cyan-400'}`} />
-                    <span>{isUpvoted ? 'Upvoted 👍' : 'Upvote'} ({comment.likes})</span>
+                    <ThumbsUp className="w-3.5 h-3.5" />
+                    <span>{isUpvoted ? 'Upvoted' : 'Upvote'} ({comment.likes})</span>
                   </button>
                 );
               })()}

@@ -60,37 +60,34 @@ export const RecommendationsView: React.FC<RecommendationsViewProps> = ({
   };
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-300">
+    <div className="space-y-8 animate-in fade-in duration-150">
       {/* Header & Controls Bar */}
-      <div className="p-6 md:p-8 rounded-2xl glass-panel-cyan flex flex-col lg:flex-row lg:items-center justify-between gap-6 border border-cyan-800/40">
+      <div className="p-6 md:p-8 rounded-xl bg-[#121319] border border-white/[0.08] flex flex-col lg:flex-row lg:items-center justify-between gap-6 shadow-sm">
         <div>
           <div className="flex items-center gap-2.5">
-            <FileCheck className="w-6 h-6 text-cyan-400" />
-            <h1 className="text-2xl font-extrabold text-slate-100 tracking-tight font-sans">
-              Priority <span className="gradient-text-cyan">Recommendations</span>
+            <FileCheck className="w-5 h-5 text-indigo-400" />
+            <h1 className="text-2xl md:text-[28px] font-semibold text-slate-100 tracking-tight font-sans">
+              Priority <span className="hero-gradient-text">Recommendations</span>
             </h1>
           </div>
-          <div className="flex flex-wrap items-center gap-2 mt-2 font-mono text-[11px]">
-            <span className="px-3 py-1 rounded-full bg-cyan-950/90 border border-cyan-700/80 text-cyan-300 font-bold">
+          <div className="flex flex-wrap items-center gap-2 mt-2 font-mono text-xs">
+            <span className="px-2.5 py-1 rounded-md bg-[#1A1C24] border border-white/[0.08] text-slate-300 font-medium">
               8-Factor Formula
             </span>
-            <span className="px-3 py-1 rounded-full bg-indigo-950/90 border border-indigo-700/80 text-indigo-300 font-bold">
-              Capital Alignment Risk
-            </span>
-            <span className="px-3 py-1 rounded-full bg-emerald-950/90 border border-emerald-700/80 text-emerald-300 font-bold">
+            <span className="px-2.5 py-1 rounded-md bg-[#1A1C24] border border-white/[0.08] text-slate-300 font-medium">
               Ranked Priority Score
             </span>
           </div>
         </div>
 
-        {/* Filter Controls & Enter Region Details Action */}
-        <div className="flex flex-wrap items-center gap-3">
+        {/* Filter Controls */}
+        <div className="flex flex-wrap items-center gap-3 font-mono text-xs">
           {/* Region Dropdown Filter */}
           <div className="flex items-center gap-2">
             <select
               value={selectedRegionId}
               onChange={(e) => setSelectedRegionId(e.target.value)}
-              className="bg-[#0b0f19] border border-slate-700 text-slate-100 font-bold text-xs rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-cyan-400 font-mono shadow-inner cursor-pointer"
+              className="bg-[#1A1C24] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
             >
               <option value="ALL">All Regions ({regions.length})</option>
               {regions.map((r) => (
@@ -100,14 +97,13 @@ export const RecommendationsView: React.FC<RecommendationsViewProps> = ({
               ))}
             </select>
 
-            {/* Explicit Enter Selected Region Details Button */}
             {selectedRegionId !== 'ALL' && (
               <button
                 onClick={() => handleOpenRegionDetails(selectedRegionId)}
-                className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-extrabold text-xs transition flex items-center gap-1.5 shadow-lg glow-cyan"
+                className="px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-xs transition flex items-center gap-1.5 cursor-pointer shadow-sm"
               >
                 <MapPin className="w-3.5 h-3.5" />
-                <span>Enter Region Details</span>
+                <span>Region Details</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             )}
@@ -116,7 +112,7 @@ export const RecommendationsView: React.FC<RecommendationsViewProps> = ({
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="bg-[#0b0f19] border border-slate-700 text-slate-100 font-bold text-xs rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-cyan-400 font-mono shadow-inner cursor-pointer"
+            className="bg-[#1A1C24] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
           >
             <option value="ALL">All Categories</option>
             <option value="healthcare">Healthcare</option>
@@ -130,7 +126,7 @@ export const RecommendationsView: React.FC<RecommendationsViewProps> = ({
           <select
             value={selectedPriority}
             onChange={(e) => setSelectedPriority(e.target.value)}
-            className="bg-[#0b0f19] border border-slate-700 text-slate-100 font-bold text-xs rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-cyan-400 font-mono shadow-inner cursor-pointer"
+            className="bg-[#1A1C24] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
           >
             <option value="ALL">All Priorities</option>
             <option value="CRITICAL">CRITICAL</option>
@@ -142,28 +138,28 @@ export const RecommendationsView: React.FC<RecommendationsViewProps> = ({
       </div>
 
       {/* Recommendations Cards Grid */}
-      <div className="space-y-5">
+      <div className="space-y-4">
         {filteredRecs.length === 0 ? (
-          <div className="p-12 text-center text-sm font-bold text-slate-400 rounded-2xl glass-card">
+          <div className="p-12 text-center text-xs font-medium text-slate-400 rounded-xl bg-[#121319] border border-white/[0.08]">
             No priority recommendations match the selected filters.
           </div>
         ) : (
           filteredRecs.map((rec) => (
             <div
               key={rec.id}
-              className="p-6 md:p-7 rounded-2xl glass-card hover:border-cyan-500/40 transition shadow-xl space-y-5"
+              className="p-6 rounded-xl bg-[#121319] border border-white/[0.08] hover:border-white/[0.16] transition-colors shadow-sm space-y-4"
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div className="flex items-center gap-3.5">
+                <div className="flex items-center gap-3">
                   <PriorityBadge level={rec.priority_level} score={rec.priority_score} size="lg" />
                   <div>
-                    <h3 className="text-lg font-extrabold text-slate-100 font-sans tracking-tight">
+                    <h3 className="text-base font-semibold text-slate-100 tracking-tight">
                       {rec.category.toUpperCase()} Expansion
                     </h3>
-                    <div className="text-xs text-slate-300 font-mono font-bold flex items-center gap-2 mt-0.5">
+                    <div className="text-xs text-slate-400 font-mono flex items-center gap-2 mt-0.5">
                       <button
                         onClick={() => handleOpenRegionDetails(rec.region_id)}
-                        className="text-cyan-400 hover:text-cyan-300 hover:underline flex items-center gap-1"
+                        className="text-indigo-400 hover:underline flex items-center gap-1 cursor-pointer font-medium"
                         title="Click to view detailed region profile"
                       >
                         <MapPin className="w-3.5 h-3.5" />
@@ -181,7 +177,7 @@ export const RecommendationsView: React.FC<RecommendationsViewProps> = ({
                   )}
                   <button
                     onClick={() => onOpenEvidenceModal && onOpenEvidenceModal(rec)}
-                    className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-extrabold text-xs transition flex items-center gap-1.5 shadow-lg shadow-cyan-950/80 glow-cyan"
+                    className="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-xs transition flex items-center gap-1.5 cursor-pointer shadow-sm"
                   >
                     <span>View Evidence Trail</span>
                     <ChevronRight className="w-4 h-4" />
@@ -189,28 +185,28 @@ export const RecommendationsView: React.FC<RecommendationsViewProps> = ({
                 </div>
               </div>
 
-              <div className="p-4 rounded-xl bg-[#070b14]/90 border border-slate-800 text-sm font-semibold text-slate-100 leading-relaxed italic">
+              <div className="p-3.5 rounded-lg bg-[#1A1C24] border border-white/[0.08] text-xs font-sans text-slate-200 italic leading-relaxed">
                 "{rec.reasoning}"
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-mono">
-                <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800">
-                  <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Demand Signal</div>
-                  <div className="text-slate-100 font-bold text-sm mt-1">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs font-mono">
+                <div className="p-3.5 rounded-lg bg-[#1A1C24] border border-white/[0.08]">
+                  <div className="text-[10px] uppercase text-slate-400 font-medium">Demand Signal</div>
+                  <div className="text-slate-100 font-semibold text-xs mt-1">
                     {rec.evidence_card?.demand_signal_summary || '14 Verified Citizen Signals'}
                   </div>
                 </div>
 
-                <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800">
-                  <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Infrastructure Deficit</div>
-                  <div className="text-rose-400 font-extrabold text-sm mt-1">
+                <div className="p-3.5 rounded-lg bg-[#1A1C24] border border-white/[0.08]">
+                  <div className="text-[10px] uppercase text-slate-400 font-medium">Infrastructure Deficit</div>
+                  <div className="text-red-400 font-semibold text-xs mt-1">
                     {rec.evidence_card?.infrastructure_deficit_summary || 'Deficit Score: 0.82'}
                   </div>
                 </div>
 
-                <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800">
-                  <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Capital Project Overlap</div>
-                  <div className="text-emerald-400 font-extrabold text-sm mt-1">
+                <div className="p-3.5 rounded-lg bg-[#1A1C24] border border-white/[0.08]">
+                  <div className="text-[10px] uppercase text-slate-400 font-medium">Capital Project Overlap</div>
+                  <div className="text-green-400 font-semibold text-xs mt-1">
                     {rec.investment_overlap?.explanation || 'No active duplicate investment detected'}
                   </div>
                 </div>

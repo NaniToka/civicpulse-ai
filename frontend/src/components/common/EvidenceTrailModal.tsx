@@ -40,75 +40,75 @@ export const EvidenceTrailModal: React.FC<EvidenceTrailModalProps> = ({ recommen
   if (!recommendation) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/85 backdrop-blur-md">
-      <div className="w-full max-w-4xl max-h-[90vh] bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#0A0B0F]/80 backdrop-blur-sm">
+      <div className="w-full max-w-4xl max-h-[90vh] bg-[#121319] border border-white/[0.08] rounded-xl shadow-2xl overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-150">
         {/* Modal Header */}
-        <div className="p-6 md:p-8 border-b border-slate-800 bg-slate-950/80 flex items-start justify-between">
+        <div className="p-6 border-b border-white/[0.08] bg-[#1A1C24] flex items-start justify-between">
           <div>
             <div className="flex items-center gap-3 mb-2">
               <PriorityBadge level={recommendation.priority_level} score={recommendation.priority_score} size="lg" />
-              <span className="text-xs font-mono font-bold text-slate-200 bg-slate-800 px-3 py-1 rounded-md border border-slate-700">
+              <span className="text-xs font-mono font-medium text-slate-300 bg-[#121319] px-2.5 py-0.5 rounded border border-white/[0.08]">
                 {recommendation.id}
               </span>
-              <span className="text-xs font-bold text-emerald-400 flex items-center gap-1 font-mono">
+              <span className="text-xs font-medium text-green-400 flex items-center gap-1 font-mono">
                 <ShieldCheck className="w-4 h-4" />
                 {(recommendation.confidence * 100).toFixed(0)}% Confidence
               </span>
             </div>
-            <h2 className="text-xl md:text-2xl font-bold text-slate-100 flex items-center gap-2">
+            <h2 className="text-lg md:text-xl font-semibold text-slate-100 flex items-center gap-2">
               <span>{recommendation.category.toUpperCase()} Expansion in {recommendation.region_name}</span>
             </h2>
-            <p className="text-xs text-slate-300 mt-1 font-medium">
+            <p className="text-xs text-slate-400 mt-1">
               Traceable 6-step evidence trail linking citizen signals to capital allocation priorities.
             </p>
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 transition"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-[#121319] transition cursor-pointer"
           >
-            <X className="w-6 h-6" />
+            <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Modal Body */}
-        <div className="p-6 md:p-8 overflow-y-auto space-y-8">
+        <div className="p-6 overflow-y-auto space-y-6">
           {loading ? (
-            <div className="py-16 text-center text-slate-300 text-sm font-bold font-mono">
+            <div className="py-16 text-center text-slate-400 text-xs font-mono">
               Assembling Civic Evidence Graph...
             </div>
           ) : (
             <>
               {/* Signature Vertical 6-Step Evidence Trail */}
-              <div className="space-y-4">
-                <h3 className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2 font-mono">
-                  <Network className="w-4 h-4 text-sky-400" />
+              <div className="space-y-3">
+                <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-2 font-mono">
+                  <Network className="w-4 h-4 text-indigo-400" />
                   <span>Civic Evidence Chain ("Show Your Work")</span>
                 </h3>
 
-                <div className="relative pl-7 space-y-6 before:absolute before:left-3 before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-700">
+                <div className="relative pl-7 space-y-4 before:absolute before:left-3 before:top-2 before:bottom-2 before:w-0.5 before:bg-white/[0.08]">
                   {whyData?.evidence_chain.map((step) => (
                     <div key={step.step} className="relative group">
-                      <div className={`absolute -left-7 top-1 w-6 h-6 rounded-full flex items-center justify-center text-xs font-mono font-extrabold border ${
+                      <div className={`absolute -left-7 top-1 w-6 h-6 rounded-full flex items-center justify-center text-xs font-mono font-bold border ${
                         step.step === 6
-                          ? 'bg-rose-950 text-rose-200 border-rose-500 shadow-md shadow-rose-950'
-                          : 'bg-slate-900 text-sky-300 border-sky-500'
+                          ? 'bg-red-500/10 text-red-400 border-red-500/20'
+                          : 'bg-[#121319] text-indigo-400 border-indigo-500/30'
                       }`}>
                         {step.step}
                       </div>
 
-                      <div className="p-5 rounded-xl bg-slate-950 border border-slate-800 hover:border-slate-700 transition space-y-2 shadow-sm">
+                      <div className="p-4 rounded-lg bg-[#1A1C24] border border-white/[0.08] hover:border-white/[0.16] transition-colors space-y-1.5 shadow-sm">
                         <div className="flex items-center justify-between">
-                          <span className="text-xs font-bold text-sky-400 uppercase tracking-wide font-mono">
+                          <span className="text-xs font-semibold text-indigo-400 uppercase tracking-wide font-mono">
                             {step.title}
                           </span>
-                          <span className="text-xs font-mono font-bold text-emerald-300 bg-emerald-950 border border-emerald-700 px-2.5 py-1 rounded-md">
+                          <span className="text-[11px] font-mono text-green-400 bg-green-500/10 border border-green-500/20 px-2 py-0.5 rounded">
                             {step.contribution}
                           </span>
                         </div>
-                        <div className="text-sm font-bold text-slate-100">{step.finding}</div>
-                        <div className="text-xs font-mono text-slate-300 flex items-center gap-2 pt-1 font-semibold">
+                        <div className="text-sm font-medium text-slate-100">{step.finding}</div>
+                        <div className="text-xs font-mono text-slate-400 flex items-center gap-2 pt-0.5">
                           <span>Evidence Metric:</span>
-                          <span className="text-slate-100 font-bold">{step.value}</span>
+                          <span className="text-slate-200 font-semibold">{step.value}</span>
                         </div>
                       </div>
                     </div>
@@ -118,26 +118,26 @@ export const EvidenceTrailModal: React.FC<EvidenceTrailModalProps> = ({ recommen
 
               {/* 8-Factor Scoring Model Breakdown */}
               {whyData?.factors && whyData.factors.length > 0 && (
-                <div className="p-6 rounded-xl bg-slate-950 border border-slate-800 space-y-4">
-                  <h3 className="text-xs font-bold text-slate-300 uppercase tracking-wider font-mono">
+                <div className="p-5 rounded-lg bg-[#1A1C24] border border-white/[0.08] space-y-3">
+                  <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider font-mono">
                     Deterministic Scoring Model Factors (V2)
                   </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {whyData.factors.map((factor) => (
-                      <div key={factor.name} className="space-y-2">
-                        <div className="flex justify-between text-xs font-bold">
+                      <div key={factor.name} className="space-y-1.5">
+                        <div className="flex justify-between text-xs font-semibold">
                           <span className="text-slate-100">{factor.name}</span>
-                          <span className="font-mono text-sky-300">
+                          <span className="font-mono text-indigo-400">
                             {factor.raw_value.toFixed(1)}/100 (w: {(factor.weight * 100).toFixed(0)}%)
                           </span>
                         </div>
-                        <div className="h-2.5 rounded-full bg-slate-900 overflow-hidden border border-slate-800">
+                        <div className="h-2 rounded-full bg-[#121319] overflow-hidden border border-white/[0.08]">
                           <div
-                            className="h-full bg-gradient-to-r from-sky-400 to-indigo-500 rounded-full"
+                            className="h-full bg-indigo-500 rounded-full"
                             style={{ width: `${Math.min(100, Math.max(0, factor.raw_value))}%` }}
                           />
                         </div>
-                        <div className="text-xs text-slate-300 font-medium">{factor.explanation}</div>
+                        <div className="text-xs text-slate-400">{factor.explanation}</div>
                       </div>
                     ))}
                   </div>
@@ -145,38 +145,38 @@ export const EvidenceTrailModal: React.FC<EvidenceTrailModalProps> = ({ recommen
               )}
 
               {/* Multilingual AI Decision Brief Section */}
-              <div className="p-6 rounded-xl bg-gradient-to-br from-slate-900 via-indigo-950/40 to-slate-900 border border-indigo-800/60 space-y-4 shadow-lg">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-indigo-900/40 pb-3">
+              <div className="p-5 rounded-lg bg-[#1A1C24] border border-white/[0.08] space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/[0.08] pb-3">
                   <div className="flex items-center gap-2">
-                    <Sparkles className="w-5 h-5 text-indigo-400" />
-                    <h3 className="text-xs font-bold text-indigo-200 uppercase tracking-wider font-mono">
+                    <Sparkles className="w-4 h-4 text-indigo-400" />
+                    <h3 className="text-xs font-semibold text-slate-200 uppercase tracking-wider font-mono">
                       Multilingual AI Decision Brief
                     </h3>
                   </div>
 
                   {/* Multilingual Language Switcher */}
-                  <div className="flex items-center gap-1.5 bg-slate-950 p-1.5 rounded-lg border border-slate-800 text-xs font-mono">
-                    <Globe className="w-4 h-4 text-slate-400 ml-1" />
+                  <div className="flex items-center gap-1 bg-[#121319] p-1 rounded-lg border border-white/[0.08] text-xs font-mono">
+                    <Globe className="w-3.5 h-3.5 text-slate-400 ml-1" />
                     <button
                       onClick={() => setBriefLang('en')}
-                      className={`px-2.5 py-1 rounded-md transition font-bold ${
-                        briefLang === 'en' ? 'bg-indigo-900 text-indigo-100 border border-indigo-700' : 'text-slate-300 hover:text-white'
+                      className={`px-2 py-0.5 rounded transition cursor-pointer font-medium ${
+                        briefLang === 'en' ? 'bg-indigo-600/20 text-indigo-400 border border-indigo-500/30' : 'text-slate-400 hover:text-white'
                       }`}
                     >
                       EN
                     </button>
                     <button
                       onClick={() => setBriefLang('hi')}
-                      className={`px-2.5 py-1 rounded-md transition font-bold ${
-                        briefLang === 'hi' ? 'bg-indigo-900 text-indigo-100 border border-indigo-700' : 'text-slate-300 hover:text-white'
+                      className={`px-2 py-0.5 rounded transition cursor-pointer font-medium ${
+                        briefLang === 'hi' ? 'bg-indigo-600/20 text-indigo-400 border border-indigo-500/30' : 'text-slate-400 hover:text-white'
                       }`}
                     >
                       HI (हिंदी)
                     </button>
                     <button
                       onClick={() => setBriefLang('te')}
-                      className={`px-2.5 py-1 rounded-md transition font-bold ${
-                        briefLang === 'te' ? 'bg-indigo-900 text-indigo-100 border border-indigo-700' : 'text-slate-300 hover:text-white'
+                      className={`px-2 py-0.5 rounded transition cursor-pointer font-medium ${
+                        briefLang === 'te' ? 'bg-indigo-600/20 text-indigo-400 border border-indigo-500/30' : 'text-slate-400 hover:text-white'
                       }`}
                     >
                       TE (తెలుగు)
@@ -184,21 +184,21 @@ export const EvidenceTrailModal: React.FC<EvidenceTrailModalProps> = ({ recommen
                   </div>
                 </div>
 
-                <p className="text-sm font-medium text-slate-100 leading-relaxed">
+                <p className="text-xs font-medium text-slate-200 leading-relaxed">
                   {whyData?.summary || recommendation.reasoning}
                 </p>
 
-                <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 flex items-start gap-3 shadow-md">
-                  <ArrowRight className="w-5 h-5 text-emerald-400 mt-0.5 shrink-0" />
-                  <div className="space-y-1">
-                    <span className="font-bold text-emerald-400 uppercase font-mono">
+                <div className="p-3 rounded-lg bg-[#121319] border border-white/[0.08] text-xs text-slate-200 flex items-start gap-2.5">
+                  <ArrowRight className="w-4 h-4 text-green-400 mt-0.5 shrink-0" />
+                  <div className="space-y-0.5">
+                    <span className="font-semibold text-green-400 uppercase font-mono">
                       {briefLang === 'hi'
                         ? 'अनुशंसित नीति कार्रवाई: '
                         : briefLang === 'te'
                         ? 'సిఫార్సు చేసిన విధాన చర్య: '
                         : 'Recommended Policy Action: '}
                     </span>
-                    <span className="font-semibold">
+                    <span>
                       {briefLang === 'hi'
                         ? `${recommendation.region_name} में त्वरित बुनियादी ढांचा पूंजी आवंटन शुरू करें।`
                         : briefLang === 'te'
@@ -209,9 +209,9 @@ export const EvidenceTrailModal: React.FC<EvidenceTrailModalProps> = ({ recommen
                 </div>
 
                 {whyData?.risks && whyData.risks.length > 0 && (
-                  <div className="mt-4 pt-3 border-t border-indigo-900/40 space-y-2">
-                    <div className="text-xs font-bold text-amber-400 flex items-center gap-2 font-mono">
-                      <AlertTriangle className="w-4 h-4" />
+                  <div className="mt-3 pt-3 border-t border-white/[0.08] space-y-1.5">
+                    <div className="text-xs font-semibold text-amber-400 flex items-center gap-2 font-mono">
+                      <AlertTriangle className="w-3.5 h-3.5" />
                       <span>
                         {briefLang === 'hi'
                           ? 'निवेश जोखिम कारक एवं सीमाएं:'
@@ -220,7 +220,7 @@ export const EvidenceTrailModal: React.FC<EvidenceTrailModalProps> = ({ recommen
                           : 'Investment Risk Factors & Limitations:'}
                       </span>
                     </div>
-                    <ul className="list-disc list-inside text-xs text-slate-300 font-medium space-y-1">
+                    <ul className="list-disc list-inside text-xs text-slate-400 space-y-1">
                       {whyData.risks.map((risk, idx) => {
                         let translatedRisk = risk;
                         if (briefLang === 'hi') {
@@ -243,14 +243,14 @@ export const EvidenceTrailModal: React.FC<EvidenceTrailModalProps> = ({ recommen
         </div>
 
         {/* Modal Footer */}
-        <div className="p-5 border-t border-slate-800 bg-slate-950 flex items-center justify-between text-xs text-slate-300 font-bold">
+        <div className="p-4 border-t border-white/[0.08] bg-[#1A1C24] flex items-center justify-between text-xs text-slate-300">
           <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-            <span>Validated by CivicPulse Evidence Engine • Synthetic Demo Data</span>
+            <CheckCircle2 className="w-4 h-4 text-green-400" />
+            <span>Validated by CivicPulse Evidence Engine</span>
           </div>
           <button
             onClick={onClose}
-            className="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-100 transition font-bold shadow-sm"
+            className="px-4 py-2 rounded-lg bg-[#121319] hover:bg-[#161822] border border-white/[0.08] text-slate-200 transition font-medium cursor-pointer"
           >
             Close Detail View
           </button>

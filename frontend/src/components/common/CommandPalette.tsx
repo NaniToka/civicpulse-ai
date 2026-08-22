@@ -28,14 +28,14 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
   if (!isOpen) return null;
 
   const items: { id: NavTab; label: string; icon: React.ReactNode; description: string; category: string }[] = [
-    { id: 'dashboard', label: 'Executive Overview', icon: <LayoutDashboard className="w-4 h-4 text-sky-400" />, description: 'High-level KPIs, demand landscape & top priorities', category: 'Views' },
-    { id: 'demand', label: 'Demand Intelligence', icon: <Search className="w-4 h-4 text-blue-400" />, description: 'Multilingual citizen voices, time-series & momentum', category: 'Views' },
+    { id: 'dashboard', label: 'Executive Overview', icon: <LayoutDashboard className="w-4 h-4 text-indigo-400" />, description: 'High-level KPIs, demand landscape & top priorities', category: 'Views' },
+    { id: 'demand', label: 'Demand Intelligence', icon: <Search className="w-4 h-4 text-indigo-400" />, description: 'Multilingual citizen voices, time-series & momentum', category: 'Views' },
     { id: 'hotspots', label: 'Demand Hotspots', icon: <Flame className="w-4 h-4 text-amber-400" />, description: 'Per-capita normalized demand concentration', category: 'Views' },
-    { id: 'gaps', label: 'Infrastructure Gaps', icon: <AlertCircle className="w-4 h-4 text-rose-400" />, description: 'Operational capacity deficit index vs population need', category: 'Views' },
-    { id: 'recommendations', label: 'Priority Recommendations', icon: <FileCheck className="w-4 h-4 text-emerald-400" />, description: 'Ranked evidence-backed capital investment priorities', category: 'Views' },
+    { id: 'gaps', label: 'Infrastructure Gaps', icon: <AlertCircle className="w-4 h-4 text-red-400" />, description: 'Operational capacity deficit index vs population need', category: 'Views' },
+    { id: 'recommendations', label: 'Priority Recommendations', icon: <FileCheck className="w-4 h-4 text-green-400" />, description: 'Ranked evidence-backed capital investment priorities', category: 'Views' },
     { id: 'evidence', label: 'Evidence Explorer', icon: <Network className="w-4 h-4 text-indigo-400" />, description: 'Granular evidence nodes and 6-step evidence trails', category: 'Views' },
-    { id: 'scenarios', label: 'Scenario Lab', icon: <TestTube2 className="w-4 h-4 text-violet-400" />, description: 'Counterfactual policy simulations & score deltas', category: 'Tools' },
-    { id: 'data', label: 'Data Explorer', icon: <Database className="w-4 h-4 text-slate-300" />, description: 'Synthetic demonstration datasets & live request test', category: 'Data' },
+    { id: 'scenarios', label: 'Scenario Lab', icon: <TestTube2 className="w-4 h-4 text-indigo-400" />, description: 'Counterfactual policy simulations & score deltas', category: 'Tools' },
+    { id: 'data', label: 'Data Explorer', icon: <Database className="w-4 h-4 text-slate-400" />, description: 'Synthetic demonstration datasets & live request test', category: 'Data' },
   ];
 
   const filtered = items.filter(
@@ -45,33 +45,33 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 bg-slate-950/85 backdrop-blur-md p-4">
-      <div className="w-full max-w-2xl bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-150">
-        <div className="flex items-center px-5 border-b border-slate-800 bg-slate-950">
-          <Search className="w-5 h-5 text-sky-400 mr-3 shrink-0" />
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 bg-[#0A0B0F]/80 backdrop-blur-sm p-4">
+      <div className="w-full max-w-2xl bg-[#121319] border border-white/[0.08] rounded-xl shadow-2xl overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-150">
+        <div className="flex items-center px-4 border-b border-white/[0.08] bg-[#1A1C24]">
+          <Search className="w-4 h-4 text-indigo-400 mr-3 shrink-0" />
           <input
             type="text"
-            placeholder="Type a command, search views or region..."
+            placeholder="Type a command or search views..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full py-4.5 bg-transparent text-slate-100 placeholder-slate-400 text-sm font-semibold focus:outline-none font-sans"
+            className="w-full py-3.5 bg-transparent text-slate-100 placeholder-slate-400 text-sm font-medium focus:outline-none"
             autoFocus
           />
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition"
+            className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-[#121319] transition cursor-pointer"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
 
-        <div className="max-h-96 overflow-y-auto p-3">
+        <div className="max-h-96 overflow-y-auto p-2">
           {filtered.length === 0 ? (
-            <div className="p-8 text-center text-xs font-bold text-slate-400">
+            <div className="p-8 text-center text-xs text-slate-400">
               No matching views or commands found for "{query}".
             </div>
           ) : (
-            <div className="space-y-2">
+            <div className="space-y-1">
               {filtered.map((item) => (
                 <button
                   key={item.id}
@@ -79,22 +79,22 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
                     onSelectTab(item.id);
                     onClose();
                   }}
-                  className="w-full flex items-center justify-between p-3.5 rounded-xl text-left hover:bg-slate-800 transition group"
+                  className="w-full flex items-center justify-between p-3 rounded-lg text-left hover:bg-[#1A1C24] transition-colors group cursor-pointer"
                 >
-                  <div className="flex items-center gap-3.5">
-                    <div className="p-2.5 rounded-lg bg-slate-950 border border-slate-800 shadow-sm">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-md bg-[#0A0B0F] border border-white/[0.08]">
                       {item.icon}
                     </div>
                     <div>
-                      <div className="text-sm font-bold text-slate-100 group-hover:text-sky-300 transition">
+                      <div className="text-xs font-semibold text-slate-100 group-hover:text-indigo-400 transition-colors">
                         {item.label}
                       </div>
-                      <div className="text-xs text-slate-300 font-medium">{item.description}</div>
+                      <div className="text-[11px] text-slate-400 mt-0.5">{item.description}</div>
                     </div>
                   </div>
-                  <div className="flex items-center text-xs font-bold text-slate-300 group-hover:text-white font-mono">
-                    <span className="mr-1">Jump</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <div className="flex items-center text-xs text-slate-400 group-hover:text-slate-200">
+                    <span className="mr-1 text-[11px]">Jump</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </button>
               ))}
@@ -102,14 +102,12 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
           )}
         </div>
 
-        <div className="px-5 py-3 bg-slate-950 border-t border-slate-800 flex items-center justify-between text-xs text-slate-300 font-mono font-bold">
+        <div className="px-4 py-2.5 bg-[#0A0B0F] border-t border-white/[0.08] flex items-center justify-between text-[11px] text-slate-400">
           <div className="flex items-center gap-2">
-            <span className="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-100">↑↓</span>
-            <span>Navigate</span>
-            <span className="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-100">ESC</span>
+            <kbd className="px-1.5 py-0.5 rounded bg-[#1A1C24] border border-white/[0.08] text-slate-300 font-mono">ESC</kbd>
             <span>Close</span>
           </div>
-          <div>CivicPulse AI Command System</div>
+          <div className="font-mono text-[10px]">CivicPulse AI Command System</div>
         </div>
       </div>
     </div>

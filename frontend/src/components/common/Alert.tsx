@@ -14,29 +14,29 @@ export const Alert: React.FC<AlertProps> = ({
 }) => {
   const styles = {
     info: {
-      container: 'bg-sky-950/40 border-sky-800/80 text-sky-200',
-      icon: <Info className="w-5 h-5 text-sky-400 shrink-0" />,
+      container: 'bg-indigo-500/10 border-indigo-500/20 text-slate-200',
+      icon: <Info className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" />,
     },
     success: {
-      container: 'bg-emerald-950/40 border-emerald-800/80 text-emerald-200',
-      icon: <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />,
+      container: 'bg-green-500/10 border-green-500/20 text-slate-200',
+      icon: <CheckCircle2 className="w-4 h-4 text-green-400 shrink-0 mt-0.5" />,
     },
     warning: {
-      container: 'bg-amber-950/40 border-amber-800/80 text-amber-200',
-      icon: <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0" />,
+      container: 'bg-amber-500/10 border-amber-500/20 text-slate-200',
+      icon: <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />,
     },
     error: {
-      container: 'bg-rose-950/40 border-rose-800/80 text-rose-200',
-      icon: <AlertCircle className="w-5 h-5 text-rose-400 shrink-0" />,
+      container: 'bg-red-500/10 border-red-500/20 text-slate-200',
+      icon: <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />,
     },
   };
 
   return (
-    <div className={`flex items-start gap-3 p-4 rounded-lg border text-sm ${styles[variant].container}`}>
+    <div className={`flex items-start gap-3 p-3.5 rounded-lg border text-xs sm:text-sm ${styles[variant].container}`}>
       {styles[variant].icon}
       <div>
-        {title && <h4 className="font-semibold mb-0.5">{title}</h4>}
-        <div className="leading-relaxed text-xs sm:text-sm">{children}</div>
+        {title && <h4 className="font-semibold text-slate-100 mb-0.5">{title}</h4>}
+        <div className="leading-relaxed text-slate-300">{children}</div>
       </div>
     </div>
   );

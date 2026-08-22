@@ -4,124 +4,90 @@
 
 @layer base {
   body {
-    @apply bg-[#070b14] text-slate-100 antialiased selection:bg-cyan-500 selection:text-slate-950 tracking-normal min-h-screen;
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-    background-image: 
-      radial-gradient(at 15% 15%, rgba(6, 182, 212, 0.08) 0px, transparent 50%),
-      radial-gradient(at 85% 25%, rgba(99, 102, 241, 0.07) 0px, transparent 50%),
-      radial-gradient(at 50% 85%, rgba(16, 185, 129, 0.06) 0px, transparent 50%);
-    background-attachment: fixed;
+    @apply bg-[#0A0B0F] text-slate-200 antialiased selection:bg-indigo-500 selection:text-white tracking-normal min-h-screen;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
-    @apply font-bold text-slate-100 tracking-tight;
+    font-family: 'Inter', sans-serif;
+    @apply font-semibold text-slate-100 tracking-tight;
   }
 
   .font-mono {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'JetBrains Mono', 'Menlo', monospace;
   }
 
   select {
-    font-weight: 700 !important;
+    font-weight: 500 !important;
     color: #f8fafc !important;
-    background-color: #0b0f19 !important;
-    border-color: #1e293b !important;
+    background-color: #121319 !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    border-radius: 8px !important;
   }
 
   option {
-    font-weight: 700 !important;
+    font-weight: 500 !important;
     color: #f1f5f9 !important;
-    background-color: #0f172a !important;
-    padding: 10px 14px !important;
+    background-color: #1A1C24 !important;
+    padding: 8px 12px !important;
     font-size: 14px !important;
   }
 }
 
 @layer utilities {
-  /* Ultra-Premium Glassmorphic Containers */
-  .glass-card {
-    @apply bg-[#0e1424]/80 backdrop-blur-xl border border-slate-800/80 hover:border-slate-700/80 transition-all duration-300 shadow-2xl;
+  /* Card Surface Utilities */
+  .glass-card, .glass-card-interactive {
+    @apply bg-[#121319] border border-white/[0.08] rounded-xl transition-colors duration-150 shadow-sm;
   }
 
-  .glass-card-interactive {
-    @apply bg-[#0e1424]/70 backdrop-blur-xl border border-slate-800/80 hover:border-cyan-500/50 hover:bg-[#12192e]/90 transition-all duration-300 shadow-xl hover:shadow-cyan-950/40 hover:-translate-y-0.5;
+  .glass-card-interactive:hover {
+    @apply border-white/[0.16] bg-[#161822];
   }
 
-  .glass-panel-cyan {
-    @apply bg-gradient-to-br from-cyan-950/35 via-[#0e1424]/90 to-[#070b14]/95 backdrop-blur-2xl border border-cyan-800/50 shadow-2xl shadow-cyan-950/40;
+  .glass-panel-cyan, .glass-panel-indigo, .glass-panel-emerald, .glass-panel-rose {
+    @apply bg-[#121319] border border-white/[0.08] rounded-xl shadow-sm;
   }
 
-  .glass-panel-indigo {
-    @apply bg-gradient-to-br from-indigo-950/35 via-[#0e1424]/90 to-[#070b14]/95 backdrop-blur-2xl border border-indigo-800/50 shadow-2xl shadow-indigo-950/40;
+  /* Glow effects removed & mapped to clean subtle borders */
+  .glow-cyan, .glow-indigo, .glow-emerald, .glow-amber, .glow-rose {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   }
 
-  .glass-panel-emerald {
-    @apply bg-gradient-to-br from-emerald-950/35 via-[#0e1424]/90 to-[#070b14]/95 backdrop-blur-2xl border border-emerald-800/50 shadow-2xl shadow-emerald-950/40;
+  /* Signature Hero Gradient (Executive Overview Title only) */
+  .hero-gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-slate-100 via-indigo-200 to-indigo-400;
   }
 
-  .glass-panel-rose {
-    @apply bg-gradient-to-br from-rose-950/35 via-[#0e1424]/90 to-[#070b14]/95 backdrop-blur-2xl border border-rose-800/50 shadow-2xl shadow-rose-950/40;
+  /* Non-signature gradient text mapped to solid white/slate */
+  .gradient-text-cyan, .gradient-text-emerald, .gradient-text-rose, .gradient-text-amber {
+    @apply text-slate-100;
   }
 
-  /* Ambient Glow Effects */
-  .glow-cyan {
-    box-shadow: 0 0 30px -5px rgba(6, 182, 212, 0.3);
+  /* Subtitle / Eyebrow typography helper */
+  .eyebrow-label {
+    @apply text-[11px] font-semibold uppercase tracking-wider text-slate-400;
   }
 
-  .glow-indigo {
-    box-shadow: 0 0 30px -5px rgba(99, 102, 241, 0.3);
-  }
-
-  .glow-emerald {
-    box-shadow: 0 0 30px -5px rgba(16, 185, 129, 0.3);
-  }
-
-  .glow-amber {
-    box-shadow: 0 0 30px -5px rgba(245, 158, 11, 0.3);
-  }
-
-  .glow-rose {
-    box-shadow: 0 0 30px -5px rgba(244, 63, 94, 0.3);
-  }
-
-  /* Gradient Text Enhancements */
-  .gradient-text-cyan {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-teal-300 to-indigo-400;
-  }
-
-  .gradient-text-emerald {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400;
-  }
-
-  .gradient-text-rose {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-rose-400 via-pink-400 to-amber-300;
-  }
-
-  .gradient-text-amber {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-orange-300 to-yellow-400;
-  }
-
-  /* Grid Mesh Overlay Background */
+  /* Subtle background grid pattern */
   .bg-grid-pattern {
-    background-image: radial-gradient(rgba(51, 65, 85, 0.3) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
     background-size: 24px 24px;
   }
 }
 
 /* Custom scrollbars */
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #070b14;
+  background: #0A0B0F;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #1F222F;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #334155;
 }
+
