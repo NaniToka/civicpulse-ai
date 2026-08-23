@@ -3,6 +3,8 @@ import { Navbar } from './components/layout/Navbar';
 import { Sidebar, NavTab } from './components/layout/Sidebar';
 import { CommandPalette } from './components/common/CommandPalette';
 import { EvidenceTrailModal } from './components/common/EvidenceTrailModal';
+import { AuthModal, UserProfile } from './components/common/AuthModal';
+import { RaiseComplaintModal } from './components/common/RaiseComplaintModal';
 import { DashboardOverview } from './pages/DashboardOverview';
 import { DemandIntelligence } from './pages/DemandIntelligence';
 import { HotspotExplorer } from './pages/HotspotExplorer';
@@ -29,6 +31,19 @@ export const App: React.FC = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(false);
   const [commandPaletteOpen, setCommandPaletteOpen] = useState<boolean>(false);
   const [selectedModalRec, setSelectedModalRec] = useState<PriorityRecommendation | null>(null);
+
+  // User Auth & Complaint Modal state
+  const [authModalOpen, setAuthModalOpen] = useState<boolean>(false);
+  const [raiseComplaintModalOpen, setRaiseComplaintModalOpen] = useState<boolean>(false);
+  const [currentUser, setCurrentUser] = useState<UserProfile | null>(() => {
+    try {
+      const saved = localStorage.getItem('civicpulse_user_session');
+      if (saved) return JSON.parse(saved);
+    } catch {
+      // ignore
+    }
+    return null;
+  });
 
   const [regions, setRegions] = useState<Region[]>([]);
   const [requests, setRequests] = useState<CitizenRequest[]>([]);
@@ -75,6 +90,9 @@ export const App: React.FC = () => {
     <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-slate-800 font-sans selection:bg-indigo-600 selection:text-white">
       <Navbar
         onOpenCommandPalette={() => setCommandPaletteOpen(true)}
+        onOpenRaiseComplaint={() => setRaiseComplaintModalOpen(true)}
+        onOpenAuth={() => setAuthModalOpen(true)}
+        currentUser={currentUser}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />
@@ -85,6 +103,7 @@ export const App: React.FC = () => {
           setActiveTab={setActiveTab}
           collapsed={sidebarCollapsed}
           onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
+          onOpenRaiseComplaint={() => setRaiseComplaintModalOpen(true)}
         />
 
         <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto overflow-y-auto w-full">
@@ -187,6 +206,22 @@ export const App: React.FC = () => {
       <EvidenceTrailModal
         recommendation={selectedModalRec}
         onClose={() => setSelectedModalRec(null)}
+      />
+
+      <AuthModal
+        isOpen={authModalOpen}
+        onClose={() => setAuthModalOpen(false)}
+        onLoginSuccess={(user) => setCurrentUser(user)}
+        regions={regions}
+      />
+
+      <RaiseComplaintModal
+        isOpen={raiseComplaintModalOpen}
+        onClose={() => setRaiseComplaintModalOpen(false)}
+        currentUser={currentUser}
+        onOpenAuth={() => setAuthModalOpen(true)}
+        onComplaintSubmitted={handleNewRequestAdded}
+        regions={regions}
       />
     </div>
   );

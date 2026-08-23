@@ -300,50 +300,50 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
       </div>
 
       {/* Citizen Feedback Feed Cards */}
-      <div className="p-6 md:p-8 rounded-xl bg-white border border-slate-200 space-y-4 shadow-sm text-slate-950 font-bold">
-        <div className="flex items-center justify-between border-b border-slate-200 pb-3">
-          <h3 className="text-base sm:text-lg font-extrabold text-slate-950">Filtered Citizen Requests ({filteredRequests.length})</h3>
+      <div className="p-6 md:p-7 rounded-xl bg-white border border-slate-200 space-y-6 shadow-sm text-slate-950 font-bold mb-10">
+        <div className="flex items-center justify-between border-b border-slate-200 pb-4">
+          <h3 className="text-lg sm:text-xl font-extrabold text-slate-950 font-sans">Filtered Citizen Requests ({filteredRequests.length})</h3>
           <span className="text-xs sm:text-sm font-mono font-extrabold text-indigo-700">Showing verified demand signals</span>
         </div>
 
         {filteredRequests.length === 0 ? (
-          <div className="py-12 text-center text-xs sm:text-sm text-slate-700 font-extrabold">
+          <div className="py-16 text-center text-sm text-slate-700 font-extrabold">
             No citizen requests match the selected filters.
           </div>
         ) : (
-          <div className="space-y-3">
+          <div className="space-y-6 sm:space-y-7">
             {filteredRequests.map((req) => (
-              <div key={req.id} className="p-4.5 rounded-xl bg-[#0A0A0C] border border-white/[0.12] hover:border-indigo-500/50 transition-colors space-y-3 shadow-md text-slate-100 font-bold">
-                <div className="flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm font-bold">
-                  <div className="flex items-center gap-2 font-mono">
-                    <span className="font-extrabold text-indigo-400">{req.id}</span>
+              <div key={req.id} className="p-6 sm:p-7 rounded-xl bg-[#0A0A0C] border border-white/[0.12] hover:border-indigo-500/50 transition-colors space-y-5 shadow-md text-slate-100 font-bold">
+                <div className="flex flex-wrap items-center justify-between gap-4 text-xs sm:text-sm font-bold border-b border-white/[0.08] pb-3">
+                  <div className="flex items-center gap-3 font-mono">
+                    <span className="font-extrabold text-indigo-400 text-sm">{req.id}</span>
                     <span className="text-slate-300 font-extrabold">• {req.request_category || req.category}</span>
                     <button
                       onClick={() => handleOpenRegionDetails(req.region_id)}
-                      className="text-slate-800 hover:text-indigo-700 flex items-center gap-1 font-extrabold cursor-pointer"
+                      className="text-slate-300 hover:text-indigo-400 flex items-center gap-1 font-extrabold cursor-pointer"
                     >
-                      <MapPin className="w-4 h-4 text-indigo-600" />
+                      <MapPin className="w-4 h-4 text-indigo-400" />
                       <span>{req.region_id}</span>
                     </button>
-                    <span className="text-slate-700 font-bold">• {req.source}</span>
+                    <span className="text-slate-400 font-bold">• {req.source}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-white border border-slate-200 text-slate-800 font-extrabold uppercase">
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-[#121215] border border-white/[0.12] text-slate-300 font-extrabold uppercase">
                       LANG: {req.language}
                     </span>
                     <PriorityBadge level={req.urgency || req.extracted_entities.severity} size="sm" />
                   </div>
                 </div>
 
-                <div className="p-3.5 rounded-lg bg-white border border-slate-200 shadow-2xs">
-                  <p className="text-xs sm:text-sm font-extrabold text-slate-950 leading-relaxed font-sans">
+                <div className="p-4 rounded-xl bg-[#121215] border border-white/[0.08] shadow-2xs">
+                  <p className="text-sm sm:text-base font-extrabold text-white leading-relaxed font-sans">
                     "{req.original_text}"
                   </p>
                 </div>
 
-                <div className="p-3 rounded-lg bg-white border border-slate-200 text-xs sm:text-sm font-mono text-slate-950 flex items-start gap-2 shadow-2xs font-bold">
-                  <span className="text-indigo-700 shrink-0 font-extrabold">Translation:</span>
-                  <span className="text-slate-950 font-sans italic font-bold">"{req.translated_text}"</span>
+                <div className="p-3.5 rounded-xl bg-[#121215] border border-white/[0.08] text-xs sm:text-sm font-mono text-slate-200 flex items-start gap-2.5 shadow-2xs font-bold">
+                  <span className="text-indigo-400 shrink-0 font-extrabold">Translation:</span>
+                  <span className="text-slate-300 font-sans italic font-bold">"{req.translated_text}"</span>
                 </div>
               </div>
             ))}

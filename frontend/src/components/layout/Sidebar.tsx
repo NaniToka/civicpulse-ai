@@ -35,6 +35,7 @@ interface SidebarProps {
   setActiveTab: (tab: NavTab) => void;
   collapsed?: boolean;
   onToggleCollapse?: () => void;
+  onOpenRaiseComplaint?: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -42,6 +43,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   setActiveTab,
   collapsed = false,
   onToggleCollapse,
+  onOpenRaiseComplaint,
 }) => {
   const navGroups: {
     groupName: string;
@@ -101,6 +103,19 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Navigation Groups */}
       <nav className="flex-1 p-3 space-y-6 overflow-y-auto bg-white">
+        {/* Prominent Sidebar CTA: Raise Complaint */}
+        <div className="px-1">
+          <button
+            onClick={onOpenRaiseComplaint}
+            className={`w-full py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-extrabold text-xs sm:text-sm transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer font-sans ${
+              collapsed ? 'px-2' : 'px-4'
+            }`}
+            title="Raise a new civic complaint with camera & location"
+          >
+            <Sparkles className="w-4 h-4 text-amber-300 animate-pulse shrink-0" />
+            {!collapsed && <span>Raise Complaint</span>}
+          </button>
+        </div>
         {navGroups.map((group, groupIdx) => (
           <div key={groupIdx} className="space-y-1.5">
             {!collapsed && (

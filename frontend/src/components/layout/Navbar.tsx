@@ -18,14 +18,22 @@ import {
 } from 'lucide-react';
 import { NavTab } from './Sidebar';
 
+import { UserProfile } from '../common/AuthModal';
+
 interface NavbarProps {
   onOpenCommandPalette?: () => void;
+  onOpenRaiseComplaint?: () => void;
+  onOpenAuth?: () => void;
+  currentUser?: UserProfile | null;
   activeTab?: NavTab;
   setActiveTab?: (tab: NavTab) => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   onOpenCommandPalette,
+  onOpenRaiseComplaint,
+  onOpenAuth,
+  currentUser,
   activeTab = 'dashboard',
   setActiveTab,
 }) => {
@@ -78,31 +86,53 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
         </div>
 
-        {/* Right Controls: Command Palette & Demo Disclaimer */}
+        {/* Right Controls: Raise Complaint CTA, User Profile, Command Palette */}
         <div className="flex items-center gap-2.5 sm:gap-3.5">
-          {/* Live Status Pill */}
-          <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-xs sm:text-sm text-slate-800 font-extrabold">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 font-bold" />
-            <span>7 Languages Active</span>
-          </div>
+          {/* Raise Complaint CTA Button */}
+          <button
+            onClick={onOpenRaiseComplaint}
+            className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white text-xs sm:text-sm font-extrabold transition shadow-md flex items-center gap-1.5 cursor-pointer font-sans"
+          >
+            <Sparkles className="w-4 h-4 text-amber-300 animate-pulse" />
+            <span>Raise Complaint</span>
+          </button>
+
+          {/* User Auth Profile Button */}
+          {currentUser ? (
+            <button
+              onClick={onOpenAuth}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-indigo-50 border border-indigo-200 text-indigo-950 hover:bg-indigo-100 transition cursor-pointer text-xs font-mono font-extrabold"
+              title="Click to manage profile or sign out"
+            >
+              <div className="w-5 h-5 rounded-full bg-indigo-600 text-white flex items-center justify-center text-[10px]">
+                {currentUser.name[0]}
+              </div>
+              <span className="hidden md:inline font-extrabold">{currentUser.name.split(' ')[0]}</span>
+            </button>
+          ) : (
+            <button
+              onClick={onOpenAuth}
+              className="px-3 py-1.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-800 hover:text-slate-950 hover:bg-slate-200 transition cursor-pointer text-xs font-mono font-extrabold"
+            >
+              Sign In
+            </button>
+          )}
 
           {/* Command Palette Trigger */}
           <button
             onClick={onOpenCommandPalette}
-            className="flex items-center gap-2.5 px-3.5 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-xs sm:text-sm text-slate-800 hover:text-slate-950 hover:bg-slate-200 transition cursor-pointer font-extrabold"
+            className="flex items-center gap-2.5 px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-xs text-slate-800 hover:text-slate-950 hover:bg-slate-200 transition cursor-pointer font-extrabold"
           >
-            <Command className="w-4 h-4 text-slate-600 shrink-0" />
-            <span className="hidden sm:inline font-extrabold text-slate-800">Search...</span>
-            <kbd className="hidden sm:inline-flex items-center px-2 py-0.5 rounded bg-white border border-slate-300 text-xs font-mono text-slate-800 font-extrabold">
+            <Command className="w-3.5 h-3.5 text-slate-600 shrink-0" />
+            <kbd className="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded bg-white border border-slate-300 text-[10px] font-mono text-slate-800 font-extrabold">
               ⌘K
             </kbd>
           </button>
 
           {/* Demo Synthetic Data Badge */}
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-50 border border-amber-200 text-xs sm:text-sm text-amber-900 font-extrabold shrink-0">
-            <ShieldAlert className="w-4 h-4 text-amber-700 shrink-0 font-bold" />
-            <span className="hidden lg:inline tracking-wide font-extrabold">DEMO DATA</span>
-            <span className="lg:hidden text-xs font-extrabold">DEMO</span>
+          <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-amber-50 border border-amber-200 text-xs text-amber-900 font-extrabold shrink-0">
+            <ShieldAlert className="w-3.5 h-3.5 text-amber-700 shrink-0 font-bold" />
+            <span className="text-xs font-extrabold">DEMO DATA</span>
           </div>
         </div>
       </header>
