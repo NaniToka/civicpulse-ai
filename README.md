@@ -1,5 +1,10 @@
 # 🏛️ CivicPulse AI (v2.0)
 
+<div align="center">
+  <img src="docs/images/dashboard-collage.jpg" alt="CivicPulse AI Dashboard and Real-world Impact" width="100%" />
+</div>
+<br/>
+
 > **An open-source multilingual civic decision intelligence layer that transforms citizen voices across Indian states into traceable, evidence-backed civic investment priorities.**
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen?style=for-the-badge&logo=github)](https://github.com/NaniToka/civicpulse-ai)
@@ -14,11 +19,21 @@
 
 ## 📌 Problem Statement
 
+<div align="center">
+  <img src="docs/images/citizen-protest.jpg" alt="Citizens protesting civic issues" width="90%" style="border-radius: 8px;" />
+</div>
+<br/>
+
 Public administration systems across India process millions of fragmented citizen complaints across diverse regional scripts (*Hindi, Telugu, Tamil, Marathi, Punjabi, Bengali, Kannada, Gujarati, Malayalam, Odia, Urdu, English*). Traditional municipal systems process complaints in isolated silos—leading to unaddressed infrastructure bottlenecks, misallocated capital investments, and a disconnect between citizen demand signals and municipal budget allocation.
 
 ---
 
 ## 💡 Solution
+
+<div align="center">
+  <img src="docs/images/citizen-voice-app.jpg" alt="Citizen Voice App in use" width="90%" style="border-radius: 8px;" />
+</div>
+<br/>
 
 **CivicPulse AI** is an open-source decision-support platform built as a **Digital Public Good**. It bridges citizen feedback and municipal public investment planning by transforming unstructured citizen signals into geographic demand intelligence, cross-referencing demographic census data, infrastructure deficit indices, and existing investment allocations to generate **transparent, explainable priority scores and actionable evidence cards for decision-makers**.
 
@@ -41,6 +56,11 @@ Public administration systems across India process millions of fragmented citize
 ---
 
 ## 📐 Architecture Overview
+
+<div align="center">
+  <img src="docs/images/architecture-diagram.png" alt="CivicPulse AI Architecture" width="100%" />
+</div>
+<br/>
 
 ```mermaid
 graph TD
