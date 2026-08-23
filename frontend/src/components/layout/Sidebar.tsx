@@ -50,25 +50,25 @@ export const Sidebar: React.FC<SidebarProps> = ({
     {
       groupName: 'COMMUNITY VOICES & AI',
       items: [
-        { id: 'dashboard', label: 'Dashboard Overview', icon: <LayoutDashboard className="w-4 h-4" /> },
-        { id: 'copilot', label: 'Ask AI Assistant', icon: <Sparkles className="w-4 h-4 text-indigo-400" />, badge: 'AI' },
-        { id: 'demand', label: 'Citizen Complaints', icon: <Search className="w-4 h-4" /> },
-        { id: 'feedback', label: 'Community Wall', icon: <MessageSquare className="w-4 h-4" />, badge: 'Emojis' },
-        { id: 'hotspots', label: 'Problem Hotspots', icon: <Flame className="w-4 h-4" /> },
+        { id: 'dashboard', label: 'Dashboard Overview', icon: <LayoutDashboard className="w-4 h-4 text-indigo-400" /> },
+        { id: 'copilot', label: 'Ask AI Assistant', icon: <Sparkles className="w-4 h-4 text-purple-400" />, badge: 'AI' },
+        { id: 'demand', label: 'Citizen Complaints', icon: <Search className="w-4 h-4 text-cyan-400" /> },
+        { id: 'feedback', label: 'Community Wall', icon: <MessageSquare className="w-4 h-4 text-emerald-400" />, badge: 'Emojis' },
+        { id: 'hotspots', label: 'Problem Hotspots', icon: <Flame className="w-4 h-4 text-rose-400" /> },
       ],
     },
     {
       groupName: 'PRIORITIES & BUDGET',
       items: [
-        { id: 'gaps', label: 'Facility Shortfalls', icon: <AlertCircle className="w-4 h-4" /> },
-        { id: 'recommendations', label: 'Top Priority Projects', icon: <FileCheck className="w-4 h-4" />, badge: 'Ranked' },
-        { id: 'evidence', label: 'Proof & Evidence', icon: <Network className="w-4 h-4" /> },
-        { id: 'scenarios', label: 'Budget Simulator', icon: <TestTube2 className="w-4 h-4" />, badge: 'Planner' },
+        { id: 'gaps', label: 'Facility Shortfalls', icon: <AlertCircle className="w-4 h-4 text-amber-400" /> },
+        { id: 'recommendations', label: 'Top Priority Projects', icon: <FileCheck className="w-4 h-4 text-green-400" />, badge: 'Ranked' },
+        { id: 'evidence', label: 'Proof & Evidence', icon: <Network className="w-4 h-4 text-sky-400" /> },
+        { id: 'scenarios', label: 'Budget Simulator', icon: <TestTube2 className="w-4 h-4 text-fuchsia-400" />, badge: 'Planner' },
       ],
     },
     {
       groupName: 'ALL DATA & REPORTS',
-      items: [{ id: 'data', label: 'Submit & Explore Data', icon: <Database className="w-4 h-4" /> }],
+      items: [{ id: 'data', label: 'Submit & Explore Data', icon: <Database className="w-4 h-4 text-teal-400" /> }],
     },
   ];
 
@@ -115,18 +115,18 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   <button
                     key={item.id}
                     onClick={() => setActiveTab(item.id)}
-                    className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-bold transition-all relative cursor-pointer group ${
+                    className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-bold transition-all relative cursor-pointer group overflow-hidden ${
                       isActive
-                        ? 'bg-indigo-600/30 text-indigo-100 border border-indigo-400/50 shadow-md'
+                        ? 'bg-gradient-to-r from-indigo-600 via-indigo-600/75 to-indigo-950/20 text-white border border-indigo-400/60 shadow-md shadow-indigo-600/25'
                         : 'text-slate-200 hover:text-white hover:bg-white/[0.08]'
                     }`}
                     title={collapsed ? item.label : undefined}
                   >
-                    {/* Glowing Indigo Active Indicator */}
+                    {/* Left Side Full Solid Color Pill */}
                     {isActive && (
-                      <span className="absolute left-0 top-1.5 bottom-1.5 w-1 rounded-r bg-indigo-400 shadow-[0_0_10px_rgba(129,140,248,0.9)]" />
+                      <span className="absolute left-0 top-0 bottom-0 w-1.5 bg-indigo-400 shadow-[0_0_12px_rgba(129,140,248,1)]" />
                     )}
-                    <span className={isActive ? 'text-indigo-300' : 'text-slate-400 group-hover:text-slate-200'}>
+                    <span className={isActive ? 'text-white font-bold drop-shadow-sm ml-0.5' : 'text-slate-300 group-hover:text-white'}>
                       {item.icon}
                     </span>
                     {!collapsed && <span className="flex-1 text-left truncate font-bold text-xs">{item.label}</span>}
@@ -134,7 +134,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                       <span
                         className={`text-[10px] px-1.5 py-0.5 rounded font-bold font-mono ${
                           isActive
-                            ? 'bg-indigo-500/30 text-indigo-200 border border-indigo-400/40'
+                            ? 'bg-indigo-700 text-white border border-indigo-400/60 shadow-xs'
                             : 'bg-[#191B28] border border-white/[0.15] text-slate-200'
                         }`}
                       >
