@@ -5,6 +5,7 @@ import { TrendBadge } from '../components/common/TrendBadge';
 import { PriorityBadge } from '../components/common/PriorityBadge';
 import { CitizenVoiceComposer } from '../components/common/CitizenVoiceComposer';
 import { RegionDetailModal } from '../components/common/RegionDetailModal';
+import { useLanguage } from '../context/LanguageContext';
 
 interface DemandIntelligenceProps {
   requests: CitizenRequest[];
@@ -20,6 +21,7 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
   onSignalAdded,
   onNavigateToScenarios,
 }) => {
+  const { t } = useLanguage();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRegion, setSelectedRegion] = useState<string>('ALL');
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
@@ -302,8 +304,8 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
       {/* Citizen Feedback Feed Cards */}
       <div className="p-6 md:p-7 rounded-xl bg-white border border-slate-200 space-y-6 shadow-sm text-slate-950 font-bold mb-10">
         <div className="flex items-center justify-between border-b border-slate-200 pb-4">
-          <h3 className="text-lg sm:text-xl font-extrabold text-slate-950 font-sans">Filtered Citizen Requests ({filteredRequests.length})</h3>
-          <span className="text-xs sm:text-sm font-mono font-extrabold text-indigo-700">Showing verified demand signals</span>
+          <h3 className="text-lg sm:text-xl font-extrabold text-slate-950 font-sans">{t('complaints_title')} ({filteredRequests.length})</h3>
+          <span className="text-xs sm:text-sm font-mono font-extrabold text-indigo-700">{t('showing_verified')}</span>
         </div>
 
         {filteredRequests.length === 0 ? (
@@ -342,7 +344,7 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
                 </div>
 
                 <div className="p-3.5 rounded-xl bg-[#121215] border border-white/[0.08] text-xs sm:text-sm font-mono text-slate-200 flex items-start gap-2.5 shadow-2xs font-bold">
-                  <span className="text-indigo-400 shrink-0 font-extrabold">Translation:</span>
+                  <span className="text-indigo-400 shrink-0 font-extrabold">{t('translation_label')}</span>
                   <span className="text-slate-300 font-sans italic font-bold">"{req.translated_text}"</span>
                 </div>
               </div>

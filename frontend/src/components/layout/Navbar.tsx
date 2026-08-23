@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { NavTab } from './Sidebar';
 
+import { useLanguage, LANGUAGE_OPTIONS, SupportedLanguage } from '../../context/LanguageContext';
 import { UserProfile } from '../common/AuthModal';
 
 interface NavbarProps {
@@ -38,6 +39,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   setActiveTab,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { language, setLanguage, t } = useLanguage();
 
   const navItems: { id: NavTab; label: string; icon: React.ReactNode; desc: string }[] = [
     { id: 'dashboard', label: 'Dashboard Overview', icon: <LayoutDashboard className="w-4 h-4" />, desc: 'Summary of citizen needs & priorities' },
@@ -86,15 +88,31 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
         </div>
 
-        {/* Right Controls: Raise Complaint CTA, User Profile, Command Palette */}
-        <div className="flex items-center gap-2.5 sm:gap-3.5">
+        {/* Right Controls: Language Selector, Raise Complaint CTA, User Profile, Command Palette */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Top Header Language Selector */}
+          <div className="relative flex items-center">
+            <select
+              value={language}
+              onChange={(e) => setLanguage(e.target.value as SupportedLanguage)}
+              className="px-2.5 py-1.5 rounded-xl bg-slate-100 border border-slate-300 text-slate-900 hover:bg-slate-200 transition cursor-pointer text-xs font-bold font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-2xs"
+              title="Select Website Language / భాషను ఎంచుకోండి / भाषा चुनें"
+            >
+              {LANGUAGE_OPTIONS.map((lang) => (
+                <option key={lang.code} value={lang.code}>
+                  {lang.flag} {lang.nativeName} ({lang.code.toUpperCase()})
+                </option>
+              ))}
+            </select>
+          </div>
+
           {/* Raise Complaint CTA Button */}
           <button
             onClick={onOpenRaiseComplaint}
-            className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white text-xs sm:text-sm font-extrabold transition shadow-md flex items-center gap-1.5 cursor-pointer font-sans"
+            className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white text-xs sm:text-sm font-extrabold transition shadow-md flex items-center gap-1.5 cursor-pointer font-sans shrink-0"
           >
             <Sparkles className="w-4 h-4 text-amber-300 animate-pulse" />
-            <span>Raise Complaint</span>
+            <span className="hidden xs:inline">{t('nav_raise_complaint')}</span>
           </button>
 
           {/* User Auth Profile Button */}

@@ -17,6 +17,8 @@ import {
   Sparkles,
 } from 'lucide-react';
 
+import { useLanguage } from '../../context/LanguageContext';
+
 export type NavTab =
   | 'dashboard'
   | 'copilot'
@@ -45,32 +47,34 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onToggleCollapse,
   onOpenRaiseComplaint,
 }) => {
+  const { t } = useLanguage();
+
   const navGroups: {
     groupName: string;
     items: { id: NavTab; label: string; icon: React.ReactNode; badge?: string }[];
   }[] = [
     {
-      groupName: 'COMMUNITY VOICES & AI',
+      groupName: t('group_voices'),
       items: [
-        { id: 'dashboard', label: 'Dashboard Overview', icon: <LayoutDashboard className="w-4 h-4 text-indigo-600" /> },
-        { id: 'copilot', label: 'Ask AI Assistant', icon: <Sparkles className="w-4 h-4 text-purple-600" />, badge: 'AI' },
-        { id: 'demand', label: 'Citizen Complaints', icon: <Search className="w-4 h-4 text-cyan-600" /> },
-        { id: 'feedback', label: 'Community Wall', icon: <MessageSquare className="w-4 h-4 text-emerald-600" />, badge: 'Emojis' },
-        { id: 'hotspots', label: 'Problem Hotspots', icon: <Flame className="w-4 h-4 text-rose-600" /> },
+        { id: 'dashboard', label: t('nav_dashboard'), icon: <LayoutDashboard className="w-4 h-4 text-indigo-600" /> },
+        { id: 'copilot', label: t('nav_copilot'), icon: <Sparkles className="w-4 h-4 text-purple-600" />, badge: 'AI' },
+        { id: 'demand', label: t('nav_demand'), icon: <Search className="w-4 h-4 text-cyan-600" /> },
+        { id: 'feedback', label: t('nav_feedback'), icon: <MessageSquare className="w-4 h-4 text-emerald-600" />, badge: 'Emojis' },
+        { id: 'hotspots', label: t('nav_hotspots'), icon: <Flame className="w-4 h-4 text-rose-600" /> },
       ],
     },
     {
-      groupName: 'PRIORITIES & BUDGET',
+      groupName: t('group_priorities'),
       items: [
-        { id: 'gaps', label: 'Facility Shortfalls', icon: <AlertCircle className="w-4 h-4 text-amber-600" /> },
-        { id: 'recommendations', label: 'Top Priority Projects', icon: <FileCheck className="w-4 h-4 text-green-600" />, badge: 'Ranked' },
-        { id: 'evidence', label: 'Proof & Evidence', icon: <Network className="w-4 h-4 text-sky-600" /> },
-        { id: 'scenarios', label: 'Budget Simulator', icon: <TestTube2 className="w-4 h-4 text-fuchsia-600" />, badge: 'Planner' },
+        { id: 'gaps', label: t('nav_gaps'), icon: <AlertCircle className="w-4 h-4 text-amber-600" /> },
+        { id: 'recommendations', label: t('nav_recommendations'), icon: <FileCheck className="w-4 h-4 text-green-600" />, badge: 'Ranked' },
+        { id: 'evidence', label: t('nav_evidence'), icon: <Network className="w-4 h-4 text-sky-600" /> },
+        { id: 'scenarios', label: t('nav_scenarios'), icon: <TestTube2 className="w-4 h-4 text-fuchsia-600" />, badge: 'Planner' },
       ],
     },
     {
-      groupName: 'ALL DATA & REPORTS',
-      items: [{ id: 'data', label: 'Submit & Explore Data', icon: <Database className="w-4 h-4 text-teal-600" /> }],
+      groupName: t('group_data'),
+      items: [{ id: 'data', label: t('nav_data'), icon: <Database className="w-4 h-4 text-teal-600" /> }],
     },
   ];
 
@@ -113,7 +117,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             title="Raise a new civic complaint with camera & location"
           >
             <Sparkles className="w-4 h-4 text-amber-300 animate-pulse shrink-0" />
-            {!collapsed && <span>Raise Complaint</span>}
+            {!collapsed && <span>{t('nav_raise_complaint')}</span>}
           </button>
         </div>
         {navGroups.map((group, groupIdx) => (

@@ -26,6 +26,8 @@ import { NavTab } from '../components/layout/Sidebar';
 import { RegionDetailModal } from '../components/common/RegionDetailModal';
 import { ThreeDDonutChart } from '../components/common/ThreeDDonutChart';
 
+import { useLanguage } from '../context/LanguageContext';
+
 interface DashboardOverviewProps {
   recommendations: PriorityRecommendation[];
   requests: CitizenRequest[];
@@ -41,6 +43,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
   onNavigate,
   onOpenEvidenceModal,
 }) => {
+  const { t } = useLanguage();
   const [selectedRegionId, setSelectedRegionId] = useState<string>(regions[0]?.id || 'REG-IND-UP-KANP-02');
   const [activeDetailRegion, setActiveDetailRegion] = useState<Region | null>(null);
   const [tableSearchQuery, setTableSearchQuery] = useState('');
@@ -129,11 +132,11 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
             </div>
 
             <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-950">
-              CivicPulse <span className="hero-gradient-text">Overview & Priorities</span>
+              {t('dash_title')}
             </h1>
 
             <p className="text-sm sm:text-base text-slate-700 font-bold">
-              Real-time citizen feedback, facility shortfalls & budget priorities.
+              {t('dash_subtitle')}
             </p>
 
             <div className="flex flex-wrap items-center gap-2.5 pt-2 font-mono text-xs sm:text-sm">
