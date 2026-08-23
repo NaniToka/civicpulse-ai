@@ -157,6 +157,12 @@ export const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     sec_chains_title: '6-Step Recommendation Evidence Chains',
     sec_chains_sub: 'Select a recommendation to inspect its complete machine-readable evidence trail.',
     btn_open_chain: 'Open Evidence Chain',
+
+    // Data Explorer Page
+    data_page_title: 'Data Explorer & Ingest Portal',
+    tag_submit_voice: 'Submit Voice Data',
+    tag_inspect_datasets: 'Inspect Datasets',
+    badge_demo_dataset: 'Demo Dataset',
   },
 
   te: {
@@ -296,6 +302,12 @@ export const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     sec_chains_title: '6-దశల సాక్ష్యాల గొలుసు',
     sec_chains_sub: 'సంపూర్ణ ఆధారాన్ని చూడటానికి ఒక సిఫార్సును ఎంచుకోండి.',
     btn_open_chain: 'సాక్ష్యాల సిరీస్ తెరవండి',
+
+    // Data Explorer Page
+    data_page_title: 'డేటా ఎక్స్‌ప్లోరర్ & ఇంజెస్ట్ పోర్టల్',
+    tag_submit_voice: 'వాయిస్ డేటా సమర్పించండి',
+    tag_inspect_datasets: 'డేటాసెట్‌లు పరిశీలించండి',
+    badge_demo_dataset: 'డెమో డేటాసెట్',
   },
 
   hi: {
@@ -387,6 +399,12 @@ export const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     create_btn: 'खाता बनाएं और जारी रखें',
     login_btn: 'खाते में लॉग इन करें',
     demo_login: 'एक क्लिक में त्वरित साइन इन करें (डेमो)',
+
+    // Data Explorer Page
+    data_page_title: 'डेटा एक्सप्लोरर और इंजेस्ट पोर्टल',
+    tag_submit_voice: 'वॉयस डेटा जमा करें',
+    tag_inspect_datasets: 'डेटासेट देखें',
+    badge_demo_dataset: 'डेमो डेटासेट',
   },
 
   ta: {
@@ -478,6 +496,12 @@ export const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     create_btn: 'கணக்கு உருவாக்கி தொடரவும்',
     login_btn: 'உள்நுழைக',
     demo_login: 'ஒரே கிளிக்கில் உள்நுழைக (டெமோ)',
+
+    // Data Explorer Page
+    data_page_title: 'தரவு ஆய்வாளர் & இன்ஜெஸ்ட் போர்டல்',
+    tag_submit_voice: 'குரல் தரவை சமர்ப்பிக்கவும்',
+    tag_inspect_datasets: 'தரவுத்தொகுப்புகளை ஆய்வு செய்',
+    badge_demo_dataset: 'டெமோ தரவுத்தொகுப்பு',
   },
 
   mr: {
@@ -569,6 +593,12 @@ export const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     create_btn: 'खाते तयार करा आणि पुढे जा',
     login_btn: 'लॉग इन करा',
     demo_login: 'एका क्लिकमध्ये साइन इन करा (डेमो)',
+
+    // Data Explorer Page
+    data_page_title: 'डेटा एक्सप्लोरर आणि इन्जेस्ट पोर्टल',
+    tag_submit_voice: 'व्हॉइस डेटा सबमिट करा',
+    tag_inspect_datasets: 'डेटासेट तपासा',
+    badge_demo_dataset: 'डेमो डेटासेट',
   },
 
   bn: {
@@ -660,6 +690,12 @@ export const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     create_btn: 'অ্যাকাউন্ট তৈরি করুন',
     login_btn: 'লগ ইন করুন',
     demo_login: 'এক ক্লিকে লগ ইন করুন (ডেমো)',
+
+    // Data Explorer Page
+    data_page_title: 'ডেটা এক্সপ্লোরার ও ইনজেস্ট পোর্টাল',
+    tag_submit_voice: 'ভয়েস ডেটা জমা দিন',
+    tag_inspect_datasets: 'ডেটাসেট পরীক্ষা করুন',
+    badge_demo_dataset: 'ডেমো ডেটাসেট',
   },
 };
 
