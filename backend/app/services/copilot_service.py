@@ -220,28 +220,40 @@ I am your intelligent, grounded civic intelligence assistant. I am here to help 
                 "Which projects have funding gaps?",
             ]
 
-        # Intent 2: HOW TO POST COMPLAINT / SUBMIT SIGNAL / PLATFORM USAGE / SOLVE PROBLEM
-        elif any(w in lower_msg for w in ["complaint", "how to post", "how to submit", "how to report", "how to log", "how do i post", "how do i submit", "how to solve my problem", "how to solve a problem", "i have a problem", "i have an issue", "how to add signal"]):
-            grounded_context = """### How to Submit Feedback & Log a Civic Problem in CivicPulse AI 🛠️
+        # Intent 2: HOW TO POST COMPLAINT / RAISE A PROBLEM / SUBMIT SIGNAL / SOLVE PROBLEM
+        problem_submission_triggers = [
+            "raise", "raise my problem", "raise problem", "raise a problem", "raise issue", "raise complaint",
+            "how to raise", "how do i raise", "how can i raise", "want to raise", "need to raise",
+            "how to post", "how to submit", "how to report", "how to log", "how to file", "how to register",
+            "how do i post", "how do i submit", "how do i report", "how do i log", "how do i file",
+            "how can i post", "how can i submit", "how can i report", "how to solve my problem",
+            "how to solve a problem", "how to solve problem", "i have a problem", "i have an issue",
+            "i have a complaint", "want to complain", "want to report", "tell me how to", "where can i submit",
+            "where do i submit", "where do i report", "how to add signal", "complaint", "grievance"
+        ]
+        if any(w in lower_msg for w in problem_submission_triggers):
+            grounded_context = """### How to Raise & Submit Your Civic Problem in CivicPulse AI 🛠️
 
-Citizens, community leaders, and administrators can log complaints, report service outages, or request infrastructure improvements directly in CivicPulse AI:
+To raise your civic problem or report a community infrastructure issue, follow these simple steps:
 
 1. **Navigate to Data Explorer or Demand Intelligence**:
-   - Click **[Data Explorer]** or **[Demand Intelligence]** in the top navigation bar.
+   - Click **[Data Explorer]** or **[Demand Intelligence]** in the left sidebar or top navigation bar.
    - Locate the **Citizen Voice Composer** panel.
 
 2. **Enter Your Civic Feedback**:
-   - Type your feedback or record a voice note in any supported language (*Telugu, Hindi, Marathi, Bengali, Portuguese, Zulu, or English*).
+   - Type your problem or record a voice note in any supported language (*Telugu, Hindi, Marathi, Bengali, Portuguese, Zulu, or English*).
    - Example: *"Severe drinking water supply disruption in Vijayawada Ward 4; urgent pipeline repair required."* or *"మా ప్రాంతంలో పిల్లలకు మంచి ఆసుపత్రి లేదు."*
 
 3. **Select Input Channel & Location**:
    - Choose the source channel (*Web, Voice Note, Mobile App, Messaging, Survey*).
-   - Specify latitude/longitude or select the target District/City.
+   - Specify latitude/longitude or select your target District/City.
 
 4. **Analyze & Fast-Track Signal**:
    - Click **"Analyze Civic Signal"** followed by **"Add Signal to Civic Intelligence"**.
    - The Gemini AI NLP Engine detects the script, normalizes the text into English, classifies the category, extracts entities, and assigns urgency.
    - The signal is instantly added to CivicPulse, updating per-capita demand scores and regional hotspot rankings in real time!
+
+*You can also type your problem details directly in this chat, and I will analyze it for you!*
 
 ### Evidence used:
 • Ingestion Channels: Web, Voice, Messaging, Mobile App
@@ -252,7 +264,7 @@ Citizens, community leaders, and administrators can log complaints, report servi
                 CopilotEvidenceRef(title="Supported Languages", metric="Count", value="7 Languages Active"),
                 CopilotEvidenceRef(title="Ingestion Channels", metric="Channels", value="Web, Voice, SMS, App"),
             ]
-            action_link = CopilotActionLink(label="Open Data Explorer to Submit Signal", action_type="navigate", target="/data")
+            action_link = CopilotActionLink(label="Open Data Explorer to Raise Problem", action_type="navigate", target="/data")
             suggested_actions = ["Show top 5 priorities", "Which region has highest infrastructure deficit?", "What happens if we allocate $15M?"]
 
         # Intent 3: DIRECT CIVIC PROBLEM TYPED INTO CHAT (e.g. "Water pipeline broken in Vijayawada", "No doctors at hospital")
@@ -581,31 +593,41 @@ Click **[Ingest Signal in Data Explorer]** below to record it into the regional 
                 suggested_actions=["Which civic problem needs attention most urgently?", "Why is Vijayawada a high-priority region?", "Which projects have funding gaps?"],
             )
 
-        # DEFAULT FALLBACK: Dynamic Context-Aware Civic Intelligence Overview
+        # DEFAULT FALLBACK: Provide rich platform knowledge base to Gemini LLM for natural, conversational AI responses
         else:
             top_rec = all_recs[0]
             cat_disp = get_category_display_name(top_rec.category)
-            grounded_context = f"""### Civic Intelligence Response 📊
+            grounded_context = f"""### System Knowledge Base Context for CivicPulse AI:
 
-I have processed your query: **"{sanitized_msg}"**
+1. **Platform Purpose**: CivicPulse AI is an intelligent civic demand and infrastructure cockpit that ingests citizen complaints, measures per-capita infrastructure deficits, and prioritizes capital investments across 35 BRICS districts.
 
-#### Current System Intelligence Overview:
-- **Top Priority Region**: **{top_rec.region_name}** ({cat_disp}) — Priority Score `{top_rec.priority_score:.1f}/100` ({top_rec.priority_level})
-- **Monitored Regions**: {len(regions)} BRICS Districts
-- **Active Citizen Demands**: {len(requests):,} feedback entries across 7 languages
-- **Assessed Capital Projects**: {len(investments)} public investment initiatives
+2. **How Citizens & Users Raise Problems or Log Complaints**:
+   - Navigate to '/data' (Data Explorer) or '/demand' (Demand Intelligence).
+   - Use the **Citizen Voice Composer** panel to type feedback or record voice notes in 7 languages (Hindi, Telugu, Marathi, Bengali, Portuguese, Zulu, English).
+   - Select channel (Web/Voice Note/App/SMS) and location, then click "Analyze Civic Signal" -> "Add Signal".
+   - The Gemini AI NLP Engine classifies sector, assigns urgency (CRITICAL/HIGH/MEDIUM/LOW), normalizes text into English, and updates regional per-capita demand indices in real time.
 
-### Evidence used:
-• Monitored Regions: {len(regions)}
-• Monitored Sectors: Healthcare, Water, Electricity, Transportation, Sanitation, Digital Connectivity
-• Grounded Recommendations: {len(all_recs)}
+3. **Live System Snapshot**:
+   - Monitored Regions: {len(regions)} BRICS Districts (including Kanpur South Belt, Vijayawada, Pune, eThekwini/Durban, Salvador, Ekurhuleni, Rio).
+   - Top Priority Region: {top_rec.region_name} ({cat_disp}) — Priority Score `{top_rec.priority_score:.1f}/100` ({top_rec.priority_level}).
+   - Active Citizen Demands: {len(requests):,} multilingual feedback entries.
+   - Assessed Capital Projects: {len(investments)} public investment initiatives.
+
+4. **Available Platform Views & Tools**:
+   - Top Priority Projects ('/recommendations'): 8-factor deterministic priority ranking.
+   - What-If Scenario Lab ('/scenarios'): Simulate $15M+ budget allocations to calculate projected beneficiary counts and gap reductions.
+   - Infrastructure Shortfalls ('/gaps'): Sector-by-sector operational capacity deficit matrix.
+   - Community Feedback Wall ('/feedback'): Verified public community comments.
+
+### Instructions for AI Response:
+Answer the user's input directly, warmly, and conversationally based on the knowledge base above. If the user asks how to raise a problem, report an issue, or ask a question, provide clear, step-by-step guidance!
 """
             evidence_list = [
                 CopilotEvidenceRef(title="Monitored Regions", metric="Count", value=str(len(regions))),
                 CopilotEvidenceRef(title="Active Signals", metric="Count", value=str(len(requests))),
             ]
-            action_link = CopilotActionLink(label="View Recommendations", action_type="navigate", target="/recommendations")
-            suggested_actions = ["Which civic problem needs attention most urgently?", "How to post a complaint or submit a civic signal?", "What happens if we allocate $15M to healthcare?"]
+            action_link = CopilotActionLink(label="Open Data Explorer to Raise Problem", action_type="navigate", target="/data")
+            suggested_actions = ["How to post a complaint or submit a civic signal?", "Which civic problem needs attention most urgently?", "What happens if we allocate $15M to healthcare?"]
 
         # 3. Call AI Provider for final polished grounded response
         ai_provider = get_ai_service()
