@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Search, LayoutDashboard, Flame, AlertCircle, FileCheck, Network, TestTube2, Database, ArrowRight, X } from 'lucide-react';
+import { Search, LayoutDashboard, Flame, AlertCircle, FileCheck, Network, TestTube2, Database, ArrowRight, X, Sparkles } from 'lucide-react';
 import { NavTab } from '../layout/Sidebar';
+
+
 
 interface CommandPaletteProps {
   isOpen: boolean;
@@ -29,7 +31,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
 
   const items: { id: NavTab; label: string; icon: React.ReactNode; description: string; category: string }[] = [
     { id: 'dashboard', label: 'Executive Overview', icon: <LayoutDashboard className="w-4 h-4 text-indigo-400" />, description: 'High-level KPIs, demand landscape & top priorities', category: 'Views' },
+    { id: 'copilot', label: 'Civic Intelligence Copilot', icon: <Sparkles className="w-4 h-4 text-indigo-400" />, description: 'Ask questions, explore grounded evidence trails & run scenario simulations', category: 'AI Assistant' },
     { id: 'demand', label: 'Demand Intelligence', icon: <Search className="w-4 h-4 text-indigo-400" />, description: 'Multilingual citizen voices, time-series & momentum', category: 'Views' },
+
     { id: 'hotspots', label: 'Demand Hotspots', icon: <Flame className="w-4 h-4 text-amber-400" />, description: 'Per-capita normalized demand concentration', category: 'Views' },
     { id: 'gaps', label: 'Infrastructure Gaps', icon: <AlertCircle className="w-4 h-4 text-red-400" />, description: 'Operational capacity deficit index vs population need', category: 'Views' },
     { id: 'recommendations', label: 'Priority Recommendations', icon: <FileCheck className="w-4 h-4 text-green-400" />, description: 'Ranked evidence-backed capital investment priorities', category: 'Views' },

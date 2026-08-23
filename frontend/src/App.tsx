@@ -12,6 +12,8 @@ import { EvidenceExplorer } from './pages/EvidenceExplorer';
 import { WhatIfScenario } from './pages/WhatIfScenario';
 import { DataExplorer } from './pages/DataExplorer';
 import { CitizenFeedbackWall } from './pages/CitizenFeedbackWall';
+import { CopilotView } from './pages/CopilotView';
+
 import { api } from './services/api';
 import {
   Region,
@@ -102,6 +104,15 @@ export const App: React.FC = () => {
                   onOpenEvidenceModal={(rec) => setSelectedModalRec(rec)}
                 />
               )}
+
+              {activeTab === 'copilot' && (
+                <CopilotView
+                  onNavigate={setActiveTab}
+                  onOpenEvidenceModal={(rec) => setSelectedModalRec(rec)}
+                  recommendations={recommendations}
+                />
+              )}
+
 
               {activeTab === 'demand' && (
                 <DemandIntelligence

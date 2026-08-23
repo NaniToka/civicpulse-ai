@@ -14,10 +14,12 @@ import {
   ChevronLeft,
   ChevronRight,
   Compass,
+  Sparkles,
 } from 'lucide-react';
 
 export type NavTab =
   | 'dashboard'
+  | 'copilot'
   | 'demand'
   | 'feedback'
   | 'hotspots'
@@ -26,6 +28,7 @@ export type NavTab =
   | 'evidence'
   | 'scenarios'
   | 'data';
+
 
 interface SidebarProps {
   activeTab: NavTab;
@@ -48,10 +51,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
       groupName: 'INTELLIGENCE HUB',
       items: [
         { id: 'dashboard', label: 'Executive Overview', icon: <LayoutDashboard className="w-4 h-4" /> },
+        { id: 'copilot', label: 'Civic Intelligence Copilot', icon: <Sparkles className="w-4 h-4 text-indigo-400" />, badge: 'AI Copilot' },
         { id: 'demand', label: 'Demand Intelligence', icon: <Search className="w-4 h-4" /> },
         { id: 'feedback', label: 'Citizen Comments', icon: <MessageSquare className="w-4 h-4" />, badge: 'Emojis' },
         { id: 'hotspots', label: 'Demand Hotspots', icon: <Flame className="w-4 h-4" /> },
       ],
+
     },
     {
       groupName: 'DECISION ENGINE',

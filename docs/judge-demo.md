@@ -47,11 +47,17 @@
 
 ---
 
-### ⏱️ 1:10 – 1:30 | Real-Time Multilingual Citizen Voice Signal Ingestion
-* **Screen**: Demand Intelligence (`/demand`).
-* **Action**: In the **CitizenVoiceComposer**, click the Telugu example (`మా ప్రాంతంలో పిల్లలకు మంచి ఆసుపత్రి లేదు.`) and click **"Analyze Civic Signal"**. Then click **"Add Signal to Civic Intelligence"**.
+---
+
+### ⏱️ 1:30 – 1:50 | Grounded Civic Intelligence Copilot
+* **Screen**: Civic Intelligence Copilot (`/copilot`).
+* **Action**: Click the starter prompt **"Which projects currently have the largest funding gaps?"** or ask **"What happens if we allocate $15M to healthcare?"**. Hover over the grounded evidence citations and click **[Open Scenario Lab]**.
 * **Narrative**:
-  > *"Watch what happens when a citizen submits feedback in Telugu: 'మా ప్రాంతంలో పిల్లలకు మంచి ఆసుపత్రి లేదు.' Our NLP Engine detects Telugu, normalizes the text to 'Lacks adequate healthcare facilities for children', classifies the intent as a Healthcare Improvement Request, assigns High Urgency, and seamlessly incorporates the signal into our regional intelligence engine."*
-  > 
-  > **Closing Statement**:
-  > *"In CivicPulse AI, citizen voice is not just collected—it becomes decision intelligence."*
+  > *"Meet the Civic Intelligence Copilot—our grounded conversational assistant. Policymakers can ask natural-language questions about regional infrastructure deficits, project funding gaps, or counterfactual investment scenarios. Every response includes verified evidence citations and interactive links directly back to the decision cockpit."*
+
+---
+
+### ⏱️ 1:50 – 2:00 | Closing & Responsible AI Boundary
+* **Narrative**:
+  > *"In CivicPulse AI, citizen voice is not just collected—it becomes grounded, transparent, and actionable decision intelligence."*
+

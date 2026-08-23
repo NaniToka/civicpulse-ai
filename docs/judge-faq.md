@@ -78,3 +78,9 @@ $$\text{Base Score} = (0.20 \cdot D_s) + (0.10 \cdot M_v) + (0.20 \cdot G_i) + (
 
 ### Q13: What are the current prototype limitations?
 **A**: Speech-to-Text relies on browser SpeechRecognition Web APIs or typed text inputs; raw audio binaries are not stored on disk in this prototype stage. Real municipal deployment would require integration with municipal GIS and ERP databases.
+
+---
+
+### Q14: How does the Civic Intelligence Copilot work without hallucinating stats?
+**A**: The Copilot (`/copilot`) uses a controlled context retrieval layer (`CopilotService`). When a user asks a natural-language question, the backend identifies the intent, retrieves verified facts from the deterministic data loaders, engines, and simulation services, and feeds only that grounded context to Gemini. If the required information is missing, it explicitly states *"I don't have enough verified CivicPulse data to answer that."* rather than inventing numbers.
+

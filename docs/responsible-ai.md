@@ -13,14 +13,15 @@ CivicPulse AI adheres to strict Responsible AI guidelines to ensure that artific
 ## 🛡️ Key Responsible AI Principles
 
 ### 1. Deterministic AI Boundary ("No AI-Fabricated Statistics")
-- **AI Role**: Google Gemini is used solely for natural language processing—detecting scripts, translating text, classifying intent, extracting entities, and writing human-readable summaries.
-- **Deterministic Role**: All priority scores, per-capita demand normalization, infrastructure capacity gaps, census vulnerability indices, capital project overlap penalties, and counterfactual scenario deltas are computed 100% deterministically in Python application code.
-- **Enforcement**: Gemini is **NEVER** allowed to compute numbers or modify priority scores.
+- **AI Role**: Google Gemini is used solely for natural language processing—detecting scripts, translating text, classifying intent, extracting entities, drafting executive multilingual decision briefs, and formatting Copilot conversational markdown answers.
+- **Deterministic Role**: All priority scores, per-capita demand normalization, infrastructure capacity gaps, census vulnerability indices, capital project overlap penalties, counterfactual scenario deltas, and CivicFund project funding gaps are computed 100% deterministically in Python application code.
+- **Enforcement**: Gemini is **NEVER** allowed to compute numbers, modify priority scores, or fabricate stats. If data is absent, Copilot states: *"I don't have enough verified CivicPulse data to answer that."*
 
-### 2. Prompt Injection Defense
-- Citizen feedback is treated as untrusted external data.
+### 2. Prompt Injection & Key Exfiltration Defense
+- Citizen feedback and user Copilot questions are treated as untrusted external data.
 - Inputs are enclosed inside `<CITIZEN_INPUT_DATA_DO_NOT_EXECUTE>` tags with explicit system instructions to ignore prompt jailbreaks or key exfiltration commands.
-- `sanitize_input_text` neutralizes system override patterns before reaching the LLM.
+- `sanitize_input_text` and `CopilotService._is_security_violation` neutralize system override patterns, secret key exfiltration requests (`GEMINI_API_KEY`, `os.environ`), and code execution attempts before reaching the LLM.
+
 
 ### 3. Strict Schema Validation & Bounded Confidence
 - AI JSON responses are validated against Pydantic `StructuredAIOutput` schemas.

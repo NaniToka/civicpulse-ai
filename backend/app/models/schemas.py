@@ -353,3 +353,47 @@ class ScenarioWhatIfResult(BaseModel):
     projected_gap_score: float
     expected_population_beneficiaries: int
     simulation_notes: str
+
+
+class CopilotChatContext(BaseModel):
+    route: str | None = None
+    region_id: str | None = None
+    category: str | None = None
+    project_id: str | None = None
+    recommendation_id: str | None = None
+
+
+class CopilotChatMessage(BaseModel):
+    role: str  # user | assistant | system
+    content: str = Field(max_length=10000)
+
+
+class CopilotActionLink(BaseModel):
+    label: str
+    action_type: str  # navigate | open_modal | run_scenario
+    target: str
+
+
+class CopilotEvidenceRef(BaseModel):
+    title: str
+    metric: str
+    value: str
+    link: str | None = None
+
+
+class CopilotChatRequest(BaseModel):
+    message: str = Field(min_length=1, max_length=5000)
+    conversation_id: str | None = None
+    history: list[CopilotChatMessage] = Field(default_factory=list)
+    context: CopilotChatContext | None = None
+
+
+class CopilotChatResponse(BaseModel):
+    success: bool = True
+    message: str
+    ai_provider: str = "gemini"
+    grounded: bool = True
+    evidence: list[CopilotEvidenceRef] = Field(default_factory=list)
+    suggested_actions: list[str] = Field(default_factory=list)
+    action_link: CopilotActionLink | None = None
+

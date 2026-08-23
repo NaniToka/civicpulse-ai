@@ -15,6 +15,8 @@ from app.core.taxonomy import (
 from app.models.schemas import (
     CitizenRequest,
     CitizenRequestIngestInput,
+    CopilotChatRequest,
+    CopilotChatResponse,
     DemandAggregationSummary,
     DemandHotspot,
     DemandMomentumSignal,
@@ -30,6 +32,7 @@ from app.models.schemas import (
     WhyThisRecommendation,
 )
 from app.services.ai_service import get_ai_service
+from app.services.copilot_service import copilot_service
 from app.services.data_loader import data_loader
 from app.services.demand_engine import demand_aggregation_service
 from app.services.demand_momentum import demand_momentum_engine
@@ -349,3 +352,13 @@ async def scenario_what_if(payload: ScenarioWhatIfInput):
         requests=requests,
         investments=investments,
     )
+
+
+@router.post(
+    "/copilot/chat",
+    response_model=CopilotChatResponse,
+    summary="Execute Grounded Civic Intelligence Copilot Query",
+    dependencies=[Depends(validate_request_size)],
+)
+async def copilot_chat(payload: CopilotChatRequest):
+    return await copilot_service.process_chat(payload)

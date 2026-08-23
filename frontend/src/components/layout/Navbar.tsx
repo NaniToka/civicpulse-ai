@@ -33,6 +33,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const navItems: { id: NavTab; label: string; icon: React.ReactNode; desc: string }[] = [
     { id: 'dashboard', label: 'Executive Overview', icon: <LayoutDashboard className="w-4 h-4" />, desc: 'BRICS Civic Decision Cockpit' },
+    { id: 'copilot', label: 'Civic Intelligence Copilot', icon: <Sparkles className="w-4 h-4 text-indigo-400" />, desc: 'AI Decision Assistant & Evidence Copilot' },
     { id: 'demand', label: 'Demand Intelligence', icon: <Search className="w-4 h-4" />, desc: 'Multilingual Voices & Momentum' },
     { id: 'feedback', label: 'Citizen Comments & Emojis', icon: <MessageSquare className="w-4 h-4" />, desc: 'Community Feedback Wall' },
     { id: 'hotspots', label: 'Demand Hotspots', icon: <Flame className="w-4 h-4" />, desc: 'Per-Capita Risk Heatmaps' },

@@ -28,6 +28,7 @@ Public administration systems across India process millions of fragmented citize
 
 | Feature | Description | Highlight |
 | :--- | :--- | :--- |
+| 🤖 **Civic Intelligence Copilot** | Grounded conversational AI assistant (`/copilot`) for natural-language questions, evidence citations, CivicFund project funding gap queries, and $15M scenario execution. | `CopilotView.tsx` & `/api/v1/copilot/chat` |
 | 🇮🇳 **35 Indian Districts Dataset** | Seed dataset covering 35 municipal districts across Indian states with demographic census metrics and vulnerability indices. | *Kanpur UP, Pune MH, Chennai TN, Ongole AP, Delhi NCR, Mumbai MH, Ludhiana PB, Bengaluru KA, Hyderabad TG, Kolkata WB, etc.* |
 | 🧊 **3D Isometric Donut Chart** | 3D isometric cylinder ring visualization featuring perspective transforms, multi-layered SVG extrusions, and 60fps momentum spin. | `ThreeDDonutChart.tsx` |
 | 📊 **3D Animated Bar Matrix Graph** | 3D extruded bar cylinder graph visualizing system dataset volume with upright 2D glass hover badges. | `ThreeDBarChart.tsx` |
@@ -36,23 +37,21 @@ Public administration systems across India process millions of fragmented citize
 | 🔬 **Scenario Lab Simulator** | Counterfactual policy simulator with 1-click intervention presets, dual priority reduction gauge cards, and cost-per-resident ROI metrics. | `WhatIfScenario.tsx` |
 | 📱 **Mobile & Laptop Responsive** | Glassmorphic navigation drawer overlay, responsive grid layouts, and mobile-friendly touch targets across all devices. | `Navbar.tsx` & `Sidebar.tsx` |
 
+
 ---
 
 ## 📐 Architecture Overview
 
 ```mermaid
 graph TD
-    A[Citizen Input / Voice / SMS / Web] --> B[React Decision Cockpit]
-    B --> C[FastAPI REST Gateway]
-    C --> D[Multilingual NLP Engine]
-    D -->|Gemini / Fallback| E[Structured Civic Signal]
-    E --> F[Demand Momentum Engine]
-    E --> G[Per-Capita Hotspot Detector]
-    F & G --> H[Civic Evidence Graph Service]
-    H --> I[Priority Scoring Engine V2]
-    I --> J[Scenario Simulation Engine]
-    J --> K[Actionable Decision & Multilingual Brief]
+    A[Citizen Input / Voice / SMS / Web] --> B[React Decision Cockpit & Copilot View]
+    B --> C[FastAPI REST Gateway /api/v1/copilot/chat]
+    C --> D[Copilot Intelligence & Controlled Retrieval Engine]
+    D --> E[Data Loader & Scoring Services]
+    E -->|Grounded Context| F[Google Gemini / Fallback Provider]
+    F --> G[Validated Markdown Answer + Evidence Links]
 ```
+
 
 ---
 

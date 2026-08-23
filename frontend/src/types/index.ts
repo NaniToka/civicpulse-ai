@@ -257,3 +257,47 @@ export interface DemandHotspot {
   gap_score: number;
   urgency_level: UrgencyLevel;
 }
+
+export interface CopilotChatContext {
+  route?: string;
+  region_id?: string;
+  category?: string;
+  project_id?: string;
+  recommendation_id?: string;
+}
+
+export interface CopilotChatMessage {
+  role: 'user' | 'assistant' | 'system';
+  content: string;
+}
+
+export interface CopilotActionLink {
+  label: string;
+  action_type: 'navigate' | 'open_modal' | 'run_scenario';
+  target: string;
+}
+
+export interface CopilotEvidenceRef {
+  title: string;
+  metric: string;
+  value: string;
+  link?: string;
+}
+
+export interface CopilotChatRequest {
+  message: string;
+  conversation_id?: string;
+  history?: CopilotChatMessage[];
+  context?: CopilotChatContext;
+}
+
+export interface CopilotChatResponse {
+  success: boolean;
+  message: string;
+  ai_provider: string;
+  grounded: boolean;
+  evidence: CopilotEvidenceRef[];
+  suggested_actions: string[];
+  action_link?: CopilotActionLink | null;
+}
+

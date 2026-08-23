@@ -61,6 +61,12 @@ Assembles traceable 6-step evidence trails:
 01 CITIZEN DEMAND → 02 DEMAND MOMENTUM → 03 INFRASTRUCTURE GAP → 04 DEMOGRAPHIC NEED → 05 INVESTMENT OVERLAP → 06 PRIORITY RECOMMENDATION
 ```
 
+### 4. Civic Intelligence Copilot Architecture (`CopilotService`)
+- **Intent Parsing & Retrieval Layer**: Intercepts natural-language queries (e.g. top priorities, Vijayawada evidence, CivicFund capital project funding gaps, counterfactual $15M scenarios) and queries deterministic backend data loaders and simulation services.
+- **Strict Grounding Boundary**: Constructs compact factual contexts and invokes Google Gemini (or RuleBasedFallback). Gemini is forbidden from computing numbers or fabricating statistics.
+- **Interactive Action Linking**: Returns structured `CopilotActionLink` items (`[View Evidence Trail]`, `[Open Scenario Lab]`, `[View Capital Projects]`) enabling seamless UI navigation across the platform.
+
+
 ---
 
 ## 🔒 Security & Deployment Architecture
