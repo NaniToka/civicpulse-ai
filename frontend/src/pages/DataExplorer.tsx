@@ -4,6 +4,7 @@ import { CitizenRequest, InfrastructureIndicator, InvestmentProject, Region } fr
 import { api } from '../services/api';
 import { RegionDetailModal } from '../components/common/RegionDetailModal';
 import { ThreeDBarChart } from '../components/common/ThreeDBarChart';
+import { useLanguage } from '../context/LanguageContext';
 
 interface DataExplorerProps {
   requests: CitizenRequest[];
@@ -20,6 +21,7 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
   investments,
   onNewRequestAdded,
 }) => {
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState<'requests' | 'regions' | 'indicators' | 'investments' | 'ingest'>('requests');
 
   const [rawText, setRawText] = useState('');
@@ -69,22 +71,22 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
           <div className="flex items-center gap-2">
             <Database className="w-6 h-6 text-indigo-600 font-extrabold" />
             <h1 className="text-3xl md:text-4xl font-extrabold text-slate-950 tracking-tight">
-              Submit & Explore <span className="hero-gradient-text">Data</span>
+              {t('data_page_title')}
             </h1>
           </div>
           <div className="flex flex-wrap items-center gap-2 mt-2 font-mono text-xs sm:text-sm font-extrabold">
             <span className="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-800">
-              Submit Complaints & Voice Notes
+              {t('tag_submit_voice')}
             </span>
             <span className="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-800">
-              Inspect All Platform Datasets
+              {t('tag_inspect_datasets')}
             </span>
           </div>
         </div>
 
         <div className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-amber-50 border border-amber-200 text-xs sm:text-sm font-mono font-extrabold text-amber-900 shadow-2xs">
           <ShieldAlert className="w-4.5 h-4.5 text-amber-700" />
-          <span>DEMO DATASET</span>
+          <span>{t('badge_demo_dataset')}</span>
         </div>
       </div>
 
@@ -97,7 +99,7 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
               : 'border-transparent text-slate-700 hover:text-slate-950'
           }`}
         >
-          Citizen Requests ({requests.length})
+          {t('tab_citizen_requests')} ({requests.length})
         </button>
         <button
           onClick={() => setActiveTab('regions')}
@@ -107,7 +109,7 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
               : 'border-transparent text-slate-700 hover:text-slate-950'
           }`}
         >
-          Regions & Census ({regions.length})
+          {t('tab_regions_census')} ({regions.length})
         </button>
         <button
           onClick={() => setActiveTab('indicators')}
@@ -117,7 +119,7 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
               : 'border-transparent text-slate-700 hover:text-slate-950'
           }`}
         >
-          Infrastructure Indicators ({indicators.length})
+          {t('tab_infra_indicators')} ({indicators.length})
         </button>
         <button
           onClick={() => setActiveTab('investments')}
@@ -127,7 +129,7 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
               : 'border-transparent text-slate-700 hover:text-slate-950'
           }`}
         >
-          Capital Investments ({investments.length})
+          {t('tab_capital_investments')} ({investments.length})
         </button>
         <button
           onClick={() => setActiveTab('ingest')}
@@ -138,14 +140,14 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
           }`}
         >
           <Plus className="w-4 h-4" />
-          <span>Ingest Test Signal</span>
+          <span>{t('tab_ingest_signal')}</span>
         </button>
       </div>
 
       <div className="p-6 rounded-xl bg-white border border-slate-200 space-y-4 shadow-sm text-slate-950 font-bold">
         {activeTab === 'requests' && (
           <div className="space-y-4">
-            <h3 className="text-base sm:text-lg font-extrabold text-slate-950 font-mono">Citizen Requests Data</h3>
+            <h3 className="text-base sm:text-lg font-extrabold text-slate-950 font-mono">{t('table_citizen_requests_data')}</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs sm:text-sm font-mono border-collapse">
                 <thead className="bg-slate-100 text-slate-800 border-b border-slate-200 uppercase text-xs font-extrabold">

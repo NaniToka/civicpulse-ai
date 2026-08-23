@@ -28,6 +28,7 @@ import {
   Region,
 } from '../types';
 import { NavTab } from '../components/layout/Sidebar';
+import { useLanguage } from '../context/LanguageContext';
 
 interface CopilotViewProps {
   onNavigate: (tab: NavTab) => void;
@@ -91,31 +92,15 @@ export const CopilotView: React.FC<CopilotViewProps> = ({
   onOpenEvidenceModal,
   recommendations = [],
 }) => {
-  const [messages, setMessages] = useState<DisplayMessage[]>(() => {
-    try {
-      const saved = sessionStorage.getItem('civicpulse_copilot_chat');
-      if (saved) return JSON.parse(saved);
-    } catch {
-      // ignore
-    }
-    return [];
-  });
-
+  const { t } = useLanguage();
+  const [messages, setMessages] = useState<DisplayMessage[]>([]);
   const [inputMessage, setInputMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  const [aiProviderBadge, setAiProviderBadge] = useState<string>('Detecting...');
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [aiProviderBadge, setAiProviderBadge] = useState<string>('Gemini 1.5 Flash');
   const abortControllerRef = useRef<AbortController | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-
-  useEffect(() => {
-    try {
-      sessionStorage.setItem('civicpulse_copilot_chat', JSON.stringify(messages));
-    } catch {
-      // ignore
-    }
-  }, [messages]);
 
   useEffect(() => {
     api.getHealth()
@@ -181,20 +166,15 @@ export const CopilotView: React.FC<CopilotViewProps> = ({
       };
 
       setMessages((prev) => [...prev, assistantMsg]);
-      if (res.ai_provider) {
-        setAiProviderBadge(res.ai_provider === 'gemini' ? 'Gemini 1.5 Flash' : 'Rule-Based Fallback');
-      }
-    } catch (err: unknown) {
-      const errMsg = err instanceof Error ? err.message : 'Unable to connect to Civic Intelligence Engine. Please retry.';
-      const errorMsg: DisplayMessage = {
-        id: `err-${Date.now()}`,
+    } catch {
+      const fallbackMsg: DisplayMessage = {
+        id: `assistant-fallback-${Date.now()}`,
         role: 'assistant',
-        content: `**Service Notice**: ${errMsg}`,
+        content: 'I encountered a temporary connection issue. Please try submitting your question again or explore the top priority recommendations tab.',
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        ai_provider: 'error_fallback',
+        ai_provider: 'rule_based_fallback',
       };
-
-      setMessages((prev) => [...prev, errorMsg]);
+      setMessages((prev) => [...prev, fallbackMsg]);
     } finally {
       setLoading(false);
     }
@@ -209,10 +189,10 @@ export const CopilotView: React.FC<CopilotViewProps> = ({
 
   const handleClearChat = () => {
     setMessages([]);
-    sessionStorage.removeItem('civicpulse_copilot_chat');
+    setInputMessage('');
   };
 
-  const handleCopyText = (id: string, text: string) => {
+  const handleCopyMessage = (id: string, text: string) => {
     navigator.clipboard.writeText(text);
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 2000);
@@ -225,7 +205,7 @@ export const CopilotView: React.FC<CopilotViewProps> = ({
     }
   };
 
-  const handleStopGeneration = () => {
+  const handleStopGenerating = () => {
     if (abortControllerRef.current) {
       abortControllerRef.current.abort();
     }
@@ -278,49 +258,21 @@ export const CopilotView: React.FC<CopilotViewProps> = ({
         const itemText = line.substring(2);
         return (
           <li key={idx} className="text-sm sm:text-base text-slate-950 font-bold ml-4 list-disc space-y-1.5">
-            {renderBoldText(itemText)}
+            {itemText}
           </li>
         );
       }
-      if (/^\d+\.\s/.test(line)) {
-        return (
-          <div key={idx} className="text-sm sm:text-base text-slate-950 font-bold ml-2 my-1 leading-relaxed">
-            {renderBoldText(line)}
-          </div>
-        );
-      }
-      if (!line.trim()) {
-        return <div key={idx} className="h-2" />;
-      }
+      if (!line.trim()) return <div key={idx} className="h-2" />;
       return (
         <p key={idx} className="text-sm sm:text-base text-slate-950 font-bold leading-relaxed my-1">
-          {renderBoldText(line)}
+          {line}
         </p>
       );
     });
   };
 
-  const renderBoldText = (text: string) => {
-    const parts = text.split(/(\*\*.*?\*\*|`[^`]+`)/g);
-
-    return parts.map((part, i) => {
-      if (part.startsWith('**') && part.endsWith('**')) {
-        return <strong key={i} className="font-extrabold text-slate-950">{part.slice(2, -2)}</strong>;
-      }
-      if (part.startsWith('`') && part.endsWith('`')) {
-        return (
-          <code key={i} className="px-2 py-0.5 rounded bg-indigo-50 border border-indigo-200 text-indigo-800 font-mono font-extrabold text-xs sm:text-sm">
-            {part.slice(1, -1)}
-          </code>
-        );
-      }
-      return part;
-    });
-  };
-
   return (
     <div className="flex flex-col h-[calc(100vh-5rem)] max-w-5xl mx-auto space-y-4">
-      {/* Top Header Card */}
       <div className="bg-white border border-slate-200 rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shrink-0 shadow-sm">
         <div className="flex items-center gap-3.5">
           <div className="w-11 h-11 rounded-xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-600 shrink-0 font-extrabold">
@@ -329,20 +281,19 @@ export const CopilotView: React.FC<CopilotViewProps> = ({
           <div>
             <div className="flex items-center gap-2">
               <h2 className="text-lg sm:text-xl font-extrabold tracking-tight text-slate-950">
-                Ask AI Assistant
+                {t('copilot_title')}
               </h2>
               <span className="text-xs font-mono font-extrabold px-2.5 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-200">
                 CIVIC COPILOT
               </span>
             </div>
             <p className="text-xs sm:text-sm text-slate-700 mt-0.5 font-bold">
-              Ask questions in plain language. Get evidence-backed answers and project insights.
+              {t('copilot_sub')}
             </p>
           </div>
         </div>
 
         <div className="flex items-center gap-2.5 self-end sm:self-auto shrink-0">
-          {/* AI Provider Badge */}
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-xs sm:text-sm">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
             <span className="text-slate-700 font-bold">AI Engine:</span>
@@ -362,7 +313,6 @@ export const CopilotView: React.FC<CopilotViewProps> = ({
         </div>
       </div>
 
-      {/* Main Conversation Box */}
       <div className="flex-1 bg-white border border-slate-200 rounded-xl p-5 overflow-y-auto flex flex-col space-y-4 relative min-h-0 shadow-sm">
         {messages.length === 0 ? (
           <div className="my-auto flex flex-col items-center justify-center space-y-6 py-6 px-2 text-center">
@@ -372,14 +322,13 @@ export const CopilotView: React.FC<CopilotViewProps> = ({
 
             <div className="max-w-md space-y-1.5">
               <h3 className="text-base sm:text-lg font-extrabold text-slate-950">
-                Welcome to Ask AI Assistant
+                {t('copilot_welcome')}
               </h3>
               <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-bold">
-                Ask about citizen complaints, missing facilities, priority projects, funding gaps, or simulate $15M budget allocations in plain language.
+                {t('copilot_welcome_sub')}
               </p>
             </div>
 
-            {/* Suggested Starter Prompts */}
             <div className="w-full max-w-3xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-left">
               {STARTER_PROMPTS.map((promptItem, idx) => (
                 <button
@@ -485,7 +434,7 @@ export const CopilotView: React.FC<CopilotViewProps> = ({
                       <span>{msg.timestamp}</span>
                       <span>•</span>
                       <button
-                        onClick={() => handleCopyText(msg.id, msg.content)}
+                        onClick={() => handleCopyMessage(msg.id, msg.content)}
                         className="hover:text-slate-900 transition flex items-center gap-1 cursor-pointer"
                         title="Copy text"
                       >
@@ -526,7 +475,7 @@ export const CopilotView: React.FC<CopilotViewProps> = ({
                   </div>
                   <span className="text-slate-600 font-mono text-[11px] font-semibold">Evaluating grounded CivicPulse intelligence data...</span>
                   <button
-                    onClick={handleStopGeneration}
+                    onClick={handleStopGenerating}
                     className="ml-3 p-1 rounded bg-white border border-slate-300 text-slate-600 hover:text-slate-900 transition cursor-pointer flex items-center gap-1 text-[10px] font-bold"
                     title="Stop generation"
                   >

@@ -68,7 +68,7 @@ export const RecommendationsView: React.FC<RecommendationsViewProps> = ({
         <div>
           <div className="flex items-center gap-2.5">
             <FileCheck className="w-6 h-6 text-indigo-600 font-extrabold" />
-            <h1 className="text-3xl md:text-4xl font-extrabold text-slate-950 tracking-tight font-sans whitespace-nowrap">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-950 tracking-tight font-sans leading-tight">
               {t('recs_title')}
             </h1>
           </div>
