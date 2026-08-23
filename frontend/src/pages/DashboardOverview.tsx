@@ -122,8 +122,8 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
     <div className="space-y-8 animate-in fade-in duration-150">
       {/* 1. Hero Command Cockpit Banner */}
       <div className="rounded-xl bg-white border border-slate-200 p-6 md:p-8 space-y-6 shadow-sm">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-          <div className="space-y-2.5 max-w-3xl">
+        <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-6">
+          <div className="space-y-2.5 flex-1 min-w-0">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 font-bold" />
               <span className="text-xs font-extrabold uppercase tracking-wider text-slate-800 font-mono">
@@ -152,7 +152,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
           </div>
 
           {/* Quick Launcher Buttons */}
-          <div className="grid grid-cols-2 lg:flex items-center gap-3 shrink-0 w-full sm:w-auto">
+          <div className="grid grid-cols-2 xl:flex items-center gap-3 shrink-0 w-full sm:w-auto">
             <button
               onClick={() => onNavigate('feedback')}
               className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs sm:text-sm transition cursor-pointer text-center shadow-xs"
