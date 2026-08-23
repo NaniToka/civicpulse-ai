@@ -74,12 +74,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <aside
-      className={`hidden md:flex bg-[#10121C] border-r border-white/[0.12] flex-col transition-all duration-200 select-none shadow-xl ${
+      className={`hidden md:flex bg-[#060609] border-r border-white/[0.08] flex-col transition-all duration-200 select-none shadow-xl ${
         collapsed ? 'w-16' : 'w-60'
       }`}
     >
       {/* Sidebar Header Toggle */}
-      <div className="p-3.5 border-b border-white/[0.10] bg-[#141624]/80 flex items-center justify-between">
+      <div className="p-3.5 border-b border-white/[0.08] bg-[#08080C] flex items-center justify-between">
         {!collapsed && (
           <div className="flex items-center gap-2">
             <Compass className="w-4 h-4 text-indigo-400 font-bold" />
@@ -100,11 +100,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       {/* Navigation Groups */}
-      <nav className="flex-1 p-2.5 space-y-5 overflow-y-auto bg-[#10121C]">
+      <nav className="flex-1 p-2.5 space-y-5 overflow-y-auto bg-[#060609]">
         {navGroups.map((group, groupIdx) => (
           <div key={groupIdx} className="space-y-1">
             {!collapsed && (
-              <div className="px-3 text-[11px] font-bold text-indigo-200/80 uppercase tracking-wider mb-1.5">
+              <div className="px-3 text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">
                 {group.groupName}
               </div>
             )}
@@ -135,7 +135,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         className={`text-[10px] px-1.5 py-0.5 rounded font-bold font-mono ${
                           isActive
                             ? 'bg-indigo-700 text-white border border-indigo-400/60 shadow-xs'
-                            : 'bg-[#191B28] border border-white/[0.15] text-slate-200'
+                            : 'bg-[#121215] border border-white/[0.12] text-slate-300'
                         }`}
                       >
                         {item.badge}
@@ -151,7 +151,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Bottom Footer Disclaimer */}
       {!collapsed && (
-        <div className="p-3.5 border-t border-white/[0.10] bg-[#0C0D14] text-xs space-y-2">
+        <div className="p-3.5 border-t border-white/[0.08] bg-[#060609] text-xs space-y-2">
           <div className="flex items-center justify-between text-xs text-slate-200">
             <span className="flex items-center gap-1.5 text-slate-200 text-[11px] font-bold">
               <Activity className="w-3.5 h-3.5 text-emerald-400" />
@@ -162,7 +162,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </span>
           </div>
 
-          <div className="p-2.5 rounded-lg bg-[#141624] border border-white/[0.10] text-xs text-slate-200 flex items-start gap-2 shadow-xs">
+          <div className="p-2.5 rounded-lg bg-[#0A0A0C] border border-white/[0.08] text-xs text-slate-200 flex items-start gap-2 shadow-xs">
             <ShieldCheck className="w-3.5 h-3.5 text-slate-300 shrink-0 mt-0.5" />
             <div>
               <span className="font-bold text-slate-100 text-[10px] uppercase tracking-wider block">
