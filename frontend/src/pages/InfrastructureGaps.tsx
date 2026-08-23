@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Building, Activity, Zap, Droplet, Bus, Wifi, MapPin, ArrowRight, HelpCircle, ShieldAlert } from 'lucide-react';
 import { InfrastructureIndicator, Region } from '../types';
 import { RegionDetailModal } from '../components/common/RegionDetailModal';
+import { useLanguage } from '../context/LanguageContext';
 
 interface InfrastructureGapsProps {
   indicators: InfrastructureIndicator[];
@@ -10,6 +11,7 @@ interface InfrastructureGapsProps {
 }
 
 export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicators, regions, onNavigateToScenarios }) => {
+  const { t } = useLanguage();
   const [activeDetailRegion, setActiveDetailRegion] = useState<Region | null>(null);
   const categories = ['healthcare', 'water', 'electricity', 'transportation', 'digital_connectivity', 'sanitation'];
 
@@ -30,18 +32,18 @@ export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicato
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-indigo-600 font-bold" />
             <span className="text-xs font-extrabold uppercase tracking-wider text-slate-800 font-mono">
-              Facility Shortfalls & Gaps
+              {t('gaps_sub')}
             </span>
           </div>
           <h1 className="text-3xl md:text-4xl font-extrabold text-slate-950 tracking-tight font-sans">
-            Facility Shortfalls & <span className="hero-gradient-text">Capacity Deficits</span>
+            {t('gaps_title')}
           </h1>
           <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-xs sm:text-sm font-extrabold">
             <span className="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-800">
-              6 Core Sectors
+              {t('tag_core_sectors')}
             </span>
             <span className="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-800">
-              District Shortfall Matrix
+              {t('tag_shortfall_matrix')}
             </span>
           </div>
         </div>
@@ -51,13 +53,13 @@ export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicato
       <div className="p-5 rounded-xl bg-white border border-slate-200 shadow-sm space-y-3 font-mono text-xs sm:text-sm font-bold">
         <div className="flex items-center gap-2 text-slate-950 font-extrabold">
           <HelpCircle className="w-4.5 h-4.5 text-indigo-600 shrink-0 font-extrabold" />
-          <span>Understanding Deficit Scores & Severity Levels:</span>
+          <span>{t('understanding_deficits')}</span>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs sm:text-sm font-bold">
           <div className="p-3.5 rounded-xl bg-rose-50/60 border border-rose-200 flex items-start gap-2.5 shadow-2xs">
             <ShieldAlert className="w-4.5 h-4.5 text-rose-700 shrink-0 mt-0.5" />
             <div>
-              <span className="font-extrabold text-rose-900">0.75 – 1.00 (Critical Deficit)</span>
+              <span className="font-extrabold text-rose-900">0.75 – 1.00 ({t('critical_deficit')})</span>
               <p className="text-slate-800 mt-0.5 font-bold">75%+ capacity shortfall. Fast-track capital required.</p>
             </div>
           </div>
@@ -65,7 +67,7 @@ export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicato
           <div className="p-3.5 rounded-xl bg-amber-50/60 border border-amber-200 flex items-start gap-2.5 shadow-2xs">
             <ShieldAlert className="w-4.5 h-4.5 text-amber-700 shrink-0 mt-0.5" />
             <div>
-              <span className="font-extrabold text-amber-900">0.50 – 0.74 (High Deficit)</span>
+              <span className="font-extrabold text-amber-900">0.50 – 0.74 ({t('high_deficit')})</span>
               <p className="text-slate-800 mt-0.5 font-bold">50%-74% operational gap. Risk of system bottlenecking.</p>
             </div>
           </div>
@@ -73,7 +75,7 @@ export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicato
           <div className="p-3.5 rounded-xl bg-emerald-50/60 border border-emerald-200 flex items-start gap-2.5 shadow-2xs">
             <ShieldAlert className="w-4.5 h-4.5 text-emerald-700 shrink-0 mt-0.5" />
             <div>
-              <span className="font-extrabold text-emerald-900">0.00 – 0.49 (Stable)</span>
+              <span className="font-extrabold text-emerald-900">0.00 – 0.49 ({t('stable_coverage')})</span>
               <p className="text-slate-800 mt-0.5 font-bold">Sufficient baseline coverage with manageable demand load.</p>
             </div>
           </div>

@@ -11,6 +11,7 @@ import {
   Clock,
 } from 'lucide-react';
 import { Region } from '../types';
+import { useLanguage } from '../context/LanguageContext';
 
 export interface CitizenComment {
   id: string;
@@ -32,6 +33,7 @@ interface CitizenFeedbackWallProps {
 }
 
 export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ regions }) => {
+  const { t } = useLanguage();
   const seedComments: CitizenComment[] = [
     {
       id: 'FB-IND-MH-001',
@@ -233,18 +235,18 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-600 font-bold" />
               <span className="text-xs font-extrabold uppercase tracking-wider text-slate-800 font-mono">
-                Community Feedback Wall
+                {t('wall_sub')}
               </span>
             </div>
             <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-950 font-sans">
-              Community <span className="hero-gradient-text">Feedback Wall</span>
+              {t('wall_title')}
             </h1>
             <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-xs sm:text-sm font-extrabold">
               <span className="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-800">
-                Public Community Voice
+                {t('tag_public_voice')}
               </span>
               <span className="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-800">
-                Verified Citizen Posts
+                {t('tag_verified_posts')}
               </span>
             </div>
           </div>
@@ -254,7 +256,7 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
             className="flex items-center gap-2 px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs sm:text-sm transition cursor-pointer shrink-0 self-start md:self-auto shadow-xs"
           >
             <PlusCircle className="w-4.5 h-4.5" />
-            <span>Post Feedback</span>
+            <span>{t('btn_post_feedback')}</span>
           </button>
         </div>
       </div>
@@ -265,7 +267,7 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
           <div className="flex items-center justify-between border-b border-slate-200 pb-3">
             <div className="flex items-center gap-2 font-mono font-extrabold">
               <Sparkles className="w-4.5 h-4.5 text-indigo-600" />
-              <h3 className="text-base sm:text-lg font-extrabold text-slate-950">Post New Citizen Feedback</h3>
+              <h3 className="text-base sm:text-lg font-extrabold text-slate-950">{t('btn_post_feedback')}</h3>
             </div>
             <button
               onClick={() => setShowComposer(false)}
@@ -412,7 +414,7 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 rounded-xl bg-white border border-slate-200 font-mono text-xs sm:text-sm shadow-sm font-extrabold">
         <div className="flex flex-wrap items-center gap-2">
           <Filter className="w-4 h-4 text-indigo-600 font-extrabold" />
-          <span className="text-slate-800 font-extrabold">Filter Sentiment:</span>
+          <span className="text-slate-800 font-extrabold">{t('label_filter_sentiment')}</span>
           <button
             onClick={() => setFilterType('ALL')}
             className={`px-3.5 py-2 rounded-lg font-extrabold transition cursor-pointer ${
@@ -456,7 +458,7 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
         </div>
 
         <div className="flex items-center gap-2 self-end sm:self-auto">
-          <span className="text-slate-800 font-extrabold">State:</span>
+          <span className="text-slate-800 font-extrabold">{t('label_state_filter')}</span>
           <select
             value={filterState}
             onChange={(e) => setFilterState(e.target.value)}

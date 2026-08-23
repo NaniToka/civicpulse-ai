@@ -4,6 +4,7 @@ import { PriorityRecommendation, Region } from '../types';
 import { PriorityBadge } from '../components/common/PriorityBadge';
 import { TrendBadge } from '../components/common/TrendBadge';
 import { RegionDetailModal } from '../components/common/RegionDetailModal';
+import { useLanguage } from '../context/LanguageContext';
 
 interface RecommendationsViewProps {
   recommendations: PriorityRecommendation[];
@@ -18,6 +19,7 @@ export const RecommendationsView: React.FC<RecommendationsViewProps> = ({
   onOpenEvidenceModal,
   onNavigateToScenarios,
 }) => {
+  const { t } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
   const [selectedPriority, setSelectedPriority] = useState<string>('ALL');
   const [selectedRegionId, setSelectedRegionId] = useState<string>('ALL');
@@ -66,16 +68,16 @@ export const RecommendationsView: React.FC<RecommendationsViewProps> = ({
         <div>
           <div className="flex items-center gap-2.5">
             <FileCheck className="w-6 h-6 text-indigo-600 font-extrabold" />
-            <h1 className="text-3xl md:text-4xl font-extrabold text-slate-950 tracking-tight font-sans">
-              Top Priority <span className="hero-gradient-text">Projects</span>
+            <h1 className="text-3xl md:text-4xl font-extrabold text-slate-950 tracking-tight font-sans whitespace-nowrap">
+              {t('recs_title')}
             </h1>
           </div>
           <div className="flex flex-wrap items-center gap-2 mt-2 font-mono text-xs sm:text-sm font-extrabold">
             <span className="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-800">
-              Ranked Priority Order
+              {t('tag_ranked_order')}
             </span>
             <span className="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-800">
-              Action Recommended
+              {t('tag_action_rec')}
             </span>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Network } from 'lucide-react';
 import { PriorityRecommendation, Region } from '../types';
+import { useLanguage } from '../context/LanguageContext';
 
 interface EvidenceExplorerProps {
   recommendations: PriorityRecommendation[];
@@ -13,6 +14,7 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
   regions,
   onOpenEvidenceModal,
 }) => {
+  const { t } = useLanguage();
   const [selectedRegion, setSelectedRegion] = useState<string>('ALL');
   const [selectedType, setSelectedType] = useState<string>('ALL');
 
@@ -31,15 +33,15 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
           <div className="flex items-center gap-2">
             <Network className="w-6 h-6 text-indigo-600 font-extrabold" />
             <h1 className="text-3xl md:text-4xl font-extrabold text-slate-950 tracking-tight">
-              Proof & <span className="hero-gradient-text">Evidence Explorer</span>
+              {t('evidence_title')}
             </h1>
           </div>
           <div className="flex flex-wrap items-center gap-2 mt-2 font-mono text-xs sm:text-sm font-extrabold">
             <span className="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-800">
-              Why This Project Was Picked
+              {t('tag_why_picked')}
             </span>
             <span className="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-800">
-              Transparent Proof Trail
+              {t('tag_transparent_trail')}
             </span>
           </div>
         </div>
@@ -74,8 +76,8 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
       </div>
 
       <div className="p-6 rounded-xl bg-white border border-slate-200 space-y-4 shadow-sm">
-        <h2 className="text-base sm:text-lg font-extrabold text-slate-950 font-mono">6-Step Recommendation Evidence Chains</h2>
-        <p className="text-xs sm:text-sm text-slate-700 font-bold">Select a recommendation to inspect its complete machine-readable evidence trail.</p>
+        <h2 className="text-base sm:text-lg font-extrabold text-slate-950 font-mono">{t('sec_chains_title')}</h2>
+        <p className="text-xs sm:text-sm text-slate-700 font-bold">{t('sec_chains_sub')}</p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {recommendations.slice(0, 4).map((rec) => (
@@ -94,7 +96,7 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
               <div className="flex items-center justify-between text-xs sm:text-sm pt-3 border-t border-white/[0.08] font-mono font-bold">
                 <span className="text-emerald-400 font-extrabold">+{(rec.confidence * 100).toFixed(0)}% Confidence</span>
                 <span className="text-indigo-400 font-extrabold flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-                  Open Evidence Chain →
+                  {t('btn_open_chain')} →
                 </span>
               </div>
             </div>

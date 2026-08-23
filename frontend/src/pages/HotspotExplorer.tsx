@@ -3,6 +3,7 @@ import { Flame, ArrowRight, Filter, MapPin } from 'lucide-react';
 import { CitizenRequest, InfrastructureIndicator, Region } from '../types';
 import { NavTab } from '../components/layout/Sidebar';
 import { RegionDetailModal } from '../components/common/RegionDetailModal';
+import { useLanguage } from '../context/LanguageContext';
 
 interface HotspotExplorerProps {
   regions: Region[];
@@ -17,6 +18,7 @@ export const HotspotExplorer: React.FC<HotspotExplorerProps> = ({
   requests,
   onNavigate,
 }) => {
+  const { t } = useLanguage();
   const [selectedRegionId, setSelectedRegionId] = useState<string>(regions[0]?.id || 'REG-IND-UP-KANP-02');
   const [categoryFilter, setCategoryFilter] = useState<string>('ALL');
   const [activeDetailRegion, setActiveDetailRegion] = useState<Region | null>(null);
@@ -59,15 +61,15 @@ export const HotspotExplorer: React.FC<HotspotExplorerProps> = ({
           <div className="flex items-center gap-2">
             <Flame className="w-6 h-6 text-amber-600 font-extrabold" />
             <h1 className="text-3xl md:text-4xl font-extrabold text-slate-950 tracking-tight font-sans">
-              Problem <span className="hero-gradient-text">Hotspots</span>
+              {t('hotspots_title')}
             </h1>
           </div>
           <div className="flex flex-wrap items-center gap-2 mt-2 font-mono text-xs sm:text-sm font-extrabold">
             <span className="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-800">
-              Normalized by Population Size
+              {t('tag_normalized_pop')}
             </span>
             <span className="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-800">
-              High Urgency Locations
+              {t('tag_high_urgency')}
             </span>
           </div>
         </div>
@@ -142,7 +144,7 @@ export const HotspotExplorer: React.FC<HotspotExplorerProps> = ({
         <div className="p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.12] space-y-5 shadow-md text-slate-100 font-bold">
           <div>
             <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
-              <span className="text-xs sm:text-sm font-mono text-indigo-400 font-extrabold uppercase">Region Profile</span>
+              <span className="text-xs sm:text-sm font-mono text-indigo-400 font-extrabold uppercase">{t('region_profile')}</span>
               <span className="text-xs font-mono text-slate-400 font-bold">{selectedRegion.country_code}</span>
             </div>
             <h2 className="text-lg sm:text-xl font-extrabold text-white mt-3">{selectedRegion.district_city}</h2>
@@ -151,27 +153,27 @@ export const HotspotExplorer: React.FC<HotspotExplorerProps> = ({
 
           <div className="space-y-2 text-xs sm:text-sm font-mono font-bold">
             <div className="p-3 rounded-xl bg-[#121215] border border-white/[0.08] flex justify-between items-center shadow-2xs">
-              <span className="text-slate-400">Population:</span>
+              <span className="text-slate-400">{t('pop_label')}:</span>
               <span className="font-extrabold text-white">{selectedRegion.population.toLocaleString()}</span>
             </div>
 
             <div className="p-3 rounded-xl bg-[#121215] border border-white/[0.08] flex justify-between items-center shadow-2xs">
-              <span className="text-slate-400">Vulnerability Index:</span>
+              <span className="text-slate-400">{t('vuln_label')}:</span>
               <span className="font-extrabold text-amber-400">{selectedRegion.vulnerability_index.toFixed(2)}</span>
             </div>
 
             <div className="p-3 rounded-xl bg-[#121215] border border-white/[0.08] flex justify-between items-center shadow-2xs">
-              <span className="text-slate-400">Youth Demographic %:</span>
+              <span className="text-slate-400">{t('youth_label')}:</span>
               <span className="font-extrabold text-indigo-400">{selectedRegion.youth_percentage || 32.0}%</span>
             </div>
 
             <div className="p-3 rounded-xl bg-[#121215] border border-white/[0.08] flex justify-between items-center shadow-2xs">
-              <span className="text-slate-400">Elderly Demographic %:</span>
+              <span className="text-slate-400">{t('elderly_label')}:</span>
               <span className="font-extrabold text-indigo-400">{selectedRegion.elderly_percentage || 14.0}%</span>
             </div>
 
             <div className="p-3 rounded-xl bg-[#121215] border border-white/[0.08] flex justify-between items-center shadow-2xs">
-              <span className="text-slate-400">Primary Language:</span>
+              <span className="text-slate-400">{t('primary_lang')}:</span>
               <span className="font-extrabold text-emerald-400">{selectedRegion.primary_language.toUpperCase()}</span>
             </div>
           </div>
@@ -182,14 +184,14 @@ export const HotspotExplorer: React.FC<HotspotExplorerProps> = ({
               className="w-full py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 cursor-pointer shadow-xs"
             >
               <MapPin className="w-4 h-4" />
-              <span>Region Details</span>
+              <span>{t('btn_region_details')}</span>
             </button>
 
             <button
               onClick={() => onNavigate && onNavigate('recommendations')}
               className="w-full py-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-950 border border-slate-200 text-xs sm:text-sm transition flex items-center justify-center gap-2 cursor-pointer font-extrabold"
             >
-              <span>Evidence Priorities</span>
+              <span>{t('evidence_priorities')}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>

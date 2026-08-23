@@ -109,6 +109,54 @@ export const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     create_btn: 'Create Account & Continue',
     login_btn: 'Log In to Account',
     demo_login: 'One-Click Quick Sign In as Verified Citizen (Demo)',
+
+    // Community Wall
+    wall_title: 'Community Feedback Wall',
+    wall_sub: 'COMMUNITY FEEDBACK WALL',
+    btn_post_feedback: 'Post Feedback',
+    tag_public_voice: 'Public Community Voice',
+    tag_verified_posts: 'Verified Citizen Posts',
+    label_filter_sentiment: 'Filter Sentiment:',
+    label_state_filter: 'State:',
+    btn_upvote: 'Upvote',
+
+    // Problem Hotspots
+    hotspots_title: 'Problem Hotspots',
+    tag_normalized_pop: 'Normalized by Population Size',
+    tag_high_urgency: 'High Urgency Locations',
+    matrix_header: 'DEMAND INTENSITY HEAT MATRIX',
+    region_profile: 'REGION PROFILE',
+    pop_label: 'Population',
+    vuln_label: 'Vulnerability Index',
+    youth_label: 'Youth Demographic %',
+    elderly_label: 'Elderly Demographic %',
+    primary_lang: 'Primary Language',
+    evidence_priorities: 'Evidence Priorities',
+
+    // Facility Shortfalls
+    gaps_title: 'Facility Shortfalls & Capacity Deficits',
+    gaps_sub: 'FACILITY SHORTFALLS & GAPS',
+    tag_core_sectors: '6 Core Sectors',
+    tag_shortfall_matrix: 'District Shortfall Matrix',
+    understanding_deficits: 'Understanding Deficit Scores & Severity Levels:',
+    critical_deficit: 'Critical Deficit',
+    high_deficit: 'High Deficit',
+    stable_coverage: 'Stable',
+    coverage_vs_shortfall: 'Coverage vs Shortfall',
+
+    // Top Priority Projects
+    recs_title: 'Top Priority Projects',
+    tag_ranked_order: 'Ranked Priority Order',
+    tag_action_rec: 'Action Recommended',
+    view_evidence_trail: 'View Evidence Trail',
+
+    // Proof & Evidence Explorer
+    evidence_title: 'Proof & Evidence Explorer',
+    tag_why_picked: 'Why This Project Was Picked',
+    tag_transparent_trail: 'Transparent Proof Trail',
+    sec_chains_title: '6-Step Recommendation Evidence Chains',
+    sec_chains_sub: 'Select a recommendation to inspect its complete machine-readable evidence trail.',
+    btn_open_chain: 'Open Evidence Chain',
   },
 
   te: {
@@ -200,6 +248,54 @@ export const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     create_btn: 'ఖాతాను సృష్టించి కొనసాగించండి',
     login_btn: 'ఖాతాలోకి లాగిన్ అవ్వండి',
     demo_login: 'ఒకే క్లిక్‌లో లాగిన్ అవ్వండి (డెమో)',
+
+    // Community Wall
+    wall_title: 'ప్రజా సమస్యల గోడ',
+    wall_sub: 'సమాజ అభిప్రాయాల గోడ',
+    btn_post_feedback: 'అభిప్రాయాన్ని పోస్ట్ చేయండి',
+    tag_public_voice: 'ప్రజా గొంతుక',
+    tag_verified_posts: 'ధృవీకరించబడిన పౌరుల పోస్ట్‌లు',
+    label_filter_sentiment: 'సెంటిమెంట్ ఫిల్టర్:',
+    label_state_filter: 'రాష్ట్రం:',
+    btn_upvote: 'మద్దతు తెలపండి',
+
+    // Problem Hotspots
+    hotspots_title: 'సమస్యల హాట్‌స్పాట్‌లు',
+    tag_normalized_pop: 'జనాభా ఆధారంగా వర్గీకరించబడింది',
+    tag_high_urgency: 'అత్యంత అత్యవసర ప్రాంతాలు',
+    matrix_header: 'డిమాండ్ తీవ్రత హీట్ మ్యాట్రిక్స్',
+    region_profile: 'ప్రాంతం ప్రొఫైల్',
+    pop_label: 'జనాభా',
+    vuln_label: 'సమస్య సూచిక',
+    youth_label: 'యువత %',
+    elderly_label: 'వృద్ధులు %',
+    primary_lang: 'ప్రధాన భాష',
+    evidence_priorities: 'సాక్ష్యాల ప్రాధాన్యతలు',
+
+    // Facility Shortfalls
+    gaps_title: 'వసతుల కొరత & సామర్థ్య లోపాలు',
+    gaps_sub: 'వసతుల కొరత & వ్యత్యాసాలు',
+    tag_core_sectors: '6 ప్రధాన రంగాలు',
+    tag_shortfall_matrix: 'జిల్లా కొరత మ్యాట్రిక్స్',
+    understanding_deficits: 'కొరత స్కోర్లు & తీవ్రత స్థాయిలను అర్థం చేసుకోవడం:',
+    critical_deficit: 'తీవ్రమైన కొరత',
+    high_deficit: 'అధిక కొరత',
+    stable_coverage: 'స్థిరమైనది',
+    coverage_vs_shortfall: 'కవరేజ్ వర్సెస్ కొరత',
+
+    // Top Priority Projects
+    recs_title: 'అగ్ర ప్రాధాన్యత ప్రాజెక్ట్‌లు',
+    tag_ranked_order: 'ర్యాంక్ చేసిన ప్రాధాన్యతా క్రమం',
+    tag_action_rec: 'సిఫార్సు చేసిన చర్యలు',
+    view_evidence_trail: 'సాక్ష్యాల సిరీస్ చూడండి',
+
+    // Proof & Evidence Explorer
+    evidence_title: 'సాక్ష్యాలు & ఆధారాల అన్వేషణ',
+    tag_why_picked: 'ఈ ప్రాజెక్ట్‌ను ఎందుకు ఎంచుకున్నారు',
+    tag_transparent_trail: 'పారదర్శక సాక్ష్యాల ట్రైల్',
+    sec_chains_title: '6-దశల సాక్ష్యాల గొలుసు',
+    sec_chains_sub: 'సంపూర్ణ ఆధారాన్ని చూడటానికి ఒక సిఫార్సును ఎంచుకోండి.',
+    btn_open_chain: 'సాక్ష్యాల సిరీస్ తెరవండి',
   },
 
   hi: {
