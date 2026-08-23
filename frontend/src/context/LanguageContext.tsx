@@ -42,7 +42,7 @@ export const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     group_data: 'ALL DATA & REPORTS',
 
     // Dashboard Overview
-    dash_title: 'Civic Demand Intelligence & Infrastructure Cockpit',
+    dash_title: 'Civic Demand & Infra Cockpit',
     dash_subtitle: 'Real-time multi-lingual citizen feedback synthesis across 35 BRICS districts',
     stat_demands: 'Verified Demands',
     stat_regions: 'Monitored Regions',

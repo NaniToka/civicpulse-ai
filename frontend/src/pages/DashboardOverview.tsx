@@ -131,7 +131,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
               </span>
             </div>
 
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-slate-950 leading-tight whitespace-nowrap">
+            <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-extrabold tracking-tight text-slate-950 leading-tight truncate">
               {t('dash_title')}
             </h1>
 
