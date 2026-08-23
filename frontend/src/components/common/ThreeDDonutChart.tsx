@@ -28,11 +28,11 @@ export const ThreeDDonutChart: React.FC<ThreeDDonutChartProps> = ({ data, total 
   }, [isRotating]);
 
   return (
-    <div className="relative flex flex-col items-center justify-between w-full min-h-[420px] p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.08] overflow-hidden shadow-sm space-y-4">
+    <div className="relative flex flex-col items-center justify-between w-full min-h-[420px] p-6 rounded-xl bg-white border border-slate-200 overflow-hidden shadow-sm space-y-4 text-slate-900">
       {/* Top Header & 3D Control Bar */}
-      <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-white/[0.08] pb-3 z-20">
-        <div className="flex items-center gap-2 text-[10px] font-mono text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-md border border-indigo-500/20">
-          <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
+      <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-200 pb-3 z-20">
+        <div className="flex items-center gap-2 text-[10px] font-mono text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-md border border-indigo-200 font-bold">
+          <span className="w-1.5 h-1.5 rounded-full bg-indigo-600" />
           <span>ISOMETRIC DEMAND DISTRIBUTION</span>
         </div>
 
@@ -40,7 +40,7 @@ export const ThreeDDonutChart: React.FC<ThreeDDonutChartProps> = ({ data, total 
         <div className="flex items-center gap-2 self-end sm:self-auto">
           <button
             onClick={() => setIsRotating(!isRotating)}
-            className="px-2.5 py-1 rounded-lg bg-[#121215] border border-white/[0.08] text-slate-300 hover:text-white transition font-mono text-[11px] font-medium flex items-center gap-1 cursor-pointer"
+            className="px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 hover:text-slate-900 hover:bg-slate-200 transition font-mono text-[11px] font-bold flex items-center gap-1 cursor-pointer"
             title={isRotating ? 'Pause Rotation' : 'Spin 3D Ring'}
           >
             {isRotating ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
@@ -49,7 +49,7 @@ export const ThreeDDonutChart: React.FC<ThreeDDonutChartProps> = ({ data, total 
 
           <button
             onClick={() => setTiltAngle((prev) => (prev === 58 ? 40 : prev === 40 ? 70 : 58))}
-            className="px-2.5 py-1 rounded-lg bg-[#121215] border border-white/[0.08] text-slate-300 hover:text-white transition font-mono text-[11px] font-medium flex items-center gap-1 cursor-pointer"
+            className="px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 hover:text-slate-900 hover:bg-slate-200 transition font-mono text-[11px] font-bold flex items-center gap-1 cursor-pointer"
             title="Toggle 3D Tilt Angle"
           >
             <Layers className="w-3.5 h-3.5" />
@@ -58,7 +58,7 @@ export const ThreeDDonutChart: React.FC<ThreeDDonutChartProps> = ({ data, total 
 
           <button
             onClick={() => setRotationDeg(0)}
-            className="p-1 rounded-lg bg-[#121215] border border-white/[0.08] text-slate-400 hover:text-slate-200 transition text-[10px] cursor-pointer"
+            className="p-1 rounded-lg bg-slate-100 border border-slate-200 text-slate-600 hover:text-slate-900 transition text-[10px] cursor-pointer"
             title="Reset Rotation"
           >
             <RotateCcw className="w-3.5 h-3.5" />
@@ -85,7 +85,7 @@ export const ThreeDDonutChart: React.FC<ThreeDDonutChartProps> = ({ data, total 
           }}
         >
           {/* Layer 1: Bottom Extrusion Shadow Base */}
-          <svg className="absolute inset-0 w-full h-full transform translate-z-[-16px] opacity-40 blur-[1px]" viewBox="0 0 100 100">
+          <svg className="absolute inset-0 w-full h-full transform translate-z-[-16px] opacity-20 blur-[1px]" viewBox="0 0 100 100">
             {(() => {
               let currentAngle = 0;
               return data.map((item, idx) => {
@@ -101,7 +101,7 @@ export const ThreeDDonutChart: React.FC<ThreeDDonutChartProps> = ({ data, total 
                     cy="50"
                     r="38"
                     fill="transparent"
-                    stroke="#000000"
+                    stroke="#0f172a"
                     strokeWidth="18"
                     strokeDasharray={dashArray}
                     strokeDashoffset={dashOffset}
@@ -143,7 +143,7 @@ export const ThreeDDonutChart: React.FC<ThreeDDonutChartProps> = ({ data, total 
                       strokeDashoffset={dashOffset}
                       pathLength="100"
                       style={{
-                        filter: `brightness(${0.4 + layer * 0.05})`,
+                        filter: `brightness(${0.7 + layer * 0.03})`,
                       }}
                     />
                   );
@@ -177,7 +177,7 @@ export const ThreeDDonutChart: React.FC<ThreeDDonutChartProps> = ({ data, total 
                     pathLength="100"
                     onMouseEnter={() => setActiveSlice(idx)}
                     onMouseLeave={() => setActiveSlice(null)}
-                    className="transition-all duration-200 cursor-pointer hover:brightness-125"
+                    className="transition-all duration-200 cursor-pointer hover:brightness-110"
                     style={{
                       transformOrigin: 'center',
                       transform: isHovered ? 'scale(1.05)' : 'scale(1)',
@@ -190,18 +190,18 @@ export const ThreeDDonutChart: React.FC<ThreeDDonutChartProps> = ({ data, total 
         </div>
 
         {/* Compact Floating Core Badge */}
-        <div className="absolute z-20 flex flex-col items-center justify-center w-24 h-24 rounded-full bg-[#0A0A0C] border border-white/[0.16] shadow-md backdrop-blur-md pointer-events-none font-mono">
-          <span className="text-xl font-bold tracking-tight text-slate-100">{total}</span>
-          <span className="text-[9px] text-slate-400 font-semibold uppercase tracking-wider">SIGNALS</span>
+        <div className="absolute z-20 flex flex-col items-center justify-center w-24 h-24 rounded-full bg-white border border-slate-300 shadow-md backdrop-blur-md pointer-events-none font-mono">
+          <span className="text-xl font-bold tracking-tight text-slate-900">{total}</span>
+          <span className="text-[9px] text-slate-600 font-bold uppercase tracking-wider">SIGNALS</span>
         </div>
 
         {/* Hovered Slice Tooltip */}
         {activeSlice !== null && data[activeSlice] && (
-          <div className="absolute bottom-1 z-30 px-3.5 py-1.5 rounded-lg bg-[#121215] border border-white/[0.16] text-center font-mono shadow-md animate-in fade-in duration-150">
+          <div className="absolute bottom-1 z-30 px-3.5 py-1.5 rounded-lg bg-white border border-slate-300 text-center font-mono shadow-md animate-in fade-in duration-150">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: data[activeSlice].color }} />
-              <span className="text-slate-100 font-semibold text-xs">{data[activeSlice].label}</span>
-              <span className="text-indigo-400 font-medium text-xs">
+              <span className="text-slate-900 font-bold text-xs">{data[activeSlice].label}</span>
+              <span className="text-indigo-700 font-bold text-xs">
                 {data[activeSlice].count} ({Math.round((data[activeSlice].count / total) * 100)}%)
               </span>
             </div>
@@ -210,7 +210,7 @@ export const ThreeDDonutChart: React.FC<ThreeDDonutChartProps> = ({ data, total 
       </div>
 
       {/* Category Legend Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 w-full pt-3 border-t border-white/[0.08] font-mono text-[11px]">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 w-full pt-3 border-t border-slate-200 font-mono text-[11px]">
         {data.map((item, idx) => {
           const pct = Math.round((item.count / total) * 100);
           const isSelected = activeSlice === idx;
@@ -221,15 +221,15 @@ export const ThreeDDonutChart: React.FC<ThreeDDonutChartProps> = ({ data, total 
               onMouseLeave={() => setActiveSlice(null)}
               className={`p-2 rounded-lg border text-center transition-colors duration-150 cursor-pointer ${
                 isSelected
-                  ? 'bg-indigo-600/10 border-indigo-500/40 text-indigo-400'
-                  : 'bg-[#121215] border-white/[0.08] text-slate-300 hover:border-white/[0.16]'
+                  ? 'bg-indigo-50 border-indigo-300 text-indigo-700 font-bold'
+                  : 'bg-slate-50 border-slate-200 text-slate-800 hover:border-slate-300 hover:bg-slate-100 font-medium'
               }`}
             >
               <div className="flex items-center justify-center gap-1.5 mb-1">
                 <span className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
-                <span className="text-slate-200 font-medium truncate">{item.label}</span>
+                <span className="text-slate-900 font-bold truncate">{item.label}</span>
               </div>
-              <div className="text-slate-400 font-semibold text-xs">{pct}%</div>
+              <div className="text-slate-600 font-bold text-xs">{pct}%</div>
             </button>
           );
         })}

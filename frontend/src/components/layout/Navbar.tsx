@@ -51,27 +51,27 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <>
-      <header className="h-14 bg-[#000000] border-b border-white/[0.08] px-3 sm:px-6 flex items-center justify-between z-40 sticky top-0 shadow-sm">
+      <header className="h-14 bg-white border-b border-slate-200 px-3 sm:px-6 flex items-center justify-between z-40 sticky top-0 shadow-xs">
         {/* Brand Identity & Mobile Menu Toggle */}
         <div className="flex items-center gap-3">
           {/* Mobile Hamburger Toggle Button */}
           <button
             onClick={() => setMobileMenuOpen(true)}
-            className="md:hidden p-1.5 rounded-lg bg-[#0A0A0C] border border-white/[0.08] text-slate-300 hover:text-white transition cursor-pointer flex items-center justify-center shrink-0"
+            className="md:hidden p-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 hover:text-slate-900 transition cursor-pointer flex items-center justify-center shrink-0"
             title="Open Mobile Navigation Menu"
           >
             <Menu className="w-5 h-5" />
           </button>
 
-          <div className="w-7 h-7 rounded-lg bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 shrink-0">
+          <div className="w-7 h-7 rounded-lg bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-600 shrink-0 font-bold">
             <Sparkles className="w-3.5 h-3.5" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-sm sm:text-base font-semibold tracking-tight text-slate-100">
-                CivicPulse <span className="text-indigo-400 font-semibold">AI</span>
+              <h1 className="text-sm sm:text-base font-semibold tracking-tight text-slate-900">
+                CivicPulse <span className="text-indigo-600 font-bold">AI</span>
               </h1>
-              <span className="text-[10px] font-mono font-medium px-1.5 py-0.2 rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 shrink-0">
+              <span className="text-[10px] font-mono font-bold px-1.5 py-0.2 rounded bg-indigo-50 text-indigo-700 border border-indigo-200 shrink-0">
                 v2.0
               </span>
             </div>
@@ -81,26 +81,26 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Right Controls: Command Palette & Demo Disclaimer */}
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Live Status Pill */}
-          <div className="hidden xl:flex items-center gap-2 px-2.5 py-1 rounded-lg bg-[#0A0A0C] border border-white/[0.08] text-xs text-slate-300">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
-            <span className="text-[11px] font-medium text-slate-400">7 Languages Active</span>
+          <div className="hidden xl:flex items-center gap-2 px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200 text-xs text-slate-700">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+            <span className="text-[11px] font-semibold text-slate-700">7 Languages Active</span>
           </div>
 
           {/* Command Palette Trigger */}
           <button
             onClick={onOpenCommandPalette}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#0A0A0C] border border-white/[0.08] text-xs text-slate-300 hover:text-white hover:border-white/[0.16] transition cursor-pointer"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-xs text-slate-700 hover:text-slate-950 hover:bg-slate-200 transition cursor-pointer"
           >
-            <Command className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-            <span className="hidden sm:inline text-xs text-slate-400">Search...</span>
-            <kbd className="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded bg-[#000000] border border-white/[0.08] text-[10px] font-mono text-slate-400">
+            <Command className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+            <span className="hidden sm:inline text-xs text-slate-600 font-medium">Search...</span>
+            <kbd className="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded bg-white border border-slate-300 text-[10px] font-mono text-slate-600">
               ⌘K
             </kbd>
           </button>
 
           {/* Demo Synthetic Data Badge */}
-          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-500/10 border border-amber-500/20 text-xs text-amber-400 font-medium shrink-0">
-            <ShieldAlert className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-50 border border-amber-200 text-xs text-amber-800 font-bold shrink-0">
+            <ShieldAlert className="w-3.5 h-3.5 text-amber-600 shrink-0" />
             <span className="hidden lg:inline text-[11px] tracking-wide">DEMO DATA</span>
             <span className="lg:hidden text-[10px]">DEMO</span>
           </div>
@@ -109,18 +109,18 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Full-Screen Mobile Navigation Overlay Modal */}
       {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 z-50 bg-[#000000] flex flex-col p-4 sm:p-6 overflow-y-auto">
+        <div className="md:hidden fixed inset-0 z-50 bg-white flex flex-col p-4 sm:p-6 overflow-y-auto text-slate-900">
           {/* Mobile Drawer Top Bar */}
-          <div className="flex items-center justify-between border-b border-white/[0.08] pb-4 mb-4">
+          <div className="flex items-center justify-between border-b border-slate-200 pb-4 mb-4">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center shrink-0">
-                <Compass className="w-4 h-4 text-indigo-400" />
+              <div className="w-8 h-8 rounded-lg bg-indigo-50 border border-indigo-200 flex items-center justify-center shrink-0">
+                <Compass className="w-4 h-4 text-indigo-600" />
               </div>
               <div>
-                <span className="text-xs font-semibold text-slate-100 uppercase tracking-wider block">
+                <span className="text-xs font-bold text-slate-900 uppercase tracking-wider block">
                   CivicPulse AI Navigation
                 </span>
-                <span className="text-[11px] text-slate-400">
+                <span className="text-[11px] text-slate-600">
                   Select a section to navigate
                 </span>
               </div>
@@ -128,9 +128,9 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => setMobileMenuOpen(false)}
-              className="p-2 rounded-lg bg-[#0A0A0C] border border-white/[0.08] text-slate-300 hover:text-white transition cursor-pointer flex items-center gap-1 text-xs shrink-0"
+              className="p-2 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 hover:text-slate-900 transition cursor-pointer flex items-center gap-1 text-xs shrink-0"
             >
-              <X className="w-4 h-4 text-slate-400" />
+              <X className="w-4 h-4 text-slate-600" />
               <span className="hidden xs:inline">Close</span>
             </button>
           </div>
@@ -145,8 +145,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onClick={() => handleSelectTab(item.id)}
                   className={`w-full flex items-center justify-between p-3 rounded-lg text-left transition-colors cursor-pointer ${
                     isActive
-                      ? 'bg-indigo-600/10 text-indigo-400 border border-indigo-500/30'
-                      : 'bg-[#0A0A0C] text-slate-300 hover:bg-[#121215] hover:text-white border border-white/[0.08]'
+                      ? 'bg-indigo-50 text-indigo-700 border border-indigo-200 font-bold'
+                      : 'bg-slate-50 text-slate-800 hover:bg-slate-100 hover:text-slate-950 border border-slate-200 font-medium'
                   }`}
                 >
                   <div className="flex items-center gap-3 min-w-0">
