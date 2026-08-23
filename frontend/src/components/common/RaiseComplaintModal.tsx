@@ -16,6 +16,7 @@ import {
 import { Region, CitizenRequest } from '../../types';
 import { UserProfile } from './AuthModal';
 import { api } from '../../services/api';
+import { useLanguage } from '../../context/LanguageContext';
 
 interface RaiseComplaintModalProps {
   isOpen: boolean;
@@ -34,6 +35,7 @@ export const RaiseComplaintModal: React.FC<RaiseComplaintModalProps> = ({
   onComplaintSubmitted,
   regions = [],
 }) => {
+  const { t } = useLanguage();
   // Form states
   const [category, setCategory] = useState('water');
   const [urgency, setUrgency] = useState<'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW'>('CRITICAL');
@@ -245,14 +247,14 @@ export const RaiseComplaintModal: React.FC<RaiseComplaintModalProps> = ({
             <div>
               <div className="flex items-center gap-2">
                 <h2 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
-                  Raise Your Complaint
+                  {t('raise_modal_title')}
                 </h2>
                 <span className="text-xs font-mono font-extrabold px-2.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                   REAL-TIME INGESTION
                 </span>
               </div>
               <p className="text-xs text-slate-400 font-normal mt-0.5">
-                Report broken infrastructure, service outages, or local civic issues directly to priority models.
+                {t('raise_modal_sub')}
               </p>
             </div>
           </div>
@@ -332,7 +334,7 @@ export const RaiseComplaintModal: React.FC<RaiseComplaintModalProps> = ({
                     <div className="flex items-center gap-2">
                       <span className="font-extrabold text-white text-sm">{currentUser.name}</span>
                       <span className="text-[10px] font-mono font-extrabold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
-                        VERIFIED CITIZEN
+                        {t('badge_verified_citizen')}
                       </span>
                     </div>
                     <div className="text-xs font-mono text-slate-400">{currentUser.email} • {currentUser.district}</div>
@@ -342,7 +344,7 @@ export const RaiseComplaintModal: React.FC<RaiseComplaintModalProps> = ({
                 <div className="flex items-center justify-between w-full">
                   <div className="flex items-center gap-2 text-xs font-mono text-slate-300">
                     <User className="w-4 h-4 text-indigo-400" />
-                    <span>Raising as Guest Citizen (Or log in to track status)</span>
+                    <span>{t('guest_banner_text')}</span>
                   </div>
                   <button
                     type="button"
@@ -359,7 +361,7 @@ export const RaiseComplaintModal: React.FC<RaiseComplaintModalProps> = ({
             {!currentUser && (
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div className="space-y-1">
-                  <label className="text-xs font-mono uppercase text-slate-400 font-bold">Your Name</label>
+                  <label className="text-xs font-mono uppercase text-slate-400 font-bold">{t('full_name')}</label>
                   <input
                     type="text"
                     value={guestName}
@@ -369,7 +371,7 @@ export const RaiseComplaintModal: React.FC<RaiseComplaintModalProps> = ({
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-xs font-mono uppercase text-slate-400 font-bold">Phone Number</label>
+                  <label className="text-xs font-mono uppercase text-slate-400 font-bold">{t('phone_number')}</label>
                   <input
                     type="text"
                     value={guestPhone}
@@ -379,7 +381,7 @@ export const RaiseComplaintModal: React.FC<RaiseComplaintModalProps> = ({
                   />
                 </div>
                 <div className="space-y-1 font-mono">
-                  <label className="text-xs uppercase text-slate-400 font-bold">District / City</label>
+                  <label className="text-xs uppercase text-slate-400 font-bold">{t('your_district')}</label>
                   <select
                     value={guestDistrict}
                     onChange={(e) => setGuestDistrict(e.target.value)}
@@ -397,7 +399,7 @@ export const RaiseComplaintModal: React.FC<RaiseComplaintModalProps> = ({
             {/* 1. Sector Category, Urgency, Language & Channel Selectors */}
             <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 font-mono">
               <div className="space-y-1.5">
-                <label className="text-xs uppercase text-slate-300 font-extrabold">Sector Category *</label>
+                <label className="text-xs uppercase text-slate-300 font-extrabold">{t('label_sector_category')}</label>
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
@@ -414,7 +416,7 @@ export const RaiseComplaintModal: React.FC<RaiseComplaintModalProps> = ({
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs uppercase text-slate-300 font-extrabold">Urgency Level *</label>
+                <label className="text-xs uppercase text-slate-300 font-extrabold">{t('label_urgency_level')}</label>
                 <select
                   value={urgency}
                   onChange={(e) => setUrgency(e.target.value as 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW')}
@@ -428,7 +430,7 @@ export const RaiseComplaintModal: React.FC<RaiseComplaintModalProps> = ({
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs uppercase text-slate-300 font-extrabold">Language *</label>
+                <label className="text-xs uppercase text-slate-300 font-extrabold">{t('label_language')}</label>
                 <select
                   value={language}
                   onChange={(e) => setLanguage(e.target.value)}
@@ -445,7 +447,7 @@ export const RaiseComplaintModal: React.FC<RaiseComplaintModalProps> = ({
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs uppercase text-slate-300 font-extrabold">Channel *</label>
+                <label className="text-xs uppercase text-slate-300 font-extrabold">{t('label_channel')}</label>
                 <select
                   value={channel}
                   onChange={(e) => setChannel(e.target.value)}
@@ -464,7 +466,7 @@ export const RaiseComplaintModal: React.FC<RaiseComplaintModalProps> = ({
               <div className="flex items-center justify-between">
                 <label className="text-xs font-mono uppercase text-slate-300 font-extrabold flex items-center gap-1.5">
                   <FileText className="w-4 h-4 text-indigo-400" />
-                  Describe Your Problem in Detail *
+                  {t('label_describe_problem')}
                 </label>
 
                 {/* Voice Note Recorder Trigger */}
@@ -478,7 +480,7 @@ export const RaiseComplaintModal: React.FC<RaiseComplaintModalProps> = ({
                   }`}
                 >
                   <Mic className="w-3.5 h-3.5" />
-                  <span>{isRecordingAudio ? `Recording (${recordingTimer}s)... Tap to Stop` : 'Record Voice Note'}</span>
+                  <span>{isRecordingAudio ? `Recording (${recordingTimer}s)... Tap to Stop` : t('btn_record_voice')}</span>
                 </button>
               </div>
 
@@ -486,7 +488,7 @@ export const RaiseComplaintModal: React.FC<RaiseComplaintModalProps> = ({
                 rows={3}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="Explain the civic problem clearly (e.g., Severe drinking water supply disruption in Vijayawada Ward 4 for the past 3 days; pipeline leakage leaking onto main road)..."
+                placeholder={t('placeholder_describe')}
                 className="w-full p-3.5 rounded-xl bg-[#121215] border border-white/[0.12] text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 font-sans leading-relaxed text-xs sm:text-sm font-bold"
               />
             </div>
@@ -498,7 +500,7 @@ export const RaiseComplaintModal: React.FC<RaiseComplaintModalProps> = ({
                 <div className="flex items-center justify-between border-b border-white/[0.08] pb-2">
                   <span className="text-slate-300 font-extrabold uppercase flex items-center gap-1.5">
                     <MapPin className="w-4 h-4 text-indigo-400" />
-                    Live Location
+                    {t('label_live_location')}
                   </span>
                   <button
                     type="button"
@@ -507,7 +509,7 @@ export const RaiseComplaintModal: React.FC<RaiseComplaintModalProps> = ({
                     className="px-2.5 py-1 rounded-md bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-extrabold transition flex items-center gap-1 cursor-pointer"
                   >
                     <RefreshCw className={`w-3 h-3 ${fetchingGps ? 'animate-spin' : ''}`} />
-                    <span>Fetch GPS</span>
+                    <span>{t('btn_fetch_gps')}</span>
                   </button>
                 </div>
 
@@ -528,7 +530,7 @@ export const RaiseComplaintModal: React.FC<RaiseComplaintModalProps> = ({
                 <div className="flex items-center justify-between border-b border-white/[0.08] pb-2">
                   <span className="text-slate-300 font-extrabold uppercase flex items-center gap-1.5">
                     <Camera className="w-4 h-4 text-indigo-400" />
-                    Photo Evidence
+                    {t('label_photo_evidence')}
                   </span>
 
                   <div className="flex items-center gap-1">
@@ -538,11 +540,11 @@ export const RaiseComplaintModal: React.FC<RaiseComplaintModalProps> = ({
                       className="px-2.5 py-1 rounded-md bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-extrabold transition flex items-center gap-1 cursor-pointer"
                     >
                       <Camera className="w-3 h-3" />
-                      <span>{cameraActive ? 'Close Camera' : 'Live Camera'}</span>
+                      <span>{cameraActive ? 'Close Camera' : t('btn_live_camera')}</span>
                     </button>
                     <label className="px-2.5 py-1 rounded-md bg-white/[0.08] hover:bg-white/[0.16] text-slate-300 text-[11px] font-extrabold transition cursor-pointer flex items-center gap-1">
                       <Upload className="w-3 h-3" />
-                      <span>Upload</span>
+                      <span>{t('upload_file')}</span>
                       <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
                     </label>
                   </div>
@@ -601,7 +603,7 @@ export const RaiseComplaintModal: React.FC<RaiseComplaintModalProps> = ({
                 ) : (
                   <>
                     <Send className="w-5 h-5" />
-                    <span>Fast-Track & Submit Civic Complaint</span>
+                    <span>{t('btn_submit_complaint')}</span>
                   </>
                 )}
               </button>

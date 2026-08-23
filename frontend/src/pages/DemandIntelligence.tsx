@@ -87,7 +87,7 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
             </span>
           </div>
           <h1 className="text-3xl md:text-4xl font-extrabold text-slate-950 tracking-tight">
-            Citizen Complaints & <span className="hero-gradient-text">Feedback Trends</span>
+            {t('demand_page_title')}
           </h1>
           <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-xs sm:text-sm font-extrabold">
             <span className="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-800">
@@ -101,7 +101,7 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
 
         <div className="flex items-center gap-3 shrink-0">
           <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-center font-mono space-y-0.5 shadow-2xs">
-            <div className="text-xs font-extrabold text-slate-800 uppercase">Signals Logged</div>
+            <div className="text-xs font-extrabold text-slate-800 uppercase">{t('signals_logged_label')}</div>
             <div className="text-3xl font-extrabold text-indigo-700">{requests.length}</div>
           </div>
         </div>

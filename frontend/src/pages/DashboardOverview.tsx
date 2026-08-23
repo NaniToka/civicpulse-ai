@@ -158,28 +158,28 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
               className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs sm:text-sm transition cursor-pointer text-center shadow-xs"
             >
               <MessageSquare className="w-4 h-4 shrink-0" />
-              <span className="truncate">View Complaints</span>
+              <span className="truncate">{t('btn_view_complaints')}</span>
             </button>
             <button
               onClick={() => onNavigate('demand')}
               className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-900 font-extrabold text-xs sm:text-sm transition cursor-pointer text-center shadow-xs"
             >
               <Globe2 className="w-4 h-4 text-indigo-600 shrink-0" />
-              <span className="truncate">Citizen Voices</span>
+              <span className="truncate">{t('btn_citizen_voices')}</span>
             </button>
             <button
               onClick={() => onNavigate('scenarios')}
               className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-900 font-extrabold text-xs sm:text-sm transition cursor-pointer text-center shadow-xs"
             >
               <Sparkles className="w-4 h-4 text-indigo-600 shrink-0" />
-              <span className="truncate">Budget Simulator</span>
+              <span className="truncate">{t('btn_budget_sim')}</span>
             </button>
             <button
               onClick={() => onNavigate('hotspots')}
               className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-900 font-extrabold text-xs sm:text-sm transition cursor-pointer text-center shadow-xs"
             >
               <Activity className="w-4 h-4 text-indigo-600 shrink-0" />
-              <span className="truncate">Problem Hotspots</span>
+              <span className="truncate">{t('btn_problem_hotspots')}</span>
             </button>
           </div>
         </div>
@@ -191,7 +191,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
         <div className="p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.12] hover:border-indigo-500/50 transition-colors duration-150 shadow-md flex flex-col justify-between text-slate-100 font-bold">
           <div className="flex items-center justify-between">
             <span className="text-xs font-extrabold text-slate-300 uppercase tracking-wider">
-              Total Complaints Logged
+              {t('metric_total_complaints')}
             </span>
             <div className="p-2 rounded-lg bg-[#121215] border border-white/[0.12] text-indigo-400 font-bold">
               <Users className="w-4 h-4" />
@@ -215,7 +215,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
         <div className="p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.12] hover:border-indigo-500/50 transition-colors duration-150 shadow-md flex flex-col justify-between text-slate-100 font-bold">
           <div className="flex items-center justify-between">
             <span className="text-xs font-extrabold text-slate-300 uppercase tracking-wider">
-              Districts Monitored
+              {t('metric_districts_monitored')}
             </span>
             <div className="p-2 rounded-lg bg-[#121215] border border-white/[0.12] text-indigo-400 font-bold">
               <MapPin className="w-4 h-4" />
@@ -238,7 +238,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
         <div className="p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.12] hover:border-amber-500/50 transition-colors duration-150 shadow-md flex flex-col justify-between text-slate-100 font-bold">
           <div className="flex items-center justify-between">
             <span className="text-xs font-extrabold text-slate-300 uppercase tracking-wider">
-              Facility Shortfalls Found
+              {t('metric_facility_shortfalls')}
             </span>
             <div className="p-2 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400 font-bold">
               <AlertTriangle className="w-4 h-4" />
@@ -259,7 +259,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
         <div className="p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.12] hover:border-rose-500/50 transition-colors duration-150 shadow-md flex flex-col justify-between text-slate-100 font-bold">
           <div className="flex items-center justify-between">
             <span className="text-xs font-extrabold text-slate-300 uppercase tracking-wider">
-              Urgent Priority Projects
+              {t('metric_urgent_projects')}
             </span>
             <div className="p-2 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-400 font-bold">
               <FileCheck className="w-4 h-4" />

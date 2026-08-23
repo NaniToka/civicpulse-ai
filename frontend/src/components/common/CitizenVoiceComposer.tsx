@@ -3,6 +3,7 @@ import { Sparkles, Globe2, ShieldCheck, CheckCircle2, RefreshCw, Send, Radio, Ar
 import { CitizenRequest, Region, StructuredAIOutput } from '../../types';
 import { api } from '../../services/api';
 import { PriorityBadge } from './PriorityBadge';
+import { useLanguage } from '../../context/LanguageContext';
 
 interface CitizenVoiceComposerProps {
   regions: Region[];
@@ -11,6 +12,7 @@ interface CitizenVoiceComposerProps {
 }
 
 export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regions, onSignalAdded, onOpenRegionDetails }) => {
+  const { t } = useLanguage();
   const [rawText, setRawText] = useState('');
   const [languageHint, setLanguageHint] = useState('auto');
   const [selectedRegionId, setSelectedRegionId] = useState(regions[0]?.id || 'REG-IND-UP-KANP-02');
@@ -118,19 +120,19 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
           </div>
           <div>
             <h2 className="text-lg sm:text-xl font-extrabold text-slate-950 tracking-tight flex items-center gap-2">
-              <span>Multilingual Citizen Voice Studio</span>
+              <span>{t('studio_title')}</span>
               <span className="text-xs font-mono font-extrabold px-2.5 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-200">
                 LIVE INGRESS
               </span>
             </h2>
             <p className="text-xs sm:text-sm text-slate-700 mt-0.5 font-bold">
-              Submit citizen feedback in Telugu, Hindi, Marathi, Portuguese, Zulu, Bengali, or English to generate structured demand signals.
+              {t('studio_sub')}
             </p>
           </div>
         </div>
 
         <div className="flex flex-wrap items-center gap-2.5 text-xs font-mono font-bold">
-          <span className="text-slate-700 font-bold text-xs">Target Region:</span>
+          <span className="text-slate-700 font-bold text-xs">{t('target_region_label')}</span>
           <select
             value={selectedRegionId}
             onChange={(e) => setSelectedRegionId(e.target.value)}
@@ -147,7 +149,7 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
               onClick={() => onOpenRegionDetails(selectedRegionId)}
               className="px-3.5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-extrabold transition flex items-center gap-1.5 cursor-pointer font-sans shadow-xs"
             >
-              <span>Region Details</span>
+              <span>{t('btn_region_details')}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           )}
@@ -158,7 +160,7 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
       <div className="space-y-2.5">
         <div className="text-xs font-mono text-slate-800 uppercase tracking-wider flex items-center gap-2 font-extrabold">
           <Radio className="w-4 h-4 text-indigo-600 font-extrabold" />
-          <span>Try a Multilingual Civic Signal:</span>
+          <span>{t('try_signal_label')}</span>
         </div>
         <div className="flex flex-wrap gap-2">
           {samplePrompts.map((sample) => (
@@ -184,7 +186,7 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
             rows={3}
             value={rawText}
             onChange={(e) => setRawText(e.target.value)}
-            placeholder="Type or paste citizen feedback in any language (e.g. 'మా ప్రాంతంలో సరైన ఆసుపత్రి సౌకర్యాలు లేవు.')..."
+            placeholder={t('placeholder_feedback')}
             className="w-full p-4 bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:bg-white rounded-xl text-sm sm:text-base text-slate-950 placeholder:text-slate-400 focus:outline-none font-sans font-bold leading-relaxed shadow-xs"
           />
         </div>
@@ -192,7 +194,7 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm font-mono font-bold">
             <div>
-              <span className="text-slate-700 mr-2 font-bold">Language:</span>
+              <span className="text-slate-700 mr-2 font-bold">{t('label_language')}:</span>
               <select
                 value={languageHint}
                 onChange={(e) => setLanguageHint(e.target.value)}
@@ -210,7 +212,7 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
             </div>
 
             <div>
-              <span className="text-slate-700 mr-2 font-bold">Channel:</span>
+              <span className="text-slate-700 mr-2 font-bold">{t('label_channel')}:</span>
               <select
                 value={channelSource}
                 onChange={(e) => setChannelSource(e.target.value)}
@@ -230,11 +232,14 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
             className="px-5 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-xs transition flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer shadow-sm"
           >
             {analyzing ? (
-              <span>Analyzing Signal...</span>
+              <>
+                <RefreshCw className="w-4 h-4 animate-spin shrink-0" />
+                <span>{pipelineStep || 'Analyzing...'}</span>
+              </>
             ) : (
               <>
-                <Sparkles className="w-4 h-4" />
-                <span>Analyze Civic Signal</span>
+                <Sparkles className="w-4 h-4 text-amber-300 shrink-0" />
+                <span>{t('btn_analyze_signal')}</span>
               </>
             )}
           </button>
