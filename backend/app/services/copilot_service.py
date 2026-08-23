@@ -154,8 +154,44 @@ class CopilotService:
 
         # 2. Intent Dispatching
 
+        # Intent: HOW TO POST COMPLAINT / SUBMIT SIGNAL / PLATFORM USAGE
+        if any(w in lower_msg for w in ["complaint", "how to post", "how to submit", "how to report", "how to log", "how do i post", "how do i submit", "how to add signal", "how does this tool work", "how does civicpulse work", "how to use"]):
+            grounded_context = """### How to Submit Feedback & Post a Complaint in CivicPulse AI
+
+Citizens and administrators can log complaints, report service outages, or request infrastructure improvements directly in CivicPulse AI:
+
+1. **Navigate to Data Explorer or Demand Intelligence**:
+   - Click **[Data Explorer]** or **[Demand Intelligence]** in the navigation bar.
+   - Locate the **Citizen Voice Composer** panel.
+
+2. **Enter Your Civic Feedback**:
+   - Type your feedback in any supported regional language (*Telugu, Hindi, Marathi, Bengali, Portuguese, Zulu, or English*).
+   - Example: *"Severe drinking water supply disruption in Vijayawada Ward 4; urgent pipeline repair required."* or *"మా ప్రాంతంలో పిల్లలకు మంచి ఆసుపత్రి లేదు."*
+
+3. **Select Input Channel & Location**:
+   - Select the source channel (*Web, Voice Note, Mobile App, Messaging, Survey*).
+   - Specify latitude/longitude or select the target District/City.
+
+4. **Analyze & Ingest Signal**:
+   - Click **"Analyze Civic Signal"** followed by **"Add Signal to Civic Intelligence"**.
+   - The Gemini AI NLP Engine detects the script, normalizes the text into English, classifies the category, extracts entities, and assigns urgency.
+   - The signal is instantly added to CivicPulse, updating per-capita demand scores and regional hotspot rankings in real time!
+
+### Evidence used:
+• Ingestion Channels: Web, Voice, Messaging, Mobile App
+• Supported Languages: Telugu, Hindi, Marathi, Bengali, Portuguese, Zulu, English
+• Real-time Processing: Script Detection → Translation → Intent Classification → Hotspot Update
+"""
+            evidence_list = [
+                CopilotEvidenceRef(title="Supported Languages", metric="Count", value="7 Languages Active"),
+                CopilotEvidenceRef(title="Ingestion Channels", metric="Channels", value="Web, Voice, SMS, App"),
+            ]
+            action_link = CopilotActionLink(label="Open Data Explorer to Submit Signal", action_type="navigate", target="/data")
+            suggested_actions = ["Show top 5 priorities", "Which region has highest infrastructure deficit?", "What happens if we allocate $15M?"]
+
         # Intent A: WHAT-IF SCENARIO
-        if any(w in lower_msg for w in ["scenario", "allocate", "if we invest", "what happens if", "$15m", "budget", "counterfactual"]):
+        elif any(w in lower_msg for w in ["scenario", "allocate", "if we invest", "what happens if", "$15m", "budget", "counterfactual"]):
+
             budget = self._extract_budget(sanitized_msg)
             cat = category_key or "healthcare"
             target_region = region or regions[0]

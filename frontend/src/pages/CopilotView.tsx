@@ -49,6 +49,12 @@ interface DisplayMessage {
 
 const STARTER_PROMPTS = [
   {
+    icon: <FileText className="w-4 h-4 text-indigo-400" />,
+    title: 'How to Submit a Complaint',
+    prompt: 'How to post a complaint or submit a civic signal?',
+    category: 'Guide',
+  },
+  {
     icon: <AlertTriangle className="w-4 h-4 text-amber-400" />,
     title: 'Most Urgent Problem',
     prompt: 'Which civic problem needs attention most urgently?',
@@ -71,12 +77,6 @@ const STARTER_PROMPTS = [
     title: 'CivicFund Funding Gaps',
     prompt: 'Which projects currently have the largest funding gaps?',
     category: 'Capital Investments',
-  },
-  {
-    icon: <FileText className="w-4 h-4 text-indigo-400" />,
-    title: 'Explain Top Recommendation',
-    prompt: 'Explain the top recommendation in simple language.',
-    category: 'Explanation',
   },
   {
     icon: <TestTube2 className="w-4 h-4 text-purple-400" />,

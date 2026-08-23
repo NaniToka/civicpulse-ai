@@ -23,6 +23,19 @@ def test_copilot_basic_question():
     assert data["action_link"] is not None
 
 
+def test_copilot_post_complaint_how_to():
+    response = client.post(
+        "/api/v1/copilot/chat",
+        json={"message": "how to post an complaint"},
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data["success"] is True
+    assert "Data Explorer" in data["message"] or "Citizen Voice Composer" in data["message"]
+    assert data["action_link"]["target"] == "/data"
+
+
+
 def test_copilot_top_priorities():
     response = client.post(
         "/api/v1/copilot/chat",
