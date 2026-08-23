@@ -94,6 +94,12 @@ $$\text{Priority Score} = 0.35 \cdot S_{\text{demand}} + 0.25 \cdot I_{\text{gap
 
 Policymakers can inspect individual factor contributions and switch language briefs (**EN / HI / TE**) directly inside the Evidence Explorer.
 
+## 📁 Project Structure
+
+For detailed documentation on specific components, see:
+- [Backend Documentation](backend/README.md) - API setup, models, and FastAPI architecture.
+- [Frontend Documentation](frontend/README.md) - React UI, Vite build, and Tailwind styling.
+
 ---
 
 ## 🚀 Quickstart & Local Setup
