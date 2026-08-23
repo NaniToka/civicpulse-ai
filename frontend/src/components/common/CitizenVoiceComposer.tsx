@@ -109,35 +109,35 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
   };
 
   return (
-    <div className="p-6 md:p-8 rounded-xl bg-[#0A0A0C] border border-white/[0.08] space-y-6 shadow-sm">
+    <div className="p-6 md:p-8 rounded-xl bg-white border border-slate-200 space-y-6 shadow-sm text-slate-950 font-bold">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/[0.08] pb-5">
-        <div className="flex items-center gap-3">
-          <div className="p-3 rounded-lg bg-indigo-600/20 text-indigo-400 border border-indigo-500/30">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-5">
+        <div className="flex items-center gap-3.5">
+          <div className="p-3 rounded-xl bg-indigo-50 border border-indigo-200 text-indigo-600 font-extrabold">
             <Globe2 className="w-6 h-6" />
           </div>
           <div>
-            <h2 className="text-lg font-semibold text-slate-100 tracking-tight flex items-center gap-2">
+            <h2 className="text-lg sm:text-xl font-extrabold text-slate-950 tracking-tight flex items-center gap-2">
               <span>Multilingual Citizen Voice Studio</span>
-              <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+              <span className="text-xs font-mono font-extrabold px-2.5 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-200">
                 LIVE INGRESS
               </span>
             </h2>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <p className="text-xs sm:text-sm text-slate-700 mt-0.5 font-bold">
               Submit citizen feedback in Telugu, Hindi, Marathi, Portuguese, Zulu, Bengali, or English to generate structured demand signals.
             </p>
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2.5 text-xs font-mono">
-          <span className="text-slate-400 font-medium text-xs">Target Region:</span>
+        <div className="flex flex-wrap items-center gap-2.5 text-xs font-mono font-bold">
+          <span className="text-slate-700 font-bold text-xs">Target Region:</span>
           <select
             value={selectedRegionId}
             onChange={(e) => setSelectedRegionId(e.target.value)}
-            className="bg-[#121215] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-white/[0.16] cursor-pointer"
+            className="bg-slate-100 border border-slate-200 text-slate-950 text-xs sm:text-sm rounded-lg px-3 py-2 focus:outline-none cursor-pointer font-bold"
           >
             {regions.map((r) => (
-              <option className="bg-[#121215] text-slate-100 text-sm py-1" key={r.id} value={r.id}>
+              <option key={r.id} value={r.id}>
                 {r.district_city}, {r.country_code}
               </option>
             ))}
@@ -145,19 +145,19 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
           {onOpenRegionDetails && (
             <button
               onClick={() => onOpenRegionDetails(selectedRegionId)}
-              className="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium transition flex items-center gap-1.5 cursor-pointer font-sans"
+              className="px-3.5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-extrabold transition flex items-center gap-1.5 cursor-pointer font-sans shadow-xs"
             >
               <span>Region Details</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <ArrowRight className="w-4 h-4" />
             </button>
           )}
         </div>
       </div>
 
       {/* Quick Example Prompts */}
-      <div className="space-y-2">
-        <div className="text-[11px] font-mono text-slate-400 uppercase tracking-wider flex items-center gap-2">
-          <Radio className="w-3.5 h-3.5 text-indigo-400" />
+      <div className="space-y-2.5">
+        <div className="text-xs font-mono text-slate-800 uppercase tracking-wider flex items-center gap-2 font-extrabold">
+          <Radio className="w-4 h-4 text-indigo-600 font-extrabold" />
           <span>Try a Multilingual Civic Signal:</span>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -169,7 +169,7 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
                 setLanguageHint(sample.code);
                 handleAnalyze(sample.text, sample.code);
               }}
-              className="px-3 py-1.5 rounded-lg bg-[#121215] border border-white/[0.08] hover:border-white/[0.16] text-xs text-slate-300 transition cursor-pointer"
+              className="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 hover:bg-slate-200 text-xs sm:text-sm text-slate-950 transition cursor-pointer font-bold"
             >
               {sample.label}
             </button>
@@ -185,41 +185,41 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
             value={rawText}
             onChange={(e) => setRawText(e.target.value)}
             placeholder="Type or paste citizen feedback in any language (e.g. 'మా ప్రాంతంలో సరైన ఆసుపత్రి సౌకర్యాలు లేవు.')..."
-            className="w-full p-4 bg-[#121215] border border-white/[0.08] rounded-xl text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-white/[0.16] font-sans leading-relaxed"
+            className="w-full p-4 bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:bg-white rounded-xl text-sm sm:text-base text-slate-950 placeholder:text-slate-400 focus:outline-none font-sans font-bold leading-relaxed shadow-xs"
           />
         </div>
 
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="flex flex-wrap items-center gap-4 text-xs font-mono">
+          <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm font-mono font-bold">
             <div>
-              <span className="text-slate-400 mr-2">Language:</span>
+              <span className="text-slate-700 mr-2 font-bold">Language:</span>
               <select
                 value={languageHint}
                 onChange={(e) => setLanguageHint(e.target.value)}
-                className="bg-[#121215] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
+                className="bg-slate-100 border border-slate-200 text-slate-950 text-xs sm:text-sm rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer font-bold"
               >
-                <option className="bg-[#121215] text-slate-100 text-sm py-1" value="auto">Auto Detect</option>
-                <option className="bg-[#121215] text-slate-100 text-sm py-1" value="te">Telugu (తెలుగు)</option>
-                <option className="bg-[#121215] text-slate-100 text-sm py-1" value="hi">Hindi (हिंदी)</option>
-                <option className="bg-[#121215] text-slate-100 text-sm py-1" value="mr">Marathi (मराठी)</option>
-                <option className="bg-[#121215] text-slate-100 text-sm py-1" value="bn">Bengali (বাংলা)</option>
-                <option className="bg-[#121215] text-slate-100 text-sm py-1" value="pt">Portuguese (pt)</option>
-                <option className="bg-[#121215] text-slate-100 text-sm py-1" value="zu">Zulu (zu)</option>
-                <option className="bg-[#121215] text-slate-100 text-sm py-1" value="en">English (en)</option>
+                <option value="auto">Auto Detect</option>
+                <option value="te">Telugu (తెలుగు)</option>
+                <option value="hi">Hindi (हिंदी)</option>
+                <option value="mr">Marathi (मराठी)</option>
+                <option value="bn">Bengali (বাংলা)</option>
+                <option value="pt">Portuguese (pt)</option>
+                <option value="zu">Zulu (zu)</option>
+                <option value="en">English (en)</option>
               </select>
             </div>
 
             <div>
-              <span className="text-slate-400 mr-2">Channel:</span>
+              <span className="text-slate-700 mr-2 font-bold">Channel:</span>
               <select
                 value={channelSource}
                 onChange={(e) => setChannelSource(e.target.value)}
-                className="bg-[#121215] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
+                className="bg-slate-100 border border-slate-200 text-slate-950 text-xs sm:text-sm rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer font-bold"
               >
-                <option className="bg-[#121215] text-slate-100 text-sm py-1" value="voice">Voice Call</option>
-                <option className="bg-[#121215] text-slate-100 text-sm py-1" value="text">SMS Text</option>
-                <option className="bg-[#121215] text-slate-100 text-sm py-1" value="whatsapp">WhatsApp</option>
-                <option className="bg-[#121215] text-slate-100 text-sm py-1" value="web">Web Portal</option>
+                <option value="voice">Voice Call</option>
+                <option value="text">SMS Text</option>
+                <option value="whatsapp">WhatsApp</option>
+                <option value="web">Web Portal</option>
               </select>
             </div>
           </div>
@@ -280,36 +280,36 @@ export const CitizenVoiceComposer: React.FC<CitizenVoiceComposerProps> = ({ regi
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono">
-            <div className="p-3.5 rounded-lg bg-[#0A0A0C] border border-white/[0.08]">
-              <span className="text-slate-400 text-[11px] uppercase tracking-wider">Detected Language</span>
-              <div className="text-slate-100 font-semibold text-base mt-1 uppercase">{analysisResult.language}</div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs sm:text-sm font-mono font-bold">
+            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 shadow-2xs">
+              <span className="text-slate-700 text-xs uppercase tracking-wider font-extrabold">Detected Language</span>
+              <div className="text-slate-950 font-extrabold text-lg mt-1 uppercase">{analysisResult.language}</div>
             </div>
 
-            <div className="p-3.5 rounded-lg bg-[#0A0A0C] border border-white/[0.08]">
-              <span className="text-slate-400 text-[11px] uppercase tracking-wider">Civic Category</span>
-              <div className="text-indigo-400 font-semibold text-base mt-1 uppercase">{analysisResult.category}</div>
+            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 shadow-2xs">
+              <span className="text-slate-700 text-xs uppercase tracking-wider font-extrabold">Civic Category</span>
+              <div className="text-indigo-700 font-extrabold text-lg mt-1 uppercase">{analysisResult.category}</div>
             </div>
 
-            <div className="p-3.5 rounded-lg bg-[#0A0A0C] border border-white/[0.08]">
-              <span className="text-slate-400 text-[11px] uppercase tracking-wider">Urgency Signal</span>
+            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 shadow-2xs">
+              <span className="text-slate-700 text-xs uppercase tracking-wider font-extrabold">Urgency Signal</span>
               <div className="mt-1.5">
                 <PriorityBadge level={analysisResult.urgency} size="sm" />
               </div>
             </div>
           </div>
 
-          <div className="space-y-1.5 text-xs">
-            <span className="font-mono text-slate-400 text-[11px] uppercase">Normalized English Meaning:</span>
-            <div className="p-3.5 rounded-lg bg-[#0A0A0C] border border-white/[0.08] text-slate-200 text-sm italic">
+          <div className="space-y-1.5 text-xs sm:text-sm font-bold">
+            <span className="font-mono text-slate-800 text-xs uppercase font-extrabold">Normalized English Meaning:</span>
+            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-950 text-sm sm:text-base italic font-bold shadow-2xs">
               "{analysisResult.summary}"
             </div>
           </div>
 
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
-            <div className="text-xs font-mono text-slate-400 flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-green-400 shrink-0" />
-              <span>Contributes to <span className="text-indigo-400 font-semibold uppercase">{analysisResult.category}</span> demand index in selected district.</span>
+            <div className="text-xs sm:text-sm font-mono text-slate-800 flex items-center gap-2 font-bold">
+              <ShieldCheck className="w-4.5 h-4.5 text-emerald-600 shrink-0 font-extrabold" />
+              <span>Contributes to <span className="text-indigo-700 font-extrabold uppercase">{analysisResult.category}</span> demand index in selected district.</span>
             </div>
 
             <button

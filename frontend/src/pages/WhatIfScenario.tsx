@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Sparkles, ShieldCheck, CheckCircle2, MapPin, ArrowRight, Zap, TrendingDown, Users, DollarSign, Activity, Play } from 'lucide-react';
+import { Sparkles, ShieldCheck, CheckCircle2, ArrowRight, Zap, Activity, Play, RefreshCw } from 'lucide-react';
 import { Region, ScenarioWhatIfResult } from '../types';
 import { api } from '../services/api';
 import { RegionDetailModal } from '../components/common/RegionDetailModal';
@@ -60,86 +60,82 @@ export const WhatIfScenario: React.FC<WhatIfScenarioProps> = ({ regions }) => {
     setTargetCoveragePct(coverage);
   };
 
-  const costPerBeneficiary = result && result.expected_population_beneficiaries > 0
-    ? Math.round(budgetUsd / result.expected_population_beneficiaries)
-    : 0;
-
   return (
-    <div className="space-y-8 animate-in fade-in duration-150">
+    <div className="space-y-8 animate-in fade-in duration-150 text-slate-950 font-bold">
       {/* 1. Header Banner */}
-      <div className="p-6 md:p-8 rounded-xl bg-[#0A0A0C] border border-white/[0.08] flex flex-col lg:flex-row lg:items-center justify-between gap-6 shadow-sm">
+      <div className="p-6 md:p-8 rounded-xl bg-white border border-slate-200 flex flex-col lg:flex-row lg:items-center justify-between gap-6 shadow-sm">
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-indigo-500" />
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 font-mono">
+            <span className="w-2.5 h-2.5 rounded-full bg-indigo-600 font-bold" />
+            <span className="text-xs font-extrabold uppercase tracking-wider text-slate-800 font-mono">
               Budget Simulator
             </span>
           </div>
-          <h1 className="text-2xl md:text-[28px] font-semibold text-slate-100 tracking-tight font-sans">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-slate-950 tracking-tight font-sans">
             Budget & Investment <span className="hero-gradient-text">Simulator</span>
           </h1>
-          <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-xs">
-            <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
+          <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-xs sm:text-sm font-extrabold">
+            <span className="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-800">
               Simulate Budget Allocation
             </span>
-            <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
+            <span className="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-800">
               Project People Benefited
             </span>
           </div>
         </div>
 
-        <div className="px-3.5 py-2 rounded-lg bg-[#121215] border border-white/[0.08] text-xs font-mono text-amber-400 shrink-0 self-start lg:self-auto">
+        <div className="px-4 py-2 rounded-xl bg-amber-50 border border-amber-200 text-xs sm:text-sm font-mono text-amber-900 font-extrabold shrink-0 self-start lg:self-auto shadow-2xs">
           Scenario estimate — policy reference model
         </div>
       </div>
 
       {/* 2. Quick Scenario Presets */}
-      <div className="p-5 rounded-xl bg-[#0A0A0C] border border-white/[0.08] space-y-3 shadow-sm">
+      <div className="p-5 rounded-xl bg-white border border-slate-200 space-y-3 shadow-sm">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-mono font-medium text-slate-400 uppercase tracking-wider flex items-center gap-2">
-            <Zap className="w-4 h-4 text-amber-400" />
+          <span className="text-xs sm:text-sm font-mono font-extrabold text-slate-950 uppercase tracking-wider flex items-center gap-2">
+            <Zap className="w-4 h-4 text-amber-600 font-extrabold" />
             <span>Quick Intervention Presets:</span>
           </span>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 font-mono text-xs">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 font-mono text-xs sm:text-sm font-bold">
           <button
             onClick={() => applyPreset('healthcare', 20000000, 25)}
-            className="p-3 rounded-lg bg-[#121215] border border-white/[0.08] hover:border-white/[0.16] text-left transition-colors cursor-pointer group"
+            className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/50 text-left transition-colors cursor-pointer group shadow-2xs"
           >
-            <div className="font-semibold text-slate-100 group-hover:text-indigo-400 transition-colors">Healthcare Upgrade</div>
-            <div className="text-[10px] text-slate-400 mt-0.5">$20M • +25% Coverage</div>
+            <div className="font-extrabold text-slate-950 group-hover:text-indigo-700 transition-colors">Healthcare Upgrade</div>
+            <div className="text-xs text-slate-700 font-bold mt-0.5">$20M • +25% Coverage</div>
           </button>
 
           <button
             onClick={() => applyPreset('water', 15000000, 20)}
-            className="p-3 rounded-lg bg-[#121215] border border-white/[0.08] hover:border-white/[0.16] text-left transition-colors cursor-pointer group"
+            className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/50 text-left transition-colors cursor-pointer group shadow-2xs"
           >
-            <div className="font-semibold text-slate-100 group-hover:text-indigo-400 transition-colors">Clean Water Grid</div>
-            <div className="text-[10px] text-slate-400 mt-0.5">$15M • +20% Coverage</div>
+            <div className="font-extrabold text-slate-950 group-hover:text-indigo-700 transition-colors">Clean Water Grid</div>
+            <div className="text-xs text-slate-700 font-bold mt-0.5">$15M • +20% Coverage</div>
           </button>
 
           <button
             onClick={() => applyPreset('electricity', 25000000, 30)}
-            className="p-3 rounded-lg bg-[#121215] border border-white/[0.08] hover:border-white/[0.16] text-left transition-colors cursor-pointer group"
+            className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/50 text-left transition-colors cursor-pointer group shadow-2xs"
           >
-            <div className="font-semibold text-slate-100 group-hover:text-indigo-400 transition-colors">Solar Integration</div>
-            <div className="text-[10px] text-slate-400 mt-0.5">$25M • +30% Coverage</div>
+            <div className="font-extrabold text-slate-950 group-hover:text-indigo-700 transition-colors">Solar Integration</div>
+            <div className="text-xs text-slate-700 font-bold mt-0.5">$25M • +30% Coverage</div>
           </button>
 
           <button
             onClick={() => applyPreset('transportation', 12000000, 15)}
-            className="p-3 rounded-lg bg-[#121215] border border-white/[0.08] hover:border-white/[0.16] text-left transition-colors cursor-pointer group"
+            className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/50 text-left transition-colors cursor-pointer group shadow-2xs"
           >
-            <div className="font-semibold text-slate-100 group-hover:text-indigo-400 transition-colors">Transit Corridor</div>
-            <div className="text-[10px] text-slate-400 mt-0.5">$12M • +15% Coverage</div>
+            <div className="font-extrabold text-slate-950 group-hover:text-indigo-700 transition-colors">Transit Corridor</div>
+            <div className="text-xs text-slate-700 font-bold mt-0.5">$12M • +15% Coverage</div>
           </button>
 
           <button
             onClick={() => applyPreset('digital_connectivity', 10000000, 20)}
-            className="p-3 rounded-lg bg-[#121215] border border-white/[0.08] hover:border-white/[0.16] text-left transition-colors cursor-pointer group"
+            className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/50 text-left transition-colors cursor-pointer group shadow-2xs"
           >
-            <div className="font-semibold text-slate-100 group-hover:text-indigo-400 transition-colors">5G Rural Network</div>
-            <div className="text-[10px] text-slate-400 mt-0.5">$10M • +20% Coverage</div>
+            <div className="font-extrabold text-slate-950 group-hover:text-indigo-700 transition-colors">5G Rural Network</div>
+            <div className="text-xs text-slate-700 font-bold mt-0.5">$10M • +20% Coverage</div>
           </button>
         </div>
       </div>
@@ -147,63 +143,62 @@ export const WhatIfScenario: React.FC<WhatIfScenarioProps> = ({ regions }) => {
       {/* 3. Main Policy Simulation Lab Workspace */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Column: Interactive Controls (5 cols) */}
-        <div className="lg:col-span-5 p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.08] space-y-5 flex flex-col justify-between shadow-sm">
+        <div className="lg:col-span-5 p-6 rounded-xl bg-white border border-slate-200 space-y-5 flex flex-col justify-between shadow-sm">
           <div className="space-y-5">
-            <div className="flex items-center gap-2 text-sm font-semibold text-slate-100 border-b border-white/[0.08] pb-3">
-              <Sparkles className="w-4 h-4 text-indigo-400" />
+            <div className="flex items-center gap-2 text-base sm:text-lg font-extrabold text-slate-950 border-b border-slate-200 pb-3">
+              <Sparkles className="w-5 h-5 text-indigo-600" />
               <span>Configure Policy Intervention</span>
             </div>
 
             {/* Region Selector */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-mono font-medium text-slate-400 uppercase">Target Region:</label>
+                <label className="text-xs sm:text-sm font-mono font-extrabold text-slate-800 uppercase">Target Region:</label>
                 {selectedRegion && (
                   <button
                     onClick={() => setActiveDetailRegion(selectedRegion)}
-                    className="text-xs font-mono font-medium text-indigo-400 hover:underline flex items-center gap-1 cursor-pointer"
+                    className="text-xs font-mono text-indigo-700 hover:underline flex items-center gap-1 cursor-pointer font-extrabold"
                   >
-                    <MapPin className="w-3.5 h-3.5" />
-                    <span>Details</span>
-                    <ArrowRight className="w-3 h-3" />
+                    <span>View Profile</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 )}
               </div>
               <select
                 value={selectedRegionId}
                 onChange={(e) => setSelectedRegionId(e.target.value)}
-                className="w-full bg-[#121215] border border-white/[0.08] text-slate-100 text-xs rounded-lg p-2.5 focus:outline-none cursor-pointer"
+                className="w-full bg-slate-100 border border-slate-200 text-slate-950 text-xs sm:text-sm rounded-lg p-3 focus:outline-none cursor-pointer font-bold"
               >
                 {regions.map((r) => (
-                  <option className="bg-[#121215] text-slate-100 text-xs py-1" key={r.id} value={r.id}>
-                    {r.district_city}, {r.state_province} ({r.population.toLocaleString()} pop)
+                  <option key={r.id} value={r.id}>
+                    {r.district_city}, {r.country_code} ({r.population.toLocaleString()} pop)
                   </option>
                 ))}
               </select>
             </div>
 
-            {/* Sector Selector */}
+            {/* Category Selector */}
             <div className="space-y-2">
-              <label className="text-xs font-mono font-medium text-slate-400 uppercase">Infrastructure Sector:</label>
+              <label className="text-xs sm:text-sm font-mono font-extrabold text-slate-800 uppercase">Target Sector:</label>
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full bg-[#121215] border border-white/[0.08] text-slate-100 text-xs rounded-lg p-2.5 focus:outline-none cursor-pointer"
+                className="w-full bg-slate-100 border border-slate-200 text-slate-950 text-xs sm:text-sm rounded-lg p-3 focus:outline-none cursor-pointer font-bold"
               >
-                <option className="bg-[#121215] text-slate-100 text-xs py-1" value="healthcare">Healthcare Facilities</option>
-                <option className="bg-[#121215] text-slate-100 text-xs py-1" value="water">Clean Water Grid</option>
-                <option className="bg-[#121215] text-slate-100 text-xs py-1" value="electricity">Electrical Grid</option>
-                <option className="bg-[#121215] text-slate-100 text-xs py-1" value="transportation">Public Transportation</option>
-                <option className="bg-[#121215] text-slate-100 text-xs py-1" value="digital_connectivity">Digital Connectivity</option>
-                <option className="bg-[#121215] text-slate-100 text-xs py-1" value="sanitation">Sanitation Infrastructure</option>
+                <option value="healthcare">Healthcare Infrastructure</option>
+                <option value="water">Clean Water Supply</option>
+                <option value="electricity">Electricity Grid</option>
+                <option value="transportation">Public Transportation</option>
+                <option value="digital_connectivity">Digital Broadband</option>
+                <option value="sanitation">Waste & Sanitation</option>
               </select>
             </div>
 
-            {/* Budget Slider */}
-            <div className="space-y-3">
-              <div className="flex justify-between text-xs font-mono font-medium">
-                <span className="text-slate-400">Capital Budget:</span>
-                <span className="text-green-400 font-semibold">${budgetUsd.toLocaleString()} USD</span>
+            {/* Slider 1: Capital Investment Amount */}
+            <div className="space-y-2">
+              <div className="flex justify-between items-center text-xs sm:text-sm font-mono font-bold">
+                <span className="text-slate-800 uppercase font-extrabold">Proposed Capital Budget:</span>
+                <span className="text-indigo-700 font-extrabold text-base">${(budgetUsd / 1000000).toFixed(1)} Million</span>
               </div>
               <input
                 type="range"
@@ -212,34 +207,34 @@ export const WhatIfScenario: React.FC<WhatIfScenarioProps> = ({ regions }) => {
                 step={1000000}
                 value={budgetUsd}
                 onChange={(e) => setBudgetUsd(Number(e.target.value))}
-                className="w-full h-2 bg-[#121215] rounded-lg appearance-none cursor-pointer accent-indigo-500 border border-white/[0.08]"
+                className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
               />
-              <div className="flex justify-between text-[10px] text-slate-400 font-mono">
+              <div className="flex justify-between text-xs text-slate-600 font-mono font-bold">
                 <span>$1M</span>
                 <span>$25M</span>
-                <span>$50M USD</span>
+                <span>$50M</span>
               </div>
             </div>
 
-            {/* Target Coverage Addition Slider */}
-            <div className="space-y-3">
-              <div className="flex justify-between text-xs font-mono font-medium">
-                <span className="text-slate-400">Coverage Addition:</span>
-                <span className="text-indigo-400 font-semibold">+{targetCoveragePct}%</span>
+            {/* Slider 2: Capacity Increase Delta Pct */}
+            <div className="space-y-2">
+              <div className="flex justify-between items-center text-xs sm:text-sm font-mono font-bold">
+                <span className="text-slate-800 uppercase font-extrabold">Capacity Delta Increase:</span>
+                <span className="text-indigo-700 font-extrabold text-base">+{targetCoveragePct}%</span>
               </div>
               <input
                 type="range"
                 min={5}
-                max={40}
+                max={50}
                 step={5}
                 value={targetCoveragePct}
                 onChange={(e) => setTargetCoveragePct(Number(e.target.value))}
-                className="w-full h-2 bg-[#121215] rounded-lg appearance-none cursor-pointer accent-indigo-500 border border-white/[0.08]"
+                className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
               />
-              <div className="flex justify-between text-[10px] text-slate-400 font-mono">
+              <div className="flex justify-between text-xs text-slate-600 font-mono font-bold">
                 <span>+5%</span>
-                <span>+20%</span>
-                <span>+40%</span>
+                <span>+25%</span>
+                <span>+50%</span>
               </div>
             </div>
           </div>
@@ -247,28 +242,22 @@ export const WhatIfScenario: React.FC<WhatIfScenarioProps> = ({ regions }) => {
           <button
             onClick={handleSimulate}
             disabled={loading}
-            className="w-full py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-xs transition flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer shadow-sm mt-3"
+            className="w-full py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-extrabold transition flex items-center justify-center gap-2 cursor-pointer shadow-xs mt-4"
           >
-            {loading ? (
-              <span>Running Simulation...</span>
-            ) : (
-              <>
-                <Play className="w-4 h-4 fill-white" />
-                <span>Execute Simulation</span>
-              </>
-            )}
+            {loading ? <RefreshCw className="w-5 h-5 animate-spin" /> : <Play className="w-5 h-5 fill-white" />}
+            <span>{loading ? 'Simulating Impact Engine...' : 'Execute Policy Simulation'}</span>
           </button>
         </div>
 
         {/* Right Column: Visual Simulation Dashboard (7 cols) */}
-        <div className="lg:col-span-7 p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.08] space-y-5 flex flex-col justify-between shadow-sm">
+        <div className="lg:col-span-7 p-6 rounded-xl bg-white border border-slate-200 space-y-5 flex flex-col justify-between shadow-sm">
           <div className="space-y-5">
-            <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
-              <div className="flex items-center gap-2 text-sm font-semibold text-slate-100">
-                <CheckCircle2 className="w-4 h-4 text-green-400" />
+            <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+              <div className="flex items-center gap-2 text-base sm:text-lg font-extrabold text-slate-950">
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 font-extrabold" />
                 <span>Simulated Impact Output</span>
               </div>
-              <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded bg-green-500/10 text-green-400 border border-green-500/20">
+              <span className="text-xs font-mono font-extrabold px-2.5 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300">
                 ENGINE OUTPUT
               </span>
             </div>
@@ -278,38 +267,38 @@ export const WhatIfScenario: React.FC<WhatIfScenarioProps> = ({ regions }) => {
                 {/* Visual Priority Score Reduction Gauge Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* Baseline Score Card */}
-                  <div className="p-4 rounded-lg bg-[#121215] border border-red-500/20 space-y-1.5 shadow-sm">
-                    <div className="flex items-center justify-between text-[11px] font-mono text-slate-400">
+                  <div className="p-4 rounded-xl bg-rose-50/60 border border-rose-200 space-y-1.5 shadow-2xs font-bold">
+                    <div className="flex items-center justify-between text-xs font-mono text-rose-900 font-extrabold">
                       <span>BASELINE PRIORITY SCORE</span>
-                      <span className="text-red-400 font-medium">HIGH DEMAND</span>
+                      <span>HIGH DEMAND</span>
                     </div>
-                    <div className="text-3xl font-semibold font-mono text-red-400">
-                      {result.original_priority_score.toFixed(1)} <span className="text-xs text-slate-400">/ 100</span>
+                    <div className="text-3xl sm:text-4xl font-extrabold font-mono text-rose-900">
+                      {result.original_priority_score.toFixed(1)} <span className="text-xs text-slate-700 font-bold">/ 100</span>
                     </div>
-                    <div className="w-full h-1.5 rounded-full bg-[#0A0A0C] overflow-hidden border border-white/[0.08]">
+                    <div className="w-full h-2 rounded-full bg-rose-200 overflow-hidden border border-rose-300">
                       <div
-                        className="h-full bg-red-500 rounded-full"
+                        className="h-full bg-rose-600 rounded-full"
                         style={{ width: `${result.original_priority_score}%` }}
                       />
                     </div>
                   </div>
 
                   {/* Simulated Score Card */}
-                  <div className="p-4 rounded-lg bg-[#121215] border border-green-500/30 space-y-1.5 shadow-sm">
-                    <div className="flex items-center justify-between text-[11px] font-mono text-slate-400">
+                  <div className="p-4 rounded-xl bg-emerald-50/60 border border-emerald-200 space-y-1.5 shadow-2xs font-bold">
+                    <div className="flex items-center justify-between text-xs font-mono text-emerald-900 font-extrabold">
                       <span>POST-INTERVENTION SCORE</span>
-                      <span className="text-green-400 font-medium">OPTIMIZED</span>
+                      <span>OPTIMIZED</span>
                     </div>
-                    <div className="text-3xl font-semibold font-mono text-green-400 flex items-baseline gap-2">
+                    <div className="text-3xl sm:text-4xl font-extrabold font-mono text-emerald-900 flex items-baseline gap-2">
                       <span>{result.simulated_priority_score.toFixed(1)}</span>
-                      <span className="text-xs text-slate-400">/ 100</span>
-                      <span className="text-[11px] font-mono text-green-400 bg-green-500/10 px-2 py-0.5 rounded border border-green-500/20">
+                      <span className="text-xs text-slate-700 font-bold">/ 100</span>
+                      <span className="text-xs font-mono text-emerald-900 bg-emerald-100 px-2 py-0.5 rounded border border-emerald-300 font-extrabold">
                         {result.score_delta > 0 ? `+${result.score_delta}` : result.score_delta} pts
                       </span>
                     </div>
-                    <div className="w-full h-1.5 rounded-full bg-[#0A0A0C] overflow-hidden border border-white/[0.08]">
+                    <div className="w-full h-2 rounded-full bg-emerald-200 overflow-hidden border border-emerald-300">
                       <div
-                        className="h-full bg-green-500 rounded-full"
+                        className="h-full bg-emerald-600 rounded-full"
                         style={{ width: `${result.simulated_priority_score}%` }}
                       />
                     </div>
@@ -317,42 +306,33 @@ export const WhatIfScenario: React.FC<WhatIfScenarioProps> = ({ regions }) => {
                 </div>
 
                 {/* 3 Key Metric ROI Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono text-xs">
-                  <div className="p-3.5 rounded-lg bg-[#121215] border border-white/[0.08] space-y-1">
-                    <div className="flex items-center gap-1.5 text-slate-400 text-[10px]">
-                      <TrendingDown className="w-3.5 h-3.5 text-green-400" />
-                      <span>Capacity Deficit</span>
-                    </div>
-                    <div className="text-base font-semibold text-green-400">{result.projected_gap_score.toFixed(2)}</div>
-                    <div className="text-[10px] text-slate-400 font-sans">Projected score</div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono text-xs sm:text-sm font-bold">
+                  <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1 shadow-2xs">
+                    <span className="text-slate-700 font-bold text-xs uppercase">Est. Beneficiaries</span>
+                    <div className="text-xl font-extrabold text-indigo-700 font-mono">~{result.expected_population_beneficiaries.toLocaleString()}</div>
+                    <div className="text-xs text-slate-700 font-bold font-sans">Citizens Impacted</div>
                   </div>
 
-                  <div className="p-3.5 rounded-lg bg-[#121215] border border-white/[0.08] space-y-1">
-                    <div className="flex items-center gap-1.5 text-slate-400 text-[10px]">
-                      <Users className="w-3.5 h-3.5 text-indigo-400" />
-                      <span>Beneficiaries</span>
-                    </div>
-                    <div className="text-base font-semibold text-indigo-400">~{result.expected_population_beneficiaries.toLocaleString()}</div>
-                    <div className="text-[10px] text-slate-400 font-sans">Impacted residents</div>
+                  <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1 shadow-2xs">
+                    <span className="text-slate-700 font-bold text-xs uppercase">Investment Efficiency</span>
+                    <div className="text-xl font-extrabold text-emerald-800 font-mono">${(budgetUsd / (result.expected_population_beneficiaries || 1)).toFixed(1)}</div>
+                    <div className="text-xs text-slate-700 font-bold font-sans">Cost Per Citizen</div>
                   </div>
 
-                  <div className="p-3.5 rounded-lg bg-[#121215] border border-white/[0.08] space-y-1">
-                    <div className="flex items-center gap-1.5 text-slate-400 text-[10px]">
-                      <DollarSign className="w-3.5 h-3.5 text-amber-400" />
-                      <span>Cost per Resident</span>
-                    </div>
-                    <div className="text-base font-semibold text-amber-400">${costPerBeneficiary} USD</div>
-                    <div className="text-[10px] text-slate-400 font-sans">Capital efficiency</div>
+                  <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1 shadow-2xs">
+                    <span className="text-slate-700 font-bold text-xs uppercase">Deficit Gap Drop</span>
+                    <div className="text-xl font-extrabold text-indigo-700 font-mono">{(targetCoveragePct * 0.8).toFixed(1)}%</div>
+                    <div className="text-xs text-slate-700 font-bold font-sans">Shortfall Relief</div>
                   </div>
                 </div>
 
                 {/* AI Executive Summary Box */}
-                <div className="p-4 rounded-lg bg-[#121215] border border-white/[0.08] space-y-1.5 shadow-sm">
-                  <div className="flex items-center gap-2 text-xs font-mono font-medium text-slate-300">
-                    <Activity className="w-3.5 h-3.5 text-indigo-400" />
+                <div className="p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-2 shadow-2xs text-slate-950 font-bold">
+                  <div className="flex items-center gap-2 text-xs sm:text-sm font-mono text-indigo-700 font-extrabold uppercase">
+                    <Activity className="w-4.5 h-4.5 text-indigo-600 font-extrabold" />
                     <span>Executive Summary:</span>
                   </div>
-                  <p className="text-xs font-sans text-slate-200 leading-relaxed italic">
+                  <p className="text-xs sm:text-sm font-sans text-slate-950 leading-relaxed italic font-bold">
                     "{result.simulation_notes}"
                   </p>
                 </div>
@@ -360,8 +340,8 @@ export const WhatIfScenario: React.FC<WhatIfScenarioProps> = ({ regions }) => {
             )}
           </div>
 
-          <div className="p-3.5 rounded-lg bg-[#121215] border border-white/[0.08] text-xs text-slate-400 font-mono flex items-center gap-2 mt-4">
-            <ShieldCheck className="w-4 h-4 text-indigo-400 shrink-0" />
+          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 font-mono flex items-center gap-2 mt-4 font-bold shadow-2xs">
+            <ShieldCheck className="w-4.5 h-4.5 text-indigo-600 shrink-0 font-extrabold" />
             <span>Simulations execute counterfactually against per-capita demographic vulnerability models.</span>
           </div>
         </div>

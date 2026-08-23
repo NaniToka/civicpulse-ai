@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Filter, Globe2, TrendingUp, Layers, MapPin, ArrowRight } from 'lucide-react';
+import { Search, Filter, Globe2, TrendingUp, Layers, MapPin } from 'lucide-react';
 import { CitizenRequest, DemandMomentumSignal, Region } from '../types';
 import { TrendBadge } from '../components/common/TrendBadge';
 import { PriorityBadge } from '../components/common/PriorityBadge';
@@ -74,38 +74,38 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
   };
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-150">
+    <div className="space-y-8 animate-in fade-in duration-150 text-slate-950 font-bold">
       {/* Header */}
-      <div className="p-6 md:p-8 rounded-xl bg-[#0A0A0C] border border-white/[0.08] flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm">
+      <div className="p-6 md:p-8 rounded-xl bg-white border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm">
         <div className="space-y-2 max-w-3xl">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-indigo-500" />
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 font-mono">
+            <span className="w-2.5 h-2.5 rounded-full bg-indigo-600 font-bold" />
+            <span className="text-xs font-extrabold uppercase tracking-wider text-slate-800 font-mono">
               Citizen Feedback & Growth
             </span>
           </div>
-          <h1 className="text-2xl md:text-[28px] font-semibold text-slate-100 tracking-tight">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-slate-950 tracking-tight">
             Citizen Complaints & <span className="hero-gradient-text">Feedback Trends</span>
           </h1>
-          <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-xs">
-            <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
+          <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-xs sm:text-sm font-extrabold">
+            <span className="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-800">
               7 Native Languages
             </span>
-            <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
+            <span className="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-800">
               Growth & Surge Trends
             </span>
           </div>
         </div>
 
         <div className="flex items-center gap-3 shrink-0">
-          <div className="p-4 rounded-lg bg-[#121215] border border-white/[0.08] text-center font-mono space-y-0.5">
-            <div className="text-[11px] text-slate-400 uppercase font-medium">Signals Logged</div>
-            <div className="text-2xl font-semibold text-indigo-400">{requests.length}</div>
+          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-center font-mono space-y-0.5 shadow-2xs">
+            <div className="text-xs font-extrabold text-slate-800 uppercase">Signals Logged</div>
+            <div className="text-3xl font-extrabold text-indigo-700">{requests.length}</div>
           </div>
         </div>
       </div>
 
-      {/* Interactive Multilingual Citizen Voice Composer */}
+      {/* Interactive Multilingual Citizen Voice Studio */}
       <CitizenVoiceComposer
         regions={regions}
         onSignalAdded={onSignalAdded}
@@ -113,108 +113,93 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
       />
 
       {/* Filter Bar Console */}
-      <div className="p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.08] space-y-4 shadow-sm">
-        <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-200 uppercase tracking-wider font-mono">
-            <Filter className="w-4 h-4 text-indigo-400" />
+      <div className="p-6 rounded-xl bg-white border border-slate-200 space-y-4 shadow-sm">
+        <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+          <div className="flex items-center gap-2 text-xs sm:text-sm font-extrabold text-slate-950 uppercase tracking-wider font-mono">
+            <Filter className="w-4.5 h-4.5 text-indigo-600" />
             <span>Multilingual Signal Filters</span>
           </div>
-          <span className="text-xs font-mono text-indigo-400 font-medium">
+          <span className="text-xs sm:text-sm font-mono text-indigo-700 font-extrabold">
             Showing {filteredRequests.length} of {requests.length} Signals
           </span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 font-bold">
           <div className="relative col-span-1 sm:col-span-2 lg:col-span-1">
-            <Search className="w-4 h-4 absolute left-3 top-2.5 text-slate-400" />
+            <Search className="w-4 h-4 absolute left-3 top-2.5 text-slate-500 font-bold" />
             <input
               type="text"
-              placeholder="Search citizen feedback..."
+              placeholder="Search text or ID..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-1.5 bg-[#121215] border border-white/[0.08] rounded-lg text-xs text-slate-100 placeholder-slate-400 focus:outline-none focus:border-white/[0.16] font-mono"
+              className="w-full pl-9 pr-3 py-1.5 bg-slate-100 border border-slate-200 rounded-lg text-xs sm:text-sm text-slate-950 placeholder:text-slate-500 focus:outline-none font-bold"
             />
           </div>
 
-          <div className="flex items-center gap-2 col-span-1 sm:col-span-2 lg:col-span-1">
-            <select
-              value={selectedRegion}
-              onChange={(e) => setSelectedRegion(e.target.value)}
-              className="w-full bg-[#121215] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
-            >
-              <option className="bg-[#121215] text-slate-100 text-sm py-1" value="ALL">All Regions ({regions.length})</option>
-              {regions.map((r) => (
-                <option className="bg-[#121215] text-slate-100 text-sm py-1" key={r.id} value={r.id}>
-                  {r.district_city}, {r.country_code}
-                </option>
-              ))}
-            </select>
-
-            {selectedRegion !== 'ALL' && (
-              <button
-                onClick={() => handleOpenRegionDetails(selectedRegion)}
-                className="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-xs transition flex items-center gap-1 shrink-0 cursor-pointer"
-                title="View selected region profile details"
-              >
-                <MapPin className="w-3.5 h-3.5" />
-                <span className="hidden xl:inline">Details</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
-            )}
-          </div>
+          <select
+            value={selectedRegion}
+            onChange={(e) => setSelectedRegion(e.target.value)}
+            className="bg-slate-100 border border-slate-200 text-slate-950 text-xs sm:text-sm rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer font-bold"
+          >
+            <option value="ALL">All Regions</option>
+            {regions.map((r) => (
+              <option key={r.id} value={r.id}>
+                {r.district_city}, {r.country_code}
+              </option>
+            ))}
+          </select>
 
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="bg-[#121215] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
+            className="bg-slate-100 border border-slate-200 text-slate-950 text-xs sm:text-sm rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer font-bold"
           >
-            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="ALL">All Categories</option>
-            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="healthcare">Healthcare</option>
-            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="water">Clean Water</option>
-            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="electricity">Electricity</option>
-            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="transportation">Transportation</option>
-            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="digital_connectivity">Digital Connectivity</option>
-            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="sanitation">Sanitation</option>
+            <option value="ALL">All Sectors</option>
+            <option value="healthcare">Healthcare</option>
+            <option value="water">Water</option>
+            <option value="sanitation">Sanitation</option>
+            <option value="electricity">Electricity</option>
+            <option value="transportation">Transportation</option>
           </select>
 
           <select
             value={selectedLanguage}
             onChange={(e) => setSelectedLanguage(e.target.value)}
-            className="bg-[#121215] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
+            className="bg-slate-100 border border-slate-200 text-slate-950 text-xs sm:text-sm rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer font-bold"
           >
-            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="ALL">All Languages</option>
-            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="te">Telugu (te)</option>
-            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="hi">Hindi (hi)</option>
-            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="mr">Marathi (mr)</option>
-            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="pt">Portuguese (pt)</option>
-            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="zu">Zulu (zu)</option>
-            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="bn">Bengali (bn)</option>
-            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="en">English (en)</option>
+            <option value="ALL">All Languages</option>
+            <option value="te">Telugu (te)</option>
+            <option value="hi">Hindi (hi)</option>
+            <option value="mr">Marathi (mr)</option>
+            <option value="bn">Bengali (bn)</option>
+            <option value="pt">Portuguese (pt)</option>
+            <option value="zu">Zulu (zu)</option>
+            <option value="en">English (en)</option>
           </select>
 
           <select
             value={selectedUrgency}
             onChange={(e) => setSelectedUrgency(e.target.value)}
-            className="bg-[#121215] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
+            className="bg-slate-100 border border-slate-200 text-slate-950 text-xs sm:text-sm rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer font-bold"
           >
-            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="ALL">All Urgency Levels</option>
-            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="CRITICAL">CRITICAL</option>
-            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="HIGH">HIGH</option>
-            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="MEDIUM">MEDIUM</option>
-            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="LOW">LOW</option>
+            <option value="ALL">All Urgency Levels</option>
+            <option value="CRITICAL">CRITICAL</option>
+            <option value="HIGH">HIGH</option>
+            <option value="MEDIUM">MEDIUM</option>
+            <option value="LOW">LOW</option>
           </select>
         </div>
       </div>
 
       {/* Visual Analytics Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.08] space-y-4 shadow-sm">
-          <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
-            <h3 className="text-sm font-semibold text-slate-100 flex items-center gap-2">
-              <Layers className="w-4 h-4 text-indigo-400" />
+        <div className="p-6 rounded-xl bg-white border border-slate-200 space-y-4 shadow-sm">
+          <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+            <h3 className="text-base sm:text-lg font-extrabold text-slate-950 flex items-center gap-2">
+              <Layers className="w-5 h-5 text-indigo-600" />
               <span>Category Demand Distribution</span>
             </h3>
-            <span className="text-xs font-mono font-medium text-indigo-400">{requests.length} Signals</span>
+            <span className="text-xs sm:text-sm font-mono font-extrabold text-indigo-700">{requests.length} Signals</span>
           </div>
 
           <div className="space-y-3.5">
@@ -222,13 +207,13 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
               const pct = Math.round((count / (requests.length || 1)) * 100);
               return (
                 <div key={cat} className="space-y-1">
-                  <div className="flex justify-between text-xs font-mono">
-                    <span className="text-slate-200 font-medium capitalize">{cat}</span>
-                    <span className="text-indigo-400 font-medium">{count} ({pct}%)</span>
+                  <div className="flex justify-between text-xs sm:text-sm font-mono font-extrabold">
+                    <span className="text-slate-950 capitalize">{cat}</span>
+                    <span className="text-indigo-700">{count} ({pct}%)</span>
                   </div>
-                  <div className="h-2 rounded-full bg-[#121215] overflow-hidden border border-white/[0.08]">
+                  <div className="h-2 rounded-full bg-slate-200 overflow-hidden border border-slate-300">
                     <div
-                      className="h-full bg-indigo-500 rounded-full"
+                      className="h-full bg-indigo-600 rounded-full"
                       style={{ width: `${pct}%` }}
                     />
                   </div>
@@ -238,13 +223,13 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
           </div>
         </div>
 
-        <div className="p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.08] space-y-4 shadow-sm">
-          <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
+        <div className="p-6 rounded-xl bg-white border border-slate-200 space-y-4 shadow-sm">
+          <div className="flex items-center justify-between border-b border-slate-200 pb-3">
             <div className="flex items-center gap-2">
-              <Globe2 className="w-4 h-4 text-indigo-400" />
-              <h3 className="text-sm font-semibold text-slate-100">Multilingual Voice Representation</h3>
+              <Globe2 className="w-5 h-5 text-indigo-600" />
+              <h3 className="text-base sm:text-lg font-extrabold text-slate-950">Multilingual Voice Representation</h3>
             </div>
-            <span className="text-xs font-mono text-indigo-400 font-medium bg-indigo-500/10 px-2.5 py-0.5 rounded border border-indigo-500/20">
+            <span className="text-xs font-mono font-extrabold text-indigo-700 bg-indigo-50 px-2.5 py-0.5 rounded border border-indigo-200">
               NLP Engine Active
             </span>
           </div>
@@ -253,13 +238,13 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
             {Object.entries(languageCounts).map(([code, count]) => {
               const pct = Math.round((count / (requests.length || 1)) * 100);
               return (
-                <div key={code} className="p-3.5 rounded-lg bg-[#121215] border border-white/[0.08]">
-                  <div className="text-xs font-medium text-slate-200">
+                <div key={code} className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 shadow-2xs">
+                  <div className="text-xs sm:text-sm font-extrabold text-slate-950">
                     {languageLabels[code] || code}
                   </div>
                   <div className="flex items-baseline justify-between mt-2 font-mono">
-                    <span className="text-lg font-semibold text-indigo-400">{count}</span>
-                    <span className="text-xs text-slate-400">{pct}% share</span>
+                    <span className="text-xl font-extrabold text-indigo-700">{count}</span>
+                    <span className="text-xs text-slate-700 font-bold">{pct}% share</span>
                   </div>
                 </div>
               );
@@ -269,96 +254,96 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
       </div>
 
       {/* Demand Velocity Momentum Signals */}
-      <div className="p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.08] space-y-4 shadow-sm">
-        <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
+      <div className="p-6 rounded-xl bg-white border border-slate-200 space-y-4 shadow-sm">
+        <div className="flex items-center justify-between border-b border-slate-200 pb-3">
           <div className="flex items-center gap-2">
-            <TrendingUp className="w-4 h-4 text-indigo-400" />
-            <h3 className="text-[15px] font-semibold text-slate-100">Demand Momentum Velocity Signals</h3>
+            <TrendingUp className="w-5 h-5 text-indigo-600" />
+            <h3 className="text-base sm:text-lg font-extrabold text-slate-950">Demand Momentum Velocity Signals</h3>
           </div>
-          <span className="text-xs text-slate-400 font-mono">30-Day Window Comparison</span>
+          <span className="text-xs text-slate-700 font-mono font-bold">30-Day Window Comparison</span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="p-4 rounded-lg bg-[#121215] border border-white/[0.08] space-y-2">
+          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2 shadow-2xs">
             <div className="flex justify-between items-center">
-              <span className="text-xs font-semibold text-slate-100 font-mono">Healthcare Demand</span>
+              <span className="text-xs sm:text-sm font-extrabold text-slate-950 font-mono">Healthcare Demand</span>
               <TrendBadge trend="INCREASING" pctChange={34.5} />
             </div>
-            <p className="text-xs text-slate-400 leading-relaxed font-sans">
+            <p className="text-xs sm:text-sm text-slate-800 leading-relaxed font-bold">
               Accelerating demand velocity in Kanpur South and Ekurhuleni North clinics.
             </p>
-            <div className="text-xs font-mono font-medium text-green-400">+34.5% vs previous 30 days</div>
+            <div className="text-xs sm:text-sm font-mono font-extrabold text-emerald-800">+34.5% vs previous 30 days</div>
           </div>
 
-          <div className="p-4 rounded-lg bg-[#121215] border border-white/[0.08] space-y-2">
+          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2 shadow-2xs">
             <div className="flex justify-between items-center">
-              <span className="text-xs font-semibold text-slate-100 font-mono">Clean Water Supply</span>
+              <span className="text-xs sm:text-sm font-extrabold text-slate-950 font-mono">Clean Water Supply</span>
               <TrendBadge trend="EMERGING" />
             </div>
-            <p className="text-xs text-slate-400 leading-relaxed font-sans">
+            <p className="text-xs sm:text-sm text-slate-800 leading-relaxed font-bold">
               Sudden surge in pipeline fracture complaints in Pune Peri-Urban Ward 12.
             </p>
-            <div className="text-xs font-mono font-medium text-amber-400">Emerging urgent signal</div>
+            <div className="text-xs sm:text-sm font-mono font-extrabold text-amber-800">Emerging urgent signal</div>
           </div>
 
-          <div className="p-4 rounded-lg bg-[#121215] border border-white/[0.08] space-y-2">
+          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2 shadow-2xs">
             <div className="flex justify-between items-center">
-              <span className="text-xs font-semibold text-slate-100 font-mono">Digital Broadband</span>
+              <span className="text-xs sm:text-sm font-extrabold text-slate-950 font-mono">Digital Broadband</span>
               <TrendBadge trend="STABLE" pctChange={2.1} />
             </div>
-            <p className="text-xs text-slate-400 leading-relaxed font-sans">
+            <p className="text-xs sm:text-sm text-slate-800 leading-relaxed font-bold">
               Consistent steady request rate across student populations.
             </p>
-            <div className="text-xs font-mono font-medium text-slate-400">Stable volume (+2.1%)</div>
+            <div className="text-xs sm:text-sm font-mono font-extrabold text-slate-700">Stable volume (+2.1%)</div>
           </div>
         </div>
       </div>
 
       {/* Citizen Feedback Feed Cards */}
-      <div className="p-6 md:p-8 rounded-xl bg-[#0A0A0C] border border-white/[0.08] space-y-4 shadow-sm">
-        <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
-          <h3 className="text-[15px] font-semibold text-slate-100">Filtered Citizen Requests ({filteredRequests.length})</h3>
-          <span className="text-xs font-mono text-indigo-400">Showing verified demand signals</span>
+      <div className="p-6 md:p-8 rounded-xl bg-white border border-slate-200 space-y-4 shadow-sm">
+        <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+          <h3 className="text-base sm:text-lg font-extrabold text-slate-950">Filtered Citizen Requests ({filteredRequests.length})</h3>
+          <span className="text-xs sm:text-sm font-mono font-extrabold text-indigo-700">Showing verified demand signals</span>
         </div>
 
         {filteredRequests.length === 0 ? (
-          <div className="py-12 text-center text-xs text-slate-400 font-medium">
+          <div className="py-12 text-center text-xs sm:text-sm text-slate-700 font-extrabold">
             No citizen requests match the selected filters.
           </div>
         ) : (
           <div className="space-y-3">
             {filteredRequests.map((req) => (
-              <div key={req.id} className="p-4 rounded-lg bg-[#121215] border border-white/[0.08] hover:border-white/[0.16] transition-colors space-y-2.5">
-                <div className="flex flex-wrap items-center justify-between gap-3 text-xs">
+              <div key={req.id} className="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-slate-300 transition-colors space-y-3 shadow-2xs">
+                <div className="flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm font-bold">
                   <div className="flex items-center gap-2 font-mono">
-                    <span className="font-semibold text-indigo-400">{req.id}</span>
-                    <span className="text-slate-300">• {req.request_category || req.category}</span>
+                    <span className="font-extrabold text-indigo-700">{req.id}</span>
+                    <span className="text-slate-800 font-extrabold">• {req.request_category || req.category}</span>
                     <button
                       onClick={() => handleOpenRegionDetails(req.region_id)}
-                      className="text-slate-400 hover:text-indigo-400 flex items-center gap-1 font-medium cursor-pointer"
+                      className="text-slate-800 hover:text-indigo-700 flex items-center gap-1 font-extrabold cursor-pointer"
                     >
-                      <MapPin className="w-3.5 h-3.5 text-indigo-400" />
+                      <MapPin className="w-4 h-4 text-indigo-600" />
                       <span>{req.region_id}</span>
                     </button>
-                    <span className="text-slate-400">• {req.source}</span>
+                    <span className="text-slate-700 font-bold">• {req.source}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#0A0A0C] border border-white/[0.08] text-slate-400 uppercase">
+                    <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-white border border-slate-200 text-slate-800 font-extrabold uppercase">
                       LANG: {req.language}
                     </span>
                     <PriorityBadge level={req.urgency || req.extracted_entities.severity} size="sm" />
                   </div>
                 </div>
 
-                <div className="p-3.5 rounded-lg bg-[#0A0A0C] border border-white/[0.08]">
-                  <p className="text-xs font-medium text-slate-100 leading-relaxed font-sans">
+                <div className="p-3.5 rounded-lg bg-white border border-slate-200 shadow-2xs">
+                  <p className="text-xs sm:text-sm font-extrabold text-slate-950 leading-relaxed font-sans">
                     "{req.original_text}"
                   </p>
                 </div>
 
-                <div className="p-3 rounded-lg bg-[#0A0A0C] border border-white/[0.08] text-xs font-mono text-slate-300 flex items-start gap-2">
-                  <span className="text-indigo-400 shrink-0">Translation:</span>
-                  <span className="text-slate-300 font-sans italic">"{req.translated_text}"</span>
+                <div className="p-3 rounded-lg bg-white border border-slate-200 text-xs sm:text-sm font-mono text-slate-950 flex items-start gap-2 shadow-2xs font-bold">
+                  <span className="text-indigo-700 shrink-0 font-extrabold">Translation:</span>
+                  <span className="text-slate-950 font-sans italic font-bold">"{req.translated_text}"</span>
                 </div>
               </div>
             ))}

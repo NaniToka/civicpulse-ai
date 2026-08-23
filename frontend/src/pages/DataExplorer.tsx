@@ -62,93 +62,93 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
   };
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-150">
+    <div className="space-y-8 animate-in fade-in duration-150 text-slate-950 font-bold">
       {/* Header */}
-      <div className="p-6 md:p-8 rounded-xl bg-[#0A0A0C] border border-white/[0.08] flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm">
+      <div className="p-6 md:p-8 rounded-xl bg-white border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm">
         <div>
           <div className="flex items-center gap-2">
-            <Database className="w-5 h-5 text-indigo-400" />
-            <h1 className="text-2xl md:text-[28px] font-semibold text-slate-100 tracking-tight">
+            <Database className="w-6 h-6 text-indigo-600 font-extrabold" />
+            <h1 className="text-3xl md:text-4xl font-extrabold text-slate-950 tracking-tight">
               Submit & Explore <span className="hero-gradient-text">Data</span>
             </h1>
           </div>
-          <div className="flex flex-wrap items-center gap-2 mt-2 font-mono text-xs">
-            <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
+          <div className="flex flex-wrap items-center gap-2 mt-2 font-mono text-xs sm:text-sm font-extrabold">
+            <span className="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-800">
               Submit Complaints & Voice Notes
             </span>
-            <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
+            <span className="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-800">
               Inspect All Platform Datasets
             </span>
           </div>
         </div>
 
-        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#121215] border border-white/[0.08] text-xs font-mono font-medium text-amber-400">
-          <ShieldAlert className="w-4 h-4 text-amber-400" />
+        <div className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-amber-50 border border-amber-200 text-xs sm:text-sm font-mono font-extrabold text-amber-900 shadow-2xs">
+          <ShieldAlert className="w-4.5 h-4.5 text-amber-700" />
           <span>DEMO DATASET</span>
         </div>
       </div>
 
-      <div className="flex border-b border-white/[0.08] text-xs font-mono overflow-x-auto">
+      <div className="flex border-b border-slate-200 text-xs sm:text-sm font-mono overflow-x-auto font-extrabold">
         <button
           onClick={() => setActiveTab('requests')}
-          className={`px-4 py-2.5 font-medium transition-colors border-b-2 whitespace-nowrap cursor-pointer ${
+          className={`px-4 py-3 font-extrabold transition-colors border-b-2 whitespace-nowrap cursor-pointer ${
             activeTab === 'requests'
-              ? 'border-indigo-500 text-indigo-400'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
+              ? 'border-indigo-600 text-indigo-700'
+              : 'border-transparent text-slate-700 hover:text-slate-950'
           }`}
         >
           Citizen Requests ({requests.length})
         </button>
         <button
           onClick={() => setActiveTab('regions')}
-          className={`px-4 py-2.5 font-medium transition-colors border-b-2 whitespace-nowrap cursor-pointer ${
+          className={`px-4 py-3 font-extrabold transition-colors border-b-2 whitespace-nowrap cursor-pointer ${
             activeTab === 'regions'
-              ? 'border-indigo-500 text-indigo-400'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
+              ? 'border-indigo-600 text-indigo-700'
+              : 'border-transparent text-slate-700 hover:text-slate-950'
           }`}
         >
           Regions & Census ({regions.length})
         </button>
         <button
           onClick={() => setActiveTab('indicators')}
-          className={`px-4 py-2.5 font-medium transition-colors border-b-2 whitespace-nowrap cursor-pointer ${
+          className={`px-4 py-3 font-extrabold transition-colors border-b-2 whitespace-nowrap cursor-pointer ${
             activeTab === 'indicators'
-              ? 'border-indigo-500 text-indigo-400'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
+              ? 'border-indigo-600 text-indigo-700'
+              : 'border-transparent text-slate-700 hover:text-slate-950'
           }`}
         >
           Infrastructure Indicators ({indicators.length})
         </button>
         <button
           onClick={() => setActiveTab('investments')}
-          className={`px-4 py-2.5 font-medium transition-colors border-b-2 whitespace-nowrap cursor-pointer ${
+          className={`px-4 py-3 font-extrabold transition-colors border-b-2 whitespace-nowrap cursor-pointer ${
             activeTab === 'investments'
-              ? 'border-indigo-500 text-indigo-400'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
+              ? 'border-indigo-600 text-indigo-700'
+              : 'border-transparent text-slate-700 hover:text-slate-950'
           }`}
         >
           Capital Investments ({investments.length})
         </button>
         <button
           onClick={() => setActiveTab('ingest')}
-          className={`px-4 py-2.5 font-medium transition-colors border-b-2 flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
+          className={`px-4 py-3 font-extrabold transition-colors border-b-2 flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
             activeTab === 'ingest'
-              ? 'border-green-500 text-green-400'
-              : 'border-transparent text-green-500/80 hover:text-green-400'
+              ? 'border-emerald-600 text-emerald-800'
+              : 'border-transparent text-emerald-700 hover:text-emerald-950'
           }`}
         >
-          <Plus className="w-3.5 h-3.5" />
+          <Plus className="w-4 h-4" />
           <span>Ingest Test Signal</span>
         </button>
       </div>
 
-      <div className="p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.08] space-y-4 shadow-sm">
+      <div className="p-6 rounded-xl bg-white border border-slate-200 space-y-4 shadow-sm text-slate-950 font-bold">
         {activeTab === 'requests' && (
           <div className="space-y-4">
-            <h3 className="text-[15px] font-semibold text-slate-100 font-mono">Citizen Requests Data</h3>
+            <h3 className="text-base sm:text-lg font-extrabold text-slate-950 font-mono">Citizen Requests Data</h3>
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs font-mono border-collapse">
-                <thead className="bg-[#121215] text-slate-400 border-b border-white/[0.08] uppercase text-[11px]">
+              <table className="w-full text-left text-xs sm:text-sm font-mono border-collapse">
+                <thead className="bg-slate-100 text-slate-800 border-b border-slate-200 uppercase text-xs font-extrabold">
                   <tr>
                     <th className="p-3">ID</th>
                     <th className="p-3">REGION</th>
@@ -158,23 +158,23 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
                     <th className="p-3">ORIGINAL TEXT</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-white/[0.08]">
+                <tbody className="divide-y divide-slate-200 font-bold">
                   {requests.map((r) => (
-                    <tr key={r.id} className="hover:bg-[#121215] transition-colors">
-                      <td className="p-3 font-semibold text-indigo-400">{r.id}</td>
+                    <tr key={r.id} className="hover:bg-slate-50 transition-colors">
+                      <td className="p-3 font-extrabold text-indigo-700">{r.id}</td>
                       <td className="p-3">
                         <button
                           onClick={() => handleOpenRegionDetails(r.region_id)}
-                          className="text-indigo-400 hover:underline flex items-center gap-1 font-medium cursor-pointer"
+                          className="text-indigo-700 hover:underline flex items-center gap-1 font-extrabold cursor-pointer"
                         >
-                          <MapPin className="w-3 h-3" />
+                          <MapPin className="w-3.5 h-3.5 text-indigo-600" />
                           <span>{r.region_id}</span>
                         </button>
                       </td>
-                      <td className="p-3 text-slate-300 uppercase">{r.language}</td>
-                      <td className="p-3 text-slate-100 font-medium">{r.request_category || r.category}</td>
-                      <td className="p-3 font-semibold text-red-400">{r.urgency || r.extracted_entities.severity}</td>
-                      <td className="p-3 text-slate-300 italic">"{r.original_text}"</td>
+                      <td className="p-3 text-slate-800 uppercase font-extrabold">{r.language}</td>
+                      <td className="p-3 text-slate-950 font-extrabold">{r.request_category || r.category}</td>
+                      <td className="p-3 font-extrabold text-rose-800">{r.urgency || r.extracted_entities.severity}</td>
+                      <td className="p-3 text-slate-950 font-sans italic font-bold">"{r.original_text}"</td>
                     </tr>
                   ))}
                 </tbody>
@@ -185,10 +185,10 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
 
         {activeTab === 'regions' && (
           <div className="space-y-4">
-            <h3 className="text-[15px] font-semibold text-slate-100 font-mono">Regions & Demographic Census Data</h3>
+            <h3 className="text-base sm:text-lg font-extrabold text-slate-950 font-mono">Regions & Demographic Census Data</h3>
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs font-mono border-collapse">
-                <thead className="bg-[#121215] text-slate-400 border-b border-white/[0.08] uppercase text-[11px]">
+              <table className="w-full text-left text-xs sm:text-sm font-mono border-collapse">
+                <thead className="bg-slate-100 text-slate-800 border-b border-slate-200 uppercase text-xs font-extrabold">
                   <tr>
                     <th className="p-3">ID</th>
                     <th className="p-3">CITY</th>
@@ -199,23 +199,23 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
                     <th className="p-3">ACTION</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-white/[0.08]">
+                <tbody className="divide-y divide-slate-200 font-bold">
                   {regions.map((r) => (
-                    <tr key={r.id} className="hover:bg-[#121215] transition-colors">
-                      <td className="p-3 font-semibold text-indigo-400">{r.id}</td>
-                      <td className="p-3 font-semibold text-slate-100">{r.district_city}</td>
-                      <td className="p-3 text-slate-400">{r.country}</td>
-                      <td className="p-3 text-slate-100 font-medium">{r.population.toLocaleString()}</td>
-                      <td className="p-3 font-semibold text-amber-400">{r.vulnerability_index.toFixed(2)}</td>
-                      <td className="p-3 text-green-400 uppercase font-medium">{r.primary_language}</td>
+                    <tr key={r.id} className="hover:bg-slate-50 transition-colors">
+                      <td className="p-3 font-extrabold text-indigo-700">{r.id}</td>
+                      <td className="p-3 font-extrabold text-slate-950">{r.district_city}</td>
+                      <td className="p-3 text-slate-800 font-bold">{r.country}</td>
+                      <td className="p-3 text-slate-950 font-extrabold">{r.population.toLocaleString()}</td>
+                      <td className="p-3 font-extrabold text-amber-800">{r.vulnerability_index.toFixed(2)}</td>
+                      <td className="p-3 text-emerald-800 uppercase font-extrabold">{r.primary_language}</td>
                       <td className="p-3">
                         <button
                           onClick={() => setActiveDetailRegion(r)}
-                          className="px-2.5 py-1 rounded-lg bg-[#121215] hover:bg-[#101014] border border-white/[0.08] text-slate-300 text-[11px] font-medium flex items-center gap-1 cursor-pointer"
+                          className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-950 text-xs font-extrabold flex items-center gap-1 cursor-pointer"
                         >
-                          <MapPin className="w-3 h-3 text-indigo-400" />
+                          <MapPin className="w-3.5 h-3.5 text-indigo-600" />
                           <span>Details</span>
-                          <ArrowRight className="w-3 h-3" />
+                          <ArrowRight className="w-3.5 h-3.5" />
                         </button>
                       </td>
                     </tr>
@@ -228,10 +228,10 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
 
         {activeTab === 'indicators' && (
           <div className="space-y-4">
-            <h3 className="text-[15px] font-semibold text-slate-100 font-mono">Infrastructure Capacity Indicators</h3>
+            <h3 className="text-base sm:text-lg font-extrabold text-slate-950 font-mono">Infrastructure Capacity Indicators</h3>
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs font-mono border-collapse">
-                <thead className="bg-[#121215] text-slate-400 border-b border-white/[0.08] uppercase text-[11px]">
+              <table className="w-full text-left text-xs sm:text-sm font-mono border-collapse">
+                <thead className="bg-slate-100 text-slate-800 border-b border-slate-200 uppercase text-xs font-extrabold">
                   <tr>
                     <th className="p-3">ID</th>
                     <th className="p-3">REGION</th>
@@ -240,22 +240,22 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
                     <th className="p-3">GAP SCORE</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-white/[0.08]">
+                <tbody className="divide-y divide-slate-200 font-bold">
                   {indicators.map((ind) => (
-                    <tr key={ind.id} className="hover:bg-[#121215] transition-colors">
-                      <td className="p-3 text-slate-300">{ind.id}</td>
+                    <tr key={ind.id} className="hover:bg-slate-50 transition-colors">
+                      <td className="p-3 text-slate-800 font-bold">{ind.id}</td>
                       <td className="p-3">
                         <button
                           onClick={() => handleOpenRegionDetails(ind.region_id)}
-                          className="text-indigo-400 hover:underline flex items-center gap-1 font-medium cursor-pointer"
+                          className="text-indigo-700 hover:underline flex items-center gap-1 font-extrabold cursor-pointer"
                         >
-                          <MapPin className="w-3 h-3" />
+                          <MapPin className="w-3.5 h-3.5 text-indigo-600" />
                           <span>{ind.region_id}</span>
                         </button>
                       </td>
-                      <td className="p-3 text-indigo-400 uppercase font-semibold">{ind.category}</td>
-                      <td className="p-3 text-slate-100 font-medium">{ind.coverage_ratio_pct}%</td>
-                      <td className="p-3 font-semibold text-red-400">{ind.gap_score.toFixed(2)}</td>
+                      <td className="p-3 text-indigo-700 uppercase font-extrabold">{ind.category}</td>
+                      <td className="p-3 text-slate-950 font-extrabold">{ind.coverage_ratio_pct}%</td>
+                      <td className="p-3 font-extrabold text-rose-800">{ind.gap_score.toFixed(2)}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -266,10 +266,10 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
 
         {activeTab === 'investments' && (
           <div className="space-y-4">
-            <h3 className="text-[15px] font-semibold text-slate-100 font-mono">Public Capital Investments</h3>
+            <h3 className="text-base sm:text-lg font-extrabold text-slate-950 font-mono">Public Capital Investments</h3>
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs font-mono border-collapse">
-                <thead className="bg-[#121215] text-slate-400 border-b border-white/[0.08] uppercase text-[11px]">
+              <table className="w-full text-left text-xs sm:text-sm font-mono border-collapse">
+                <thead className="bg-slate-100 text-slate-800 border-b border-slate-200 uppercase text-xs font-extrabold">
                   <tr>
                     <th className="p-3">ID</th>
                     <th className="p-3">PROJECT NAME</th>
@@ -279,23 +279,23 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
                     <th className="p-3">STATUS</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-white/[0.08]">
+                <tbody className="divide-y divide-slate-200 font-bold">
                   {investments.map((inv) => (
-                    <tr key={inv.id} className="hover:bg-[#121215] transition-colors">
-                      <td className="p-3 text-slate-300">{inv.id}</td>
-                      <td className="p-3 font-semibold text-slate-100">{inv.project_name}</td>
+                    <tr key={inv.id} className="hover:bg-slate-50 transition-colors">
+                      <td className="p-3 text-slate-800 font-bold">{inv.id}</td>
+                      <td className="p-3 font-extrabold text-slate-950">{inv.project_name}</td>
                       <td className="p-3">
                         <button
                           onClick={() => handleOpenRegionDetails(inv.region_id)}
-                          className="text-indigo-400 hover:underline flex items-center gap-1 font-medium cursor-pointer"
+                          className="text-indigo-700 hover:underline flex items-center gap-1 font-extrabold cursor-pointer"
                         >
-                          <MapPin className="w-3 h-3" />
+                          <MapPin className="w-3.5 h-3.5 text-indigo-600" />
                           <span>{inv.region_id}</span>
                         </button>
                       </td>
-                      <td className="p-3 text-indigo-400 uppercase font-semibold">{inv.category}</td>
-                      <td className="p-3 text-green-400 font-semibold">${inv.budget_usd.toLocaleString()}</td>
-                      <td className="p-3 font-semibold text-amber-400 uppercase">{inv.status}</td>
+                      <td className="p-3 text-indigo-700 uppercase font-extrabold">{inv.category}</td>
+                      <td className="p-3 text-emerald-800 font-extrabold">${inv.budget_usd.toLocaleString()}</td>
+                      <td className="p-3 font-extrabold text-amber-800 uppercase">{inv.status}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -305,78 +305,78 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
         )}
 
         {activeTab === 'ingest' && (
-          <form onSubmit={handleIngest} className="space-y-4 max-w-2xl">
-            <h3 className="text-[15px] font-semibold text-slate-100 font-mono">Ingest Multilingual Citizen Feedback Signal</h3>
+          <form onSubmit={handleIngest} className="space-y-4 max-w-2xl text-slate-950 font-bold">
+            <h3 className="text-base sm:text-lg font-extrabold text-slate-950 font-mono">Ingest Multilingual Citizen Feedback Signal</h3>
 
             {successMsg && (
-              <div className="p-3.5 rounded-lg bg-[#121215] border border-green-500/30 text-xs font-medium text-green-400 flex items-center gap-2 shadow-sm">
-                <CheckCircle2 className="w-4 h-4 text-green-400 shrink-0" />
+              <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm font-extrabold text-emerald-900 flex items-center gap-2 shadow-2xs">
+                <CheckCircle2 className="w-4.5 h-4.5 text-emerald-700 shrink-0" />
                 <span>{successMsg}</span>
               </div>
             )}
 
             <div className="space-y-1.5">
-              <label className="text-xs font-mono font-medium text-slate-400">Citizen Raw Text Feedback:</label>
+              <label className="text-xs sm:text-sm font-mono font-extrabold text-slate-800">Citizen Raw Text Feedback:</label>
               <textarea
                 rows={4}
                 required
                 placeholder="Enter feedback in Hindi, Marathi, Portuguese, Zulu, Bengali, English..."
                 value={rawText}
                 onChange={(e) => setRawText(e.target.value)}
-                className="w-full p-3 bg-[#121215] border border-white/[0.08] rounded-lg text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-white/[0.16] font-sans leading-relaxed"
+                className="w-full p-3.5 bg-slate-100 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-950 placeholder:text-slate-500 focus:outline-none font-sans leading-relaxed font-bold"
               />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs sm:text-sm font-mono font-bold">
               <div>
-                <label className="text-slate-400 block mb-1">Language:</label>
+                <label className="text-slate-800 font-extrabold block mb-1">Language:</label>
                 <select
                   value={language}
                   onChange={(e) => setLanguage(e.target.value)}
-                  className="w-full bg-[#121215] border border-white/[0.08] text-slate-100 text-xs rounded-lg p-2.5 focus:outline-none cursor-pointer"
+                  className="w-full bg-slate-100 border border-slate-200 text-slate-950 text-xs sm:text-sm rounded-lg p-2.5 focus:outline-none cursor-pointer font-bold"
                 >
-                  <option className="bg-[#121215] text-slate-100 text-xs py-1" value="hi">Hindi (hi)</option>
-                  <option className="bg-[#121215] text-slate-100 text-xs py-1" value="mr">Marathi (mr)</option>
-                  <option className="bg-[#121215] text-slate-100 text-xs py-1" value="pt">Portuguese (pt)</option>
-                  <option className="bg-[#121215] text-slate-100 text-xs py-1" value="zu">Zulu (zu)</option>
-                  <option className="bg-[#121215] text-slate-100 text-xs py-1" value="bn">Bengali (bn)</option>
-                  <option className="bg-[#121215] text-slate-100 text-xs py-1" value="en">English (en)</option>
+                  <option value="hi">Hindi (hi)</option>
+                  <option value="mr">Marathi (mr)</option>
+                  <option value="pt">Portuguese (pt)</option>
+                  <option value="zu">Zulu (zu)</option>
+                  <option value="bn">Bengali (bn)</option>
+                  <option value="en">English (en)</option>
                 </select>
               </div>
 
               <div>
-                <label className="text-slate-400 block mb-1">Channel Source:</label>
+                <label className="text-slate-800 font-extrabold block mb-1">Channel Source:</label>
                 <select
                   value={source}
                   onChange={(e) => setSource(e.target.value)}
-                  className="w-full bg-[#121215] border border-white/[0.08] text-slate-100 text-xs rounded-lg p-2.5 focus:outline-none cursor-pointer"
+                  className="w-full bg-slate-100 border border-slate-200 text-slate-950 text-xs sm:text-sm rounded-lg p-2.5 focus:outline-none cursor-pointer font-bold"
                 >
-                  <option className="bg-[#121215] text-slate-100 text-xs py-1" value="voice">Voice Call</option>
-                  <option className="bg-[#121215] text-slate-100 text-xs py-1" value="text">SMS Text</option>
-                  <option className="bg-[#121215] text-slate-100 text-xs py-1" value="whatsapp">WhatsApp</option>
-                  <option className="bg-[#121215] text-slate-100 text-xs py-1" value="web">Web Portal</option>
+                  <option value="voice">Voice Call</option>
+                  <option value="text">SMS Text</option>
+                  <option value="whatsapp">WhatsApp</option>
+                  <option value="web">Web Portal</option>
                 </select>
               </div>
 
               <div>
                 <div className="flex items-center justify-between mb-1">
-                  <label className="text-slate-400">Target Region:</label>
+                  <label className="text-slate-800 font-extrabold">Target Region:</label>
                   <button
                     type="button"
                     onClick={() => handleOpenRegionDetails(regionId)}
-                    className="text-[11px] font-mono text-indigo-400 hover:underline flex items-center gap-0.5 cursor-pointer"
+                    className="text-xs font-mono text-indigo-700 hover:underline flex items-center gap-0.5 cursor-pointer font-extrabold"
                   >
                     <span>Details</span>
-                    <ArrowRight className="w-3 h-3" />
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
                 <select
                   value={regionId}
                   onChange={(e) => setRegionId(e.target.value)}
-                  className="w-full bg-[#121215] border border-white/[0.08] text-slate-100 text-xs rounded-lg p-2.5 focus:outline-none cursor-pointer"
+                  className="w-full bg-slate-100 border border-slate-200 text-slate-950 text-xs sm:text-sm rounded-lg p-2.5 focus:outline-none cursor-pointer font-bold"
                 >
                   {regions.map((r) => (
-                    <option className="bg-[#121215] text-slate-100 text-xs py-1" key={r.id} value={r.id}>
+                    <option key={r.id} value={r.id}>
                       {r.district_city}
                     </option>
                   ))}
@@ -387,7 +387,7 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
             <button
               type="submit"
               disabled={loading}
-              className="px-4 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-xs transition disabled:opacity-50 cursor-pointer shadow-sm"
+              className="px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs sm:text-sm transition disabled:opacity-50 cursor-pointer shadow-xs"
             >
               {loading ? 'Ingesting via AI Pipeline...' : 'Ingest Signal into System'}
             </button>

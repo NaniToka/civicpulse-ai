@@ -52,46 +52,46 @@ export const HotspotExplorer: React.FC<HotspotExplorerProps> = ({
   hotspotItems.sort((a, b) => b.hotspotScore - a.hotspotScore);
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-150">
+    <div className="space-y-8 animate-in fade-in duration-150 text-slate-950 font-bold">
       {/* Header */}
-      <div className="p-6 md:p-8 rounded-xl bg-[#0A0A0C] border border-white/[0.08] flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm">
+      <div className="p-6 md:p-8 rounded-xl bg-white border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm">
         <div>
           <div className="flex items-center gap-2">
-            <Flame className="w-5 h-5 text-amber-400" />
-            <h1 className="text-2xl md:text-[28px] font-semibold text-slate-100 tracking-tight font-sans">
+            <Flame className="w-6 h-6 text-amber-600 font-extrabold" />
+            <h1 className="text-3xl md:text-4xl font-extrabold text-slate-950 tracking-tight font-sans">
               Problem <span className="hero-gradient-text">Hotspots</span>
             </h1>
           </div>
-          <div className="flex flex-wrap items-center gap-2 mt-2 font-mono text-xs">
-            <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
+          <div className="flex flex-wrap items-center gap-2 mt-2 font-mono text-xs sm:text-sm font-extrabold">
+            <span className="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-800">
               Normalized by Population Size
             </span>
-            <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
+            <span className="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-800">
               High Urgency Locations
             </span>
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          <Filter className="w-4 h-4 text-indigo-400" />
+        <div className="flex items-center gap-3 font-bold font-mono text-xs sm:text-sm">
+          <Filter className="w-4 h-4 text-indigo-600 font-extrabold" />
           <select
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
-            className="bg-[#121215] border border-white/[0.08] text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none cursor-pointer"
+            className="bg-slate-100 border border-slate-200 text-slate-950 text-xs sm:text-sm rounded-lg px-3 py-2 focus:outline-none cursor-pointer font-bold"
           >
-            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="ALL">All Categories</option>
-            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="healthcare">Healthcare</option>
-            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="water">Clean Water</option>
-            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="electricity">Electricity</option>
-            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="transportation">Transportation</option>
-            <option className="bg-[#121215] text-slate-100 text-sm py-1" value="sanitation">Sanitation</option>
+            <option value="ALL">All Categories</option>
+            <option value="healthcare">Healthcare</option>
+            <option value="water">Clean Water</option>
+            <option value="electricity">Electricity</option>
+            <option value="transportation">Transportation</option>
+            <option value="sanitation">Sanitation</option>
           </select>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-4">
-          <div className="text-xs font-semibold text-slate-300 uppercase tracking-wider font-mono">
+          <div className="text-xs sm:text-sm font-extrabold text-slate-950 uppercase tracking-wider font-mono">
             Demand Intensity Heat Matrix
           </div>
 
@@ -102,34 +102,34 @@ export const HotspotExplorer: React.FC<HotspotExplorerProps> = ({
                 <div
                   key={item.region.id}
                   onClick={() => setSelectedRegionId(item.region.id)}
-                  className={`p-5 rounded-xl border transition-colors cursor-pointer relative shadow-sm ${
+                  className={`p-5 rounded-xl border transition-colors cursor-pointer relative shadow-sm text-slate-950 font-bold ${
                     isSelected
-                      ? 'bg-[#121215] border-amber-500/40'
-                      : 'bg-[#0A0A0C] border-white/[0.08] hover:border-white/[0.16]'
+                      ? 'bg-amber-50/60 border-amber-300 shadow-xs'
+                      : 'bg-white border-slate-200 hover:border-slate-300'
                   }`}
                 >
                   <div className="flex justify-between items-start mb-2">
                     <div>
-                      <span className="text-[11px] font-mono text-amber-400 font-medium uppercase">
+                      <span className="text-xs font-mono text-amber-800 font-extrabold uppercase">
                         RANK #{item.rank}
                       </span>
-                      <h3 className="text-base font-semibold text-slate-100 mt-0.5 tracking-tight">{item.region.district_city}</h3>
-                      <div className="text-xs text-slate-400">{item.region.state_province}, {item.region.country}</div>
+                      <h3 className="text-base sm:text-lg font-extrabold text-slate-950 mt-0.5 tracking-tight">{item.region.district_city}</h3>
+                      <div className="text-xs text-slate-700 font-bold">{item.region.state_province}, {item.region.country}</div>
                     </div>
-                    <div className="text-right font-mono">
-                      <div className="text-xl font-semibold text-amber-400">{item.hotspotScore}</div>
-                      <div className="text-[10px] text-slate-400 uppercase">SCORE</div>
+                    <div className="text-right font-mono font-extrabold">
+                      <div className="text-2xl font-extrabold text-amber-800">{item.hotspotScore}</div>
+                      <div className="text-xs text-slate-700 uppercase">SCORE</div>
                     </div>
                   </div>
 
-                  <div className="mt-3 pt-3 border-t border-white/[0.08] grid grid-cols-2 gap-2 text-xs font-mono">
+                  <div className="mt-3 pt-3 border-t border-slate-200 grid grid-cols-2 gap-2 text-xs sm:text-sm font-mono font-bold">
                     <div>
-                      <div className="text-[10px] text-slate-400 uppercase">DEMAND / 100K</div>
-                      <div className="text-sm font-semibold text-slate-100">{item.perCapitaPer100k}</div>
+                      <div className="text-xs text-slate-700 uppercase font-bold">DEMAND / 100K</div>
+                      <div className="text-sm sm:text-base font-extrabold text-slate-950">{item.perCapitaPer100k}</div>
                     </div>
                     <div>
-                      <div className="text-[10px] text-slate-400 uppercase">AVG GAP SCORE</div>
-                      <div className="text-sm font-semibold text-red-400">{item.avgGap.toFixed(2)}</div>
+                      <div className="text-xs text-slate-700 uppercase font-bold">AVG GAP SCORE</div>
+                      <div className="text-sm sm:text-base font-extrabold text-rose-800">{item.avgGap.toFixed(2)}</div>
                     </div>
                   </div>
                 </div>
@@ -139,70 +139,70 @@ export const HotspotExplorer: React.FC<HotspotExplorerProps> = ({
         </div>
 
         {/* Region Intelligence Side Panel */}
-        <div className="p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.08] space-y-5 shadow-sm">
+        <div className="p-6 rounded-xl bg-white border border-slate-200 space-y-5 shadow-sm text-slate-950 font-bold">
           <div>
-            <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
-              <span className="text-xs font-mono text-indigo-400 font-medium uppercase">Region Profile</span>
-              <span className="text-xs font-mono text-slate-400">{selectedRegion.country_code}</span>
+            <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+              <span className="text-xs sm:text-sm font-mono text-indigo-700 font-extrabold uppercase">Region Profile</span>
+              <span className="text-xs font-mono text-slate-700 font-bold">{selectedRegion.country_code}</span>
             </div>
-            <h2 className="text-lg font-semibold text-slate-100 mt-3">{selectedRegion.district_city}</h2>
-            <p className="text-xs text-slate-400">{selectedRegion.state_province}, {selectedRegion.country}</p>
+            <h2 className="text-lg sm:text-xl font-extrabold text-slate-950 mt-3">{selectedRegion.district_city}</h2>
+            <p className="text-xs sm:text-sm text-slate-700 font-bold">{selectedRegion.state_province}, {selectedRegion.country}</p>
           </div>
 
-          <div className="space-y-2 text-xs font-mono">
-            <div className="p-3 rounded-lg bg-[#121215] border border-white/[0.08] flex justify-between items-center">
-              <span className="text-slate-400">Population:</span>
-              <span className="font-semibold text-slate-100">{selectedRegion.population.toLocaleString()}</span>
+          <div className="space-y-2 text-xs sm:text-sm font-mono font-bold">
+            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center shadow-2xs">
+              <span className="text-slate-700">Population:</span>
+              <span className="font-extrabold text-slate-950">{selectedRegion.population.toLocaleString()}</span>
             </div>
 
-            <div className="p-3 rounded-lg bg-[#121215] border border-white/[0.08] flex justify-between items-center">
-              <span className="text-slate-400">Vulnerability Index:</span>
-              <span className="font-semibold text-amber-400">{selectedRegion.vulnerability_index.toFixed(2)}</span>
+            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center shadow-2xs">
+              <span className="text-slate-700">Vulnerability Index:</span>
+              <span className="font-extrabold text-amber-800">{selectedRegion.vulnerability_index.toFixed(2)}</span>
             </div>
 
-            <div className="p-3 rounded-lg bg-[#121215] border border-white/[0.08] flex justify-between items-center">
-              <span className="text-slate-400">Youth Demographic %:</span>
-              <span className="font-semibold text-indigo-400">{selectedRegion.youth_percentage || 32.0}%</span>
+            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center shadow-2xs">
+              <span className="text-slate-700">Youth Demographic %:</span>
+              <span className="font-extrabold text-indigo-700">{selectedRegion.youth_percentage || 32.0}%</span>
             </div>
 
-            <div className="p-3 rounded-lg bg-[#121215] border border-white/[0.08] flex justify-between items-center">
-              <span className="text-slate-400">Elderly Demographic %:</span>
-              <span className="font-semibold text-indigo-400">{selectedRegion.elderly_percentage || 14.0}%</span>
+            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center shadow-2xs">
+              <span className="text-slate-700">Elderly Demographic %:</span>
+              <span className="font-extrabold text-indigo-700">{selectedRegion.elderly_percentage || 14.0}%</span>
             </div>
 
-            <div className="p-3 rounded-lg bg-[#121215] border border-white/[0.08] flex justify-between items-center">
-              <span className="text-slate-400">Primary Language:</span>
-              <span className="font-semibold text-green-400">{selectedRegion.primary_language.toUpperCase()}</span>
+            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center shadow-2xs">
+              <span className="text-slate-700">Primary Language:</span>
+              <span className="font-extrabold text-emerald-800">{selectedRegion.primary_language.toUpperCase()}</span>
             </div>
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-2 font-extrabold">
             <button
               onClick={() => setActiveDetailRegion(selectedRegion)}
-              className="w-full py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-xs transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+              className="w-full py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 cursor-pointer shadow-xs"
             >
-              <MapPin className="w-3.5 h-3.5" />
+              <MapPin className="w-4 h-4" />
               <span>Region Details</span>
             </button>
 
             <button
               onClick={() => onNavigate && onNavigate('recommendations')}
-              className="w-full py-2.5 rounded-lg bg-[#121215] hover:bg-[#101014] text-slate-200 border border-white/[0.08] text-xs transition flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full py-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-950 border border-slate-200 text-xs sm:text-sm transition flex items-center justify-center gap-2 cursor-pointer font-extrabold"
             >
               <span>Evidence Priorities</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <ArrowRight className="w-4 h-4" />
             </button>
           </div>
         </div>
       </div>
 
       {/* Municipal Hotspot Ranking Table */}
-      <div className="p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.08] space-y-4 shadow-sm">
-        <h3 className="text-[15px] font-semibold text-slate-100">Municipal Hotspot Ranking Table</h3>
+      <div className="p-6 rounded-xl bg-white border border-slate-200 space-y-4 shadow-sm text-slate-950 font-bold">
+        <h3 className="text-base sm:text-lg font-extrabold text-slate-950">Municipal Hotspot Ranking Table</h3>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs font-mono border-collapse">
-            <thead className="bg-[#121215] text-slate-400 border-b border-white/[0.08] uppercase text-[11px]">
+          <table className="w-full text-left text-xs sm:text-sm font-mono border-collapse">
+            <thead className="bg-slate-100 text-slate-800 border-b border-slate-200 uppercase text-xs font-extrabold">
               <tr>
                 <th className="p-3">RANK</th>
                 <th className="p-3">REGION</th>
@@ -214,23 +214,23 @@ export const HotspotExplorer: React.FC<HotspotExplorerProps> = ({
                 <th className="p-3">ACTION</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/[0.08]">
+            <tbody className="divide-y divide-slate-200 font-bold">
               {hotspotItems.map((item) => (
-                <tr key={item.region.id} className="hover:bg-[#121215] transition-colors">
-                  <td className="p-3 font-semibold text-amber-400">#{item.rank}</td>
-                  <td className="p-3 font-semibold text-slate-100">{item.region.district_city}</td>
-                  <td className="p-3 text-slate-400">{item.region.country}</td>
-                  <td className="p-3 text-indigo-400 font-semibold">{item.topCategory}</td>
-                  <td className="p-3 font-semibold text-slate-100">{item.perCapitaPer100k}</td>
-                  <td className="p-3 font-semibold text-red-400">{item.avgGap.toFixed(2)}</td>
-                  <td className="p-3 text-slate-300">{item.region.vulnerability_index.toFixed(2)}</td>
+                <tr key={item.region.id} className="hover:bg-slate-50 transition-colors">
+                  <td className="p-3 font-extrabold text-amber-800">#{item.rank}</td>
+                  <td className="p-3 font-extrabold text-slate-950">{item.region.district_city}</td>
+                  <td className="p-3 text-slate-700 font-bold">{item.region.country}</td>
+                  <td className="p-3 text-indigo-700 font-extrabold">{item.topCategory}</td>
+                  <td className="p-3 font-extrabold text-slate-950">{item.perCapitaPer100k}</td>
+                  <td className="p-3 font-extrabold text-rose-800">{item.avgGap.toFixed(2)}</td>
+                  <td className="p-3 text-slate-800 font-bold">{item.region.vulnerability_index.toFixed(2)}</td>
                   <td className="p-3">
                     <button
                       onClick={() => setActiveDetailRegion(item.region)}
-                      className="px-2.5 py-1 rounded-lg bg-[#121215] hover:bg-[#101014] border border-white/[0.08] text-slate-300 text-[11px] font-medium flex items-center gap-1 cursor-pointer"
+                      className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-950 text-xs font-extrabold flex items-center gap-1 cursor-pointer"
                     >
                       <span>Details</span>
-                      <ArrowRight className="w-3 h-3" />
+                      <ArrowRight className="w-3.5 h-3.5" />
                     </button>
                   </td>
                 </tr>

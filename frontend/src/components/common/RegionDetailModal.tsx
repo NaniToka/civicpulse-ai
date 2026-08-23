@@ -18,34 +18,34 @@ export const RegionDetailModal: React.FC<RegionDetailModalProps> = ({
   if (!region) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#000000]/80 backdrop-blur-sm animate-in fade-in duration-150">
-      <div className="w-full max-w-3xl max-h-[90vh] bg-[#0A0A0C] border border-white/[0.08] rounded-xl shadow-2xl overflow-hidden flex flex-col">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-900/40 backdrop-blur-xs animate-in fade-in duration-150">
+      <div className="w-full max-w-3xl max-h-[90vh] bg-white border border-slate-200 rounded-xl shadow-2xl overflow-hidden flex flex-col font-bold text-slate-950">
         {/* Modal Header */}
-        <div className="p-6 border-b border-white/[0.08] bg-[#121215] flex items-start justify-between">
+        <div className="p-6 border-b border-slate-200 bg-slate-50 flex items-start justify-between">
           <div className="space-y-1">
             <div className="flex items-center gap-2.5">
-              <span className="text-xs font-mono font-medium px-2 py-0.5 rounded bg-[#0A0A0C] text-slate-300 border border-white/[0.08] uppercase">
+              <span className="text-xs font-mono font-extrabold px-2.5 py-0.5 rounded bg-white text-slate-800 border border-slate-200 uppercase">
                 {region.country_code} • DISTRICT PROFILE
               </span>
-              <span className="text-xs font-mono text-green-400 font-medium flex items-center gap-1">
-                <Globe2 className="w-3.5 h-3.5" />
+              <span className="text-xs font-mono text-emerald-800 font-extrabold flex items-center gap-1">
+                <Globe2 className="w-4 h-4" />
                 Primary Language: {region.primary_language.toUpperCase()}
               </span>
             </div>
-            <h2 className="text-lg md:text-xl font-semibold text-slate-100 flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-indigo-400" />
+            <h2 className="text-xl md:text-2xl font-extrabold text-slate-950 flex items-center gap-2 tracking-tight">
+              <MapPin className="w-6 h-6 text-indigo-600 font-extrabold" />
               <span>{region.district_city}, {region.country}</span>
             </h2>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs sm:text-sm text-slate-700 font-bold">
               State/Province: {region.state_province} • Geolocation Coordinates: {region.latitude.toFixed(4)}, {region.longitude.toFixed(4)}
             </p>
           </div>
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-[#0A0A0C] transition cursor-pointer"
+            className="p-2 rounded-lg text-slate-600 hover:text-slate-950 hover:bg-slate-200 transition cursor-pointer"
           >
-            <X className="w-5 h-5" />
+            <X className="w-5 h-5 font-extrabold" />
           </button>
         </div>
 
@@ -53,75 +53,75 @@ export const RegionDetailModal: React.FC<RegionDetailModalProps> = ({
         <div className="p-6 overflow-y-auto space-y-6">
           {/* Key Census Statistics Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="p-4 rounded-xl bg-[#121215] border border-white/[0.08]">
-              <div className="flex items-center justify-between text-slate-400 text-xs font-mono">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 shadow-2xs">
+              <div className="flex items-center justify-between text-slate-700 text-xs font-mono font-bold">
                 <span>Total Population</span>
-                <Users className="w-4 h-4 text-indigo-400" />
+                <Users className="w-4 h-4 text-indigo-600 font-bold" />
               </div>
-              <div className="text-xl font-semibold text-slate-100 font-mono mt-2">
+              <div className="text-2xl font-extrabold text-slate-950 font-mono mt-2">
                 {region.population.toLocaleString()}
               </div>
-              <div className="text-[11px] text-slate-400 font-mono mt-1">
+              <div className="text-xs text-slate-700 font-mono mt-1 font-bold">
                 Density: {(region.population_density || 4500).toLocaleString()} / km²
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-[#121215] border border-white/[0.08]">
-              <div className="flex items-center justify-between text-slate-400 text-xs font-mono">
+            <div className="p-4 rounded-xl bg-amber-50/60 border border-amber-200 shadow-2xs">
+              <div className="flex items-center justify-between text-amber-900 text-xs font-mono font-bold">
                 <span>Vulnerability Index</span>
-                <ShieldAlert className="w-4 h-4 text-amber-400" />
+                <ShieldAlert className="w-4 h-4 text-amber-700 font-bold" />
               </div>
-              <div className="text-xl font-semibold text-amber-400 font-mono mt-2">
+              <div className="text-2xl font-extrabold text-amber-900 font-mono mt-2">
                 {region.vulnerability_index.toFixed(2)} / 1.00
               </div>
-              <div className="text-[11px] text-amber-400 font-mono mt-1 font-medium">
+              <div className="text-xs text-amber-900 font-mono mt-1 font-extrabold">
                 {region.vulnerability_index >= 0.75 ? 'CRITICAL VULNERABILITY' : 'ELEVATED VULNERABILITY'}
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-[#121215] border border-white/[0.08]">
-              <div className="flex items-center justify-between text-slate-400 text-xs font-mono">
+            <div className="p-4 rounded-xl bg-emerald-50/60 border border-emerald-200 shadow-2xs">
+              <div className="flex items-center justify-between text-emerald-900 text-xs font-mono font-bold">
                 <span>Digital Access Rate</span>
-                <Activity className="w-4 h-4 text-green-400" />
+                <Activity className="w-4 h-4 text-emerald-700 font-bold" />
               </div>
-              <div className="text-xl font-semibold text-green-400 font-mono mt-2">
+              <div className="text-2xl font-extrabold text-emerald-900 font-mono mt-2">
                 {(region.digital_access_rate || 55).toFixed(0)}%
               </div>
-              <div className="text-[11px] text-slate-400 font-mono mt-1">
+              <div className="text-xs text-slate-700 font-mono mt-1 font-bold">
                 Urbanization: {(region.urbanization_rate || 68).toFixed(0)}%
               </div>
             </div>
           </div>
 
           {/* Demographic Composition Meters */}
-          <div className="p-5 rounded-xl bg-[#121215] border border-white/[0.08] space-y-4">
-            <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider font-mono flex items-center gap-2">
-              <BarChart2 className="w-4 h-4 text-indigo-400" />
+          <div className="p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-4 shadow-2xs">
+            <h3 className="text-xs sm:text-sm font-extrabold text-slate-950 uppercase tracking-wider font-mono flex items-center gap-2">
+              <BarChart2 className="w-4 h-4 text-indigo-600" />
               <span>Demographic Need Breakdown</span>
             </h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm font-mono font-bold">
               <div className="space-y-1.5">
-                <div className="flex justify-between text-slate-300 font-medium">
+                <div className="flex justify-between text-slate-950 font-extrabold">
                   <span>Youth Population Share</span>
-                  <span className="text-indigo-400">{(region.youth_percentage || 35).toFixed(1)}%</span>
+                  <span className="text-indigo-700 font-extrabold">{(region.youth_percentage || 35).toFixed(1)}%</span>
                 </div>
-                <div className="h-2 rounded-full bg-[#0A0A0C] overflow-hidden border border-white/[0.08]">
+                <div className="h-2 rounded-full bg-slate-200 overflow-hidden border border-slate-300">
                   <div
-                    className="h-full bg-indigo-500 rounded-full"
+                    className="h-full bg-indigo-600 rounded-full"
                     style={{ width: `${region.youth_percentage || 35}%` }}
                   />
                 </div>
               </div>
 
               <div className="space-y-1.5">
-                <div className="flex justify-between text-slate-300 font-medium">
+                <div className="flex justify-between text-slate-950 font-extrabold">
                   <span>Elderly Population Share</span>
-                  <span className="text-indigo-400">{(region.elderly_percentage || 18).toFixed(1)}%</span>
+                  <span className="text-indigo-700 font-extrabold">{(region.elderly_percentage || 18).toFixed(1)}%</span>
                 </div>
-                <div className="h-2 rounded-full bg-[#0A0A0C] overflow-hidden border border-white/[0.08]">
+                <div className="h-2 rounded-full bg-slate-200 overflow-hidden border border-slate-300">
                   <div
-                    className="h-full bg-indigo-400 rounded-full"
+                    className="h-full bg-indigo-500 rounded-full"
                     style={{ width: `${region.elderly_percentage || 18}%` }}
                   />
                 </div>
@@ -130,21 +130,21 @@ export const RegionDetailModal: React.FC<RegionDetailModalProps> = ({
           </div>
 
           {/* District Infrastructure Summary Card */}
-          <div className="p-5 rounded-xl bg-[#121215] border border-white/[0.08] space-y-2">
-            <div className="flex items-center gap-2 text-xs font-mono text-indigo-400 uppercase font-semibold">
-              <Building2 className="w-4 h-4 text-indigo-400" />
+          <div className="p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-2 shadow-2xs">
+            <div className="flex items-center gap-2 text-xs sm:text-sm font-mono text-indigo-700 uppercase font-extrabold">
+              <Building2 className="w-4.5 h-4.5 text-indigo-600" />
               <span>District Decision Summary</span>
             </div>
-            <p className="text-xs text-slate-300 leading-relaxed font-normal">
-              {region.district_city} exhibits an elevated census vulnerability index of <strong>{region.vulnerability_index.toFixed(2)}</strong> across <strong>{region.population.toLocaleString()}</strong> residents. Capital investment is recommended to address critical sector capacity deficits.
+            <p className="text-xs sm:text-sm text-slate-950 leading-relaxed font-bold">
+              {region.district_city} exhibits an elevated census vulnerability index of <strong className="text-amber-800 font-extrabold">{region.vulnerability_index.toFixed(2)}</strong> across <strong className="text-slate-950 font-extrabold">{region.population.toLocaleString()}</strong> residents. Capital investment is recommended to address critical sector capacity deficits.
             </p>
           </div>
         </div>
 
         {/* Modal Footer Actions */}
-        <div className="p-4 border-t border-white/[0.08] bg-[#121215] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono">
-          <div className="flex items-center gap-2 text-slate-400">
-            <span>Region ID: {region.id}</span>
+        <div className="p-4 border-t border-slate-200 bg-slate-50 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm font-mono font-bold">
+          <div className="flex items-center gap-2 text-slate-700">
+            <span className="font-extrabold">Region ID: {region.id}</span>
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
@@ -154,9 +154,9 @@ export const RegionDetailModal: React.FC<RegionDetailModalProps> = ({
                   onClose();
                   onNavigateToScenarios(region.id);
                 }}
-                className="px-3.5 py-1.5 rounded-lg bg-[#0A0A0C] hover:bg-[#101014] border border-white/[0.08] text-slate-200 transition flex items-center gap-1.5 cursor-pointer font-sans"
+                className="px-4 py-2 rounded-lg bg-white hover:bg-slate-100 border border-slate-300 text-slate-950 transition flex items-center gap-1.5 cursor-pointer font-sans font-extrabold shadow-2xs"
               >
-                <Zap className="w-3.5 h-3.5 text-indigo-400" />
+                <Zap className="w-4 h-4 text-indigo-600" />
                 <span>Simulate Scenario</span>
               </button>
             )}
@@ -167,16 +167,16 @@ export const RegionDetailModal: React.FC<RegionDetailModalProps> = ({
                   onClose();
                   onNavigateToRecommendations(region.id);
                 }}
-                className="px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition flex items-center gap-1.5 cursor-pointer font-sans font-medium shadow-sm"
+                className="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white transition flex items-center gap-1.5 cursor-pointer font-sans font-extrabold shadow-xs"
               >
                 <span>View Recommendations</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-4 h-4" />
               </button>
             )}
 
             <button
               onClick={onClose}
-              className="px-3.5 py-1.5 rounded-lg bg-[#0A0A0C] hover:bg-[#101014] border border-white/[0.08] text-slate-300 transition cursor-pointer font-sans"
+              className="px-4 py-2 rounded-lg bg-white hover:bg-slate-100 border border-slate-300 text-slate-950 transition cursor-pointer font-sans font-extrabold shadow-2xs"
             >
               Close
             </button>

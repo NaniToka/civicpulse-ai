@@ -43,37 +43,37 @@ export const CitizenFeedbackFeed: React.FC<CitizenFeedbackFeedProps> = ({
   };
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-150">
+    <div className="space-y-6 animate-in fade-in duration-150 text-slate-950 font-bold">
       <div>
-        <h2 className="text-xl font-semibold text-slate-100 tracking-tight">Multilingual Citizen Feedback Stream</h2>
-        <p className="text-xs text-slate-400 mt-1">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight">Multilingual Citizen Feedback Stream</h2>
+        <p className="text-xs sm:text-sm text-slate-800 font-bold mt-1">
           Aggregated feedback entries from voice, WhatsApp, USSD, and web across Hindi, Portuguese, Zulu, Marathi, and English.
         </p>
       </div>
 
       {/* Ingest Form */}
       <Card title="Ingest Multilingual Feedback Entry" subtitle="Test Gemini NLP translation & entity extraction">
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 text-slate-950 font-bold">
           {successMessage && <Alert variant="success">{successMessage}</Alert>}
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs sm:text-sm font-bold">
             <div>
-              <label className="block text-slate-400 mb-1 font-medium">Channel / Source</label>
+              <label className="block text-slate-800 mb-1 font-extrabold">Channel / Source</label>
               <select
                 value={source}
                 onChange={(e) => setSource(e.target.value)}
-                className="w-full bg-[#121215] border border-white/[0.08] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-white/[0.16] cursor-pointer"
+                className="w-full bg-slate-100 border border-slate-200 rounded-lg px-3 py-2 text-slate-950 focus:outline-none cursor-pointer font-bold"
               >
-                <option value="WhatsApp Voice Note" className="bg-[#121215]">WhatsApp Voice Note</option>
-                <option value="IVR Call" className="bg-[#121215]">IVR Voice Call</option>
-                <option value="USSD Gateway" className="bg-[#121215]">USSD Gateway</option>
-                <option value="Web Intake" className="bg-[#121215]">Web Portal Intake</option>
+                <option value="WhatsApp Voice Note">WhatsApp Voice Note</option>
+                <option value="IVR Call">IVR Voice Call</option>
+                <option value="USSD Gateway">USSD Gateway</option>
+                <option value="Web Intake">Web Portal Intake</option>
               </select>
             </div>
           </div>
 
           <div>
-            <label className="block text-slate-400 text-xs mb-1 font-medium">
+            <label className="block text-slate-800 text-xs sm:text-sm mb-1 font-extrabold">
               Citizen Input Text (supports Hindi, Portuguese, Zulu, Tamil, English, etc.)
             </label>
             <textarea
@@ -81,14 +81,14 @@ export const CitizenFeedbackFeed: React.FC<CitizenFeedbackFeedProps> = ({
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               placeholder="e.g. पानी की पाइपलाइन 3 हफ्तों से टूटी है 5000 घर प्रभावित हैं..."
-              className="w-full bg-[#121215] border border-white/[0.08] rounded-lg p-3 text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-white/[0.16]"
+              className="w-full bg-slate-100 border border-slate-200 rounded-xl p-3 text-xs sm:text-sm text-slate-950 placeholder:text-slate-500 focus:outline-none font-bold"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading || !inputText.trim()}
-            className="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-lg text-xs disabled:opacity-50 transition-colors cursor-pointer shadow-sm"
+            className="flex items-center gap-2 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold rounded-xl text-xs sm:text-sm disabled:opacity-50 transition-colors cursor-pointer shadow-xs"
           >
             <Sparkles className="w-4 h-4" />
             <span>{loading ? 'Ingesting & Analyzing...' : 'Analyze & Ingest Request'}</span>
@@ -98,31 +98,31 @@ export const CitizenFeedbackFeed: React.FC<CitizenFeedbackFeedProps> = ({
 
       {/* Stream List */}
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-slate-200">Recent Citizen Demand Log ({requests.length} entries)</h3>
+        <h3 className="text-base sm:text-lg font-extrabold text-slate-950">Recent Citizen Demand Log ({requests.length} entries)</h3>
         {requests.map((req) => (
-          <div key={req.id} className="p-4 bg-[#0A0A0C] border border-white/[0.08] rounded-xl space-y-2.5 shadow-sm">
-            <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
+          <div key={req.id} className="p-4 bg-white border border-slate-200 rounded-xl space-y-3 shadow-sm text-slate-950 font-bold">
+            <div className="flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm font-bold">
               <div className="flex items-center gap-2">
                 <Badge variant="accent">{req.request_category}</Badge>
-                <span className="text-slate-400 font-mono">Channel: {req.source} ({req.language.toUpperCase()})</span>
+                <span className="text-slate-800 font-mono font-extrabold">Channel: {req.source} ({req.language.toUpperCase()})</span>
               </div>
               <Badge variant={req.extracted_entities.severity === 'CRITICAL' ? 'danger' : 'warning'}>
                 {req.extracted_entities.severity} SEVERITY
               </Badge>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs pt-1">
-              <div className="p-3 bg-[#121215] rounded-lg border border-white/[0.08]">
-                <span className="text-slate-400 font-medium block">Original Text:</span>
-                <span className="text-slate-200 italic">"{req.original_text}"</span>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs sm:text-sm pt-1 font-bold">
+              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 shadow-2xs">
+                <span className="text-slate-800 font-extrabold block">Original Text:</span>
+                <span className="text-slate-950 italic">"{req.original_text}"</span>
               </div>
-              <div className="p-3 bg-[#121215] rounded-lg border border-white/[0.08]">
-                <span className="text-slate-400 font-medium block">English Translation:</span>
-                <span className="text-slate-200 font-medium">"{req.translated_text}"</span>
+              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 shadow-2xs">
+                <span className="text-slate-800 font-extrabold block">English Translation:</span>
+                <span className="text-slate-950 font-extrabold">"{req.translated_text}"</span>
               </div>
             </div>
 
-            <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1 font-mono">
+            <div className="flex items-center justify-between text-xs text-slate-800 pt-1 font-mono font-extrabold">
               <span>Location: {req.extracted_entities.location || 'Regional Hotspot'}</span>
               <span>Impacted Residents: ~{req.extracted_entities.impacted_count || 100}</span>
             </div>
