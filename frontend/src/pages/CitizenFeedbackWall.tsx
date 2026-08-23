@@ -239,14 +239,14 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
               </span>
             </div>
             <h1 className="text-2xl md:text-[28px] font-semibold tracking-tight text-slate-100 font-sans">
-              Indian States <span className="hero-gradient-text">Citizen Comments & Ratings</span>
+              Community <span className="hero-gradient-text">Feedback Wall</span>
             </h1>
             <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-xs">
               <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
-                Verified Citizen Wall
+                Public Community Voice
               </span>
               <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
-                7 Native Languages
+                Verified Citizen Posts
               </span>
             </div>
           </div>

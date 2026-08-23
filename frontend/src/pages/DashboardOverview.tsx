@@ -124,17 +124,18 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-green-500" />
               <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 font-mono">
-                Civic Decision Engine • Active
+                Civic Priority System • Active
               </span>
             </div>
 
             <h1 className="text-2xl md:text-[28px] font-semibold tracking-tight text-slate-100">
-              CivicPulse <span className="hero-gradient-text">Executive Decision Intelligence</span>
+              CivicPulse <span className="hero-gradient-text">Overview & Priorities</span>
             </h1>
 
             <p className="text-xs sm:text-sm text-slate-400">
-              Multilingual citizen demand analysis & infrastructure capital allocation prioritization.
+              Real-time citizen feedback, facility shortfalls & budget priorities.
             </p>
+
 
             <div className="flex flex-wrap items-center gap-2 pt-2 font-mono text-xs">
               <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium flex items-center gap-1.5">
@@ -155,29 +156,30 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
               className="flex items-center justify-center gap-2 px-3.5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-xs transition cursor-pointer text-center"
             >
               <MessageSquare className="w-3.5 h-3.5 shrink-0" />
-              <span className="truncate">Citizen Feedback</span>
+              <span className="truncate">View Complaints</span>
             </button>
             <button
               onClick={() => onNavigate('demand')}
               className="flex items-center justify-center gap-2 px-3.5 py-2 rounded-lg bg-[#121215] hover:bg-[#101014] border border-white/[0.08] text-slate-200 font-medium text-xs transition cursor-pointer text-center"
             >
               <Globe2 className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
-              <span className="truncate">Voice Feed</span>
+              <span className="truncate">Citizen Voices</span>
             </button>
             <button
               onClick={() => onNavigate('scenarios')}
               className="flex items-center justify-center gap-2 px-3.5 py-2 rounded-lg bg-[#121215] hover:bg-[#101014] border border-white/[0.08] text-slate-200 font-medium text-xs transition cursor-pointer text-center"
             >
               <Sparkles className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
-              <span className="truncate">Scenario Lab</span>
+              <span className="truncate">Budget Simulator</span>
             </button>
             <button
               onClick={() => onNavigate('hotspots')}
               className="flex items-center justify-center gap-2 px-3.5 py-2 rounded-lg bg-[#121215] hover:bg-[#101014] border border-white/[0.08] text-slate-200 font-medium text-xs transition cursor-pointer text-center"
             >
               <Activity className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
-              <span className="truncate">Hotspots</span>
+              <span className="truncate">Problem Hotspots</span>
             </button>
+
           </div>
         </div>
       </div>
@@ -188,7 +190,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
         <div className="p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.08] hover:border-white/[0.16] transition-colors duration-150 shadow-sm flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
-              Total Problems Raised
+              Total Complaints Logged
             </span>
             <div className="p-2 rounded-lg bg-[#121215] border border-white/[0.08] text-slate-400">
               <Users className="w-4 h-4" />
@@ -200,7 +202,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
             </div>
             <div className="flex items-center gap-1.5 text-xs text-green-400 font-medium">
               <TrendingUp className="w-3.5 h-3.5" />
-              <span>+18.4% temporal acceleration</span>
+              <span>+18.4% growth this month</span>
             </div>
           </div>
           <div className="mt-3 h-1.5 w-full bg-[#121215] rounded-full overflow-hidden border border-white/[0.08]">
@@ -212,7 +214,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
         <div className="p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.08] hover:border-white/[0.16] transition-colors duration-150 shadow-sm flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
-              Districts Covered
+              Districts Monitored
             </span>
             <div className="p-2 rounded-lg bg-[#121215] border border-white/[0.08] text-slate-400">
               <MapPin className="w-4 h-4" />
@@ -223,7 +225,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
               {totalRegions}
             </div>
             <div className="text-xs text-slate-400 font-medium">
-              100% census data attached
+              35 Districts & Cities
             </div>
           </div>
           <div className="mt-3 h-1.5 w-full bg-[#121215] rounded-full overflow-hidden border border-white/[0.08]">
@@ -235,7 +237,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
         <div className="p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.08] hover:border-white/[0.16] transition-colors duration-150 shadow-sm flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
-              Deficits Identified
+              Facility Shortfalls Found
             </span>
             <div className="p-2 rounded-lg bg-[#121215] border border-white/[0.08] text-amber-400">
               <AlertTriangle className="w-4 h-4" />
@@ -244,7 +246,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
           <div className="mt-3 space-y-1">
             <div className="text-2xl font-semibold text-slate-100 tracking-tight font-mono">126</div>
             <div className="text-xs text-amber-400 font-medium">
-              Avg gap score: 0.68 / 1.00
+              High deficit area ratio
             </div>
           </div>
           <div className="mt-3 h-1.5 w-full bg-[#121215] rounded-full overflow-hidden border border-white/[0.08]">
@@ -256,7 +258,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
         <div className="p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.08] hover:border-white/[0.16] transition-colors duration-150 shadow-sm flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
-              Critical Needs
+              Urgent Priority Projects
             </span>
             <div className="p-2 rounded-lg bg-[#121215] border border-white/[0.08] text-red-400">
               <FileCheck className="w-4 h-4" />
@@ -268,13 +270,14 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
             </div>
             <div className="text-xs text-red-400 font-medium flex items-center gap-1">
               <Zap className="w-3.5 h-3.5 text-red-400" />
-              <span>Requires fast-track capital</span>
+              <span>Requires immediate budget priority</span>
             </div>
           </div>
           <div className="mt-3 h-1.5 w-full bg-[#121215] rounded-full overflow-hidden border border-white/[0.08]">
             <div className="h-full bg-red-500 rounded-full w-[85%]" />
           </div>
         </div>
+
       </div>
 
       {/* 3. 3D Animated Isometric Cylinder Donut Chart & Multilingual Script Representation */}

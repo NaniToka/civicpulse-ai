@@ -69,15 +69,15 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({
           <div className="flex items-center gap-2">
             <Database className="w-5 h-5 text-indigo-400" />
             <h1 className="text-2xl md:text-[28px] font-semibold text-slate-100 tracking-tight">
-              Synthetic Demonstration <span className="hero-gradient-text">Datasets</span>
+              Submit & Explore <span className="hero-gradient-text">Data</span>
             </h1>
           </div>
           <div className="flex flex-wrap items-center gap-2 mt-2 font-mono text-xs">
             <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
-              35 Indian Districts
+              Submit Complaints & Voice Notes
             </span>
             <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
-              Demographic Census
+              Inspect All Platform Datasets
             </span>
           </div>
         </div>

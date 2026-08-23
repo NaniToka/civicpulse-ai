@@ -30,18 +30,18 @@ export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicato
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-indigo-500" />
             <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 font-mono">
-              Infrastructure Deficit Analytics
+              Facility Shortfalls & Gaps
             </span>
           </div>
           <h1 className="text-2xl md:text-[28px] font-semibold text-slate-100 tracking-tight font-sans">
-            Infrastructure Deficit & Gap <span className="hero-gradient-text">Intelligence</span>
+            Facility Shortfalls & <span className="hero-gradient-text">Capacity Deficits</span>
           </h1>
           <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-xs">
             <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
               6 Core Sectors
             </span>
             <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
-              Municipal Capacity Deficits
+              District Shortfall Matrix
             </span>
           </div>
         </div>

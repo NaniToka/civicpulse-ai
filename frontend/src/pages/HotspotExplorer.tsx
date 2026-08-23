@@ -59,15 +59,15 @@ export const HotspotExplorer: React.FC<HotspotExplorerProps> = ({
           <div className="flex items-center gap-2">
             <Flame className="w-5 h-5 text-amber-400" />
             <h1 className="text-2xl md:text-[28px] font-semibold text-slate-100 tracking-tight font-sans">
-              Per-Capita Demand <span className="hero-gradient-text">Hotspots</span>
+              Problem <span className="hero-gradient-text">Hotspots</span>
             </h1>
           </div>
           <div className="flex flex-wrap items-center gap-2 mt-2 font-mono text-xs">
             <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
-              100,000 Per-Capita Baseline
+              Normalized by Population Size
             </span>
             <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
-              Capacity Deficit Weight
+              High Urgency Locations
             </span>
           </div>
         </div>

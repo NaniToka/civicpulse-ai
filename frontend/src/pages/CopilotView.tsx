@@ -330,14 +330,14 @@ export const CopilotView: React.FC<CopilotViewProps> = ({
           <div>
             <div className="flex items-center gap-2">
               <h2 className="text-base sm:text-lg font-semibold tracking-tight text-slate-100">
-                Civic Intelligence Copilot
+                Ask AI Assistant
               </h2>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-                AI DECISION ASSISTANT
+                CIVIC COPILOT
               </span>
             </div>
             <p className="text-xs text-slate-400 mt-0.5">
-              Ask questions. Explore evidence. Understand civic priorities.
+              Ask questions in plain language. Get evidence-backed answers and project insights.
             </p>
           </div>
         </div>
@@ -346,7 +346,7 @@ export const CopilotView: React.FC<CopilotViewProps> = ({
           {/* AI Provider Badge */}
           <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#121215] border border-white/[0.08] text-xs">
             <span className="w-2 h-2 rounded-full bg-green-400 animate-ping" />
-            <span className="text-slate-400 text-[11px]">AI Provider:</span>
+            <span className="text-slate-400 text-[11px]">AI Engine:</span>
             <span className="font-mono text-slate-200 font-medium text-[11px]">{aiProviderBadge}</span>
           </div>
 
@@ -373,10 +373,10 @@ export const CopilotView: React.FC<CopilotViewProps> = ({
 
             <div className="max-w-md space-y-1">
               <h3 className="text-sm sm:text-base font-semibold text-slate-200">
-                Welcome to Civic Intelligence Copilot
+                Welcome to Ask AI Assistant
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Query citizen demand signals, per-capita deficit rankings, evidence trails, funding gaps, and counterfactual $15M scenarios in natural language.
+                Ask about citizen complaints, missing facilities, priority projects, funding gaps, or simulate $15M budget allocations in plain language.
               </p>
             </div>
 

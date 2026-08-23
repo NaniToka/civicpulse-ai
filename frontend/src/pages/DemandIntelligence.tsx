@@ -81,18 +81,18 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-indigo-500" />
             <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 font-mono">
-              Multilingual NLP Pipeline
+              Citizen Feedback & Growth
             </span>
           </div>
           <h1 className="text-2xl md:text-[28px] font-semibold text-slate-100 tracking-tight">
-            Citizen Demand <span className="hero-gradient-text">Intelligence Studio</span>
+            Citizen Complaints & <span className="hero-gradient-text">Feedback Trends</span>
           </h1>
           <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-xs">
             <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
               7 Native Languages
             </span>
             <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
-              30-Day Velocity Trends
+              Growth & Surge Trends
             </span>
           </div>
         </div>

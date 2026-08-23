@@ -32,16 +32,16 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems: { id: NavTab; label: string; icon: React.ReactNode; desc: string }[] = [
-    { id: 'dashboard', label: 'Executive Overview', icon: <LayoutDashboard className="w-4 h-4" />, desc: 'BRICS Civic Decision Cockpit' },
-    { id: 'copilot', label: 'Civic Intelligence Copilot', icon: <Sparkles className="w-4 h-4 text-indigo-400" />, desc: 'AI Decision Assistant & Evidence Copilot' },
-    { id: 'demand', label: 'Demand Intelligence', icon: <Search className="w-4 h-4" />, desc: 'Multilingual Voices & Momentum' },
-    { id: 'feedback', label: 'Citizen Comments & Emojis', icon: <MessageSquare className="w-4 h-4" />, desc: 'Community Feedback Wall' },
-    { id: 'hotspots', label: 'Demand Hotspots', icon: <Flame className="w-4 h-4" />, desc: 'Per-Capita Risk Heatmaps' },
-    { id: 'gaps', label: 'Infrastructure Gaps', icon: <AlertCircle className="w-4 h-4" />, desc: 'Shortfall Deficit Matrix' },
-    { id: 'recommendations', label: 'Recommendations', icon: <FileCheck className="w-4 h-4" />, desc: 'Ranked Policy Priorities' },
-    { id: 'evidence', label: 'Evidence Explorer', icon: <Network className="w-4 h-4" />, desc: 'Traceable Audit Trail' },
-    { id: 'scenarios', label: 'Scenario Lab', icon: <TestTube2 className="w-4 h-4" />, desc: 'Policy Simulator & ROI' },
-    { id: 'data', label: 'Data Explorer', icon: <Database className="w-4 h-4" />, desc: 'Raw Signals & Datasets' },
+    { id: 'dashboard', label: 'Dashboard Overview', icon: <LayoutDashboard className="w-4 h-4" />, desc: 'Summary of citizen needs & priorities' },
+    { id: 'copilot', label: 'Ask AI Assistant', icon: <Sparkles className="w-4 h-4 text-indigo-400" />, desc: 'Ask questions to AI & get evidence answers' },
+    { id: 'demand', label: 'Citizen Complaints', icon: <Search className="w-4 h-4" />, desc: 'Multilingual complaints & growth trends' },
+    { id: 'feedback', label: 'Community Wall', icon: <MessageSquare className="w-4 h-4" />, desc: 'Public feedback wall & emojis' },
+    { id: 'hotspots', label: 'Problem Hotspots', icon: <Flame className="w-4 h-4" />, desc: 'High urgency problem locations' },
+    { id: 'gaps', label: 'Facility Shortfalls', icon: <AlertCircle className="w-4 h-4" />, desc: 'Missing facilities & capacity gaps' },
+    { id: 'recommendations', label: 'Top Priority Projects', icon: <FileCheck className="w-4 h-4" />, desc: 'Ranked projects that need action' },
+    { id: 'evidence', label: 'Proof & Evidence', icon: <Network className="w-4 h-4" />, desc: 'Evidence breakdown behind recommendations' },
+    { id: 'scenarios', label: 'Budget Simulator', icon: <TestTube2 className="w-4 h-4" />, desc: 'Simulate budget allocations & impact' },
+    { id: 'data', label: 'Submit & Explore Data', icon: <Database className="w-4 h-4" />, desc: 'Submit new signals & view datasets' },
   ];
 
   const handleSelectTab = (tab: NavTab) => {

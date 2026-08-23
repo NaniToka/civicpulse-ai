@@ -48,28 +48,27 @@ export const Sidebar: React.FC<SidebarProps> = ({
     items: { id: NavTab; label: string; icon: React.ReactNode; badge?: string }[];
   }[] = [
     {
-      groupName: 'INTELLIGENCE HUB',
+      groupName: 'COMMUNITY VOICES & AI',
       items: [
-        { id: 'dashboard', label: 'Executive Overview', icon: <LayoutDashboard className="w-4 h-4" /> },
-        { id: 'copilot', label: 'Civic Intelligence Copilot', icon: <Sparkles className="w-4 h-4 text-indigo-400" />, badge: 'AI Copilot' },
-        { id: 'demand', label: 'Demand Intelligence', icon: <Search className="w-4 h-4" /> },
-        { id: 'feedback', label: 'Citizen Comments', icon: <MessageSquare className="w-4 h-4" />, badge: 'Emojis' },
-        { id: 'hotspots', label: 'Demand Hotspots', icon: <Flame className="w-4 h-4" /> },
-      ],
-
-    },
-    {
-      groupName: 'DECISION ENGINE',
-      items: [
-        { id: 'gaps', label: 'Infrastructure Gaps', icon: <AlertCircle className="w-4 h-4" /> },
-        { id: 'recommendations', label: 'Recommendations', icon: <FileCheck className="w-4 h-4" />, badge: 'Ranked' },
-        { id: 'evidence', label: 'Evidence Explorer', icon: <Network className="w-4 h-4" /> },
-        { id: 'scenarios', label: 'Scenario Lab', icon: <TestTube2 className="w-4 h-4" />, badge: 'Sim' },
+        { id: 'dashboard', label: 'Dashboard Overview', icon: <LayoutDashboard className="w-4 h-4" /> },
+        { id: 'copilot', label: 'Ask AI Assistant', icon: <Sparkles className="w-4 h-4 text-indigo-400" />, badge: 'AI' },
+        { id: 'demand', label: 'Citizen Complaints', icon: <Search className="w-4 h-4" /> },
+        { id: 'feedback', label: 'Community Wall', icon: <MessageSquare className="w-4 h-4" />, badge: 'Emojis' },
+        { id: 'hotspots', label: 'Problem Hotspots', icon: <Flame className="w-4 h-4" /> },
       ],
     },
     {
-      groupName: 'SYSTEM DATA',
-      items: [{ id: 'data', label: 'Data Explorer', icon: <Database className="w-4 h-4" /> }],
+      groupName: 'PRIORITIES & BUDGET',
+      items: [
+        { id: 'gaps', label: 'Facility Shortfalls', icon: <AlertCircle className="w-4 h-4" /> },
+        { id: 'recommendations', label: 'Top Priority Projects', icon: <FileCheck className="w-4 h-4" />, badge: 'Ranked' },
+        { id: 'evidence', label: 'Proof & Evidence', icon: <Network className="w-4 h-4" /> },
+        { id: 'scenarios', label: 'Budget Simulator', icon: <TestTube2 className="w-4 h-4" />, badge: 'Planner' },
+      ],
+    },
+    {
+      groupName: 'ALL DATA & REPORTS',
+      items: [{ id: 'data', label: 'Submit & Explore Data', icon: <Database className="w-4 h-4" /> }],
     },
   ];
 

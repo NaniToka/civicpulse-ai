@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Search, LayoutDashboard, Flame, AlertCircle, FileCheck, Network, TestTube2, Database, ArrowRight, X, Sparkles } from 'lucide-react';
+import { Search, LayoutDashboard, Flame, AlertCircle, FileCheck, Network, TestTube2, Database, ArrowRight, X, Sparkles, MessageSquare } from 'lucide-react';
 import { NavTab } from '../layout/Sidebar';
 
 
@@ -30,16 +30,16 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
   if (!isOpen) return null;
 
   const items: { id: NavTab; label: string; icon: React.ReactNode; description: string; category: string }[] = [
-    { id: 'dashboard', label: 'Executive Overview', icon: <LayoutDashboard className="w-4 h-4 text-indigo-400" />, description: 'High-level KPIs, demand landscape & top priorities', category: 'Views' },
-    { id: 'copilot', label: 'Civic Intelligence Copilot', icon: <Sparkles className="w-4 h-4 text-indigo-400" />, description: 'Ask questions, explore grounded evidence trails & run scenario simulations', category: 'AI Assistant' },
-    { id: 'demand', label: 'Demand Intelligence', icon: <Search className="w-4 h-4 text-indigo-400" />, description: 'Multilingual citizen voices, time-series & momentum', category: 'Views' },
-
-    { id: 'hotspots', label: 'Demand Hotspots', icon: <Flame className="w-4 h-4 text-amber-400" />, description: 'Per-capita normalized demand concentration', category: 'Views' },
-    { id: 'gaps', label: 'Infrastructure Gaps', icon: <AlertCircle className="w-4 h-4 text-red-400" />, description: 'Operational capacity deficit index vs population need', category: 'Views' },
-    { id: 'recommendations', label: 'Priority Recommendations', icon: <FileCheck className="w-4 h-4 text-green-400" />, description: 'Ranked evidence-backed capital investment priorities', category: 'Views' },
-    { id: 'evidence', label: 'Evidence Explorer', icon: <Network className="w-4 h-4 text-indigo-400" />, description: 'Granular evidence nodes and 6-step evidence trails', category: 'Views' },
-    { id: 'scenarios', label: 'Scenario Lab', icon: <TestTube2 className="w-4 h-4 text-indigo-400" />, description: 'Counterfactual policy simulations & score deltas', category: 'Tools' },
-    { id: 'data', label: 'Data Explorer', icon: <Database className="w-4 h-4 text-slate-400" />, description: 'Synthetic demonstration datasets & live request test', category: 'Data' },
+    { id: 'dashboard', label: 'Dashboard Overview', icon: <LayoutDashboard className="w-4 h-4 text-indigo-400" />, description: 'Summary of citizen complaints, shortfalls & priority needs', category: 'Views' },
+    { id: 'copilot', label: 'Ask AI Assistant', icon: <Sparkles className="w-4 h-4 text-indigo-400" />, description: 'Ask questions to AI assistant & get grounded evidence answers', category: 'AI Assistant' },
+    { id: 'demand', label: 'Citizen Complaints', icon: <Search className="w-4 h-4 text-indigo-400" />, description: 'Multilingual citizen requests & growing demand trends', category: 'Views' },
+    { id: 'feedback', label: 'Community Wall', icon: <MessageSquare className="w-4 h-4 text-indigo-400" />, description: 'Public citizen comments, feedback & community votes', category: 'Views' },
+    { id: 'hotspots', label: 'Problem Hotspots', icon: <Flame className="w-4 h-4 text-amber-400" />, description: 'Map of high-urgency problem concentration areas', category: 'Views' },
+    { id: 'gaps', label: 'Facility Shortfalls', icon: <AlertCircle className="w-4 h-4 text-red-400" />, description: 'Missing facilities & capacity shortfalls by district', category: 'Views' },
+    { id: 'recommendations', label: 'Top Priority Projects', icon: <FileCheck className="w-4 h-4 text-green-400" />, description: 'Ranked priority projects recommended for government funding', category: 'Views' },
+    { id: 'evidence', label: 'Proof & Evidence', icon: <Network className="w-4 h-4 text-indigo-400" />, description: 'Step-by-step evidence trail explaining priority rankings', category: 'Views' },
+    { id: 'scenarios', label: 'Budget Simulator', icon: <TestTube2 className="w-4 h-4 text-indigo-400" />, description: 'Simulate budget allocation impacts & beneficiary counts', category: 'Tools' },
+    { id: 'data', label: 'Submit & Explore Data', icon: <Database className="w-4 h-4 text-slate-400" />, description: 'Submit new complaints & inspect platform datasets', category: 'Data' },
   ];
 
   const filtered = items.filter(

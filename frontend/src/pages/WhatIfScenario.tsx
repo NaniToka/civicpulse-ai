@@ -72,18 +72,18 @@ export const WhatIfScenario: React.FC<WhatIfScenarioProps> = ({ regions }) => {
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-indigo-500" />
             <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 font-mono">
-              Policy Lab & Simulator
+              Budget Simulator
             </span>
           </div>
           <h1 className="text-2xl md:text-[28px] font-semibold text-slate-100 tracking-tight font-sans">
-            Scenario Lab & <span className="hero-gradient-text">Policy Simulator</span>
+            Budget & Investment <span className="hero-gradient-text">Simulator</span>
           </h1>
           <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-xs">
             <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
-              Counterfactual Simulation
+              Simulate Budget Allocation
             </span>
             <span className="px-2.5 py-1 rounded-md bg-[#121215] border border-white/[0.08] text-slate-300 font-medium">
-              Capital Budget Allocation
+              Project People Benefited
             </span>
           </div>
         </div>
