@@ -261,15 +261,15 @@ export const CopilotView: React.FC<CopilotViewProps> = ({
     return lines.map((line, idx) => {
       if (line.startsWith('### ')) {
         return (
-          <h3 key={idx} className="text-sm sm:text-base font-bold text-slate-100 mt-3 mb-1.5 flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
+          <h3 key={idx} className="text-base sm:text-lg font-extrabold text-slate-950 mt-4 mb-2 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-indigo-600 font-bold" />
             {line.replace('### ', '')}
           </h3>
         );
       }
       if (line.startsWith('#### ')) {
         return (
-          <h4 key={idx} className="text-xs sm:text-sm font-semibold text-indigo-300 mt-2 mb-1">
+          <h4 key={idx} className="text-sm sm:text-base font-extrabold text-indigo-700 mt-3 mb-1.5">
             {line.replace('#### ', '')}
           </h4>
         );
@@ -277,23 +277,23 @@ export const CopilotView: React.FC<CopilotViewProps> = ({
       if (line.startsWith('• ') || line.startsWith('- ')) {
         const itemText = line.substring(2);
         return (
-          <li key={idx} className="text-xs sm:text-sm text-slate-300 ml-4 list-disc space-y-1">
+          <li key={idx} className="text-sm sm:text-base text-slate-950 font-bold ml-4 list-disc space-y-1.5">
             {renderBoldText(itemText)}
           </li>
         );
       }
       if (/^\d+\.\s/.test(line)) {
         return (
-          <div key={idx} className="text-xs sm:text-sm text-slate-300 ml-2 my-1 leading-relaxed">
+          <div key={idx} className="text-sm sm:text-base text-slate-950 font-bold ml-2 my-1 leading-relaxed">
             {renderBoldText(line)}
           </div>
         );
       }
       if (!line.trim()) {
-        return <div key={idx} className="h-1.5" />;
+        return <div key={idx} className="h-2" />;
       }
       return (
-        <p key={idx} className="text-xs sm:text-sm text-slate-300 leading-relaxed my-0.5">
+        <p key={idx} className="text-sm sm:text-base text-slate-950 font-bold leading-relaxed my-1">
           {renderBoldText(line)}
         </p>
       );
@@ -303,14 +303,13 @@ export const CopilotView: React.FC<CopilotViewProps> = ({
   const renderBoldText = (text: string) => {
     const parts = text.split(/(\*\*.*?\*\*|`[^`]+`)/g);
 
-
     return parts.map((part, i) => {
       if (part.startsWith('**') && part.endsWith('**')) {
-        return <strong key={i} className="font-semibold text-slate-100">{part.slice(2, -2)}</strong>;
+        return <strong key={i} className="font-extrabold text-slate-950">{part.slice(2, -2)}</strong>;
       }
       if (part.startsWith('`') && part.endsWith('`')) {
         return (
-          <code key={i} className="px-1.5 py-0.5 rounded bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 font-mono text-[11px]">
+          <code key={i} className="px-2 py-0.5 rounded bg-indigo-50 border border-indigo-200 text-indigo-800 font-mono font-extrabold text-xs sm:text-sm">
             {part.slice(1, -1)}
           </code>
         );
@@ -322,41 +321,41 @@ export const CopilotView: React.FC<CopilotViewProps> = ({
   return (
     <div className="flex flex-col h-[calc(100vh-5rem)] max-w-5xl mx-auto space-y-4">
       {/* Top Header Card */}
-      <div className="bg-white border border-slate-200 rounded-xl p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shrink-0 shadow-sm">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-600 shrink-0 font-bold">
-            <Sparkles className="w-5 h-5 animate-pulse" />
+      <div className="bg-white border border-slate-200 rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shrink-0 shadow-sm">
+        <div className="flex items-center gap-3.5">
+          <div className="w-11 h-11 rounded-xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-600 shrink-0 font-extrabold">
+            <Sparkles className="w-6 h-6 animate-pulse" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="text-base sm:text-lg font-semibold tracking-tight text-slate-900">
+              <h2 className="text-lg sm:text-xl font-extrabold tracking-tight text-slate-950">
                 Ask AI Assistant
               </h2>
-              <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-200">
+              <span className="text-xs font-mono font-extrabold px-2.5 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-200">
                 CIVIC COPILOT
               </span>
             </div>
-            <p className="text-xs text-slate-600 mt-0.5 font-medium">
+            <p className="text-xs sm:text-sm text-slate-700 mt-0.5 font-bold">
               Ask questions in plain language. Get evidence-backed answers and project insights.
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 self-end sm:self-auto shrink-0">
+        <div className="flex items-center gap-2.5 self-end sm:self-auto shrink-0">
           {/* AI Provider Badge */}
-          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200 text-xs">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-            <span className="text-slate-600 text-[11px] font-medium">AI Engine:</span>
-            <span className="font-mono text-slate-900 font-bold text-[11px]">{aiProviderBadge}</span>
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-xs sm:text-sm">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
+            <span className="text-slate-700 font-bold">AI Engine:</span>
+            <span className="font-mono text-slate-950 font-extrabold">{aiProviderBadge}</span>
           </div>
 
           {messages.length > 0 && (
             <button
               onClick={handleClearChat}
-              className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200 text-xs text-slate-600 hover:text-red-600 hover:border-red-300 transition cursor-pointer font-medium"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-xs sm:text-sm text-slate-700 hover:text-red-700 hover:border-red-300 transition cursor-pointer font-extrabold"
               title="Clear current conversation"
             >
-              <Trash2 className="w-3.5 h-3.5" />
+              <Trash2 className="w-4 h-4" />
               <span className="hidden xs:inline">Clear</span>
             </button>
           )}
@@ -364,43 +363,43 @@ export const CopilotView: React.FC<CopilotViewProps> = ({
       </div>
 
       {/* Main Conversation Box */}
-      <div className="flex-1 bg-white border border-slate-200 rounded-xl p-4 overflow-y-auto flex flex-col space-y-4 relative min-h-0 shadow-sm">
+      <div className="flex-1 bg-white border border-slate-200 rounded-xl p-5 overflow-y-auto flex flex-col space-y-4 relative min-h-0 shadow-sm">
         {messages.length === 0 ? (
           <div className="my-auto flex flex-col items-center justify-center space-y-6 py-6 px-2 text-center">
-            <div className="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-600">
-              <Sparkles className="w-6 h-6" />
+            <div className="w-14 h-14 rounded-2xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-600 font-extrabold">
+              <Sparkles className="w-7 h-7" />
             </div>
 
-            <div className="max-w-md space-y-1">
-              <h3 className="text-sm sm:text-base font-semibold text-slate-900">
+            <div className="max-w-md space-y-1.5">
+              <h3 className="text-base sm:text-lg font-extrabold text-slate-950">
                 Welcome to Ask AI Assistant
               </h3>
-              <p className="text-xs text-slate-600 leading-relaxed font-medium">
+              <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-bold">
                 Ask about citizen complaints, missing facilities, priority projects, funding gaps, or simulate $15M budget allocations in plain language.
               </p>
             </div>
 
             {/* Suggested Starter Prompts */}
-            <div className="w-full max-w-3xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 text-left">
+            <div className="w-full max-w-3xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-left">
               {STARTER_PROMPTS.map((promptItem, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleSendMessage(promptItem.prompt)}
-                  className="p-3 rounded-lg bg-slate-50 border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/50 transition cursor-pointer flex flex-col justify-between group space-y-2"
+                  className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/50 transition cursor-pointer flex flex-col justify-between group space-y-2.5 shadow-2xs"
                 >
                   <div className="flex items-center justify-between">
-                    <div className="p-1.5 rounded-md bg-white border border-slate-200 shadow-2xs">
+                    <div className="p-2 rounded-lg bg-white border border-slate-200 shadow-2xs">
                       {promptItem.icon}
                     </div>
-                    <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-200/60 text-slate-700 group-hover:text-indigo-700">
+                    <span className="text-xs font-mono font-extrabold px-2 py-0.5 rounded bg-slate-200 text-slate-800 group-hover:text-indigo-800">
                       {promptItem.category}
                     </span>
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold text-slate-900 group-hover:text-indigo-700 transition-colors">
+                    <h4 className="text-xs sm:text-sm font-extrabold text-slate-950 group-hover:text-indigo-700 transition-colors">
                       {promptItem.title}
                     </h4>
-                    <p className="text-[11px] text-slate-600 mt-1 line-clamp-2 leading-normal font-medium">
+                    <p className="text-xs text-slate-700 mt-1 line-clamp-2 leading-normal font-bold">
                       "{promptItem.prompt}"
                     </p>
                   </div>
@@ -409,25 +408,25 @@ export const CopilotView: React.FC<CopilotViewProps> = ({
             </div>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-5">
             {messages.map((msg) => (
               <div
                 key={msg.id}
-                className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                className={`flex gap-3.5 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 {msg.role === 'assistant' && (
-                  <div className="w-8 h-8 rounded-lg bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-600 shrink-0 mt-0.5 font-bold">
-                    <Sparkles className="w-4 h-4" />
+                  <div className="w-9 h-9 rounded-xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-600 shrink-0 mt-0.5 font-extrabold shadow-2xs">
+                    <Sparkles className="w-5 h-5" />
                   </div>
                 )}
 
-                <div className={`max-w-[85%] sm:max-w-[78%] space-y-3 ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
+                <div className={`max-w-[88%] sm:max-w-[82%] space-y-3.5 ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
                   {/* Message Bubble Container */}
                   <div
-                    className={`p-3.5 sm:p-4 rounded-xl border text-xs sm:text-sm ${
+                    className={`p-4 sm:p-5 rounded-2xl border text-sm sm:text-base ${
                       msg.role === 'user'
-                        ? 'bg-indigo-600 text-white border-indigo-700 rounded-tr-none shadow-sm font-medium'
-                        : 'bg-slate-50 text-slate-900 border-slate-200 rounded-tl-none shadow-xs font-medium'
+                        ? 'bg-indigo-600 text-white border-indigo-700 rounded-tr-none shadow-md font-extrabold'
+                        : 'bg-slate-50 text-slate-950 border-slate-300 rounded-tl-none shadow-xs font-bold'
                     }`}
                   >
                     {renderMarkdownText(msg.content)}

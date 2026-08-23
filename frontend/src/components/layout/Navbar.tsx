@@ -51,27 +51,27 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <>
-      <header className="h-14 bg-white border-b border-slate-200 px-3 sm:px-6 flex items-center justify-between z-40 sticky top-0 shadow-xs">
+      <header className="h-16 bg-white border-b border-slate-200 px-4 sm:px-6 flex items-center justify-between z-40 sticky top-0 shadow-xs">
         {/* Brand Identity & Mobile Menu Toggle */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3.5">
           {/* Mobile Hamburger Toggle Button */}
           <button
             onClick={() => setMobileMenuOpen(true)}
-            className="md:hidden p-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 hover:text-slate-900 transition cursor-pointer flex items-center justify-center shrink-0"
+            className="md:hidden p-2 rounded-lg bg-slate-100 border border-slate-200 text-slate-800 hover:text-slate-950 transition cursor-pointer flex items-center justify-center shrink-0"
             title="Open Mobile Navigation Menu"
           >
             <Menu className="w-5 h-5" />
           </button>
 
-          <div className="w-7 h-7 rounded-lg bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-600 shrink-0 font-bold">
-            <Sparkles className="w-3.5 h-3.5" />
+          <div className="w-8 h-8 rounded-xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-600 shrink-0 font-extrabold">
+            <Sparkles className="w-4 h-4" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-sm sm:text-base font-semibold tracking-tight text-slate-900">
-                CivicPulse <span className="text-indigo-600 font-bold">AI</span>
+              <h1 className="text-base sm:text-lg font-extrabold tracking-tight text-slate-950">
+                CivicPulse <span className="text-indigo-600 font-extrabold">AI</span>
               </h1>
-              <span className="text-[10px] font-mono font-bold px-1.5 py-0.2 rounded bg-indigo-50 text-indigo-700 border border-indigo-200 shrink-0">
+              <span className="text-xs font-mono font-extrabold px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-700 border border-indigo-200 shrink-0">
                 v2.0
               </span>
             </div>
@@ -79,30 +79,30 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         {/* Right Controls: Command Palette & Demo Disclaimer */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-2.5 sm:gap-3.5">
           {/* Live Status Pill */}
-          <div className="hidden xl:flex items-center gap-2 px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200 text-xs text-slate-700">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-            <span className="text-[11px] font-semibold text-slate-700">7 Languages Active</span>
+          <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-xs sm:text-sm text-slate-800 font-extrabold">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 font-bold" />
+            <span>7 Languages Active</span>
           </div>
 
           {/* Command Palette Trigger */}
           <button
             onClick={onOpenCommandPalette}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-xs text-slate-700 hover:text-slate-950 hover:bg-slate-200 transition cursor-pointer"
+            className="flex items-center gap-2.5 px-3.5 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-xs sm:text-sm text-slate-800 hover:text-slate-950 hover:bg-slate-200 transition cursor-pointer font-extrabold"
           >
-            <Command className="w-3.5 h-3.5 text-slate-500 shrink-0" />
-            <span className="hidden sm:inline text-xs text-slate-600 font-medium">Search...</span>
-            <kbd className="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded bg-white border border-slate-300 text-[10px] font-mono text-slate-600">
+            <Command className="w-4 h-4 text-slate-600 shrink-0" />
+            <span className="hidden sm:inline font-extrabold text-slate-800">Search...</span>
+            <kbd className="hidden sm:inline-flex items-center px-2 py-0.5 rounded bg-white border border-slate-300 text-xs font-mono text-slate-800 font-extrabold">
               ⌘K
             </kbd>
           </button>
 
           {/* Demo Synthetic Data Badge */}
-          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-50 border border-amber-200 text-xs text-amber-800 font-bold shrink-0">
-            <ShieldAlert className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-            <span className="hidden lg:inline text-[11px] tracking-wide">DEMO DATA</span>
-            <span className="lg:hidden text-[10px]">DEMO</span>
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-50 border border-amber-200 text-xs sm:text-sm text-amber-900 font-extrabold shrink-0">
+            <ShieldAlert className="w-4 h-4 text-amber-700 shrink-0 font-bold" />
+            <span className="hidden lg:inline tracking-wide font-extrabold">DEMO DATA</span>
+            <span className="lg:hidden text-xs font-extrabold">DEMO</span>
           </div>
         </div>
       </header>

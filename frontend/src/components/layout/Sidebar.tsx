@@ -75,15 +75,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
   return (
     <aside
       className={`hidden md:flex bg-white text-slate-900 border-r border-slate-200 flex-col transition-all duration-200 select-none shadow-xs ${
-        collapsed ? 'w-16' : 'w-60'
+        collapsed ? 'w-16' : 'w-64'
       }`}
     >
       {/* Sidebar Header Toggle */}
-      <div className="p-3.5 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
+      <div className="p-4 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
         {!collapsed && (
           <div className="flex items-center gap-2">
-            <Compass className="w-4 h-4 text-indigo-600 font-bold" />
-            <span className="text-[11px] font-bold tracking-wider text-slate-900 uppercase font-mono">
+            <Compass className="w-5 h-5 text-indigo-600 font-extrabold" />
+            <span className="text-xs font-extrabold tracking-wider text-slate-950 uppercase font-mono">
               Navigation
             </span>
           </div>
@@ -91,51 +91,51 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {onToggleCollapse && (
           <button
             onClick={onToggleCollapse}
-            className="p-1 rounded-lg text-slate-600 hover:text-slate-950 hover:bg-slate-200 transition cursor-pointer"
+            className="p-1.5 rounded-lg text-slate-700 hover:text-slate-950 hover:bg-slate-200 transition cursor-pointer"
             title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           >
-            {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+            {collapsed ? <ChevronRight className="w-5 h-5" /> : <ChevronLeft className="w-5 h-5" />}
           </button>
         )}
       </div>
 
       {/* Navigation Groups */}
-      <nav className="flex-1 p-2.5 space-y-5 overflow-y-auto bg-white">
+      <nav className="flex-1 p-3 space-y-6 overflow-y-auto bg-white">
         {navGroups.map((group, groupIdx) => (
-          <div key={groupIdx} className="space-y-1">
+          <div key={groupIdx} className="space-y-1.5">
             {!collapsed && (
-              <div className="px-3 text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+              <div className="px-3 text-xs font-extrabold text-slate-800 uppercase tracking-wider mb-2">
                 {group.groupName}
               </div>
             )}
-            <div className="space-y-1">
+            <div className="space-y-1.5">
               {group.items.map((item) => {
                 const isActive = activeTab === item.id;
                 return (
                   <button
                     key={item.id}
                     onClick={() => setActiveTab(item.id)}
-                    className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-bold transition-all relative cursor-pointer group overflow-hidden ${
+                    className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-extrabold transition-all relative cursor-pointer group overflow-hidden ${
                       isActive
-                        ? 'bg-gradient-to-r from-indigo-600 via-indigo-600 to-indigo-700 text-white shadow-sm font-bold'
-                        : 'text-slate-800 hover:text-slate-950 hover:bg-slate-100 font-bold'
+                        ? 'bg-gradient-to-r from-indigo-600 via-indigo-600 to-indigo-700 text-white shadow-md font-extrabold'
+                        : 'text-slate-900 hover:text-slate-950 hover:bg-slate-100 font-bold'
                     }`}
                     title={collapsed ? item.label : undefined}
                   >
                     {/* Left Side Active Accent Bar */}
                     {isActive && (
-                      <span className="absolute left-0 top-0 bottom-0 w-1.5 bg-indigo-400 rounded-l shadow-sm" />
+                      <span className="absolute left-0 top-0 bottom-0 w-1.5 bg-indigo-300 rounded-l shadow-sm" />
                     )}
-                    <span className={isActive ? 'text-white font-bold ml-0.5' : 'text-slate-700 font-bold group-hover:text-slate-950'}>
+                    <span className={isActive ? 'text-white font-extrabold ml-0.5' : 'text-slate-800 font-extrabold group-hover:text-slate-950'}>
                       {item.icon}
                     </span>
-                    {!collapsed && <span className="flex-1 text-left truncate font-bold text-xs">{item.label}</span>}
+                    {!collapsed && <span className="flex-1 text-left truncate font-extrabold text-sm">{item.label}</span>}
                     {!collapsed && item.badge && (
                       <span
-                        className={`text-[10px] px-1.5 py-0.5 rounded font-bold font-mono ${
+                        className={`text-xs px-2 py-0.5 rounded-md font-extrabold font-mono ${
                           isActive
                             ? 'bg-indigo-800 text-white border border-indigo-500 shadow-xs'
-                            : 'bg-slate-100 border border-slate-300 text-slate-700'
+                            : 'bg-slate-100 border border-slate-300 text-slate-800'
                         }`}
                       >
                         {item.badge}
@@ -151,24 +151,24 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Bottom Footer Disclaimer */}
       {!collapsed && (
-        <div className="p-3.5 border-t border-slate-200 bg-slate-50 text-xs space-y-2">
-          <div className="flex items-center justify-between text-xs text-slate-800">
-            <span className="flex items-center gap-1.5 text-slate-700 text-[11px] font-bold">
-              <Activity className="w-3.5 h-3.5 text-emerald-600 font-bold" />
-              <span className="font-bold">Engine Status</span>
+        <div className="p-4 border-t border-slate-200 bg-slate-50 text-xs space-y-2.5">
+          <div className="flex items-center justify-between text-xs text-slate-900 font-bold">
+            <span className="flex items-center gap-1.5 text-slate-900 text-xs font-extrabold">
+              <Activity className="w-4 h-4 text-emerald-600 font-extrabold" />
+              <span className="font-extrabold">Engine Status</span>
             </span>
-            <span className="text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded border border-emerald-300 text-[10px] font-mono font-bold">
+            <span className="text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded border border-emerald-300 text-xs font-mono font-extrabold">
               ONLINE v2.0
             </span>
           </div>
 
-          <div className="p-2.5 rounded-lg bg-white border border-slate-200 text-xs text-slate-700 flex items-start gap-2 shadow-xs">
-            <ShieldCheck className="w-3.5 h-3.5 text-slate-600 shrink-0 mt-0.5" />
+          <div className="p-3 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 flex items-start gap-2.5 shadow-xs">
+            <ShieldCheck className="w-4 h-4 text-slate-700 shrink-0 mt-0.5 font-bold" />
             <div>
-              <span className="font-bold text-slate-900 text-[10px] uppercase tracking-wider block">
+              <span className="font-extrabold text-slate-950 text-xs uppercase tracking-wider block">
                 DEMO ENVIRONMENT
               </span>
-              <p className="text-[11px] text-slate-600 font-semibold mt-0.5 leading-tight">
+              <p className="text-xs text-slate-700 font-bold mt-0.5 leading-tight">
                 Synthetic dataset for prototyping.
               </p>
             </div>

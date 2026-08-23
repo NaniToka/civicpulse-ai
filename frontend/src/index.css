@@ -4,40 +4,41 @@
 
 @layer base {
   body {
-    @apply bg-[#F8FAFC] text-slate-800 antialiased selection:bg-indigo-600 selection:text-white tracking-normal min-h-screen;
+    @apply bg-[#F8FAFC] text-slate-950 antialiased font-semibold tracking-normal text-base min-h-screen;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Inter', sans-serif;
-    @apply font-semibold text-slate-900 tracking-tight;
+    @apply font-extrabold text-slate-950 tracking-tight;
   }
 
   .font-mono {
     font-family: 'JetBrains Mono', 'Menlo', monospace;
+    font-weight: 700;
   }
 
   select {
-    font-weight: 500 !important;
-    color: #0f172a !important;
+    font-weight: 700 !important;
+    color: #020617 !important;
     background-color: #ffffff !important;
     border-color: #cbd5e1 !important;
     border-radius: 8px !important;
   }
 
   option {
-    font-weight: 500 !important;
-    color: #0f172a !important;
+    font-weight: 700 !important;
+    color: #020617 !important;
     background-color: #ffffff !important;
     padding: 8px 12px !important;
-    font-size: 14px !important;
+    font-size: 15px !important;
   }
 }
 
 @layer utilities {
   /* Card Surface Utilities */
   .glass-card, .glass-card-interactive {
-    @apply bg-white border border-slate-200 rounded-xl transition-colors duration-150 shadow-sm;
+    @apply bg-white border border-slate-200 rounded-xl transition-colors duration-150 shadow-sm font-semibold text-slate-950;
   }
 
   .glass-card-interactive:hover {
@@ -45,7 +46,7 @@
   }
 
   .glass-panel-cyan, .glass-panel-indigo, .glass-panel-emerald, .glass-panel-rose {
-    @apply bg-white border border-slate-200 rounded-xl shadow-sm;
+    @apply bg-white border border-slate-200 rounded-xl shadow-sm font-semibold text-slate-950;
   }
 
   /* Glow effects mapped to clean light subtle shadows */
@@ -55,17 +56,17 @@
 
   /* Signature Hero Gradient */
   .hero-gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-700 via-purple-600 to-indigo-900;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-700 via-purple-600 to-indigo-900 font-extrabold;
   }
 
   /* Non-signature gradient text mapped to dark slate */
   .gradient-text-cyan, .gradient-text-emerald, .gradient-text-rose, .gradient-text-amber {
-    @apply text-slate-900;
+    @apply text-slate-950 font-extrabold;
   }
 
   /* Subtitle / Eyebrow typography helper */
   .eyebrow-label {
-    @apply text-[11px] font-semibold uppercase tracking-wider text-slate-600;
+    @apply text-xs font-extrabold uppercase tracking-wider text-slate-800;
   }
 
   /* Subtle background grid pattern */
