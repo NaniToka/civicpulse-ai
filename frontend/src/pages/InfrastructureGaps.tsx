@@ -91,35 +91,35 @@ export const InfrastructureGaps: React.FC<InfrastructureGapsProps> = ({ indicato
           const deficitPct = Math.round(avgDeficit * 100);
 
           return (
-            <div key={cat} className="p-6 rounded-xl bg-white border border-slate-200 space-y-4 shadow-sm text-slate-950 font-bold">
+            <div key={cat} className="p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.12] space-y-4 shadow-md text-slate-100 font-bold hover:border-indigo-500/50 transition-colors">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
-                  <div className="p-2.5 rounded-xl bg-slate-100 border border-slate-200 shadow-2xs">
+                  <div className="p-2.5 rounded-xl bg-[#121215] border border-white/[0.12] shadow-2xs text-indigo-400">
                     {categoryIcons[cat]}
                   </div>
-                  <span className="text-xs sm:text-sm font-extrabold text-slate-950 uppercase tracking-wider font-mono">
+                  <span className="text-xs sm:text-sm font-extrabold text-white uppercase tracking-wider font-mono">
                     {cat.replace('_', ' ')}
                   </span>
                 </div>
                 <div className="text-right font-mono font-extrabold">
-                  <div className="text-sm sm:text-base font-extrabold text-rose-800">{deficitPct}% Deficit</div>
-                  <div className="text-xs text-slate-700 font-bold">({avgDeficit.toFixed(2)} / 1.00)</div>
+                  <div className="text-sm sm:text-base font-extrabold text-rose-400">{deficitPct}% Deficit</div>
+                  <div className="text-xs text-slate-400 font-bold">({avgDeficit.toFixed(2)} / 1.00)</div>
                 </div>
               </div>
 
               <div className="space-y-1.5 font-mono text-xs sm:text-sm font-bold">
                 <div className="flex justify-between font-extrabold">
-                  <span className="text-slate-800">Coverage vs Shortfall:</span>
-                  <span className="text-emerald-800">{avgCoverage}% Coverage</span>
+                  <span className="text-slate-300">Coverage vs Shortfall:</span>
+                  <span className="text-emerald-400">{avgCoverage}% Coverage</span>
                 </div>
-                <div className="h-2.5 rounded-full bg-slate-200 overflow-hidden border border-slate-300 flex">
+                <div className="h-2.5 rounded-full bg-[#121215] overflow-hidden border border-white/[0.08] flex">
                   <div
-                    className="h-full bg-emerald-600 rounded-l-full"
+                    className="h-full bg-emerald-500 rounded-l-full"
                     style={{ width: `${avgCoverage}%` }}
                     title={`Current Coverage: ${avgCoverage}%`}
                   />
                   <div
-                    className="h-full bg-rose-600 rounded-r-full"
+                    className="h-full bg-rose-500 rounded-r-full"
                     style={{ width: `${deficitPct}%` }}
                     title={`Capacity Shortfall: ${deficitPct}%`}
                   />

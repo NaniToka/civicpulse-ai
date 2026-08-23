@@ -238,13 +238,13 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
             {Object.entries(languageCounts).map(([code, count]) => {
               const pct = Math.round((count / (requests.length || 1)) * 100);
               return (
-                <div key={code} className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 shadow-2xs">
-                  <div className="text-xs sm:text-sm font-extrabold text-slate-950">
+                <div key={code} className="p-4 rounded-xl bg-[#0A0A0C] border border-white/[0.12] shadow-md text-slate-100">
+                  <div className="text-xs sm:text-sm font-extrabold text-white">
                     {languageLabels[code] || code}
                   </div>
                   <div className="flex items-baseline justify-between mt-2 font-mono">
-                    <span className="text-xl font-extrabold text-indigo-700">{count}</span>
-                    <span className="text-xs text-slate-700 font-bold">{pct}% share</span>
+                    <span className="text-xl font-extrabold text-indigo-400">{count}</span>
+                    <span className="text-xs text-slate-400 font-bold">{pct}% share</span>
                   </div>
                 </div>
               );
@@ -254,53 +254,53 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
       </div>
 
       {/* Demand Velocity Momentum Signals */}
-      <div className="p-6 rounded-xl bg-white border border-slate-200 space-y-4 shadow-sm">
+      <div className="p-6 rounded-xl bg-white border border-slate-200 space-y-4 shadow-sm text-slate-950 font-bold">
         <div className="flex items-center justify-between border-b border-slate-200 pb-3">
           <div className="flex items-center gap-2">
-            <TrendingUp className="w-5 h-5 text-indigo-600" />
+            <TrendingUp className="w-5 h-5 text-indigo-600 font-extrabold" />
             <h3 className="text-base sm:text-lg font-extrabold text-slate-950">Demand Momentum Velocity Signals</h3>
           </div>
           <span className="text-xs text-slate-700 font-mono font-bold">30-Day Window Comparison</span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2 shadow-2xs">
+          <div className="p-4 rounded-xl bg-[#0A0A0C] border border-white/[0.12] space-y-2 shadow-md text-slate-100">
             <div className="flex justify-between items-center">
-              <span className="text-xs sm:text-sm font-extrabold text-slate-950 font-mono">Healthcare Demand</span>
+              <span className="text-xs sm:text-sm font-extrabold text-white font-mono">Healthcare Demand</span>
               <TrendBadge trend="INCREASING" pctChange={34.5} />
             </div>
-            <p className="text-xs sm:text-sm text-slate-800 leading-relaxed font-bold">
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-bold">
               Accelerating demand velocity in Kanpur South and Ekurhuleni North clinics.
             </p>
-            <div className="text-xs sm:text-sm font-mono font-extrabold text-emerald-800">+34.5% vs previous 30 days</div>
+            <div className="text-xs sm:text-sm font-mono font-extrabold text-emerald-400">+34.5% vs previous 30 days</div>
           </div>
 
-          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2 shadow-2xs">
+          <div className="p-4 rounded-xl bg-[#0A0A0C] border border-white/[0.12] space-y-2 shadow-md text-slate-100">
             <div className="flex justify-between items-center">
-              <span className="text-xs sm:text-sm font-extrabold text-slate-950 font-mono">Clean Water Supply</span>
+              <span className="text-xs sm:text-sm font-extrabold text-white font-mono">Clean Water Supply</span>
               <TrendBadge trend="EMERGING" />
             </div>
-            <p className="text-xs sm:text-sm text-slate-800 leading-relaxed font-bold">
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-bold">
               Sudden surge in pipeline fracture complaints in Pune Peri-Urban Ward 12.
             </p>
-            <div className="text-xs sm:text-sm font-mono font-extrabold text-amber-800">Emerging urgent signal</div>
+            <div className="text-xs sm:text-sm font-mono font-extrabold text-amber-400">Emerging urgent signal</div>
           </div>
 
-          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2 shadow-2xs">
+          <div className="p-4 rounded-xl bg-[#0A0A0C] border border-white/[0.12] space-y-2 shadow-md text-slate-100">
             <div className="flex justify-between items-center">
-              <span className="text-xs sm:text-sm font-extrabold text-slate-950 font-mono">Digital Broadband</span>
+              <span className="text-xs sm:text-sm font-extrabold text-white font-mono">Digital Broadband</span>
               <TrendBadge trend="STABLE" pctChange={2.1} />
             </div>
-            <p className="text-xs sm:text-sm text-slate-800 leading-relaxed font-bold">
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-bold">
               Consistent steady request rate across student populations.
             </p>
-            <div className="text-xs sm:text-sm font-mono font-extrabold text-slate-700">Stable volume (+2.1%)</div>
+            <div className="text-xs sm:text-sm font-mono font-extrabold text-slate-400">Stable volume (+2.1%)</div>
           </div>
         </div>
       </div>
 
       {/* Citizen Feedback Feed Cards */}
-      <div className="p-6 md:p-8 rounded-xl bg-white border border-slate-200 space-y-4 shadow-sm">
+      <div className="p-6 md:p-8 rounded-xl bg-white border border-slate-200 space-y-4 shadow-sm text-slate-950 font-bold">
         <div className="flex items-center justify-between border-b border-slate-200 pb-3">
           <h3 className="text-base sm:text-lg font-extrabold text-slate-950">Filtered Citizen Requests ({filteredRequests.length})</h3>
           <span className="text-xs sm:text-sm font-mono font-extrabold text-indigo-700">Showing verified demand signals</span>
@@ -313,11 +313,11 @@ export const DemandIntelligence: React.FC<DemandIntelligenceProps> = ({
         ) : (
           <div className="space-y-3">
             {filteredRequests.map((req) => (
-              <div key={req.id} className="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-slate-300 transition-colors space-y-3 shadow-2xs">
+              <div key={req.id} className="p-4.5 rounded-xl bg-[#0A0A0C] border border-white/[0.12] hover:border-indigo-500/50 transition-colors space-y-3 shadow-md text-slate-100 font-bold">
                 <div className="flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm font-bold">
                   <div className="flex items-center gap-2 font-mono">
-                    <span className="font-extrabold text-indigo-700">{req.id}</span>
-                    <span className="text-slate-800 font-extrabold">• {req.request_category || req.category}</span>
+                    <span className="font-extrabold text-indigo-400">{req.id}</span>
+                    <span className="text-slate-300 font-extrabold">• {req.request_category || req.category}</span>
                     <button
                       onClick={() => handleOpenRegionDetails(req.region_id)}
                       className="text-slate-800 hover:text-indigo-700 flex items-center gap-1 font-extrabold cursor-pointer"

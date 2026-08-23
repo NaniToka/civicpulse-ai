@@ -82,18 +82,18 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
             <div
               key={rec.id}
               onClick={() => onOpenEvidenceModal && onOpenEvidenceModal(rec)}
-              className="p-5 rounded-xl bg-slate-50 border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/30 transition-colors cursor-pointer space-y-3 shadow-xs group"
+              className="p-5 rounded-xl bg-[#0A0A0C] border border-white/[0.12] hover:border-indigo-500/50 transition-colors cursor-pointer space-y-3 shadow-md group text-slate-100 font-bold"
             >
               <div className="flex items-center justify-between">
-                <span className="text-xs font-extrabold font-mono text-indigo-700 uppercase">{rec.category}</span>
-                <span className="text-xs font-mono font-bold text-slate-600">{rec.id}</span>
+                <span className="text-xs font-extrabold font-mono text-indigo-400 uppercase">{rec.category}</span>
+                <span className="text-xs font-mono font-bold text-slate-400">{rec.id}</span>
               </div>
-              <h3 className="text-base sm:text-lg font-extrabold text-slate-950 group-hover:text-indigo-700 transition-colors">{rec.region_name}</h3>
-              <p className="text-xs sm:text-sm text-slate-800 font-bold italic leading-relaxed">"{rec.reasoning}"</p>
+              <h3 className="text-base sm:text-lg font-extrabold text-white group-hover:text-indigo-400 transition-colors">{rec.region_name}</h3>
+              <p className="text-xs sm:text-sm text-slate-300 font-bold italic leading-relaxed">"{rec.reasoning}"</p>
 
-              <div className="flex items-center justify-between text-xs sm:text-sm pt-3 border-t border-slate-200 font-mono font-bold">
-                <span className="text-emerald-700 font-extrabold">+{(rec.confidence * 100).toFixed(0)}% Confidence</span>
-                <span className="text-indigo-700 font-extrabold flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+              <div className="flex items-center justify-between text-xs sm:text-sm pt-3 border-t border-white/[0.08] font-mono font-bold">
+                <span className="text-emerald-400 font-extrabold">+{(rec.confidence * 100).toFixed(0)}% Confidence</span>
+                <span className="text-indigo-400 font-extrabold flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
                   Open Evidence Chain →
                 </span>
               </div>
@@ -102,27 +102,27 @@ export const EvidenceExplorer: React.FC<EvidenceExplorerProps> = ({
         </div>
       </div>
 
-      <div className="p-6 rounded-xl bg-white border border-slate-200 space-y-4 shadow-sm">
+      <div className="p-6 rounded-xl bg-white border border-slate-200 space-y-4 shadow-sm text-slate-950 font-bold">
         <h2 className="text-base sm:text-lg font-extrabold text-slate-950 font-mono">
           Granular Evidence Nodes ({filteredItems.length})
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredItems.map((item) => (
-            <div key={item.id} className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2.5 shadow-xs">
+            <div key={item.id} className="p-4 rounded-xl bg-[#0A0A0C] border border-white/[0.12] space-y-2.5 shadow-md text-slate-100 font-bold hover:border-indigo-500/50 transition-colors">
               <div className="flex items-center justify-between text-xs">
-                <span className="font-mono text-indigo-700 uppercase font-extrabold text-xs bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">
+                <span className="font-mono text-indigo-400 uppercase font-extrabold text-xs bg-[#121215] px-2 py-0.5 rounded border border-white/[0.12]">
                   {item.type}
                 </span>
-                <span className="text-slate-600 font-mono font-bold text-xs">{item.id}</span>
+                <span className="text-slate-400 font-mono font-bold text-xs">{item.id}</span>
               </div>
 
-              <div className="text-sm sm:text-base font-extrabold text-slate-950 tracking-tight">{item.metric}</div>
-              <div className="text-xs sm:text-sm text-slate-800 font-bold">{item.explanation}</div>
+              <div className="text-sm sm:text-base font-extrabold text-white tracking-tight">{item.metric}</div>
+              <div className="text-xs sm:text-sm text-slate-300 font-bold">{item.explanation}</div>
 
-              <div className="flex items-center justify-between text-xs pt-2 border-t border-slate-200 font-mono font-bold">
-                <span className="text-slate-700">Weight Impact</span>
-                <span className="text-indigo-700 font-extrabold">+{item.confidence.toFixed(1)} pts</span>
+              <div className="flex items-center justify-between text-xs pt-2 border-t border-white/[0.08] font-mono font-bold">
+                <span className="text-slate-400">Weight Impact</span>
+                <span className="text-indigo-400 font-extrabold">+{item.confidence.toFixed(1)} pts</span>
               </div>
             </div>
           ))}

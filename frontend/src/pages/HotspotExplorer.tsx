@@ -102,34 +102,34 @@ export const HotspotExplorer: React.FC<HotspotExplorerProps> = ({
                 <div
                   key={item.region.id}
                   onClick={() => setSelectedRegionId(item.region.id)}
-                  className={`p-5 rounded-xl border transition-colors cursor-pointer relative shadow-sm text-slate-950 font-bold ${
+                  className={`p-5 rounded-xl border transition-colors cursor-pointer relative shadow-md text-slate-100 font-bold ${
                     isSelected
-                      ? 'bg-amber-50/60 border-amber-300 shadow-xs'
-                      : 'bg-white border-slate-200 hover:border-slate-300'
+                      ? 'bg-[#0A0A0C] border-amber-500 shadow-amber-500/10'
+                      : 'bg-[#0A0A0C] border-white/[0.12] hover:border-amber-500/50'
                   }`}
                 >
                   <div className="flex justify-between items-start mb-2">
                     <div>
-                      <span className="text-xs font-mono text-amber-800 font-extrabold uppercase">
+                      <span className="text-xs font-mono text-amber-400 font-extrabold uppercase">
                         RANK #{item.rank}
                       </span>
-                      <h3 className="text-base sm:text-lg font-extrabold text-slate-950 mt-0.5 tracking-tight">{item.region.district_city}</h3>
-                      <div className="text-xs text-slate-700 font-bold">{item.region.state_province}, {item.region.country}</div>
+                      <h3 className="text-base sm:text-lg font-extrabold text-white mt-0.5 tracking-tight">{item.region.district_city}</h3>
+                      <div className="text-xs text-slate-400 font-bold">{item.region.state_province}, {item.region.country}</div>
                     </div>
                     <div className="text-right font-mono font-extrabold">
-                      <div className="text-2xl font-extrabold text-amber-800">{item.hotspotScore}</div>
-                      <div className="text-xs text-slate-700 uppercase">SCORE</div>
+                      <div className="text-2xl font-extrabold text-amber-400">{item.hotspotScore}</div>
+                      <div className="text-xs text-slate-400 uppercase">SCORE</div>
                     </div>
                   </div>
 
-                  <div className="mt-3 pt-3 border-t border-slate-200 grid grid-cols-2 gap-2 text-xs sm:text-sm font-mono font-bold">
+                  <div className="mt-3 pt-3 border-t border-white/[0.08] grid grid-cols-2 gap-2 text-xs sm:text-sm font-mono font-bold">
                     <div>
-                      <div className="text-xs text-slate-700 uppercase font-bold">DEMAND / 100K</div>
-                      <div className="text-sm sm:text-base font-extrabold text-slate-950">{item.perCapitaPer100k}</div>
+                      <div className="text-xs text-slate-400 uppercase font-bold">DEMAND / 100K</div>
+                      <div className="text-sm sm:text-base font-extrabold text-white">{item.perCapitaPer100k}</div>
                     </div>
                     <div>
-                      <div className="text-xs text-slate-700 uppercase font-bold">AVG GAP SCORE</div>
-                      <div className="text-sm sm:text-base font-extrabold text-rose-800">{item.avgGap.toFixed(2)}</div>
+                      <div className="text-xs text-slate-400 uppercase font-bold">AVG GAP SCORE</div>
+                      <div className="text-sm sm:text-base font-extrabold text-rose-400">{item.avgGap.toFixed(2)}</div>
                     </div>
                   </div>
                 </div>
@@ -139,40 +139,40 @@ export const HotspotExplorer: React.FC<HotspotExplorerProps> = ({
         </div>
 
         {/* Region Intelligence Side Panel */}
-        <div className="p-6 rounded-xl bg-white border border-slate-200 space-y-5 shadow-sm text-slate-950 font-bold">
+        <div className="p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.12] space-y-5 shadow-md text-slate-100 font-bold">
           <div>
-            <div className="flex items-center justify-between border-b border-slate-200 pb-3">
-              <span className="text-xs sm:text-sm font-mono text-indigo-700 font-extrabold uppercase">Region Profile</span>
-              <span className="text-xs font-mono text-slate-700 font-bold">{selectedRegion.country_code}</span>
+            <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
+              <span className="text-xs sm:text-sm font-mono text-indigo-400 font-extrabold uppercase">Region Profile</span>
+              <span className="text-xs font-mono text-slate-400 font-bold">{selectedRegion.country_code}</span>
             </div>
-            <h2 className="text-lg sm:text-xl font-extrabold text-slate-950 mt-3">{selectedRegion.district_city}</h2>
-            <p className="text-xs sm:text-sm text-slate-700 font-bold">{selectedRegion.state_province}, {selectedRegion.country}</p>
+            <h2 className="text-lg sm:text-xl font-extrabold text-white mt-3">{selectedRegion.district_city}</h2>
+            <p className="text-xs sm:text-sm text-slate-400 font-bold">{selectedRegion.state_province}, {selectedRegion.country}</p>
           </div>
 
           <div className="space-y-2 text-xs sm:text-sm font-mono font-bold">
-            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center shadow-2xs">
-              <span className="text-slate-700">Population:</span>
-              <span className="font-extrabold text-slate-950">{selectedRegion.population.toLocaleString()}</span>
+            <div className="p-3 rounded-xl bg-[#121215] border border-white/[0.08] flex justify-between items-center shadow-2xs">
+              <span className="text-slate-400">Population:</span>
+              <span className="font-extrabold text-white">{selectedRegion.population.toLocaleString()}</span>
             </div>
 
-            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center shadow-2xs">
-              <span className="text-slate-700">Vulnerability Index:</span>
-              <span className="font-extrabold text-amber-800">{selectedRegion.vulnerability_index.toFixed(2)}</span>
+            <div className="p-3 rounded-xl bg-[#121215] border border-white/[0.08] flex justify-between items-center shadow-2xs">
+              <span className="text-slate-400">Vulnerability Index:</span>
+              <span className="font-extrabold text-amber-400">{selectedRegion.vulnerability_index.toFixed(2)}</span>
             </div>
 
-            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center shadow-2xs">
-              <span className="text-slate-700">Youth Demographic %:</span>
-              <span className="font-extrabold text-indigo-700">{selectedRegion.youth_percentage || 32.0}%</span>
+            <div className="p-3 rounded-xl bg-[#121215] border border-white/[0.08] flex justify-between items-center shadow-2xs">
+              <span className="text-slate-400">Youth Demographic %:</span>
+              <span className="font-extrabold text-indigo-400">{selectedRegion.youth_percentage || 32.0}%</span>
             </div>
 
-            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center shadow-2xs">
-              <span className="text-slate-700">Elderly Demographic %:</span>
-              <span className="font-extrabold text-indigo-700">{selectedRegion.elderly_percentage || 14.0}%</span>
+            <div className="p-3 rounded-xl bg-[#121215] border border-white/[0.08] flex justify-between items-center shadow-2xs">
+              <span className="text-slate-400">Elderly Demographic %:</span>
+              <span className="font-extrabold text-indigo-400">{selectedRegion.elderly_percentage || 14.0}%</span>
             </div>
 
-            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center shadow-2xs">
-              <span className="text-slate-700">Primary Language:</span>
-              <span className="font-extrabold text-emerald-800">{selectedRegion.primary_language.toUpperCase()}</span>
+            <div className="p-3 rounded-xl bg-[#121215] border border-white/[0.08] flex justify-between items-center shadow-2xs">
+              <span className="text-slate-400">Primary Language:</span>
+              <span className="font-extrabold text-emerald-400">{selectedRegion.primary_language.toUpperCase()}</span>
             </div>
           </div>
 

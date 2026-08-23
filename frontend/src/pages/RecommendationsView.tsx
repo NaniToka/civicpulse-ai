@@ -147,22 +147,22 @@ export const RecommendationsView: React.FC<RecommendationsViewProps> = ({
           filteredRecs.map((rec) => (
             <div
               key={rec.id}
-              className="p-6 rounded-xl bg-white border border-slate-200 hover:border-slate-300 transition-colors shadow-sm space-y-4 text-slate-950 font-bold"
+              className="p-6 rounded-xl bg-[#0A0A0C] border border-white/[0.12] hover:border-indigo-500/50 transition-colors shadow-md space-y-4 text-slate-100 font-bold"
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
                   <PriorityBadge level={rec.priority_level} score={rec.priority_score} size="lg" />
                   <div>
-                    <h3 className="text-lg sm:text-xl font-extrabold text-slate-950 tracking-tight">
+                    <h3 className="text-lg sm:text-xl font-extrabold text-white tracking-tight">
                       {rec.category.toUpperCase()} Expansion
                     </h3>
-                    <div className="text-xs sm:text-sm text-slate-700 font-mono flex items-center gap-2 mt-0.5 font-bold">
+                    <div className="text-xs sm:text-sm text-slate-400 font-mono flex items-center gap-2 mt-0.5 font-bold">
                       <button
                         onClick={() => handleOpenRegionDetails(rec.region_id)}
-                        className="text-indigo-700 hover:underline flex items-center gap-1 cursor-pointer font-extrabold"
+                        className="text-indigo-400 hover:underline flex items-center gap-1 cursor-pointer font-extrabold"
                         title="Click to view detailed region profile"
                       >
-                        <MapPin className="w-4 h-4 text-indigo-600" />
+                        <MapPin className="w-4 h-4 text-indigo-400" />
                         <span>{rec.region_name}</span>
                         <ExternalLink className="w-3.5 h-3.5 ml-0.5" />
                       </button>
@@ -185,28 +185,28 @@ export const RecommendationsView: React.FC<RecommendationsViewProps> = ({
                 </div>
               </div>
 
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm font-sans text-slate-950 italic leading-relaxed font-bold shadow-2xs">
+              <div className="p-4 rounded-xl bg-[#121215] border border-white/[0.08] text-xs sm:text-sm font-sans text-slate-200 italic leading-relaxed font-bold shadow-2xs">
                 "{rec.reasoning}"
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm font-mono font-bold">
-                <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 shadow-2xs">
-                  <div className="text-xs uppercase text-slate-700 font-extrabold">Demand Signal</div>
-                  <div className="text-slate-950 font-extrabold text-xs sm:text-sm mt-1">
+                <div className="p-3.5 rounded-xl bg-[#121215] border border-white/[0.08] shadow-2xs">
+                  <div className="text-xs uppercase text-slate-400 font-extrabold">Demand Signal</div>
+                  <div className="text-white font-extrabold text-xs sm:text-sm mt-1">
                     {rec.evidence_card?.demand_signal_summary || '14 Verified Citizen Signals'}
                   </div>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 shadow-2xs">
-                  <div className="text-xs uppercase text-slate-700 font-extrabold">Infrastructure Deficit</div>
-                  <div className="text-rose-800 font-extrabold text-xs sm:text-sm mt-1">
+                <div className="p-3.5 rounded-xl bg-[#121215] border border-white/[0.08] shadow-2xs">
+                  <div className="text-xs uppercase text-slate-400 font-extrabold">Infrastructure Deficit</div>
+                  <div className="text-rose-400 font-extrabold text-xs sm:text-sm mt-1">
                     {rec.evidence_card?.infrastructure_deficit_summary || 'Deficit Score: 0.82'}
                   </div>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 shadow-2xs">
-                  <div className="text-xs uppercase text-slate-700 font-extrabold">Capital Project Overlap</div>
-                  <div className="text-emerald-800 font-extrabold text-xs sm:text-sm mt-1">
+                <div className="p-3.5 rounded-xl bg-[#121215] border border-white/[0.08] shadow-2xs">
+                  <div className="text-xs uppercase text-slate-400 font-extrabold">Capital Project Overlap</div>
+                  <div className="text-emerald-400 font-extrabold text-xs sm:text-sm mt-1">
                     {rec.investment_overlap?.explanation || 'No active duplicate investment detected'}
                   </div>
                 </div>

@@ -154,12 +154,12 @@ export const ThreeDBarChart: React.FC<ThreeDBarChartProps> = ({ metrics }) => {
 
         {/* Upright Popover Badge */}
         {activePillar !== null && chartData[activePillar] && (
-          <div className="absolute top-4 z-30 px-4 py-2 rounded-xl bg-white border border-slate-300 text-center font-mono shadow-md animate-in fade-in duration-150 font-bold">
+          <div className="absolute top-4 z-30 px-4 py-2 rounded-xl bg-[#0A0A0C] border border-white/[0.16] text-center font-mono shadow-xl animate-in fade-in duration-150 font-bold">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: chartData[activePillar].color }} />
-              <span className="text-slate-950 font-extrabold text-xs sm:text-sm">{chartData[activePillar].label}:</span>
-              <span className="text-indigo-700 font-extrabold text-sm sm:text-base">{chartData[activePillar].displayVal}</span>
-              <span className="text-slate-700 text-xs font-bold">({chartData[activePillar].category})</span>
+              <span className="text-white font-extrabold text-xs sm:text-sm">{chartData[activePillar].label}:</span>
+              <span className="text-indigo-400 font-extrabold text-sm sm:text-base">{chartData[activePillar].displayVal}</span>
+              <span className="text-slate-400 text-xs font-bold">({chartData[activePillar].category})</span>
             </div>
           </div>
         )}
@@ -176,16 +176,16 @@ export const ThreeDBarChart: React.FC<ThreeDBarChartProps> = ({ metrics }) => {
               onMouseLeave={() => setActivePillar(null)}
               className={`p-3 rounded-xl border text-center transition-colors duration-150 cursor-pointer ${
                 isSelected
-                  ? 'bg-indigo-50 border-indigo-300 text-indigo-700 font-extrabold shadow-xs'
-                  : 'bg-slate-50 border-slate-200 text-slate-800 hover:border-slate-300 hover:bg-slate-100 font-bold'
+                  ? 'bg-[#0A0A0C] border-indigo-500 text-indigo-400 font-extrabold shadow-md'
+                  : 'bg-[#0A0A0C] border-white/[0.12] text-slate-200 hover:border-white/[0.24] font-bold'
               }`}
             >
               <div className="flex items-center justify-center gap-1.5 mb-1">
                 <span className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
-                <span className="text-slate-950 font-extrabold truncate">{item.label}</span>
+                <span className="text-white font-extrabold truncate">{item.label}</span>
               </div>
-              <div className="text-indigo-700 font-extrabold text-sm">{item.displayVal}</div>
-              <div className="text-xs text-slate-700 mt-0.5 font-sans font-bold">{item.category}</div>
+              <div className="text-indigo-400 font-extrabold text-sm">{item.displayVal}</div>
+              <div className="text-xs text-slate-400 mt-0.5 font-sans font-bold">{item.category}</div>
             </button>
           );
         })}

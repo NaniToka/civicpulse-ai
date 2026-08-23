@@ -307,32 +307,32 @@ export const WhatIfScenario: React.FC<WhatIfScenarioProps> = ({ regions }) => {
 
                 {/* 3 Key Metric ROI Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono text-xs sm:text-sm font-bold">
-                  <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1 shadow-2xs">
-                    <span className="text-slate-700 font-bold text-xs uppercase">Est. Beneficiaries</span>
-                    <div className="text-xl font-extrabold text-indigo-700 font-mono">~{result.expected_population_beneficiaries.toLocaleString()}</div>
-                    <div className="text-xs text-slate-700 font-bold font-sans">Citizens Impacted</div>
+                  <div className="p-3.5 rounded-xl bg-[#0A0A0C] border border-white/[0.12] space-y-1 shadow-md text-slate-100">
+                    <span className="text-slate-300 font-bold text-xs uppercase">Est. Beneficiaries</span>
+                    <div className="text-xl font-extrabold text-indigo-400 font-mono">~{result.expected_population_beneficiaries.toLocaleString()}</div>
+                    <div className="text-xs text-slate-400 font-bold font-sans">Citizens Impacted</div>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1 shadow-2xs">
-                    <span className="text-slate-700 font-bold text-xs uppercase">Investment Efficiency</span>
-                    <div className="text-xl font-extrabold text-emerald-800 font-mono">${(budgetUsd / (result.expected_population_beneficiaries || 1)).toFixed(1)}</div>
-                    <div className="text-xs text-slate-700 font-bold font-sans">Cost Per Citizen</div>
+                  <div className="p-3.5 rounded-xl bg-[#0A0A0C] border border-white/[0.12] space-y-1 shadow-md text-slate-100">
+                    <span className="text-slate-300 font-bold text-xs uppercase">Investment Efficiency</span>
+                    <div className="text-xl font-extrabold text-emerald-400 font-mono">${(budgetUsd / (result.expected_population_beneficiaries || 1)).toFixed(1)}</div>
+                    <div className="text-xs text-slate-400 font-bold font-sans">Cost Per Citizen</div>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1 shadow-2xs">
-                    <span className="text-slate-700 font-bold text-xs uppercase">Deficit Gap Drop</span>
-                    <div className="text-xl font-extrabold text-indigo-700 font-mono">{(targetCoveragePct * 0.8).toFixed(1)}%</div>
-                    <div className="text-xs text-slate-700 font-bold font-sans">Shortfall Relief</div>
+                  <div className="p-3.5 rounded-xl bg-[#0A0A0C] border border-white/[0.12] space-y-1 shadow-md text-slate-100">
+                    <span className="text-slate-300 font-bold text-xs uppercase">Deficit Gap Drop</span>
+                    <div className="text-xl font-extrabold text-indigo-400 font-mono">{(targetCoveragePct * 0.8).toFixed(1)}%</div>
+                    <div className="text-xs text-slate-400 font-bold font-sans">Shortfall Relief</div>
                   </div>
                 </div>
 
                 {/* AI Executive Summary Box */}
-                <div className="p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-2 shadow-2xs text-slate-950 font-bold">
-                  <div className="flex items-center gap-2 text-xs sm:text-sm font-mono text-indigo-700 font-extrabold uppercase">
-                    <Activity className="w-4.5 h-4.5 text-indigo-600 font-extrabold" />
+                <div className="p-5 rounded-xl bg-[#0A0A0C] border border-white/[0.12] space-y-2 shadow-md text-slate-100 font-bold">
+                  <div className="flex items-center gap-2 text-xs sm:text-sm font-mono text-indigo-400 font-extrabold uppercase">
+                    <Activity className="w-4.5 h-4.5 text-indigo-400 font-extrabold" />
                     <span>Executive Summary:</span>
                   </div>
-                  <p className="text-xs sm:text-sm font-sans text-slate-950 leading-relaxed italic font-bold">
+                  <p className="text-xs sm:text-sm font-sans text-slate-200 leading-relaxed italic font-bold">
                     "{result.simulation_notes}"
                   </p>
                 </div>
@@ -340,8 +340,8 @@ export const WhatIfScenario: React.FC<WhatIfScenarioProps> = ({ regions }) => {
             )}
           </div>
 
-          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 font-mono flex items-center gap-2 mt-4 font-bold shadow-2xs">
-            <ShieldCheck className="w-4.5 h-4.5 text-indigo-600 shrink-0 font-extrabold" />
+          <div className="p-4 rounded-xl bg-[#0A0A0C] border border-white/[0.12] text-xs sm:text-sm text-slate-300 font-mono flex items-center gap-2 mt-4 font-bold shadow-md">
+            <ShieldCheck className="w-4.5 h-4.5 text-indigo-400 shrink-0 font-extrabold" />
             <span>Simulations execute counterfactually against per-capita demographic vulnerability models.</span>
           </div>
         </div>

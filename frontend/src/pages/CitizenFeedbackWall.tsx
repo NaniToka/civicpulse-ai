@@ -477,26 +477,26 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
         {filteredComments.map((comment) => (
           <div
             key={comment.id}
-            className="p-5 rounded-xl bg-white border border-slate-200 hover:border-slate-300 transition-colors shadow-sm flex flex-col justify-between space-y-4 text-slate-950 font-bold"
+            className="p-5 rounded-xl bg-[#0A0A0C] border border-white/[0.12] hover:border-indigo-500/50 transition-colors shadow-md flex flex-col justify-between space-y-4 text-slate-100 font-bold"
           >
             <div>
               {/* Comment Header */}
-              <div className="flex items-start justify-between gap-3 border-b border-slate-200 pb-3">
+              <div className="flex items-start justify-between gap-3 border-b border-white/[0.08] pb-3">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-indigo-700 font-extrabold text-sm font-mono shadow-2xs">
+                  <div className="w-8 h-8 rounded-full bg-[#121215] border border-white/[0.12] flex items-center justify-center text-indigo-400 font-extrabold text-sm font-mono shadow-2xs">
                     {comment.citizenName[0]}
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="font-extrabold text-slate-950 text-base font-sans">{comment.citizenName}</span>
+                      <span className="font-extrabold text-white text-base font-sans">{comment.citizenName}</span>
                       {comment.isVerifiedCitizen && (
-                        <span className="text-xs font-mono font-extrabold text-emerald-900 bg-emerald-100 px-2 py-0.5 rounded border border-emerald-300">
+                        <span className="text-xs font-mono font-extrabold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
                           VERIFIED
                         </span>
                       )}
                     </div>
-                    <div className="text-xs font-mono text-slate-700 flex items-center gap-1 mt-0.5 font-bold">
-                      <MapPin className="w-3.5 h-3.5 text-indigo-600" />
+                    <div className="text-xs font-mono text-slate-400 flex items-center gap-1 mt-0.5 font-bold">
+                      <MapPin className="w-3.5 h-3.5 text-indigo-400" />
                       <span>{comment.districtCity}, {comment.stateProvince}</span>
                     </div>
                   </div>
@@ -505,10 +505,10 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
                 <span
                   className={`px-3 py-1 rounded-lg text-xs font-mono font-extrabold ${
                     comment.type === 'POSITIVE'
-                      ? 'bg-emerald-100 text-emerald-950 border border-emerald-300'
+                      ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
                       : comment.type === 'CRITICAL'
-                      ? 'bg-rose-100 text-rose-950 border border-rose-300'
-                      : 'bg-indigo-100 text-indigo-950 border border-indigo-300'
+                      ? 'bg-rose-500/10 text-rose-400 border border-rose-500/20'
+                      : 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20'
                   }`}
                 >
                   {comment.type === 'POSITIVE' ? 'PRAISE' : comment.type === 'CRITICAL' ? 'CRITICAL' : 'SUGGESTION'}
@@ -518,23 +518,23 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
               {/* Comment Body */}
               <div className="py-3 space-y-2">
                 <div className="flex items-center justify-between text-xs sm:text-sm font-mono font-bold">
-                  <span className="text-slate-800 font-extrabold">
+                  <span className="text-slate-300 font-extrabold">
                     {comment.category}
                   </span>
-                  <div className="text-amber-600 font-extrabold text-base">
+                  <div className="text-amber-400 font-extrabold text-base">
                     {'★'.repeat(comment.rating)}
                     {'☆'.repeat(5 - comment.rating)}
                   </div>
                 </div>
 
-                <p className="text-xs sm:text-sm text-slate-950 leading-relaxed font-sans pt-1 font-bold">
+                <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-sans pt-1 font-bold">
                   "{comment.commentText}"
                 </p>
               </div>
             </div>
 
             {/* Comment Footer */}
-            <div className="pt-3 border-t border-slate-200 flex items-center justify-between text-xs sm:text-sm font-mono text-slate-700 font-bold">
+            <div className="pt-3 border-t border-white/[0.08] flex items-center justify-between text-xs sm:text-sm font-mono text-slate-400 font-bold">
               <span className="flex items-center gap-1">
                 <Clock className="w-3.5 h-3.5 text-slate-500" />
                 <span>{comment.timestamp}</span>
@@ -548,7 +548,7 @@ export const CitizenFeedbackWall: React.FC<CitizenFeedbackWallProps> = ({ region
                     className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border transition-colors text-xs sm:text-sm font-extrabold cursor-pointer ${
                       isUpvoted
                         ? 'bg-indigo-600 border-indigo-600 text-white shadow-xs'
-                        : 'bg-slate-100 border-slate-200 text-slate-950 hover:bg-slate-200'
+                        : 'bg-[#121215] border-white/[0.12] text-slate-300 hover:bg-slate-800'
                     }`}
                     title={isUpvoted ? 'Remove your upvote' : 'Upvote this comment'}
                   >
