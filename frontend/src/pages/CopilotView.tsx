@@ -236,36 +236,88 @@ export const CopilotView: React.FC<CopilotViewProps> = ({
     }
   };
 
+  /** Converts inline markdown tokens to React elements (bold, italic, inline code). */
+  const parseInline = (text: string): React.ReactNode[] => {
+    // Token regex: **bold**, *italic*, `code`
+    const tokenRe = /(\*\*(.+?)\*\*|\*(.+?)\*|`([^`]+?)`)/g;
+    const parts: React.ReactNode[] = [];
+    let lastIndex = 0;
+    let match: RegExpExecArray | null;
+
+    while ((match = tokenRe.exec(text)) !== null) {
+      if (match.index > lastIndex) {
+        parts.push(text.slice(lastIndex, match.index));
+      }
+      if (match[2] !== undefined) {
+        // **bold**
+        parts.push(
+          <strong key={match.index} className="font-extrabold" style={{ color: 'inherit' }}>
+            {match[2]}
+          </strong>
+        );
+      } else if (match[3] !== undefined) {
+        // *italic*
+        parts.push(
+          <em key={match.index} className="italic" style={{ color: 'inherit' }}>
+            {match[3]}
+          </em>
+        );
+      } else if (match[4] !== undefined) {
+        // `code`
+        parts.push(
+          <code
+            key={match.index}
+            className="px-1.5 py-0.5 rounded text-[11px] font-mono"
+            style={{ backgroundColor: 'var(--accent-subtle)', color: 'var(--accent)' }}
+          >
+            {match[4]}
+          </code>
+        );
+      }
+      lastIndex = match.index + match[0].length;
+    }
+    if (lastIndex < text.length) {
+      parts.push(text.slice(lastIndex));
+    }
+    return parts;
+  };
+
   const renderMarkdownText = (content: string) => {
     const lines = content.split('\n');
     return lines.map((line, idx) => {
+      // H3 heading
       if (line.startsWith('### ')) {
         return (
-          <h3 key={idx} className="text-base sm:text-lg font-extrabold text-slate-950 mt-4 mb-2 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-indigo-600 font-bold" />
-            {line.replace('### ', '')}
+          <h3 key={idx} className="text-base sm:text-lg font-extrabold mt-4 mb-2 flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
+            <span className="w-2 h-2 rounded-full bg-indigo-500 shrink-0" />
+            {parseInline(line.replace(/^### /, ''))}
           </h3>
         );
       }
+      // H4 heading
       if (line.startsWith('#### ')) {
         return (
-          <h4 key={idx} className="text-sm sm:text-base font-extrabold text-indigo-700 mt-3 mb-1.5">
-            {line.replace('#### ', '')}
+          <h4 key={idx} className="text-sm sm:text-base font-extrabold mt-3 mb-1.5" style={{ color: 'var(--accent)' }}>
+            {parseInline(line.replace(/^#### /, ''))}
           </h4>
         );
       }
-      if (line.startsWith('• ') || line.startsWith('- ')) {
-        const itemText = line.substring(2);
+      // Bullet lists: Gemini returns "* item", "- item", or "• item"
+      const bulletMatch = line.match(/^(\*|-|•)\s+(.*)$/);
+      if (bulletMatch) {
+        const itemText = bulletMatch[2];
         return (
-          <li key={idx} className="text-sm sm:text-base text-slate-950 font-bold ml-4 list-disc space-y-1.5">
-            {itemText}
+          <li key={idx} className="text-sm sm:text-base ml-4 list-disc leading-relaxed" style={{ color: 'var(--text-primary)' }}>
+            {parseInline(itemText)}
           </li>
         );
       }
+      // Empty line
       if (!line.trim()) return <div key={idx} className="h-2" />;
+      // Normal paragraph
       return (
-        <p key={idx} className="text-sm sm:text-base text-slate-950 font-bold leading-relaxed my-1">
-          {line}
+        <p key={idx} className="text-sm sm:text-base leading-relaxed my-1" style={{ color: 'var(--text-primary)' }}>
+          {parseInline(line)}
         </p>
       );
     });

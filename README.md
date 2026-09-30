@@ -26,6 +26,8 @@
 
 Public administration systems across India process millions of fragmented citizen complaints across diverse regional scripts (*Hindi, Telugu, Tamil, Marathi, Punjabi, Bengali, Kannada, Gujarati, Malayalam, Odia, Urdu, English*). Traditional municipal systems process complaints in isolated silos—leading to unaddressed infrastructure bottlenecks, misallocated capital investments, and a disconnect between citizen demand signals and municipal budget allocation.
 
+Beyond collection, there is a second critical failure: **fake closures**. Municipal authorities often mark grievances as "resolved" without any genuine fix, with no mechanism for the reporting citizen to verify or contest the closure. This systemic dishonesty erodes public trust in civic institutions.
+
 ---
 
 ## 💡 Solution
@@ -43,7 +45,9 @@ Public administration systems across India process millions of fragmented citize
 
 | Feature | Description | Highlight |
 | :--- | :--- | :--- |
-| 🤖 **Civic Intelligence Copilot** | Grounded conversational AI assistant (`/copilot`) for natural-language questions, evidence citations, CivicFund project funding gap queries, and $15M scenario execution. | `CopilotView.tsx` & `/api/v1/copilot/chat` |
+| 🤖 **Civic Intelligence Copilot** | Grounded conversational AI assistant with proper markdown rendering — bold, italic, code, and bullet lists display cleanly without raw asterisks. | `CopilotView.tsx` & `/api/v1/copilot/chat` |
+| 🛡️ **Anti-Fake Closure Verification Loop** | Full state-machine grievance lifecycle: citizens verify municipal resolutions before permanent closure. AI guardrail detects fake/generic closures with a 0–100 confidence score. | `GrievanceTracker.tsx`, `ClosureVerificationPanel.tsx`, `closure_validation_service.py` |
+| 🎨 **Multi-Theme System** | 5 professionally designed themes (Dark, Light, Midnight Blue, Forest, Sunset) with CSS custom properties, instant switching, and localStorage persistence. No re-renders on theme change. | `ThemeContext.tsx`, `ThemeSwitcher.tsx`, `index.css` |
 | 🇮🇳 **35 Indian Districts Dataset** | Seed dataset covering 35 municipal districts across Indian states with demographic census metrics and vulnerability indices. | *Kanpur UP, Pune MH, Chennai TN, Ongole AP, Delhi NCR, Mumbai MH, Ludhiana PB, Bengaluru KA, Hyderabad TG, Kolkata WB, etc.* |
 | 🧊 **3D Isometric Donut Chart** | 3D isometric cylinder ring visualization featuring perspective transforms, multi-layered SVG extrusions, and 60fps momentum spin. | `ThreeDDonutChart.tsx` |
 | 📊 **3D Animated Bar Matrix Graph** | 3D extruded bar cylinder graph visualizing system dataset volume with upright 2D glass hover badges. | `ThreeDBarChart.tsx` |
@@ -52,6 +56,67 @@ Public administration systems across India process millions of fragmented citize
 | 🔬 **Scenario Lab Simulator** | Counterfactual policy simulator with 1-click intervention presets, dual priority reduction gauge cards, and cost-per-resident ROI metrics. | `WhatIfScenario.tsx` |
 | 📱 **Mobile & Laptop Responsive** | Glassmorphic navigation drawer overlay, responsive grid layouts, and mobile-friendly touch targets across all devices. | `Navbar.tsx` & `Sidebar.tsx` |
 
+
+---
+
+## 🛡️ Anti-Fake Closure — Feature Deep Dive
+
+The **Citizen-Verified Resolution Loop** ensures that no grievance can be permanently closed by authorities without genuine citizen verification. This is enforced by an AI guardrail.
+
+### State Machine
+
+```
+OPEN
+  │  (staff submits resolution notes + optional photo)
+  ▼
+RESOLVED_PENDING_VERIFICATION
+  │  (citizen clicks "Confirm Resolution")
+  ├──► AI Confidence ≥ 60/100 ──► VERIFIED_CLOSED ✅
+  ├──► AI Confidence < 60/100 ──► SUSPICIOUS_CLOSURE ⚠️ (citizen prompted)
+  └──► (citizen clicks "Reject & Reopen") ──► REJECTED_REOPENED 🔄
+           │  (staff re-submits improved evidence)
+           └──► RESOLVED_PENDING_VERIFICATION (retry loop)
+```
+
+### AI Guardrail Logic
+
+The `closure_validation_service.py` runs a two-tier validation:
+
+1. **Gemini LLM Analysis** (primary): Evaluates whether the staff resolution notes genuinely address the original complaint category, contain specific action verbs (repaired, installed, replaced), and are adequately detailed. Photographic evidence provides a strong positive signal.
+2. **Deterministic Rule-Based Fallback** (when Gemini is unavailable): Scores based on note length, keyword overlap between complaint and resolution, presence of positive action verbs, and generic phrase detection.
+
+**Confidence Score Thresholds:**
+| Score | Verdict |
+|---|---|
+| 80–100 | Strong genuine resolution evidence |
+| 60–79 | Plausible — citizen confirmation closes the case |
+| 40–59 | Suspicious — AI flags, requires citizen review |
+| 0–39 | Likely fake closure — strong rejection signal |
+
+### New API Endpoints
+
+| Method | Endpoint | Actor | Description |
+|---|---|---|---|
+| `GET` | `/api/v1/issues` | Any | List all grievances, filter by status/region |
+| `GET` | `/api/v1/issues/{id}` | Any | Get a single grievance record |
+| `POST` | `/api/v1/issues/{id}/resolve-pending` | Staff | Submit resolution evidence → `RESOLVED_PENDING_VERIFICATION` |
+| `POST` | `/api/v1/issues/{id}/verify-closure` | Citizen | Confirm (triggers AI guardrail) or Reject |
+
+---
+
+## 🎨 Multi-Theme System — Feature Deep Dive
+
+CivicPulse AI ships with 5 professionally curated themes, switchable instantly from the navbar.
+
+| Theme | Identity |
+|---|---|
+| 🌑 **Dark** (default) | Deep charcoal, indigo accents — professional civic dashboard feel |
+| ☀️ **Light** | Clean white with slate accents — high readability for data-heavy views |
+| 🌌 **Midnight Blue** | Deep navy with cyan glows — focus mode for late-night sessions |
+| 🌿 **Forest** | Deep greens with emerald accents — calm, nature-inspired palette |
+| 🌅 **Sunset** | Warm rose-to-amber gradient — energetic and distinctive |
+
+**Implementation:** CSS custom properties (`--bg`, `--surface`, `--text-primary`, `--accent`) are toggled by setting `theme-{id}` class on `document.documentElement`. This means zero React re-renders on theme switch — pure CSS propagation down the entire DOM tree.
 
 ---
 
@@ -70,6 +135,9 @@ graph TD
     D --> E[Data Loader & Scoring Services]
     E -->|Grounded Context| F[Google Gemini / Fallback Provider]
     F --> G[Validated Markdown Answer + Evidence Links]
+    B2[Citizen Verification UI] --> C2[POST /issues/id/verify-closure]
+    C2 --> AI[closure_validation_service.py — AI Guardrail]
+    AI --> SM[State Machine: VERIFIED_CLOSED / SUSPICIOUS_CLOSURE / REJECTED_REOPENED]
 ```
 
 
@@ -86,6 +154,7 @@ To ensure strict accountability in public governance, **CivicPulse AI** enforces
 |  - Text Translation & Intent Classification           |
 |  - Entity & Urgency Extraction                        |
 |  - Multilingual Policymaker Summaries (EN, HI, TE)    |
+|  - Closure Authenticity Validation (0-100 score)      |
 +-------------------------------------------------------+
                            ↓ (Structured JSON Signals)
 +-------------------------------------------------------+
@@ -97,6 +166,7 @@ To ensure strict accountability in public governance, **CivicPulse AI** enforces
 |  - Capital Investment Overlap & Duplicate Penalty     |
 |  - Priority Score Calculation & Ranking (Engine V2)   |
 |  - Counterfactual What-If Policy Simulations          |
+|  - Grievance State Machine Transitions                |
 +-------------------------------------------------------+
 ```
 
@@ -212,6 +282,10 @@ Or run test suites individually:
 | `GET` | `/api/v1/recommendations/{id}/explain` | 'Why This Recommendation?' Evidence Trail & AI Brief |
 | `POST` | `/api/v1/scenarios` | Execute counterfactual policy simulation ($1\text{M}-\$50\text{M}$ USD) |
 | `POST` | `/api/v1/demo/reset` | Reset in-memory demonstration state back to seed data |
+| `GET` | `/api/v1/issues` | List all grievances, filter by status/region |
+| `GET` | `/api/v1/issues/{id}` | Get single grievance record by ID |
+| `POST` | `/api/v1/issues/{id}/resolve-pending` | **[Staff]** Submit resolution → `RESOLVED_PENDING_VERIFICATION` |
+| `POST` | `/api/v1/issues/{id}/verify-closure` | **[Citizen]** Confirm/Reject with AI anti-fake-closure guardrail |
 
 ---
 
