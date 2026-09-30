@@ -20,6 +20,7 @@ import { NavTab } from './Sidebar';
 
 import { useLanguage, LANGUAGE_OPTIONS, SupportedLanguage } from '../../context/LanguageContext';
 import { UserProfile } from '../common/AuthModal';
+import { ThemeSwitcher } from '../common/ThemeSwitcher';
 
 interface NavbarProps {
   onOpenCommandPalette?: () => void;
@@ -61,7 +62,10 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <>
-      <header className="h-16 bg-white border-b border-slate-200 px-4 sm:px-6 flex items-center justify-between z-40 sticky top-0 shadow-xs">
+      <header
+          className="h-16 border-b px-4 sm:px-6 flex items-center justify-between z-40 sticky top-0 shadow-xs transition-colors duration-200"
+          style={{ backgroundColor: 'var(--surface)', borderColor: 'var(--border)' }}
+        >
         {/* Brand Identity & Mobile Menu Toggle */}
         <div className="flex items-center gap-3.5">
           {/* Mobile Hamburger Toggle Button */}
@@ -88,8 +92,11 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
         </div>
 
-        {/* Right Controls: Language Selector, Raise Complaint CTA, User Profile, Command Palette */}
+        {/* Right Controls: Theme Switcher, Language Selector, Raise Complaint CTA, User Profile, Command Palette */}
         <div className="flex items-center gap-2 sm:gap-3">
+          {/* Theme Switcher */}
+          <ThemeSwitcher />
+
           {/* Top Header Language Selector */}
           <div className="relative flex items-center">
             <select
@@ -157,7 +164,9 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Full-Screen Mobile Navigation Overlay Modal */}
       {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 z-50 bg-white flex flex-col p-4 sm:p-6 overflow-y-auto text-slate-900">
+        <div className="md:hidden fixed inset-0 z-50 flex flex-col p-4 sm:p-6 overflow-y-auto transition-colors duration-200"
+             style={{ backgroundColor: 'var(--bg)', color: 'var(--text-primary)' }}
+        >
           {/* Mobile Drawer Top Bar */}
           <div className="flex items-center justify-between border-b border-slate-200 pb-4 mb-4">
             <div className="flex items-center gap-3">

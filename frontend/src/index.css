@@ -1,16 +1,107 @@
+/* ============================================================
+   THEME CSS CUSTOM PROPERTIES
+   Applied via .theme-{id} class on <html> by ThemeContext.tsx
+   ============================================================ */
+
+/* ── Light (default) ── */
+:root,
+html.theme-light {
+  --bg:             #F8FAFC;
+  --surface:        #ffffff;
+  --surface-hover:  #f1f5f9;
+  --border:         #e2e8f0;
+  --accent:         #6366f1;
+  --accent-subtle:  #eef2ff;
+  --text-primary:   #0f172a;
+  --text-muted:     #64748b;
+  --scrollbar-track:#f8fafc;
+  --scrollbar-thumb:#cbd5e1;
+  --scrollbar-hover:#94a3b8;
+}
+
+/* ── Dark ── */
+html.theme-dark {
+  --bg:             #0f1117;
+  --surface:        #1e2130;
+  --surface-hover:  #252a3d;
+  --border:         #2d3452;
+  --accent:         #818cf8;
+  --accent-subtle:  #1e2244;
+  --text-primary:   #e2e8f0;
+  --text-muted:     #94a3b8;
+  --scrollbar-track:#0f1117;
+  --scrollbar-thumb:#2d3452;
+  --scrollbar-hover:#475569;
+}
+
+/* ── Midnight ── */
+html.theme-midnight {
+  --bg:             #030712;
+  --surface:        #0d1b2a;
+  --surface-hover:  #112236;
+  --border:         #1e3a5f;
+  --accent:         #38bdf8;
+  --accent-subtle:  #0c2a3f;
+  --text-primary:   #e0f2fe;
+  --text-muted:     #7dd3fc;
+  --scrollbar-track:#030712;
+  --scrollbar-thumb:#1e3a5f;
+  --scrollbar-hover:#2563eb;
+}
+
+/* ── Forest ── */
+html.theme-forest {
+  --bg:             #0d1f14;
+  --surface:        #132a1c;
+  --surface-hover:  #1a3826;
+  --border:         #1e4d2c;
+  --accent:         #4ade80;
+  --accent-subtle:  #0f2e1a;
+  --text-primary:   #dcfce7;
+  --text-muted:     #86efac;
+  --scrollbar-track:#0d1f14;
+  --scrollbar-thumb:#1e4d2c;
+  --scrollbar-hover:#16a34a;
+}
+
+/* ── Sunset ── */
+html.theme-sunset {
+  --bg:             #1a0e05;
+  --surface:        #271407;
+  --surface-hover:  #341b09;
+  --border:         #7c2d12;
+  --accent:         #fb923c;
+  --accent-subtle:  #2d1507;
+  --text-primary:   #fef3c7;
+  --text-muted:     #fcd34d;
+  --scrollbar-track:#1a0e05;
+  --scrollbar-thumb:#7c2d12;
+  --scrollbar-hover:#ea580c;
+}
+
+/* Apply --bg and --text-primary to html/body so themes color the page root */
+html {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   body {
-    @apply bg-[#F8FAFC] text-slate-950 antialiased font-semibold tracking-normal text-base min-h-screen;
+    @apply antialiased font-semibold tracking-normal text-base min-h-screen;
+    background-color: var(--bg);
+    color: var(--text-primary);
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Inter', sans-serif;
-    @apply font-extrabold text-slate-950 tracking-tight;
+    @apply font-extrabold tracking-tight;
+    color: var(--text-primary);
   }
 
   .font-mono {
@@ -20,75 +111,83 @@
 
   select {
     font-weight: 700 !important;
-    color: #020617 !important;
-    background-color: #ffffff !important;
-    border-color: #cbd5e1 !important;
+    color: var(--text-primary) !important;
+    background-color: var(--surface) !important;
+    border-color: var(--border) !important;
     border-radius: 8px !important;
   }
 
   option {
     font-weight: 700 !important;
-    color: #020617 !important;
-    background-color: #ffffff !important;
+    color: var(--text-primary) !important;
+    background-color: var(--surface) !important;
     padding: 8px 12px !important;
     font-size: 15px !important;
   }
 }
 
 @layer utilities {
-  /* Card Surface Utilities */
+  /* Card Surface Utilities — now theme-aware */
   .glass-card, .glass-card-interactive {
-    @apply bg-white border border-slate-200 rounded-xl transition-colors duration-150 shadow-sm font-semibold text-slate-950;
+    @apply rounded-xl transition-colors duration-150 shadow-sm font-semibold;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
   }
 
   .glass-card-interactive:hover {
-    @apply border-slate-300 bg-slate-50;
+    background-color: var(--surface-hover);
   }
 
   .glass-panel-cyan, .glass-panel-indigo, .glass-panel-emerald, .glass-panel-rose {
-    @apply bg-white border border-slate-200 rounded-xl shadow-sm font-semibold text-slate-950;
+    @apply rounded-xl shadow-sm font-semibold;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
   }
 
-  /* Glow effects mapped to clean light subtle shadows */
+  /* Glow effects */
   .glow-cyan, .glow-indigo, .glow-emerald, .glow-amber, .glow-rose {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
 
   /* Signature Hero Gradient */
   .hero-gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-700 via-purple-600 to-indigo-900 font-extrabold;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-400 font-extrabold;
   }
 
-  /* Non-signature gradient text mapped to dark slate */
+  /* Non-signature gradient text */
   .gradient-text-cyan, .gradient-text-emerald, .gradient-text-rose, .gradient-text-amber {
-    @apply text-slate-950 font-extrabold;
+    @apply font-extrabold;
+    color: var(--accent);
   }
 
   /* Subtitle / Eyebrow typography helper */
   .eyebrow-label {
-    @apply text-xs font-extrabold uppercase tracking-wider text-slate-800;
+    @apply text-xs font-extrabold uppercase tracking-wider;
+    color: var(--text-muted);
   }
 
   /* Subtle background grid pattern */
   .bg-grid-pattern {
-    background-image: radial-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(128, 128, 128, 0.07) 1px, transparent 1px);
     background-size: 24px 24px;
   }
 }
 
-/* Custom scrollbars */
+/* Custom scrollbars — theme-aware */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #f8fafc;
+  background: var(--scrollbar-track, #f8fafc);
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: var(--scrollbar-thumb, #cbd5e1);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: var(--scrollbar-hover, #94a3b8);
 }
 

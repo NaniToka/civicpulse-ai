@@ -87,7 +87,9 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-slate-800 font-sans selection:bg-indigo-600 selection:text-white">
+    <div className="min-h-screen flex flex-col font-sans selection:bg-indigo-600 selection:text-white"
+      style={{ backgroundColor: 'var(--bg)', color: 'var(--text-primary)' }}
+    >
       <Navbar
         onOpenCommandPalette={() => setCommandPaletteOpen(true)}
         onOpenRaiseComplaint={() => setRaiseComplaintModalOpen(true)}
@@ -106,7 +108,9 @@ export const App: React.FC = () => {
           onOpenRaiseComplaint={() => setRaiseComplaintModalOpen(true)}
         />
 
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto overflow-y-auto w-full">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto overflow-y-auto w-full"
+              style={{ backgroundColor: 'var(--bg)' }}
+        >
           {loading ? (
             <div className="h-96 flex flex-col items-center justify-center space-y-3 text-slate-400 text-xs font-mono">
               <div className="w-7 h-7 rounded-full border-2 border-indigo-500 border-t-transparent animate-spin" />
