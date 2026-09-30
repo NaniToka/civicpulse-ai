@@ -29,6 +29,7 @@ export type NavTab =
   | 'recommendations'
   | 'evidence'
   | 'scenarios'
+  | 'grievances'
   | 'data';
 
 
@@ -70,6 +71,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         { id: 'recommendations', label: t('nav_recommendations'), icon: <FileCheck className="w-4 h-4 text-green-600" />, badge: 'Ranked' },
         { id: 'evidence', label: t('nav_evidence'), icon: <Network className="w-4 h-4 text-sky-600" /> },
         { id: 'scenarios', label: t('nav_scenarios'), icon: <TestTube2 className="w-4 h-4 text-fuchsia-600" />, badge: 'Planner' },
+        { id: 'grievances', label: 'Resolution Tracker', icon: <ShieldCheck className="w-4 h-4 text-indigo-500" />, badge: 'NEW' },
       ],
     },
     {

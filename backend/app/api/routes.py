@@ -15,27 +15,41 @@ from app.core.taxonomy import (
 from app.models.schemas import (
     CitizenRequest,
     CitizenRequestIngestInput,
+    ClosureVerificationResult,
     CopilotChatRequest,
     CopilotChatResponse,
     DemandAggregationSummary,
     DemandHotspot,
     DemandMomentumSignal,
     ExtractedEntities,
+    GrievanceRecord,
+    GrievanceResolutionEvidence,
+    GrievanceStatusEnum,
     InfrastructureIndicator,
     InvestmentOverlapDetail,
     InvestmentProject,
     PriorityRecommendation,
     Region,
+    ResolvePendingInput,
     ScenarioWhatIfInput,
     ScenarioWhatIfResult,
     StructuredAIOutput,
+    VerifyClosureInput,
     WhyThisRecommendation,
 )
 from app.services.ai_service import get_ai_service
+from app.services.closure_validation_service import validate_closure_authenticity
 from app.services.copilot_service import copilot_service
 from app.services.data_loader import data_loader
 from app.services.demand_engine import demand_aggregation_service
 from app.services.demand_momentum import demand_momentum_engine
+from app.services.grievance_store import (
+    create_grievance,
+    get_grievance,
+    get_grievance_by_request_id,
+    list_grievances,
+    update_grievance,
+)
 from app.services.hotspot_engine import hotspot_engine
 from app.services.investment_service import investment_overlap_engine
 from app.services.location_service import location_service
@@ -362,3 +376,232 @@ async def scenario_what_if(payload: ScenarioWhatIfInput):
 )
 async def copilot_chat(payload: CopilotChatRequest):
     return await copilot_service.process_chat(payload)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CITIZEN-VERIFIED RESOLUTION LOOP — ANTI-FAKE CLOSURE ENDPOINTS
+# ─────────────────────────────────────────────────────────────────────────────
+
+@router.get(
+    "/issues",
+    response_model=list[GrievanceRecord],
+    summary="List All Grievance Records with Lifecycle Status",
+)
+async def list_grievance_records(
+    status_str: str | None = Query(None, alias="status", description="Filter by GrievanceStatusEnum value"),
+    region_id: str | None = Query(None, description="Filter by Region ID"),
+):
+    """Returns all grievance records, optionally filtered by status and/or region."""
+    status_filter: GrievanceStatusEnum | None = None
+    if status_str:
+        try:
+            status_filter = GrievanceStatusEnum(status_str.upper())
+        except ValueError:
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail=f"Invalid status '{status_str}'. Valid values: {[s.value for s in GrievanceStatusEnum]}",
+            )
+    return list_grievances(status=status_filter, region_id=region_id)
+
+
+@router.get(
+    "/issues/{grievance_id}",
+    response_model=GrievanceRecord,
+    summary="Get Single Grievance Record by ID",
+)
+async def get_grievance_record(grievance_id: str):
+    """Returns a single GrievanceRecord by its ID."""
+    record = get_grievance(grievance_id)
+    if not record:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Grievance '{grievance_id}' not found.",
+        )
+    return record
+
+
+@router.post(
+    "/issues/{grievance_id}/resolve-pending",
+    response_model=GrievanceRecord,
+    status_code=status.HTTP_200_OK,
+    summary="[Staff] Submit Resolution Evidence — Transition to RESOLVED_PENDING_VERIFICATION",
+)
+async def resolve_pending(
+    grievance_id: str,
+    payload: ResolvePendingInput,
+    _: None = Depends(validate_request_size),
+):
+    """
+    Municipal staff endpoint: transitions a grievance from OPEN/IN_PROGRESS to
+    RESOLVED_PENDING_VERIFICATION, attaching closure notes and optional after-image.
+
+    State transitions allowed:
+      OPEN → RESOLVED_PENDING_VERIFICATION
+      IN_PROGRESS → RESOLVED_PENDING_VERIFICATION
+      REJECTED_REOPENED → RESOLVED_PENDING_VERIFICATION  (re-submission after rejection)
+    """
+    record = get_grievance(grievance_id)
+    if not record:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Grievance '{grievance_id}' not found.",
+        )
+
+    allowed_from = {
+        GrievanceStatusEnum.OPEN,
+        GrievanceStatusEnum.IN_PROGRESS,
+        GrievanceStatusEnum.REJECTED_REOPENED,
+    }
+    if record.status not in allowed_from:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail=(
+                f"Cannot submit resolution for grievance in '{record.status.value}' state. "
+                f"Allowed from: {[s.value for s in allowed_from]}."
+            ),
+        )
+
+    # Fetch existing evidence to preserve the before-image and original description
+    existing_evidence = record.resolution_evidence
+
+    record.resolution_evidence = GrievanceResolutionEvidence(
+        # Preserve original citizen evidence if already set
+        before_image_url=(
+            existing_evidence.before_image_url if existing_evidence else None
+        ),
+        original_description=(
+            existing_evidence.original_description
+            if existing_evidence
+            else "Original complaint text not available."
+        ),
+        original_category=(
+            existing_evidence.original_category if existing_evidence else "other"
+        ),
+        original_urgency=(
+            existing_evidence.original_urgency if existing_evidence else "MEDIUM"
+        ),
+        original_submitted_at=(
+            existing_evidence.original_submitted_at
+            if existing_evidence
+            else record.created_at
+        ),
+        # New staff resolution evidence
+        after_image_url=payload.after_image_base64,
+        resolution_notes=payload.resolution_notes,
+        resolved_by_staff_id=payload.staff_id,
+        resolved_by_staff_name=payload.staff_name,
+        resolution_submitted_at=datetime.now(timezone.utc),
+    )
+    record.status = GrievanceStatusEnum.RESOLVED_PENDING_VERIFICATION
+    updated = update_grievance(record)
+
+    return updated
+
+
+@router.post(
+    "/issues/{grievance_id}/verify-closure",
+    response_model=ClosureVerificationResult,
+    status_code=status.HTTP_200_OK,
+    summary="[Citizen] Confirm or Reject Resolution — AI Anti-Fake-Closure Guardrail",
+    dependencies=[Depends(validate_request_size)],
+)
+async def verify_closure(
+    grievance_id: str,
+    payload: VerifyClosureInput,
+):
+    """
+    Citizen endpoint: confirms or rejects a RESOLVED_PENDING_VERIFICATION grievance.
+
+    When action='confirm':
+      1. Triggers the AI Anti-Fake-Closure guardrail.
+      2. If AI confidence ≥ 60: transitions to VERIFIED_CLOSED.
+      3. If AI confidence < 60: transitions to SUSPICIOUS_CLOSURE and prompts
+         the citizen to provide feedback.
+
+    When action='reject':
+      Immediately transitions to REJECTED_REOPENED with citizen feedback attached.
+    """
+    record = get_grievance(grievance_id)
+    if not record:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Grievance '{grievance_id}' not found.",
+        )
+
+    allowed_from = {
+        GrievanceStatusEnum.RESOLVED_PENDING_VERIFICATION,
+        GrievanceStatusEnum.SUSPICIOUS_CLOSURE,  # Allow retry after suspicion flag
+    }
+    if record.status not in allowed_from:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail=(
+                f"Grievance is in '{record.status.value}' state, not pending citizen verification. "
+                f"Allowed from: {[s.value for s in allowed_from]}."
+            ),
+        )
+
+    if not record.resolution_evidence:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="Grievance has no resolution evidence attached. Staff must submit resolution first.",
+        )
+
+    # ── REJECT PATH ──────────────────────────────────────────────────────────
+    if payload.action == "reject":
+        record.status = GrievanceStatusEnum.REJECTED_REOPENED
+        record.citizen_feedback = payload.citizen_feedback or "Citizen rejected the resolution without additional feedback."
+        update_grievance(record)
+        return ClosureVerificationResult(
+            success=True,
+            grievance_id=grievance_id,
+            new_status=GrievanceStatusEnum.REJECTED_REOPENED,
+            message=(
+                "Resolution rejected. The grievance has been reopened for further action by municipal staff."
+            ),
+        )
+
+    # ── CONFIRM PATH — Run AI Anti-Fake-Closure Guardrail ───────────────────
+    validation = await validate_closure_authenticity(record.resolution_evidence)
+
+    record.ai_confidence_score = validation.confidence_score
+    record.ai_validation_notes = validation.reasoning
+    if validation.flags:
+        record.ai_validation_notes += "  Flags: " + " | ".join(validation.flags)
+
+    if validation.is_suspicious:
+        # AI detected a likely fake closure — hold for citizen review
+        record.status = GrievanceStatusEnum.SUSPICIOUS_CLOSURE
+        update_grievance(record)
+        return ClosureVerificationResult(
+            success=True,
+            grievance_id=grievance_id,
+            new_status=GrievanceStatusEnum.SUSPICIOUS_CLOSURE,
+            ai_confidence_score=validation.confidence_score,
+            is_suspicious=True,
+            ai_validation_notes=validation.reasoning,
+            message=(
+                f"⚠️ Suspicious closure detected (AI confidence: {validation.confidence_score:.0f}/100). "
+                "The resolution does not appear to adequately address the original complaint. "
+                "Please review and provide feedback, or reject this closure."
+            ),
+        )
+
+    # AI validated — mark as permanently closed
+    record.status = GrievanceStatusEnum.VERIFIED_CLOSED
+    record.verified_at = datetime.now(timezone.utc)
+    record.citizen_feedback = payload.citizen_feedback
+    update_grievance(record)
+
+    return ClosureVerificationResult(
+        success=True,
+        grievance_id=grievance_id,
+        new_status=GrievanceStatusEnum.VERIFIED_CLOSED,
+        ai_confidence_score=validation.confidence_score,
+        is_suspicious=False,
+        ai_validation_notes=validation.reasoning,
+        message=(
+            f"✅ Resolution verified and closure confirmed (AI confidence: {validation.confidence_score:.0f}/100). "
+            "Thank you for verifying this resolution. The grievance has been permanently closed."
+        ),
+    )

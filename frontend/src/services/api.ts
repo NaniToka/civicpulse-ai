@@ -15,6 +15,11 @@ import {
   CivicAnalysisResponse,
   CopilotChatRequest,
   CopilotChatResponse,
+  // Anti-Fake Closure
+  GrievanceRecord,
+  ResolvePendingInput,
+  VerifyClosureInput,
+  ClosureVerificationResult,
 } from '../types';
 
 const BASE_URL = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '');
@@ -83,5 +88,25 @@ export const api = {
       method: 'POST',
       body: JSON.stringify(payload),
     }),
-};
 
+  // ── Anti-Fake Closure — Grievance Resolution Loop ─────────────────────────
+  getGrievances: (status?: string, regionId?: string) => {
+    const params = new URLSearchParams();
+    if (status) params.append('status', status);
+    if (regionId) params.append('region_id', regionId);
+    const query = params.toString() ? `?${params.toString()}` : '';
+    return fetchJSON<GrievanceRecord[]>(`/issues${query}`);
+  },
+  getGrievance: (grievanceId: string) =>
+    fetchJSON<GrievanceRecord>(`/issues/${grievanceId}`),
+  resolvePending: (grievanceId: string, payload: ResolvePendingInput) =>
+    fetchJSON<GrievanceRecord>(`/issues/${grievanceId}/resolve-pending`, {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }),
+  verifyClosure: (grievanceId: string, payload: VerifyClosureInput) =>
+    fetchJSON<ClosureVerificationResult>(`/issues/${grievanceId}/verify-closure`, {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }),
+};

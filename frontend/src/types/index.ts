@@ -301,3 +301,69 @@ export interface CopilotChatResponse {
   action_link?: CopilotActionLink | null;
 }
 
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CITIZEN-VERIFIED RESOLUTION LOOP — ANTI-FAKE CLOSURE TYPES
+// ─────────────────────────────────────────────────────────────────────────────
+
+export type GrievanceStatus =
+  | 'OPEN'
+  | 'IN_PROGRESS'
+  | 'RESOLVED_PENDING_VERIFICATION'
+  | 'VERIFIED_CLOSED'
+  | 'REJECTED_REOPENED'
+  | 'SUSPICIOUS_CLOSURE';
+
+export interface GrievanceResolutionEvidence {
+  before_image_url?: string | null;
+  original_description: string;
+  original_category: string;
+  original_urgency: string;
+  original_submitted_at: string;
+  after_image_url?: string | null;
+  resolution_notes: string;
+  resolved_by_staff_id: string;
+  resolved_by_staff_name: string;
+  resolution_submitted_at: string;
+}
+
+export interface GrievanceRecord {
+  id: string;
+  citizen_request_id: string;
+  region_id: string;
+  citizen_user_id?: string | null;
+  citizen_name: string;
+  status: GrievanceStatus;
+  resolution_evidence?: GrievanceResolutionEvidence | null;
+  ai_confidence_score?: number | null;
+  ai_validation_notes?: string | null;
+  citizen_feedback?: string | null;
+  created_at: string;
+  updated_at: string;
+  verified_at?: string | null;
+  is_synthetic?: boolean;
+  is_demo?: boolean;
+}
+
+export interface ResolvePendingInput {
+  resolution_notes: string;
+  staff_id: string;
+  staff_name?: string;
+  after_image_base64?: string | null;
+}
+
+export interface VerifyClosureInput {
+  action: 'confirm' | 'reject';
+  citizen_feedback?: string | null;
+}
+
+export interface ClosureVerificationResult {
+  success: boolean;
+  grievance_id: string;
+  new_status: GrievanceStatus;
+  ai_confidence_score?: number | null;
+  is_suspicious: boolean;
+  ai_validation_notes?: string | null;
+  message: string;
+  timestamp: string;
+}

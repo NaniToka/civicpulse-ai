@@ -397,3 +397,139 @@ class CopilotChatResponse(BaseModel):
     suggested_actions: list[str] = Field(default_factory=list)
     action_link: CopilotActionLink | None = None
 
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CITIZEN-VERIFIED RESOLUTION LOOP — ANTI-FAKE CLOSURE SCHEMAS
+# ─────────────────────────────────────────────────────────────────────────────
+
+class GrievanceStatusEnum(str, Enum):
+    """Full lifecycle state machine for a citizen grievance."""
+    OPEN = "OPEN"
+    IN_PROGRESS = "IN_PROGRESS"
+    RESOLVED_PENDING_VERIFICATION = "RESOLVED_PENDING_VERIFICATION"
+    VERIFIED_CLOSED = "VERIFIED_CLOSED"
+    REJECTED_REOPENED = "REJECTED_REOPENED"
+    SUSPICIOUS_CLOSURE = "SUSPICIOUS_CLOSURE"
+
+
+class GrievanceResolutionEvidence(BaseModel):
+    """Stores both the original complaint evidence and the staff resolution evidence."""
+    # Original complaint evidence
+    before_image_url: str | None = Field(
+        default=None,
+        description="Base64 data-URI or URL of the 'Before' photo submitted by the citizen."
+    )
+    original_description: str = Field(
+        description="Original complaint text as submitted by the citizen."
+    )
+    original_category: str = Field(default="other")
+    original_urgency: str = Field(default="MEDIUM")
+    original_submitted_at: datetime = Field(
+        default_factory=lambda: datetime.now(timezone.utc)
+    )
+
+    # Staff resolution evidence
+    after_image_url: str | None = Field(
+        default=None,
+        description="Base64 data-URI or URL of the 'After' photo submitted by municipal staff."
+    )
+    resolution_notes: str = Field(
+        description="Closure summary written by the municipal staff officer."
+    )
+    resolved_by_staff_id: str = Field(
+        description="Staff ID of the officer who submitted the resolution."
+    )
+    resolved_by_staff_name: str = Field(default="Municipal Officer")
+    resolution_submitted_at: datetime = Field(
+        default_factory=lambda: datetime.now(timezone.utc)
+    )
+
+
+class GrievanceRecord(BaseModel):
+    """
+    Full grievance lifecycle record.
+    Extends the lightweight CitizenRequest with status tracking and resolution evidence.
+    """
+    id: str
+    citizen_request_id: str = Field(
+        description="Foreign key referencing the original CitizenRequest.id"
+    )
+    region_id: str
+    citizen_user_id: str | None = None
+    citizen_name: str = "Anonymous Citizen"
+    status: GrievanceStatusEnum = GrievanceStatusEnum.OPEN
+    resolution_evidence: GrievanceResolutionEvidence | None = None
+    ai_confidence_score: float | None = Field(
+        default=None,
+        ge=0.0, le=100.0,
+        description="AI-computed closure authenticity score (0-100). <60 = Suspicious."
+    )
+    ai_validation_notes: str | None = None
+    citizen_feedback: str | None = Field(
+        default=None,
+        description="Citizen's explanation if they rejected the resolution."
+    )
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    verified_at: datetime | None = None
+    is_synthetic: bool = False
+    is_demo: bool = False
+
+
+class ResolvePendingInput(BaseModel):
+    """Payload for POST /api/v1/issues/{id}/resolve-pending (municipal staff)."""
+    resolution_notes: str = Field(
+        min_length=10,
+        max_length=2000,
+        description="Mandatory closure notes from the municipal officer."
+    )
+    staff_id: str = Field(
+        min_length=1,
+        max_length=100,
+        description="Staff ID of the resolving officer."
+    )
+    staff_name: str = Field(default="Municipal Officer", max_length=200)
+    after_image_base64: str | None = Field(
+        default=None,
+        description="Optional Base64-encoded 'After' image from the staff."
+    )
+
+
+class VerifyClosureInput(BaseModel):
+    """Payload for POST /api/v1/issues/{id}/verify-closure (citizen action)."""
+    action: str = Field(
+        description="Must be 'confirm' or 'reject'."
+    )
+    citizen_feedback: str | None = Field(
+        default=None,
+        max_length=1000,
+        description="Optional citizen explanation (required when action='reject')."
+    )
+
+    @field_validator("action", mode="before")
+    @classmethod
+    def validate_action(cls, v: Any) -> str:
+        if isinstance(v, str) and v.lower() in {"confirm", "reject"}:
+            return v.lower()
+        raise ValueError("action must be 'confirm' or 'reject'")
+
+
+class ClosureAIValidation(BaseModel):
+    """Internal AI validation result for the anti-fake-closure check."""
+    confidence_score: float = Field(ge=0.0, le=100.0)
+    is_suspicious: bool
+    threshold_used: float = 60.0
+    reasoning: str
+    flags: list[str] = Field(default_factory=list)
+
+
+class ClosureVerificationResult(BaseModel):
+    """Response payload for POST /api/v1/issues/{id}/verify-closure."""
+    success: bool
+    grievance_id: str
+    new_status: GrievanceStatusEnum
+    ai_confidence_score: float | None = None
+    is_suspicious: bool = False
+    ai_validation_notes: str | None = None
+    message: str
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))

@@ -15,6 +15,7 @@ import { WhatIfScenario } from './pages/WhatIfScenario';
 import { DataExplorer } from './pages/DataExplorer';
 import { CitizenFeedbackWall } from './pages/CitizenFeedbackWall';
 import { CopilotView } from './pages/CopilotView';
+import { GrievanceTracker } from './pages/GrievanceTracker';
 
 import { api } from './services/api';
 import {
@@ -193,6 +194,8 @@ export const App: React.FC = () => {
                   onNewRequestAdded={handleNewRequestAdded}
                 />
               )}
+
+              {activeTab === 'grievances' && <GrievanceTracker />}
             </>
           )}
         </main>
